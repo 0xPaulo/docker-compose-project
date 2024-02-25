@@ -1,0 +1,7 @@
+node_modules
+.vscode
+.angular
+.editorconfig
+.gitignore
+proxy.conf.js
+README.md

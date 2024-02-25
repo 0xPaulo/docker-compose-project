@@ -1,0 +1,77 @@
+.btn-primary {
+  font-size: 14px;
+  background-color: #3475c1;
+}
+.label-size {
+  font-size: 0.75rem;
+}
+.input-size {
+  height: 36px;
+}
+.input-size::placeholder {
+  font-size: 14px;
+}
+.form-control {
+  color: #555555;
+}
+.blur {
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.blur:focus {
+  border-color: #66afe9;
+  box-shadow: 0 0 10px 0px #66aee928, 0 0 20px 5px #66aee928;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  height: 100vh;
+}
+.border-radius-left {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+.border-radius-right {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+.login-container {
+  width: 800px;
+  height: 555px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.cidade-bg {
+  width: 400px;
+  height: 555px;
+  object-fit: cover;
+}
+.logo-brand {
+  position: absolute;
+  filter: drop-shadow(2px 2px 0px rgba(32, 46, 74, 0.22));
+}
+.col-6 {
+  position: relative;
+  overflow: hidden;
+  padding: 0px;
+}
+.sliding-clouds {
+  position: absolute;
+  background: url(../../../assets/image/campaign-clouds.svg) repeat-x;
+  width: 3600px;
+  height: 514px;
+  animation: slide 80s linear infinite;
+}
+@keyframes slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-1200px, 0, 0);
+  }
+}
+
+.links-login {
+  font-size: 0.75rem;
+}

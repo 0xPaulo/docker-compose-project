@@ -1,0 +1,8 @@
+.cadastro-center {
+  display: flex;
+  justify-content: center;
+}
+.cadastro-list {
+  width: 100%; /* O componente de lista de cadastro ocupará toda a largura do contêiner pai */
+  max-width: 80%; /* Defina um máximo para evitar que fique muito largo */
+}

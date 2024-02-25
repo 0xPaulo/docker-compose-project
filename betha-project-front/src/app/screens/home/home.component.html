@@ -1,0 +1,21 @@
+<betha-toolbar></betha-toolbar>
+<!-- <app-lista></app-lista> -->
+<div class="center">
+  <mat-card class="card">
+    <div class="titulo">
+      <p>Visão geral</p>
+    </div>
+    <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="125px" gutterSize="10px">
+        <mat-grid-tile style="cursor: pointer;" (click)="cadastros()" class="custom-tile">Cadastros<mat-icon
+            class="transform-icon">edit_square</mat-icon></mat-grid-tile>
+        <mat-grid-tile class="custom-tile">Triagens<mat-icon
+            class="transform-icon">history_toggle_off</mat-icon></mat-grid-tile>
+        <mat-grid-tile class="custom-tile">Em manutenção<mat-icon
+            class="transform-icon">engineering</mat-icon></mat-grid-tile>
+        <mat-grid-tile class="custom-tile">Concluídos<mat-icon
+            class="transform-icon">check_box</mat-icon></mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>

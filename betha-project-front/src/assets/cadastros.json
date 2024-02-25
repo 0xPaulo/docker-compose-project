@@ -1,0 +1,11 @@
+[
+  { "_id": "1", "name": "smartphone", "defeito": "tela quebrada" },
+  { "_id": "2", "name": "laptop", "defeito": "teclado danificado" },
+  {
+    "_id": "3",
+    "name": "tablet",
+    "defeito": "bateria descarregando rapidamente"
+  },
+  { "_id": "4", "name": "câmera digital", "defeito": "lente embaçada" },
+  { "_id": "5", "name": "fones de ouvido", "defeito": "som unilateral" }
+]

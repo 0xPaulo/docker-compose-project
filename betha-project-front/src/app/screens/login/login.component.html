@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row login-container ">
+    <div class=" col-6 p-0 d-flex align-items-center justify-content-center position-relative">
+      <div class="logo-brand">
+        <img src="../../../assets/image/betha-brands.svg" alt="" class=" img-fluid "
+          style="width: 232px; height: 73px;">
+      </div>
+      <div>
+        <img class="border-radius-left cidade-bg" src="../../../assets/image/cidade-bg.svg" alt="">
+      </div>
+      <div class="sliding-clouds"></div>
+    </div>
+    <!-- --------------------------------------------------------------------------->
+    <div class="col-6 border-radius-right" style="background-color: rgb(255, 255, 255);">
+      <form style="padding: 40px;" action="">
+        <div class="mb-2">
+          <label for="usuario" class="mb-1 form-label label-size">Usuário</label>
+          <input type="email" class=" form-control input-size blur" id="usuario"
+            placeholder="Acesse com usuário, e-mail ou telefone">
+        </div>
+        <div class="form-check ms-1">
+          <input class="form-check-input blur" type="checkbox" value="" id="user-verificado">
+          <label class="form-check-label label-size " for="user-verificado">
+            Acesso para usuário verificado.
+          </label>
+        </div>
+        <div class="mb-2">
+          <label for="senha" class="mb-1 form-label label-size">Senha</label>
+          <input type="password" class="form-control input-size blur" id="senha">
+        </div>
+        <div class="form-check ms-1">
+          <input class="form-check-input blur" type="checkbox" value="" id="user-remember">
+          <label class="form-check-label label-size" for="user-remember">
+            Lembrar meu usuário
+          </label>
+        </div>
+        <div class="d-grid gap-2 mt-4">
+          <button (click)="onACESSAR()" class="btn btn-primary" type="button">ACESSAR</button>
+        </div>
+      </form>
+      <!-- ---------------------------------------------------------------- -->
+      <div class="text-center links-login mt-3 ">
+        <p class="mb-1"><a href="/">Não possui uma conta?</a></p>
+        <p class="mb-1"><a href="/">Recuperar usuário ou senha</a></p>
+        <p class="mb-1"><a href="/">Dúvidas no cadastro</a></p>
+      </div>
+    </div>
+  </div>
+</div>

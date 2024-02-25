@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./betha-project-back
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - rede-docker
+
+  frontend:
+    build:
+      context: ./betha-project-front
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    networks:
+      - rede-docker
+    depends_on:
+      - backend
+
+networks:
+  rede-docker:
+    driver: bridge

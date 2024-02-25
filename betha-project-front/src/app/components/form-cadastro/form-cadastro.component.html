@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>Cadastro de Produto</h2>
+
+<mat-dialog-content>
+  <form class="form" [formGroup]="form">
+
+    <div class="info-cliente">
+      <mat-form-field>
+        <input matInput placeholder="Nome" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+    </div>
+
+
+    <div class="info-item">
+      <mat-form-field>
+        <input matInput placeholder="Item" formControlName="item">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Defeito" formControlName="defeito">
+      </mat-form-field>
+    </div>
+
+    <div class="info-data-status">
+      <mat-form-field class="ico-none">
+        <mat-label>Escolha uma opção</mat-label>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-select formControlName="status">
+          <mat-option value="DISPONIVEL_TRIAGEM">Disponivel para triagem</mat-option>
+          <mat-option value="EM_TRIAGEM">Em triagem</mat-option>
+          <mat-option value="AGUARDANDO_CLIENTE">Aguardando cliente</mat-option>
+          <mat-option value="CANCELADO">CANCELADO</mat-option>
+        </mat-select>
+
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Data de Entrada</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="data_entrada">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="info-footer">
+      <mat-form-field>
+        <textarea matInput placeholder="Anotações" formControlName="desc"></textarea>
+      </mat-form-field>
+    </div>
+
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close (click)="onCancel()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="onSubmit()">Enviar</button>
+</mat-dialog-actions>

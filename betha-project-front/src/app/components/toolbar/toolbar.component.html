@@ -1,0 +1,39 @@
+<p>
+  <mat-toolbar color="primary">
+    <!-- <mat-toolbar-row> -->
+    <div class="brand">
+      <div class="detalhe">
+        <img src="../../../assets/image/betha-brands.svg" alt="" style="cursor: pointer;" (click)="onLogin()">
+      </div>
+      <div class="itens">
+        <span (click)="onCadastro()" style="cursor: pointer;">AMBIENTE DE CADASTRO</span>
+        <span (click)="onHome()" style="cursor: pointer;">Visão geral</span>
+        <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Configurando ⏷</span>
+        <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Planejado ⏷</span>
+        <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Registrado ⏷</span>
+        <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Executando ⏷</span>
+      </div>
+      <div class="icons">
+        <button mat-icon-button matTooltip="{{errorMessage}}">
+          <mat-icon>wifi</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="{{errorMessage}}">
+          <mat-icon>headset_mic</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="{{errorMessage}}">
+          <mat-icon>grid_view</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="{{errorMessage}}">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="{{errorMessage}}">
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="{{errorMessage}}">
+          <mat-icon>person</mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- </mat-toolbar-row> -->
+  </mat-toolbar>
+</p>

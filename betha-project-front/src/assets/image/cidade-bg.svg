@@ -1,0 +1,269 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="840" height="1080" viewBox="0 0 840 1080">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="135" height="416" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect width="1672" height="7" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect width="315" height="71" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect width="315" height="20" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <rect id="Retângulo_26" data-name="Retângulo 26" width="31" height="150" transform="matrix(0.602, -0.799, 0.799, 0.602, 199.066, 223.837)" fill="#3055b2"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <rect id="Retângulo_27" data-name="Retângulo 27" width="15" height="150" transform="matrix(0.602, -0.799, 0.799, 0.602, 276.066, 201.837)" fill="#3055b2"/>
+    </clipPath>
+    <clipPath id="clip-path-7">
+      <rect id="Retângulo_28" data-name="Retângulo 28" width="26" height="150" transform="matrix(0.602, -0.799, 0.799, 0.602, 405.066, 195.837)" fill="#3055b2"/>
+    </clipPath>
+    <clipPath id="clip-path-8">
+      <path id="União_4" data-name="União 4" d="M33,273V228H54v45ZM0,273V228H21v45Zm33-57V171H54v45ZM0,216V171H21v45Zm33-57V114H54v45ZM0,159V114H21v45Zm33-57V57H54v45ZM0,102V57H21v45ZM33,45V0H54V45ZM0,45V0H21V45Z" transform="translate(1652 -373)" fill="#8ab6ff"/>
+    </clipPath>
+    <clipPath id="clip-path-9">
+      <rect id="Retângulo_37" data-name="Retângulo 37" width="15" height="150" transform="matrix(0.602, -0.799, 0.799, 0.602, 276.066, 201.837)" fill="#9cc5ff"/>
+    </clipPath>
+    <clipPath id="clip-campaign-bg">
+      <rect width="840" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="campaign-bg" clip-path="url(#clip-campaign-bg)">
+    <rect width="840" height="1080" fill="#85c0ff"/>
+    <rect id="Retângulo_17" data-name="Retângulo 17" width="49" height="77" rx="2" transform="translate(753 597)" fill="#76b0ff" opacity="0.7"/>
+    <rect id="Retângulo_43" data-name="Retângulo 43" width="69" height="97" rx="2" transform="translate(156 597)" fill="#6fa3f3" opacity="0.64"/>
+    <rect id="Retângulo_44" data-name="Retângulo 44" width="69" height="178" rx="2" transform="translate(341 530)" fill="#6fa3f3" opacity="0.29"/>
+    <path id="Retângulo_45" data-name="Retângulo 45" d="M2,0H32a2,2,0,0,1,2,2V5a0,0,0,0,1,0,0H0A0,0,0,0,1,0,5V2A2,2,0,0,1,2,0Z" transform="translate(353 525)" fill="#6fa3f3" opacity="0.29"/>
+    <path id="Retângulo_16" data-name="Retângulo 16" d="M0,0H61a3,3,0,0,1,3,3V126a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(688 565)" fill="#5f97ed" opacity="0.63"/>
+    <path id="Retângulo_46" data-name="Retângulo 46" d="M0,0H61a3,3,0,0,1,3,3V126a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(535 414)" fill="#5f97ed" opacity="0.63"/>
+    <path id="União_1" data-name="União 1" d="M0,594.5V96.5H.032v0H165v498Z" transform="translate(402 284.501)" fill="#498cff"/>
+    <g id="Agrupar_3" data-name="Agrupar 3" transform="translate(-733 136)">
+      <path id="Retângulo_5" data-name="Retângulo 5" d="M4,0H5.074a4,4,0,0,1,4,4V22.686a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(1383.182 316.562)" fill="#2c64f2"/>
+      <path id="Retângulo_6" data-name="Retângulo 6" d="M4,0H5.074a4,4,0,0,1,4,4V22.686a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(1404.356 309)" fill="#2c64f2"/>
+      <path id="Retângulo_4" data-name="Retângulo 4" d="M2,0H46.4a2,2,0,0,1,2,2V12.1a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(1374.108 324.124)" fill="#2c64f2"/>
+      <rect id="Retângulo_3" data-name="Retângulo 3" width="48.397" height="9.074" transform="translate(1374.108 331.686)" fill="#2659d7"/>
+      <g id="Agrupar_2" data-name="Agrupar 2" transform="translate(1300 339.248)">
+        <path id="Retângulo_1" data-name="Retângulo 1" d="M2,0H132.6a2,2,0,0,1,2,2V403.813a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(0)" fill="#2d64ef"/>
+        <g id="Agrupar_1" data-name="Agrupar 1" transform="translate(27.223 21.174)">
+          <rect id="Retângulo_2" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" fill="#1c45aa"/>
+          <rect id="Retângulo_2-2" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(33.273)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-3" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(66.546)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-4" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(0 54.447)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-5" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(33.273 54.447)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-6" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(66.546 54.447)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-7" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(0 108.893)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-8" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(33.273 108.893)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-9" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(66.546 108.893)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-10" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(0 163.34)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-11" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(33.273 163.34)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-12" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(66.546 163.34)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-13" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(0 217.787)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-14" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(33.273 217.787)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-15" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(66.546 217.787)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-16" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(0 272.233)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-17" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(33.273 272.233)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-18" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(66.546 272.233)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-19" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(0 326.68)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-20" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(33.273 326.68)" fill="#1c45aa"/>
+          <rect id="Retângulo_2-21" data-name="Retângulo 2" width="13.612" height="37.81" rx="1" transform="translate(66.546 326.68)" fill="#1c45aa"/>
+        </g>
+      </g>
+    </g>
+    <g id="Agrupar_5" data-name="Agrupar 5" transform="translate(-810 237)">
+      <rect id="Retângulo_9" data-name="Retângulo 9" width="47" height="27" rx="2" transform="translate(1615 391)" fill="#4579ff"/>
+      <rect id="Retângulo_7" data-name="Retângulo 7" width="168" height="230" transform="translate(1511 412)" fill="#498cff"/>
+      <g id="Agrupar_4" data-name="Agrupar 4" transform="translate(8 -5)">
+        <rect id="Retângulo_8" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1531 444)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-2" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1575 444)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-3" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1619 444)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-4" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1531 482)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-5" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1575 482)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-6" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1619 482)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-7" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1531 520)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-8" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1575 520)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-9" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1619 520)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-10" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1531 558)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-11" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1575 558)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-12" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1619 558)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-13" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1531 596)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-14" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1575 596)" fill="#2d64ef"/>
+        <rect id="Retângulo_8-15" data-name="Retângulo 8" width="24" height="24" rx="2" transform="translate(1619 596)" fill="#2d64ef"/>
+      </g>
+    </g>
+    <rect id="Retângulo_12" data-name="Retângulo 12" width="1920" height="15" transform="translate(-810 878)" fill="#496dba"/>
+    <rect id="Retângulo_13" data-name="Retângulo 13" width="1920" height="15" transform="translate(-810 893)" fill="#5d79c7"/>
+    <rect id="Retângulo_14" data-name="Retângulo 14" width="1920" height="172" transform="translate(-810 908)" fill="#2d4170"/>
+    <g id="Repetição_de_grade_5" data-name="Repetição de grade 5" transform="translate(417 419)" clip-path="url(#clip-path)">
+      <g id="Agrupar_372" data-name="Agrupar 372" transform="translate(-1227 -410)">
+        <g id="Agrupar_371" data-name="Agrupar 371">
+          <rect id="Retângulo_11" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-2" data-name="Agrupar 372" transform="translate(-1227 -375)">
+        <g id="Agrupar_371-2" data-name="Agrupar 371">
+          <rect id="Retângulo_11-2" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-3" data-name="Agrupar 372" transform="translate(-1227 -340)">
+        <g id="Agrupar_371-3" data-name="Agrupar 371">
+          <rect id="Retângulo_11-3" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-4" data-name="Agrupar 372" transform="translate(-1227 -305)">
+        <g id="Agrupar_371-4" data-name="Agrupar 371">
+          <rect id="Retângulo_11-4" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-5" data-name="Agrupar 372" transform="translate(-1227 -270)">
+        <g id="Agrupar_371-5" data-name="Agrupar 371">
+          <rect id="Retângulo_11-5" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-6" data-name="Agrupar 372" transform="translate(-1227 -235)">
+        <g id="Agrupar_371-6" data-name="Agrupar 371">
+          <rect id="Retângulo_11-6" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-7" data-name="Agrupar 372" transform="translate(-1227 -200)">
+        <g id="Agrupar_371-7" data-name="Agrupar 371">
+          <rect id="Retângulo_11-7" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-8" data-name="Agrupar 372" transform="translate(-1227 -165)">
+        <g id="Agrupar_371-8" data-name="Agrupar 371">
+          <rect id="Retângulo_11-8" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-9" data-name="Agrupar 372" transform="translate(-1227 -130)">
+        <g id="Agrupar_371-9" data-name="Agrupar 371">
+          <rect id="Retângulo_11-9" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-10" data-name="Agrupar 372" transform="translate(-1227 -95)">
+        <g id="Agrupar_371-10" data-name="Agrupar 371">
+          <rect id="Retângulo_11-10" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-11" data-name="Agrupar 372" transform="translate(-1227 -60)">
+        <g id="Agrupar_371-11" data-name="Agrupar 371">
+          <rect id="Retângulo_11-11" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+      <g id="Agrupar_372-12" data-name="Agrupar 372" transform="translate(-1227 -25)">
+        <g id="Agrupar_371-12" data-name="Agrupar 371">
+          <rect id="Retângulo_11-12" data-name="Retângulo 11" width="151" height="20" rx="2" transform="translate(1219 413)" fill="#2d64ef"/>
+        </g>
+      </g>
+    </g>
+    <path id="Subtração_1" data-name="Subtração 1" d="M165,593.5H14.172L0,582.876V406.5H32.211L165,506.03V593.5Z" transform="translate(402 284.501)" fill="#1c43a8" opacity="0.33"/>
+    <rect id="Retângulo_19" data-name="Retângulo 19" width="347" height="171" transform="translate(84 708)" fill="#2d64ef"/>
+    <path id="União_5" data-name="União 5" d="M0,192V9A2,2,0,0,1,2,7H39V4a4,4,0,0,1,4-4H83a4,4,0,0,1,4,4V7h14a2,2,0,0,1,2,2V192Z" transform="translate(66 516)" fill="#6fa3f3"/>
+    <rect id="Retângulo_33" data-name="Retângulo 33" width="84" height="313" transform="translate(0 565)" fill="#498cff"/>
+    <g id="Repetição_de_grade_6" data-name="Repetição de grade 6" transform="translate(-30 985)" clip-path="url(#clip-path-2)">
+      <g transform="translate(30 -987)">
+        <rect id="Retângulo_15" data-name="Retângulo 15" width="167" height="7" rx="2" transform="translate(-30 987)" fill="#9bacd8"/>
+      </g>
+      <g transform="translate(288 -987)">
+        <rect id="Retângulo_15-2" data-name="Retângulo 15" width="167" height="7" rx="2" transform="translate(-30 987)" fill="#9bacd8"/>
+      </g>
+      <g transform="translate(546 -987)">
+        <rect id="Retângulo_15-3" data-name="Retângulo 15" width="167" height="7" rx="2" transform="translate(-30 987)" fill="#9bacd8"/>
+      </g>
+      <g transform="translate(804 -987)">
+        <rect id="Retângulo_15-4" data-name="Retângulo 15" width="167" height="7" rx="2" transform="translate(-30 987)" fill="#9bacd8"/>
+      </g>
+      <g transform="translate(1062 -987)">
+        <rect id="Retângulo_15-5" data-name="Retângulo 15" width="167" height="7" rx="2" transform="translate(-30 987)" fill="#9bacd8"/>
+      </g>
+      <g transform="translate(1320 -987)">
+        <rect id="Retângulo_15-6" data-name="Retângulo 15" width="167" height="7" rx="2" transform="translate(-30 987)" fill="#9bacd8"/>
+      </g>
+      <g transform="translate(1578 -987)">
+        <rect id="Retângulo_15-7" data-name="Retângulo 15" width="167" height="7" rx="2" transform="translate(-30 987)" fill="#9bacd8"/>
+      </g>
+    </g>
+    <path id="Retângulo_20" data-name="Retângulo 20" d="M0,0H329a6,6,0,0,1,6,6v5a6,6,0,0,1-6,6H0a0,0,0,0,1,0,0V0A0,0,0,0,1,0,0Z" transform="translate(105 691)" fill="#a1c5ff"/>
+    <rect id="Retângulo_22" data-name="Retângulo 22" width="326" height="79" transform="translate(105 735)" fill="#477bff"/>
+    <rect id="Retângulo_25" data-name="Retângulo 25" width="326" height="43" transform="translate(105 835)" fill="#477bff"/>
+    <g id="Repetição_de_grade_4" data-name="Repetição de grade 4" transform="translate(116 743)" clip-path="url(#clip-path-3)">
+      <g transform="translate(-926 -506)">
+        <rect id="Retângulo_21" data-name="Retângulo 21" width="47" height="71" transform="translate(926 506)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-867 -506)">
+        <rect id="Retângulo_21-2" data-name="Retângulo 21" width="47" height="71" transform="translate(926 506)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-808 -506)">
+        <rect id="Retângulo_21-3" data-name="Retângulo 21" width="47" height="71" transform="translate(926 506)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-749 -506)">
+        <rect id="Retângulo_21-4" data-name="Retângulo 21" width="47" height="71" transform="translate(926 506)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-690 -506)">
+        <rect id="Retângulo_21-5" data-name="Retângulo 21" width="47" height="71" transform="translate(926 506)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-631 -506)">
+        <rect id="Retângulo_21-6" data-name="Retângulo 21" width="47" height="71" transform="translate(926 506)" fill="#1c45aa"/>
+      </g>
+    </g>
+    <g id="Repetição_de_grade_3" data-name="Repetição de grade 3" transform="translate(116 844)" clip-path="url(#clip-path-4)">
+      <g transform="translate(-926 -606)">
+        <rect id="Retângulo_24" data-name="Retângulo 24" width="47" height="20" transform="translate(926 606)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-867 -606)">
+        <rect id="Retângulo_24-2" data-name="Retângulo 24" width="47" height="20" transform="translate(926 606)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-808 -606)">
+        <rect id="Retângulo_24-3" data-name="Retângulo 24" width="47" height="20" transform="translate(926 606)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-749 -606)">
+        <rect id="Retângulo_24-4" data-name="Retângulo 24" width="47" height="20" transform="translate(926 606)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-690 -606)">
+        <rect id="Retângulo_24-5" data-name="Retângulo 24" width="47" height="20" transform="translate(926 606)" fill="#1c45aa"/>
+      </g>
+      <g transform="translate(-631 -606)">
+        <rect id="Retângulo_24-6" data-name="Retângulo 24" width="47" height="20" transform="translate(926 606)" fill="#1c45aa"/>
+      </g>
+    </g>
+    <g id="Agrupar_370" data-name="Agrupar 370" transform="translate(-112 544)">
+      <g id="Grupo_de_máscara_3" data-name="Grupo de máscara 3" clip-path="url(#clip-path-5)">
+        <rect id="Retângulo_21-7" data-name="Retângulo 21" width="47" height="71" transform="translate(228 199)" fill="#3055b2"/>
+        <rect id="Retângulo_29" data-name="Retângulo 29" width="47" height="71" transform="translate(287 199)" fill="#3055b2"/>
+      </g>
+      <g id="Grupo_de_máscara_2" data-name="Grupo de máscara 2" clip-path="url(#clip-path-6)">
+        <rect id="Retângulo_21-8" data-name="Retângulo 21" width="47" height="71" transform="translate(287 199)" fill="#3055b2"/>
+        <rect id="Retângulo_21-9" data-name="Retângulo 21" width="47" height="71" transform="translate(346 199)" fill="#3055b2"/>
+      </g>
+      <g id="Grupo_de_máscara_1" data-name="Grupo de máscara 1" clip-path="url(#clip-path-7)">
+        <rect id="Retângulo_21-10" data-name="Retângulo 21" width="47" height="71" transform="translate(405 199)" fill="#3055b2"/>
+        <rect id="Retângulo_21-11" data-name="Retângulo 21" width="47" height="71" transform="translate(464 199)" fill="#3055b2"/>
+        <rect id="Retângulo_21-12" data-name="Retângulo 21" width="47" height="71" transform="translate(523 199)" fill="#3055b2"/>
+      </g>
+    </g>
+    <rect id="Retângulo_23" data-name="Retângulo 23" width="326" height="11" transform="translate(105 809)" fill="#75aafe"/>
+    <g id="Agrupar_375" data-name="Agrupar 375" transform="translate(-1323 958)">
+      <g id="Agrupar_374" data-name="Agrupar 374" transform="translate(516 -896)">
+        <rect id="Retângulo_34" data-name="Retângulo 34" width="21" height="45" transform="translate(822 523)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-2" data-name="Retângulo 34" width="21" height="45" transform="translate(855 523)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-3" data-name="Retângulo 34" width="21" height="45" transform="translate(822 580)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-4" data-name="Retângulo 34" width="21" height="45" transform="translate(855 580)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-5" data-name="Retângulo 34" width="21" height="45" transform="translate(822 637)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-6" data-name="Retângulo 34" width="21" height="45" transform="translate(855 637)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-7" data-name="Retângulo 34" width="21" height="45" transform="translate(822 694)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-8" data-name="Retângulo 34" width="21" height="45" transform="translate(855 694)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-9" data-name="Retângulo 34" width="21" height="45" transform="translate(822 751)" fill="#8ab6ff"/>
+        <rect id="Retângulo_34-10" data-name="Retângulo 34" width="21" height="45" transform="translate(855 751)" fill="#8ab6ff"/>
+      </g>
+      <g id="Grupo_de_máscara_6" data-name="Grupo de máscara 6" transform="translate(-314)" clip-path="url(#clip-path-8)">
+        <g id="Grupo_de_máscara_5" data-name="Grupo de máscara 5" transform="translate(1339 -455)" clip-path="url(#clip-path-9)">
+          <rect id="Retângulo_35" data-name="Retângulo 35" width="47" height="71" transform="translate(287 199)" fill="#9cc5ff"/>
+          <rect id="Retângulo_36" data-name="Retângulo 36" width="47" height="71" transform="translate(346 199)" fill="#9cc5ff"/>
+        </g>
+        <path id="União_3" data-name="União 3" d="M0,106.771l4.814-6.389L152.562,211.718l-4.814,6.389Zm17-47,9.629-12.778L174.377,158.329l-9.629,12.778Zm19-43L48.638,0,196.385,111.335l-12.638,16.771Z" transform="translate(1578.719 -326.745)" fill="#9cc5ff"/>
+      </g>
+    </g>
+  </g>
+</svg>

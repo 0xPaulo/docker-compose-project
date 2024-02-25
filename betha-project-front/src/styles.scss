@@ -1,0 +1,30 @@
+// azul-barra #152d4c
+// azul-barra-selecionado #364d61
+// ico cinza
+// azul-ico-selecionado #285c8f
+// amarelo #febd26
+// amarelo-selecionado #fecc51
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+html,
+body {
+  height: 100%;
+  background-color: #ebedf0;
+  margin: 0;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
+}
+a {
+  text-decoration: none;
+}
+html {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}

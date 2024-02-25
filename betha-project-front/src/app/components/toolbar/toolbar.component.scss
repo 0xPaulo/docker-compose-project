@@ -1,0 +1,64 @@
+.mat-toolbar.mat-primary {
+  --mat-toolbar-container-background-color: #152d4c;
+  --mat-toolbar-container-text-color: white;
+}
+.brand {
+  display: flex;
+  align-items: center;
+}
+.brand span {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+.brand img {
+  margin-right: 20px;
+}
+.detalhe {
+  border-right: 4px solid #ffe600;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+.brand img {
+  margin-right: 10px;
+}
+.itens {
+  font-size: 18px;
+}
+.icons button mat-icon {
+  font-size: 24px;
+}
+.icons {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  right: 10px;
+}
+
+@media (max-width: 1300px) {
+  .icons {
+    display: none;
+  }
+}
+@media (max-width: 1361px) {
+  .itens {
+    font-size: 15px;
+  }
+  .icons button mat-icon {
+    font-size: 19px;
+  }
+}
+@media (max-width: 999px) {
+  .itens {
+    font-size: 12px;
+  }
+}
+@media (max-width: 1930px) {
+  .itens {
+    padding: 20px;
+  }
+}
+@media (max-width: 840px) {
+  .itens {
+    display: none;
+  }
+}
