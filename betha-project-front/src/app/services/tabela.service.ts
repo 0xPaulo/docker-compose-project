@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
 import { Cadastro } from '../interfaces/cadastro';
 import { RepositoryService } from './repository.service';
@@ -18,7 +18,7 @@ export class TabelaService {
 
   carregarCadastros(): Observable<Cadastro[]> {
     return this.repository.listarTodos().pipe(
-      tap((cadastros) => console.log(cadastros)),
+      // tap((cadastros) => console.log('tabela service' + cadastros)),
       catchError(() => {
         this.openDialogError();
         return of([]);

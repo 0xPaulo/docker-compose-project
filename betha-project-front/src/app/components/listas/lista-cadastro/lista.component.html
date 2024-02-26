@@ -51,8 +51,7 @@
             </div>
 
             <div class="grid-2">
-              <p class="linhas ">Data de entrada: {{ element.dataEntrada | date: 'dd/MM/yyyy' }}</p>
-
+              <p class="linhas">Data de entrada: {{ element.dataEntrada | date: 'dd/MM/yyyy' }}</p>
               <p style="cursor: pointer;" class="linhas"
                 [ngClass]="{'EM_TRIAGEM': element.status === 'EM_TRIAGEM', 'CANCELADO': element.status === 'CANCELADO', 'DISPONIVEL_TRIAGEM': element.status ==='DISPONIVEL_TRIAGEM', 'AGUARDANDO_CLIENTE': element.status === 'AGUARDANDO_CLIENTE', 'AGUARDANDO_MANUTENCAO' : element.status === 'AGUARDANDO_MANUTENCAO', 'EM_MANUTENCAO': element.status === 'EM_MANUTENCAO', 'MANUTENCAO_REALIZADA': element.status === 'MANUTENCAO_REALIZADA', 'CONCLUIDO_CONSERTADO' : element.status === 'CONCLUIDO_CONSERTADO', 'CONCLUIDO_N_CONSERTADO': element.status === 'CONCLUIDO_N_CONSERTADO'}"
                 (click)="filterStatus(element.status)">

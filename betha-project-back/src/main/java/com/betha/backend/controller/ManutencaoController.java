@@ -60,7 +60,13 @@ public class ManutencaoController {
     Cadastro cadastroAtualizado = cadastroExistente.get();
     cadastroAtualizado.setName(cadastro.getName());
     cadastroAtualizado.setDefeito(cadastro.getDefeito());
-    // cadastroAtualizado.setId(cadastro.getId());
+    cadastroAtualizado.setItem(cadastro.getItem());
+    cadastroAtualizado.setDataEntrada(cadastro.getDataEntrada());
+    cadastroAtualizado.setDataSaida(cadastro.getDataSaida());
+    cadastroAtualizado.setValor(cadastro.getValor());
+    cadastroAtualizado.setDesc(cadastro.getDesc());
+    cadastroAtualizado.setStatus(cadastro.getStatus());
+    cadastroAtualizado.setEmail(cadastro.getEmail());
 
     return cadastroRepository.save(cadastroAtualizado);
   }

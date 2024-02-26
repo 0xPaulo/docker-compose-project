@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,7 @@ import { RepositoryService } from './services/repository.service';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [RepositoryService],
+  providers: [RepositoryService, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

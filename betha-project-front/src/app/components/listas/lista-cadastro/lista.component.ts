@@ -101,7 +101,7 @@ export class ListaComponent implements OnInit {
 
   editarItem(item: Cadastro) {
     const id = item._id;
-    console.log(id);
+    // console.log(id);
 
     const subscription = this.repository
       .findById(id)
@@ -132,7 +132,7 @@ export class ListaComponent implements OnInit {
   ngOnInit() {
     this.tabelaService.emitListaAtualizada.subscribe(() => {
       this.carregarTabela();
-      console.log('Carregando tabela');
+      // console.log('Carregando tabela');
     });
   }
 }

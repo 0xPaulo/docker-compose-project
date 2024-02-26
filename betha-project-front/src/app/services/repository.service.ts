@@ -21,7 +21,6 @@ export class RepositoryService {
   }
 
   save(chamado: Partial<Cadastro>) {
-    //nao todo o cadastro id nao vem
     return this.httpClient.post<Cadastro>(this.API, chamado).pipe(
       tap(() => {
         // console.log(`(save) url: ${this.API}`);
@@ -30,21 +29,26 @@ export class RepositoryService {
   }
 
   update(id: string, chamado: Partial<Cadastro>) {
+    console.log('dentro do update : ' + chamado.email);
+    console.log('dentro do update : ' + chamado.name);
+
     return this.httpClient.post<Cadastro>(`${this.API}/${id}`, chamado).pipe(
       tap(() => {
-        console.log(`(edit) id: ${id} url ${this.API}/${id}`);
+        console.log(
+          `(edit) id: ${id} url ${this.API}/${id} chamadoEmail: ${chamado.email} e chamadoName ${chamado.name}`
+        );
       })
     );
   }
 
   delete(id: string) {
-    console.log(`cheguei esse é a minha url  ${this.API}/${id}`);
+    // console.log(`cheguei esse é a minha url  ${this.API}/${id}`);
     return this.httpClient.delete<Cadastro>(`${this.API}/${id}`);
   }
 
   findById(id: string): Observable<Cadastro[]> {
     const url = `${this.API}/${id}`;
-    console.log(`url da requisiçao do id (${id}): ${url}`);
+    // console.log(`url da requisiçao do id (${id}): ${url}`);
 
     return this.httpClient.get<Cadastro[]>(url).pipe(
       catchError((error) => {
