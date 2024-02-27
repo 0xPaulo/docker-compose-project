@@ -20,7 +20,6 @@ export class DeleteComponent {
     const idString = String(id_number);
     this.repository.delete(idString).subscribe(
       () => {
-        console.log('deu certo');
         this.tabelaService.emitListaAtualizada.emit();
       },
       (error) => {

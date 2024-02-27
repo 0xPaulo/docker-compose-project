@@ -106,14 +106,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Centraliza o detalhe em relação ao número */
+  transform: translate(-50%, -50%);
   // border: 2px solid red;
   background-color: #4c77af77;
   border-radius: 2rem;
-  box-sizing: border-box; /* Inclui a largura da borda no cálculo do tamanho */
+  box-sizing: border-box;
   width: 48px;
   height: 24px;
 }
@@ -170,9 +167,9 @@
   height: 80vh;
 }
 mat-card {
-  width: 100%; /* O card ocupará toda a largura do contêiner pai */
-  // max-width: 2000px; /* Defina um máximo para evitar que o card fique muito largo */
-  height: auto; /* Permita que a altura do card se ajuste conforme o conteúdo */
+  width: 100%;
+  // max-width: 2000px;
+  height: auto;
 }
 .invisivel {
   opacity: 0;
@@ -183,7 +180,7 @@ mat-card {
 
 .visivel {
   opacity: 1;
-  max-height: 100px; /* Ajuste conforme necessário para a altura máxima do dropdown */
+  max-height: 100px;
   transition: opacity 0.3s ease, max-height 0.3s ease;
 }
 

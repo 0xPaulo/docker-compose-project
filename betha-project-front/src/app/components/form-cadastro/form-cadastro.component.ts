@@ -88,9 +88,7 @@ export class FormCadastroComponent implements OnInit {
   onSucess() {
     this.snackBar.open('Cadastrado com sucesso', '', { duration: 5000 });
   }
-  onCancel() {
-    console.log('cancel funcionou');
-  }
+  onCancel() {}
 
   ngOnInit() {}
 }

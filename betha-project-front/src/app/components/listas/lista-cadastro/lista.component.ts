@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Cadastro } from 'src/app/interfaces/cadastro';
 import { RepositoryService } from 'src/app/services/repository.service';
 import { TabelaService } from 'src/app/services/tabela.service';
@@ -34,59 +34,12 @@ export class ListaComponent implements OnInit {
   carregarNovaTabela() {
     this.tabelaService.carregarCadastros();
   }
-  filterStatus(arg0: string) {
-    this.cadastros$ = this.tabelaService
-      .carregarCadastros()
-      .pipe(
-        map((cadastros) =>
-          cadastros.filter((cadastro) => cadastro.status === arg0)
-        )
-      );
+  filterStatus(filtros: string[]) {
+    this.cadastros$ = this.repository.carregarTriagem(filtros);
   }
 
-  filtroTriagem(arg0: string, arg1: string, arg2: string, arg3: string) {
-    this.cadastros$ = this.tabelaService
-      .carregarCadastros()
-      .pipe(
-        map((cadastros) =>
-          cadastros.filter(
-            (cadastro) =>
-              cadastro.status === arg0 ||
-              cadastro.status === arg1 ||
-              cadastro.status === arg2 ||
-              cadastro.status === arg3
-          )
-        )
-      );
-  }
-  filtroManu(arg0: string, arg1: string, arg2: string) {
-    this.cadastros$ = this.tabelaService
-      .carregarCadastros()
-      .pipe(
-        map((cadastros) =>
-          cadastros.filter(
-            (cadastro) =>
-              cadastro.status === arg0 ||
-              cadastro.status === arg1 ||
-              cadastro.status === arg2
-          )
-        )
-      );
-  }
-  filtroConcluido(arg0: string, arg1: string) {
-    this.cadastros$ = this.tabelaService
-      .carregarCadastros()
-      .pipe(
-        map((cadastros) =>
-          cadastros.filter(
-            (cadastro) => cadastro.status === arg0 || cadastro.status === arg1
-          )
-        )
-      );
-  }
   abrirDialogForm() {
     const dialogRef = this.dialog.open(FormCadastroComponent, {
-      // height: '40%',
       width: '80%',
     });
     dialogRef.afterClosed().subscribe((result) => {});
@@ -101,7 +54,6 @@ export class ListaComponent implements OnInit {
 
   editarItem(item: Cadastro) {
     const id = item._id;
-    // console.log(id);
 
     const subscription = this.repository
       .findById(id)
@@ -117,22 +69,15 @@ export class ListaComponent implements OnInit {
   }
 
   openDialogDeletar(item: Cadastro) {
-    // const id = item._id;
-    // const subscription = this.repository
-    // .findById(id)
-    // .subscribe((dados: Cadastro[]) => {
     this.dialog.open(DeleteComponent, {
       width: '400px',
       data: { item: item },
     });
-    // subscription.unsubscribe();
-    // });
   }
 
   ngOnInit() {
     this.tabelaService.emitListaAtualizada.subscribe(() => {
       this.carregarTabela();
-      // console.log('Carregando tabela');
     });
   }
 }
