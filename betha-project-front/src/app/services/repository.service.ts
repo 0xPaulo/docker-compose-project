@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, delay, first, tap } from 'rxjs';
 import { Cadastro } from './../interfaces/cadastro';
@@ -10,49 +10,42 @@ export class RepositoryService {
   // private readonly API = '../../assets/cadastros.json';
   // private readonly API = 'https://betha-v2.onrender.com/api/lista';
   private readonly API = 'http://localhost:8080/api/lista';
+  private readonly APIFILTER = 'http://localhost:8080/api/filtrar';
 
   constructor(private httpClient: HttpClient) {}
 
   listarTodos() {
-    return this.httpClient.get<Cadastro[]>(this.API).pipe(
-      delay(500),
-      first() // finalizar a inscriçao
-    );
+    return this.httpClient.get<Cadastro[]>(this.API).pipe(delay(500), first());
+  }
+
+  carregarTriagem(filtros: string[]): Observable<Cadastro[]> {
+    const filtroString = filtros.join(',');
+    const params = new HttpParams().set('filter', filtroString);
+    return this.httpClient
+      .get<Cadastro[]>(`${this.APIFILTER}`, { params })
+      .pipe(delay(500));
   }
 
   save(chamado: Partial<Cadastro>) {
-    return this.httpClient.post<Cadastro>(this.API, chamado).pipe(
-      tap(() => {
-        // console.log(`(save) url: ${this.API}`);
-      })
-    );
+    return this.httpClient
+      .post<Cadastro>(this.API, chamado)
+      .pipe(tap(() => {}));
   }
 
   update(id: string, chamado: Partial<Cadastro>) {
-    console.log('dentro do update : ' + chamado.email);
-    console.log('dentro do update : ' + chamado.name);
-
-    return this.httpClient.put<Cadastro>(`${this.API}/${id}`, chamado).pipe(
-      tap(() => {
-        console.log(
-          `(edit) id: ${id} url ${this.API}/${id} chamadoEmail: ${chamado.email} e chamadoName ${chamado.name}`
-        );
-      })
-    );
+    return this.httpClient.put<Cadastro>(`${this.API}/${id}`, chamado);
   }
 
   delete(id: string) {
-    // console.log(`cheguei esse é a minha url  ${this.API}/${id}`);
     return this.httpClient.delete<Cadastro>(`${this.API}/${id}`);
   }
 
   findById(id: string): Observable<Cadastro[]> {
     const url = `${this.API}/${id}`;
-    // console.log(`url da requisiçao do id (${id}): ${url}`);
 
     return this.httpClient.get<Cadastro[]>(url).pipe(
       catchError((error) => {
-        console.log(`Aconteceu esse erro ao buscar id (${id}):  ${error}`);
+        console.debug(`Aconteceu esse erro ao buscar id (${id}):  ${error}`);
         throw error;
       })
     );

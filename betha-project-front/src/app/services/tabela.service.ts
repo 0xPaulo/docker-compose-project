@@ -18,7 +18,6 @@ export class TabelaService {
 
   carregarCadastros(): Observable<Cadastro[]> {
     return this.repository.listarTodos().pipe(
-      // tap((cadastros) => console.log('tabela service' + cadastros)),
       catchError(() => {
         this.openDialogError();
         return of([]);
