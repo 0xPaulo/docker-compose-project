@@ -32,7 +32,7 @@ export class RepositoryService {
     console.log('dentro do update : ' + chamado.email);
     console.log('dentro do update : ' + chamado.name);
 
-    return this.httpClient.post<Cadastro>(`${this.API}/${id}`, chamado).pipe(
+    return this.httpClient.put<Cadastro>(`${this.API}/${id}`, chamado).pipe(
       tap(() => {
         console.log(
           `(edit) id: ${id} url ${this.API}/${id} chamadoEmail: ${chamado.email} e chamadoName ${chamado.name}`
