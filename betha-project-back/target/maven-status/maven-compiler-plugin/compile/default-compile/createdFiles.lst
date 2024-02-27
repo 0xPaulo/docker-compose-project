@@ -1,9 +1,0 @@
-com\betha\backend\model\Cadastro$CadastroBuilder.class
-com\betha\backend\config\WebConfig$1.class
-com\betha\backend\BackendApplication.class
-com\betha\backend\config\WebConfig.class
-com\betha\backend\Enum\Status.class
-com\betha\backend\model\Cadastro.class
-com\betha\backend\controller\ManutencaoController.class
-com\betha\backend\repository\CadastroRepository.class
-com\betha\backend\service\CadastroService.class
