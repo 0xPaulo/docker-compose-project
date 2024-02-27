@@ -23,9 +23,6 @@ export class FormCadastroComponent implements OnInit {
     private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // console.log(data);
-    console.log(`log vindo do list: ${data.infoCadastro.email}`);
-
     if (data) {
       this.isEditMode = true;
       this.form = formBuilder.group({
@@ -51,23 +48,7 @@ export class FormCadastroComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log('dadaos para salvar: ' + this.form.value.desc);
     if (this.isEditMode) {
-      console.log(`log dentro do submit: ${this.form.value.email}`);
-      console.log(`log dentro do submit: ${this.form.value.name}`);
-
-      const id_item: string = this.data.infoCadastro._id;
-      this.service.update(id_item, this.form.value).subscribe(
-        (result) => {
-          this.tabelaService.emitListaAtualizada.emit();
-          this.onSucess();
-        },
-        () => {
-          this.onError();
-        }
-      );
-    } else {
-      // console.log('submit ' + this.form.value.data_entrada);
       const dataInicial = this.form.value.data_entrada;
       const dataFormatada = this.datePipe.transform(
         dataInicial,
@@ -77,9 +58,20 @@ export class FormCadastroComponent implements OnInit {
         ...this.form.value,
         dataEntrada: dataFormatada,
       };
-      this.service.save(dadosParaSalvar).subscribe(
+
+      const id_item: string = this.data.infoCadastro._id;
+      this.service.update(id_item, dadosParaSalvar).subscribe(
         (result) => {
-          // console.log(result);
+          this.tabelaService.emitListaAtualizada.emit();
+          this.onSucess();
+        },
+        () => {
+          this.onError();
+        }
+      );
+    } else {
+      this.service.save(this.form.value).subscribe(
+        (result) => {
           this.tabelaService.emitListaAtualizada.emit();
           this.onSucess();
         },
