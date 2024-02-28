@@ -1,16 +1,14 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, first, tap } from 'rxjs';
-import { Cadastro } from './../interfaces/cadastro';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, catchError, delay, first, tap } from "rxjs";
+import { Cadastro } from "./../interfaces/cadastro";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class RepositoryService {
-  // private readonly API = '../../assets/cadastros.json';
   // private readonly API = 'https://betha-v2.onrender.com/api/lista';
-  private readonly API = 'http://localhost:8080/api/lista';
-  private readonly APIFILTER = 'http://localhost:8080/api/filtrar';
+  private readonly API = "http://localhost:8080/api/lista";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -19,10 +17,10 @@ export class RepositoryService {
   }
 
   carregarTriagem(filtros: string[]): Observable<Cadastro[]> {
-    const filtroString = filtros.join(',');
-    const params = new HttpParams().set('filter', filtroString);
+    const filtroString = filtros.join(",");
+    const params = new HttpParams().set("filter", filtroString);
     return this.httpClient
-      .get<Cadastro[]>(`${this.APIFILTER}`, { params })
+      .get<Cadastro[]>(`${this.API}/filtrar`, { params })
       .pipe(delay(500));
   }
 

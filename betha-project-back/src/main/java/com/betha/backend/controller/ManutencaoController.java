@@ -21,7 +21,7 @@ import com.betha.backend.repository.CadastroRepository;
 import com.betha.backend.service.CadastroService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/lista")
 public class ManutencaoController {
 
   @Autowired
@@ -33,7 +33,7 @@ public class ManutencaoController {
     this.cadastroService = cadastroService;
   }
 
-  @GetMapping("/lista")
+  @GetMapping()
   public List<Cadastro> list() {
     return cadastroRepository.findAll();
   }
@@ -56,7 +56,7 @@ public class ManutencaoController {
   }
 
   @SuppressWarnings("null")
-  @PostMapping
+  @PostMapping()
   @ResponseStatus(code = HttpStatus.CREATED)
   public Cadastro create(@RequestBody Cadastro cadastro) {
     return cadastroService.createCadastro(cadastro);
