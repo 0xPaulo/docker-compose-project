@@ -1,0 +1,16 @@
+.blur {
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.blur:focus {
+  border-color: #66afe9;
+  box-shadow: 0 0 10px 0px #66aee928, 0 0 20px 5px #66aee928;
+}
+.label-size {
+  font-size: 0.875rem;
+}
+.input-size {
+  height: 36px;
+}
+.input-size::placeholder {
+  font-size: 14px;
+}
