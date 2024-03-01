@@ -28,3 +28,52 @@ html {
   user-select: none;
   cursor: default;
 }
+.mat-mdc-tab-header {
+  --mat-tab-header-label-text-font: "Open Sans", sans-serif !important;
+  --mat-tab-header-label-text-weight: 700 !important;
+}
+.botao-betha {
+  background-color: #285c8f;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  border-radius: 2px;
+  border: 2px solid #285c8f;
+  margin-right: 10px;
+}
+.botao-betha-cancel {
+  margin-right: 8px;
+  background-color: #285c8f11;
+  border: 1px solid rgba(31, 29, 29, 0.418);
+  color: rgb(32, 34, 56);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: #285c8f;
+  --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
+  --mat-tab-header-pagination-icon-color: #000;
+  --mat-tab-header-inactive-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-active-label-text-color: #285c8f;
+  --mat-tab-header-active-ripple-color: #285c8f;
+  --mat-tab-header-inactive-ripple-color: #3d4452;
+  --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6);
+  --mat-tab-header-active-focus-label-text-color: #285c8f;
+  --mat-tab-header-active-hover-label-text-color: #285c8f;
+  --mat-tab-header-active-focus-indicator-color: #285c8f;
+  --mat-tab-header-active-hover-indicator-color: #285c8f;
+}

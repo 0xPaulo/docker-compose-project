@@ -55,7 +55,6 @@ public class ManutencaoController {
     this.cadastroRepository.deleteById(id);
   }
 
-  @SuppressWarnings("null")
   @PostMapping()
   @ResponseStatus(code = HttpStatus.CREATED)
   public Cadastro create(@RequestBody Cadastro cadastro) {

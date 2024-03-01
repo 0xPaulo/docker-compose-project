@@ -1,12 +1,12 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Observable, catchError, of } from 'rxjs';
-import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
-import { Cadastro } from '../interfaces/cadastro';
-import { RepositoryService } from './repository.service';
+import { EventEmitter, Injectable } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Observable, catchError, of } from "rxjs";
+import { ErrorDialogComponent } from "../components/errors/error-dialog/error-dialog.component";
+import { Cadastro } from "../interfaces/cadastro";
+import { RepositoryService } from "./repository.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TabelaService {
   emitListaAtualizada = new EventEmitter<void>();

@@ -1,19 +1,20 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { RepositoryService } from 'src/app/services/repository.service';
-import { TabelaService } from 'src/app/services/tabela.service';
+import { DatePipe } from "@angular/common";
+import { Component, Inject, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { RepositoryService } from "src/app/services/repository.service";
+import { TabelaService } from "src/app/services/tabela.service";
 
 @Component({
-  selector: 'app-form-cadastro',
-  templateUrl: './form-cadastro.component.html',
-  styleUrls: ['./form-cadastro.component.scss'],
+  selector: "form-cadastro",
+  templateUrl: "./form-cadastro.component.html",
+  styleUrls: ["./form-cadastro.component.scss"],
 })
 export class FormCadastroComponent implements OnInit {
   form: FormGroup;
   isEditMode: boolean = false;
+  activeTab: string = "cliente";
 
   constructor(
     private snackBar: MatSnackBar,
@@ -52,7 +53,7 @@ export class FormCadastroComponent implements OnInit {
       const dataInicial = this.form.value.data_entrada;
       const dataFormatada = this.datePipe.transform(
         dataInicial,
-        'yyyy-MM-ddTHH:mm:ss'
+        "yyyy-MM-ddTHH:mm:ss"
       );
       const dadosParaSalvar = {
         ...this.form.value,
@@ -83,10 +84,10 @@ export class FormCadastroComponent implements OnInit {
   }
 
   onError() {
-    this.snackBar.open('Acorreu um erro', '', { duration: 5000 });
+    this.snackBar.open("Acorreu um erro", "", { duration: 5000 });
   }
   onSucess() {
-    this.snackBar.open('Cadastrado com sucesso', '', { duration: 5000 });
+    this.snackBar.open("Cadastrado com sucesso", "", { duration: 5000 });
   }
   onCancel() {}
 

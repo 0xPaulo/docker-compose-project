@@ -1,0 +1,69 @@
+<h2 mat-dialog-title>Cadastro de Produto</h2>
+
+<mat-tab-group color="primary" fitInkBarToContent>
+  <mat-tab label="Cliente"><mat-dialog-content>
+      <form class="form-group" [formGroup]="form">
+        <div class="row">
+          <mat-form-field class="col-md-6">
+            <mat-label>Nome</mat-label>
+            <input matInput matInput placeholder="" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="col-md-6">
+            <mat-label>Endereço</mat-label>
+            <input matInput matInput placeholder="" formControlName="email">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col-md-6">
+            <mat-label>Telefone</mat-label>
+            <input matInput matInput placeholder="" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="col-md-6">
+            <mat-label>Email</mat-label>
+            <input matInput matInput placeholder="" formControlName="email">
+          </mat-form-field>
+        </div>
+        <mat-form-field class="col-md-12 mt-4">
+          <mat-label class="label-size">Anotações</mat-label>
+          <textarea matInput formControlName="desc"></textarea>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content></mat-tab>
+  <mat-tab label="Produto"><mat-dialog-content>
+      <form class="form-group" [formGroup]="form">
+        <div class="row">
+          <mat-form-field class="col-md-6">
+            <mat-label>Modelo</mat-label>
+            <input matInput placeholder="" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="col-md-6">
+            <mat-label>Número de série</mat-label>
+            <input matInput placeholder="" formControlName="email">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col-md-6">
+            <mat-label>Escolha uma opção</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="DISPONIVEL_TRIAGEM">Disponivel para triagem</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-6">
+            <mat-label>Data de Entrada</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="data_entrada">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="col-md-12 mt-4">
+          <mat-label class="label-size">Descrição do Problema</mat-label>
+          <textarea matInput formControlName="desc"></textarea>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content></mat-tab>
+</mat-tab-group>
+<mat-dialog-actions align="end">
+  <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
+  <button class="botao-betha" [mat-dialog-close]=" true" cdkFocusInitial (click)="onSubmit()">Enviar</button>
+</mat-dialog-actions>
