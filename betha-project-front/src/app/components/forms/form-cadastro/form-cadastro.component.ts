@@ -27,23 +27,29 @@ export class FormCadastroComponent implements OnInit {
     if (data) {
       this.isEditMode = true;
       this.form = formBuilder.group({
-        name: [data.infoCadastro.name],
-        defeito: [data.infoCadastro.defeito],
+        cliente: [data.infoCadastro.cliente],
+        endereco: [data.infoCadastro.endereco],
+        telefone: [data.infoCadastro.telefone],
         email: [data.infoCadastro.email],
+        anotacao: [data.infoCadastro.anotacao],
         item: [data.infoCadastro.item],
+        itemSerie: [data.infoCadastro.itemSerie],
+        status: [data.infoCadastro.status],
         data_entrada: [data.infoCadastro.dataEntrada],
         desc: [data.infoCadastro.desc],
-        status: [data.infoCadastro.status],
       });
     } else {
       this.form = formBuilder.group({
-        name: [null],
-        defeito: [null],
+        cliente: [null],
+        endereco: [null],
+        telefone: [null],
         email: [null],
+        anotacao: [null],
         item: [null],
+        itemSerie: [null],
+        status: [null],
         data_entrada: [null],
         desc: [null],
-        status: [null],
       });
     }
   }

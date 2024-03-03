@@ -8,6 +8,7 @@ import { DeleteComponent } from "../../delete/delete.component";
 import { ErrorDialogComponent } from "../../errors/error-dialog/error-dialog.component";
 import { SemPermissaoComponent } from "../../errors/sem-permissao/sem-permissao.component";
 import { FormCadastroComponent } from "../../forms/form-cadastro/form-cadastro.component";
+import { FormTriagemComponent } from "../../forms/form-triagem/form-triagem.component";
 
 @Component({
   selector: "lista-triagem",
@@ -52,7 +53,7 @@ export class ListaTriagemComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  editarItem(item: Cadastro) {
+  editartriagem(item: Cadastro) {
     const id = item._id;
 
     const subscription = this.repository
@@ -67,7 +68,7 @@ export class ListaTriagemComponent implements OnInit {
             subscription.unsubscribe();
           });
         } else {
-          const dialogRef = this.dialog.open(FormCadastroComponent, {
+          const dialogRef = this.dialog.open(FormTriagemComponent, {
             width: "80%",
             height: "516px",
             data: { modoEdicao: true, infoCadastro: dados },

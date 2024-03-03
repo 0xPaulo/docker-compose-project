@@ -12,10 +12,6 @@ import com.betha.backend.model.Cadastro;
 @Repository
 public interface CadastroRepository extends JpaRepository<Cadastro, Long> {
 
-  // @Query("SELECT c FROM Cadastro c WHERE c.status IN ('EM_TRIAGEM',
-  // 'DISPONIVEL_TRIAGEM', 'AGUARDANDO_CLIENTE', 'CANCELADO')")
-  // List<Cadastro> findByStatusInFilter();
-
   @Query("SELECT c FROM Cadastro c WHERE c.status IN :statusList")
   List<Cadastro> findByStatusInFilter(@Param("statusList") List<String> statusList);
 

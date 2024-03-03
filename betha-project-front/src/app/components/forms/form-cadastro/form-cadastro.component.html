@@ -6,26 +6,26 @@
         <div class="row">
           <mat-form-field class="col-md-6">
             <mat-label>Nome</mat-label>
-            <input matInput matInput placeholder="" formControlName="name">
+            <input matInput placeholder="" formControlName="cliente">
           </mat-form-field>
           <mat-form-field class="col-md-6">
             <mat-label>Endereço</mat-label>
-            <input matInput matInput placeholder="" formControlName="email">
+            <input matInput placeholder="" formControlName="endereco">
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field class="col-md-6">
             <mat-label>Telefone</mat-label>
-            <input matInput matInput placeholder="" formControlName="name">
+            <input matInput placeholder="" formControlName="telefone">
           </mat-form-field>
           <mat-form-field class="col-md-6">
             <mat-label>Email</mat-label>
-            <input matInput matInput placeholder="" formControlName="email">
+            <input matInput placeholder="" formControlName="email">
           </mat-form-field>
         </div>
         <mat-form-field class="col-md-12 mt-4">
           <mat-label class="label-size">Anotações</mat-label>
-          <textarea matInput formControlName="desc"></textarea>
+          <textarea matInput formControlName="anotacao"></textarea>
         </mat-form-field>
       </form>
     </mat-dialog-content></mat-tab>
@@ -34,11 +34,11 @@
         <div class="row">
           <mat-form-field class="col-md-6">
             <mat-label>Modelo</mat-label>
-            <input matInput placeholder="" formControlName="name">
+            <input matInput placeholder="" formControlName="item">
           </mat-form-field>
           <mat-form-field class="col-md-6">
             <mat-label>Número de série</mat-label>
-            <input matInput placeholder="" formControlName="email">
+            <input matInput placeholder="" formControlName="itemSerie">
           </mat-form-field>
         </div>
         <div class="row">
@@ -46,6 +46,13 @@
             <mat-label>Escolha uma opção</mat-label>
             <mat-select formControlName="status">
               <mat-option value="DISPONIVEL_TRIAGEM">Disponivel para triagem</mat-option>
+              <mat-option value="AGUARDANDO_CLIENTE">Aguardando confirmação do Cliente</mat-option>
+              <mat-option value="CANCELADO">Cancelado pelo cliente</mat-option>
+              <mat-option value="AGUARDANDO_MANUTENCAO">Pronto para manutenção</mat-option>
+              <mat-option value="EM_MANUTENCAO">Em processo de manutenção</mat-option>
+              <mat-option value="MANUTENCAO_REALIZADA">Manutenção realizada</mat-option>
+              <mat-option value="CONCLUIDO_CONSERTADO">Produto consertado</mat-option>
+              <mat-option value="CONCLUIDO_N_CONSERTADO">Não foi possivel consertar</mat-option>
             </mat-select>
           </mat-form-field>
 
