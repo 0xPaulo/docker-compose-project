@@ -27,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Setter(value = AccessLevel.PACKAGE)
 @Getter
-@Table(name = "Cadastros")
+@Table(name = "Sistema_Betha")
 public class Cadastro {
 
   @Id
@@ -35,18 +35,36 @@ public class Cadastro {
   @JsonProperty("_id")
   private Long id;
 
-  @Column(name = "name")
-  private String name;
+  @Column(name = "cliente")
+  private String cliente;
+
+  @Column(name = "email")
+  private String email;
+
+  @Column(name = "telefone")
+  private String telefone;
+
+  @Column(name = "endereco")
+  private String endereco;
+
+  @Column(name = "anotacao")
+  private String anotacao;
 
   @Column(name = "item")
   private String item;
 
-  @Column(name = "defeito")
-  private String defeito;
+  @Column(name = "n_serie")
+  private String itemSerie;
+
+  @Enumerated(EnumType.STRING)
+  private com.betha.backend.Enum.Status status;
 
   @Column(name = "data_entrada")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime dataEntrada;
+
+  @Column(name = "descricao_defeito")
+  private String desc;
 
   @Column(name = "data_saida")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -55,12 +73,6 @@ public class Cadastro {
   @Column(name = "valor")
   private int valor;
 
-  @Column(name = "descricao")
-  private String desc;
-
-  @Enumerated(EnumType.STRING)
-  private com.betha.backend.Enum.Status status;
-
-  @Column(name = "email")
-  private String email;
+  @Column(name = "fotos")
+  private String fotos;
 }

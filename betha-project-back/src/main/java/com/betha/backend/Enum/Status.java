@@ -2,7 +2,6 @@ package com.betha.backend.Enum;
 
 public enum Status {
   DISPONIVEL_TRIAGEM("Disponivel para triagem"),
-  EM_TRIAGEM("Em processo de triagem"),
   AGUARDANDO_CLIENTE("Aguardando confirmação do Cliente"),
   CANCELADO("Cancelado pelo cliente"),
   AGUARDANDO_MANUTENCAO("Pronto para manutenção"),

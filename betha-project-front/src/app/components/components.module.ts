@@ -31,6 +31,8 @@ import { FormCadastroComponent } from "./forms/form-cadastro/form-cadastro.compo
 import { ListaComponent } from "./listas/lista-cadastro/lista.component";
 import { ListaTriagemComponent } from "./listas/lista-triagem/lista-triagem.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { FormTriagemComponent } from './forms/form-triagem/form-triagem.component';
+import { ImageComponent } from './image/image.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     CadastroComponent,
     ListaTriagemComponent,
     SemPermissaoComponent,
+    FormTriagemComponent,
+    ImageComponent,
   ],
   imports: [
     MatTabsModule,

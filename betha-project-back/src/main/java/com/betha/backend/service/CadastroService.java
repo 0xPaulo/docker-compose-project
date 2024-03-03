@@ -27,15 +27,18 @@ public class CadastroService {
     return cadastroExistenteOptional.map(cadastroExistente -> {
       Cadastro cadastroAtualizado = Cadastro.builder()
           .id(cadastroExistente.getId())
-          .name(cadastro.getName())
+          .cliente(cadastro.getCliente())
+          .email(cadastro.getEmail())
+          .telefone(cadastro.getTelefone())
+          .endereco(cadastro.getEndereco())
+          .anotacao(cadastro.getAnotacao())
           .item(cadastro.getItem())
-          .defeito(cadastro.getDefeito())
+          .itemSerie(cadastro.getItemSerie())
+          .status(cadastro.getStatus())
           .dataEntrada(cadastro.getDataEntrada())
+          .desc(cadastro.getDesc())
           .dataSaida(cadastro.getDataSaida())
           .valor(cadastro.getValor())
-          .desc(cadastro.getDesc())
-          .status(cadastro.getStatus())
-          .email(cadastro.getEmail())
           .build();
 
       return cadastroRepository.save(cadastroAtualizado);
@@ -48,15 +51,18 @@ public class CadastroService {
   @SuppressWarnings("null")
   public Cadastro createCadastro(Cadastro cadastro) {
     Cadastro novoCadastro = Cadastro.builder()
-        .name(cadastro.getName())
+        .cliente(cadastro.getCliente())
+        .email(cadastro.getEmail())
+        .telefone(cadastro.getTelefone())
+        .endereco(cadastro.getEndereco())
+        .anotacao(cadastro.getAnotacao())
         .item(cadastro.getItem())
-        .defeito(cadastro.getDefeito())
+        .itemSerie(cadastro.getItemSerie())
+        .status(cadastro.getStatus())
         .dataEntrada(LocalDateTime.now().atZone(ZoneId.systemDefault()).toLocalDateTime())
+        .desc(cadastro.getDesc())
         .dataSaida(cadastro.getDataSaida())
         .valor(cadastro.getValor())
-        .desc(cadastro.getDesc())
-        .status(cadastro.getStatus())
-        .email(cadastro.getEmail())
         .build();
 
     return cadastroRepository.save(novoCadastro);

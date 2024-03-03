@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "global-calling-416115",
+  "private_key_id": "ac95ba44367ef2328a0e1b629948b3ba52e65e6e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCvN2f3SLx3gjVc\nAtPglvE4kEpw93rpTJWIxl//YIJeN7WxzAk+NSW0MimR8t9HmTpVLyBhQTIN9Kzk\ng4u/BdLr0rli2kCfwy7HNuggypyAaiQtmk10H3RUf5/I8+ho3inUuKA9urzLkUG2\nX9BFRBAwbFgmRG7ntzMfs73iS/HHWRiUNFPOS0+pDr0LBzSJJtfNLEi+0p8tHwF6\n+xU3a00/xQUED9RDMLl3FzSSynRN5XbBtnZqwQC5gcVMNGVhRTsp6N4KXT5PcrUN\nfijyDbMN3MzrTPmx3zhEAwGOsk8h0e/5fs325CR/IUR/Q4y+Enou0RrEcy6YbtnK\nEvgCNiJ7AgMBAAECggEALvHiWh/T1xU85K0hRYBLmwMV3tR/yvgo7F9yIwMhisrU\nVJG9PDyTIId8Gc1/wzgrp90biNMl7RVMKWGRVJnj3Ck2YGTngaaS5u8wHHEMo19M\n2CcKb31p9qXHEtk+wLIddRAOZtucb9I4T/u12okU6VRt/brCGDU+blUDIBmG6wji\nrkTGseFZ+rRkO9pOOPfawsDHSxSP4aeVULbH0Psk1TqRtGQCEMEMJSGY6hcx5DaC\nJJ8dHjylKWas/wUqI1+9W18rth6Q9sVYy+BHB+iq9qmraQoswXw0fUQfpnv+nomg\nOt2v1g9l2kSsJHeQnPztRC08icWttdArxfWUMihpcQKBgQDvyyO5eJZDfbhHqeu8\nmuwGnEHVzLewESCP+MYuwM4foIKTEOKmFRvwlGZN0Cr+uK6aMbfogbcOguQ3ZXw1\nHospDPcxT0y5zg2WmTKlOJtTyfXJxkdVDSuzIP62J6KVJ/9hOupO+KgTF74MrmWc\ns8ZOL+vlgn9o8yDIGwhCpPQR4wKBgQC7DvdsvEIXQ26eFN0YvNGo5je0ZRDnaIO2\n28u3cryG1ACEmPpSG262R5HcdQeV9TMJXPZv+UEuhxigwcIhHo6dCekDamv1X9fd\ng6kdovg+ATizH1eVG04tzJh7IHGj7I04pVRoxxtAQJz9gsEzUPEIPtVV0DcMjYcU\npDgBIyowiQKBgGaFv7xopjYs5kEdkUCOLCOXYz55zH9mkzl676DFpls3URx3t6+y\njsOJb0QNoJRPebdLUooCC7YUmGZm6Xf8mxruBDH86Zz3UC/3SAQD88UbMA8Yyx6+\nBtULYluXDpgfBb0YZ11kStf+6q6ZUbBx3HNJYd46sSa57GYhyKJVzFRpAoGBAKBm\nXAo0gCO8oe0SDOj6eHnxN1EL3Ovhthgl71DWJQ0kW3FYUEX52fyZ8FxvSdrv0By2\nR2eK/7arB5ZJr3KA5l+IsPNJ3VsiHVOIY4rTRTS+DWWjeZGVQXuKVjI2htu+qvYo\n5vGV0itNfJDx/0NGo/ijEIIuMhYkgfFUQ+XNxo6pAoGBAIVBBujI/LApli0TjJ2j\nRVFPa6o21Jkeufg5bZsj3wCoOlsILXL2eFeB/JPMjtzDNuqEWRdOrvIIN9/Y7sTd\n88tdBRdajIHx+iy1QsYvyE4YYBYcGiPsJjcCp2JmgOzrWSST5GsezCXOwBpR1EMw\nzDzmRlhfMG2eWEv4QxPuA0pd\n-----END PRIVATE KEY-----\n",
+  "client_email": "betha-drive-upload@global-calling-416115.iam.gserviceaccount.com",
+  "client_id": "110221282731172134578",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/betha-drive-upload%40global-calling-416115.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Laudo</h2>
+<mat-dialog-content>
+
+  <form class="form-group" [formGroup]="form">
+    <div class="row">
+      <mat-form-field class="col-md-6 mt-4">
+        <mat-label>Laudo técnico</mat-label>
+        <textarea matInput formControlName="desc" rows="12"></textarea>
+      </mat-form-field>
+
+
+      <app-image class="col-md-6"></app-image>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+
+
+
+  <button class="botao-betha-cancel" mat-dialog-close>Fechar</button>
+  <button class="botao-betha" mat-dialog-close cdkFocusInitial>Confirmar</button>
+</mat-dialog-actions>
