@@ -4,18 +4,18 @@ import { Observable } from "rxjs";
 import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
-import { DeleteComponent } from "../../delete/delete.component";
-import { ErrorDialogComponent } from "../../errors/error-dialog/error-dialog.component";
-import { SemPermissaoComponent } from "../../errors/sem-permissao/sem-permissao.component";
-import { FormCadastroComponent } from "../../forms/form-cadastro/form-cadastro.component";
-import { FormTriagemComponent } from "../../forms/form-triagem/form-triagem.component";
+
+import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
+import { DeleteComponent } from "../../../components/delete/delete.component";
+import { ErrorDialogComponent } from "../../../components/errors/error-dialog/error-dialog.component";
+import { SemPermissaoComponent } from "../../../components/errors/sem-permissao/sem-permissao.component";
 
 @Component({
-  selector: "lista-triagem",
-  templateUrl: "./lista-triagem.component.html",
-  styleUrls: ["./lista-triagem.component.scss"],
+  selector: "lista-cadastro",
+  templateUrl: "./lista.component.html",
+  styleUrls: ["./lista.component.scss"],
 })
-export class ListaTriagemComponent implements OnInit {
+export class ListaComponent implements OnInit {
   cadastros$: Observable<Cadastro[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["_id", "info", "ico"];
@@ -53,7 +53,7 @@ export class ListaTriagemComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  editartriagem(item: Cadastro) {
+  editarItem(item: Cadastro) {
     const id = item._id;
 
     const subscription = this.repository
@@ -68,9 +68,8 @@ export class ListaTriagemComponent implements OnInit {
             subscription.unsubscribe();
           });
         } else {
-          const dialogRef = this.dialog.open(FormTriagemComponent, {
+          const dialogRef = this.dialog.open(FormCadastroComponent, {
             width: "80%",
-            height: "516px",
             data: { modoEdicao: true, infoCadastro: dados },
           });
           dialogRef.afterClosed().subscribe((result) => {
@@ -79,7 +78,6 @@ export class ListaTriagemComponent implements OnInit {
         }
       });
   }
-
   openDialogDeletar(item: Cadastro) {
     this.dialog.open(DeleteComponent, {
       width: "400px",

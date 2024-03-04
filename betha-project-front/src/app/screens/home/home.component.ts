@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class HomeComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
   cadastros() {
-    this.router.navigate(["cadastro"]);
+    this.router.navigate(["cadastrar"]);
   }
 
   triagem() {
