@@ -1,4 +1,4 @@
-package com.betha.backend.controller;
+package com.betha.backend.uploadFotos.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.betha.backend.res.GoogleApiRes;
-import com.betha.backend.service.GoogleApiService;
+import com.betha.backend.uploadFotos.res.GoogleApiRes;
+import com.betha.backend.uploadFotos.service.GoogleApiService;
 
 @RestController
 public class GoogleApiController {

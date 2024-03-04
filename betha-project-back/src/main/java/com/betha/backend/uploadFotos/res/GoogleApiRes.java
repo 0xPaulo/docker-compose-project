@@ -1,4 +1,4 @@
-package com.betha.backend.res;
+package com.betha.backend.uploadFotos.res;
 
 import lombok.Data;
 

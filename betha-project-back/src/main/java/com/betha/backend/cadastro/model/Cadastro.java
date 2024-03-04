@@ -1,4 +1,4 @@
-package com.betha.backend.model;
+package com.betha.backend.cadastro.model;
 
 import java.time.LocalDateTime;
 
@@ -57,7 +57,7 @@ public class Cadastro {
   private String itemSerie;
 
   @Enumerated(EnumType.STRING)
-  private com.betha.backend.Enum.Status status;
+  private com.betha.backend.cadastro.model.Enum.Status status;
 
   @Column(name = "data_entrada")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

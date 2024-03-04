@@ -1,4 +1,4 @@
-package com.betha.backend.service;
+package com.betha.backend.cadastro.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.betha.backend.model.Cadastro;
-import com.betha.backend.repository.CadastroRepository;
+import com.betha.backend.cadastro.model.Cadastro;
+import com.betha.backend.cadastro.repository.CadastroRepository;
 
 @Service
 public class CadastroService {
