@@ -1,4 +1,4 @@
-package com.betha.backend.repository;
+package com.betha.backend.cadastro.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.betha.backend.model.Cadastro;
+import com.betha.backend.cadastro.model.Cadastro;
 
 @Repository
 public interface CadastroRepository extends JpaRepository<Cadastro, Long> {

@@ -1,4 +1,4 @@
-package com.betha.backend.service;
+package com.betha.backend.uploadFotos.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +10,7 @@ import java.util.Collections;
 
 import org.springframework.stereotype.Service;
 
-import com.betha.backend.res.GoogleApiRes;
+import com.betha.backend.uploadFotos.res.GoogleApiRes;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.FileContent;

@@ -1,4 +1,4 @@
-package com.betha.backend.controller;
+package com.betha.backend.cadastro.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.betha.backend.model.Cadastro;
-import com.betha.backend.repository.CadastroRepository;
-import com.betha.backend.service.CadastroService;
+import com.betha.backend.cadastro.model.Cadastro;
+import com.betha.backend.cadastro.repository.CadastroRepository;
+import com.betha.backend.cadastro.service.CadastroService;
 
 @RestController
 @RequestMapping("/api/lista")
-public class ManutencaoController {
+public class CadastroController {
 
   @Autowired
   private final CadastroRepository cadastroRepository;
   private final CadastroService cadastroService;
 
-  public ManutencaoController(CadastroService cadastroService, CadastroRepository cadastroRepository) {
+  public CadastroController(CadastroService cadastroService, CadastroRepository cadastroRepository) {
     this.cadastroRepository = cadastroRepository;
     this.cadastroService = cadastroService;
   }
@@ -43,13 +43,11 @@ public class ManutencaoController {
     return this.cadastroRepository.findByStatusInFilter(filtros);
   }
 
-  @SuppressWarnings("null")
   @GetMapping("/{id}")
   public Optional<Cadastro> findById(@PathVariable Long id) {
     return this.cadastroRepository.findById(id);
   }
 
-  @SuppressWarnings("null")
   @DeleteMapping("/{id}")
   public void deletar(@PathVariable Long id) {
     this.cadastroRepository.deleteById(id);
@@ -57,7 +55,7 @@ public class ManutencaoController {
 
   @PostMapping()
   @ResponseStatus(code = HttpStatus.CREATED)
-  public Cadastro create(@RequestBody Cadastro cadastro) {
+  public Cadastro newCadastro(@RequestBody Cadastro cadastro) {
     return cadastroService.createCadastro(cadastro);
   }
 

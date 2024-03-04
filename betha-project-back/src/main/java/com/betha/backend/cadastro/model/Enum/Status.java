@@ -1,4 +1,4 @@
-package com.betha.backend.Enum;
+package com.betha.backend.cadastro.model.Enum;
 
 public enum Status {
   DISPONIVEL_TRIAGEM("Disponivel para triagem"),
