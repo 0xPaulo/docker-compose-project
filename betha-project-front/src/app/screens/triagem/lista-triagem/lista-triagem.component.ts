@@ -4,18 +4,19 @@ import { Observable } from "rxjs";
 import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
+import { DeleteComponent } from "../../../components/delete/delete.component";
+import { ErrorDialogComponent } from "../../../components/errors/error-dialog/error-dialog.component";
+import { SemPermissaoComponent } from "../../../components/errors/sem-permissao/sem-permissao.component";
 
-import { DeleteComponent } from "../../delete/delete.component";
-import { ErrorDialogComponent } from "../../errors/error-dialog/error-dialog.component";
-import { SemPermissaoComponent } from "../../errors/sem-permissao/sem-permissao.component";
-import { FormCadastroComponent } from "../../forms/form-cadastro/form-cadastro.component";
+import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
+import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
 
 @Component({
-  selector: "lista-cadastro",
-  templateUrl: "./lista.component.html",
-  styleUrls: ["./lista.component.scss"],
+  selector: "lista-triagem",
+  templateUrl: "./lista-triagem.component.html",
+  styleUrls: ["./lista-triagem.component.scss"],
 })
-export class ListaComponent implements OnInit {
+export class ListaTriagemComponent implements OnInit {
   cadastros$: Observable<Cadastro[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["_id", "info", "ico"];
@@ -53,7 +54,7 @@ export class ListaComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  editarItem(item: Cadastro) {
+  editartriagem(item: Cadastro) {
     const id = item._id;
 
     const subscription = this.repository
@@ -68,8 +69,9 @@ export class ListaComponent implements OnInit {
             subscription.unsubscribe();
           });
         } else {
-          const dialogRef = this.dialog.open(FormCadastroComponent, {
+          const dialogRef = this.dialog.open(FormTriagemComponent, {
             width: "80%",
+            height: "516px",
             data: { modoEdicao: true, infoCadastro: dados },
           });
           dialogRef.afterClosed().subscribe((result) => {
@@ -78,6 +80,7 @@ export class ListaComponent implements OnInit {
         }
       });
   }
+
   openDialogDeletar(item: Cadastro) {
     this.dialog.open(DeleteComponent, {
       width: "400px",
