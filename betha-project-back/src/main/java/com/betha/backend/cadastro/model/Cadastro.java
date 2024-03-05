@@ -27,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Setter(value = AccessLevel.PACKAGE)
 @Getter
-@Table(name = "Sistema_Betha")
+@Table(name = "cadastros_manutencao", schema = "manutencao")
 public class Cadastro {
 
   @Id

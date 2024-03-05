@@ -1,12 +1,15 @@
 <div class="app">
-  <div *ngIf="resultMessage" [class]="resultMessage.type">
-    {{ resultMessage.result.status == 200 ? 'Success: ' + resultMessage.result.message : 'Error: ' +
-    resultMessage.result.message }}
-  </div>
 
-  <div>
-    <input type="file" (change)="handleFileChange($event)" />
-    <button class="botao-betha" (click)="handleUpload()" [disabled]="!selectedFile">Upload Image</button>
+  <h4>Selecione as fotos para anexar ao produto</h4>
+  <label for="inputField" class="botao-betha me-2">Escolher Foto</label>
+  <input type="file" id="inputField" accept=".jpg" style="display:none" (change)="handleSelectFile($event)">
+  <button class="botao-betha" (click)="handleUpload()" [disabled]="!selectedFile">Salvar Foto</button>
+  <div class="d-flex justify-content-center" *ngIf="loadingService.loading$ | async as isLoading">
+    <div *ngIf="isLoading">
+      <mat-spinner class="loading-spinner"></mat-spinner>
+    </div>
   </div>
-
+  <div class="container-fotos" *ngIf="image.url">
+    <img [src]="image.url" alt="">
+  </div>
 </div>
