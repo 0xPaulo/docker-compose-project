@@ -45,7 +45,15 @@ html {
   border-radius: 2px;
   border: 2px solid #285c8f;
   margin-right: 10px;
+
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.botao-betha:active {
+  background-color: #3a72a8;
+  transform: scale(0.95);
+}
+
 .botao-betha-cancel {
   margin-right: 8px;
   background-color: #285c8f11;
@@ -59,6 +67,10 @@ html {
   cursor: pointer;
   border-radius: 2px;
   box-sizing: border-box;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.botao-betha-cancel:active {
+  transform: scale(0.95);
 }
 
 .mat-mdc-tab-group,

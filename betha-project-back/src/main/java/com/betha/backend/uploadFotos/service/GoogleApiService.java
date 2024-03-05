@@ -47,12 +47,12 @@ public class GoogleApiService {
       FileContent mediaContent = new FileContent("image/jpeg", file);
       com.google.api.services.drive.model.File uploadedFile = drive.files().create(fileMetaData, mediaContent)
           .setFields("id").execute();
-      String imageUrl = "https://drive.google.com/uc?export=view&id=" + uploadedFile.getId();
+      String imageUrl = "https://lh3.googleusercontent.com/d/" + uploadedFile.getId();
       System.out.println("IMAGE URL: " + imageUrl);
       file.delete();
       res.setStatus(200);
       res.setMsg("Imagem enviada pro drive");
-      res.setUrl(imageUrl);
+      res.setUrl(imageUrl + "=w150");
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

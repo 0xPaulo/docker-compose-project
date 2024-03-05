@@ -22,6 +22,10 @@
   font-weight: bolder;
   cursor: pointer;
   border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.personalizado-button:active {
+  transform: scale(0.95);
 }
 .tabs {
   padding: 12px 12px 0px 12px;
