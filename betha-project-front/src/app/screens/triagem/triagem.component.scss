@@ -1,8 +1,20 @@
 .triagem-center {
   display: flex;
   justify-content: center;
+  background-color: #ebedf0;
 }
 .triagem-list {
   width: 100%;
   max-width: 80%;
+  margin-bottom: 40px;
+  border: 1px solid rgba(209, 209, 209, 0.397);
+}
+.betha-brand-bottom {
+  display: flex;
+  justify-content: center;
+  background-color: #ebedf0;
+}
+.betha-brand-bottom img {
+  width: 100px;
+  margin-bottom: 40px;
 }
