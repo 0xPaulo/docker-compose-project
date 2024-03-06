@@ -7,7 +7,7 @@
         <mat-label>Laudo técnico</mat-label>
         <textarea matInput formControlName="desc" rows="12"></textarea>
       </mat-form-field>
-      <up-image class="col-md-6 mt-4"></up-image>
+      <upload-image class="col-md-6 mt-4" (eventoFilho)="receberEvento($event)"></upload-image>
     </div>
   </form>
 </mat-dialog-content>
@@ -16,5 +16,5 @@
 
 
   <button class="botao-betha-cancel" mat-dialog-close>Fechar</button>
-  <button class="botao-betha" mat-dialog-close cdkFocusInitial>Confirmar</button>
+  <button class="botao-betha" mat-dialog-close cdkFocusInitial (click)="onSubmit()">Confirmar</button>
 </mat-dialog-actions>

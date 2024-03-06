@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LoadingService } from "./service/loading.service";
 
 @Component({
-  selector: "up-image",
+  selector: "upload-image",
   templateUrl: "./image.component.html",
   styleUrls: ["./image.component.scss"],
 })
@@ -11,6 +11,8 @@ export class ImageComponent implements OnInit {
   selectedFile: File | null = null;
   resultMessage: { type: string; result: any } | null = null;
   image: { url: string } = { url: "" };
+
+  @Output() eventoFilho = new EventEmitter<string>();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -37,9 +39,10 @@ export class ImageComponent implements OnInit {
 
       const result = await response.json();
       if (response.ok) {
-        this.onSucess();
-        this.image.url = result.url;
         this.loadingService.stopLoading();
+        this.eventoFilho.emit(result.url);
+        this.image.url = result.url;
+        this.onSucess();
       } else {
         this.onError();
       }

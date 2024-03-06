@@ -39,6 +39,7 @@ public class CadastroService {
           .desc(cadastro.getDesc())
           .dataSaida(cadastro.getDataSaida())
           .valor(cadastro.getValor())
+          .fotos(cadastro.getFotos())
           .build();
 
       return cadastroRepository.save(cadastroAtualizado);

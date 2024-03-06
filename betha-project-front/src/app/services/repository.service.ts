@@ -31,6 +31,8 @@ export class RepositoryService {
   }
 
   update(id: string, chamado: Partial<Cadastro>) {
+    console.log(chamado);
+
     return this.httpClient.put<Cadastro>(`${this.API}/${id}`, chamado);
   }
 
