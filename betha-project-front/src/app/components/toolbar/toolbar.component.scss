@@ -16,7 +16,7 @@
 .detalhe {
   border-right: 4px solid #ffe600;
   padding-right: 10px;
-  margin-right: 10px;
+  margin-right: -9px;
 }
 .brand img {
   margin-right: 10px;
@@ -52,13 +52,18 @@
     font-size: 12px;
   }
 }
+@media (max-width: 840px) {
+  .itens {
+    display: none;
+  }
+}
 @media (max-width: 1930px) {
   .itens {
     padding: 20px;
   }
 }
-@media (max-width: 840px) {
+@media (min-width: 1931px) {
   .itens {
-    display: none;
+    padding: 20px;
   }
 }
