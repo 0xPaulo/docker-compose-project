@@ -8,11 +8,13 @@ import { LoadingService } from "./service/loading.service";
   styleUrls: ["./image.component.scss"],
 })
 export class ImageComponent implements OnInit {
-  selectedFile: File | null = null;
   resultMessage: { type: string; result: any } | null = null;
   image: { url: string } = { url: "" };
+  selectedFile: File[] = [];
+  selectedFileUrls: string[] = [];
+  isInputDisabled = false;
 
-  @Output() eventoFilho = new EventEmitter<string>();
+  @Output() imagUrlSon = new EventEmitter<string>();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -20,14 +22,30 @@ export class ImageComponent implements OnInit {
   ) {}
 
   handleSelectFile(event: any): void {
-    this.selectedFile = event.target.files[0];
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        this.selectedFile.push(file);
+        this.selectedFileUrls.push(this.getObjectUrlFile(file));
+      }
+      if (this.selectedFile.length >= 3) {
+        this.isInputDisabled = true;
+      }
+    }
   }
 
+  getObjectUrlFile(file: File): string {
+    return URL.createObjectURL(file);
+  }
   async handleUpload(): Promise<void> {
     this.loadingService.startLoading();
+
     try {
       const formData = new FormData();
-      formData.append("image", this.selectedFile as Blob);
+      this.selectedFile.forEach((element) => {
+        formData.append("images[]", element);
+      });
 
       const response = await fetch(
         "http://localhost:8080/uploadToGoogleDrive",
@@ -40,8 +58,8 @@ export class ImageComponent implements OnInit {
       const result = await response.json();
       if (response.ok) {
         this.loadingService.stopLoading();
-        this.eventoFilho.emit(result.url);
-        this.image.url = result.url;
+        this.imagUrlSon.emit(result);
+        // this.image.url = result.url;
         this.onSucess();
       } else {
         this.onError();

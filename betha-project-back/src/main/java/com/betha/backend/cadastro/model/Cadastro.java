@@ -1,6 +1,7 @@
 package com.betha.backend.cadastro.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -73,6 +74,6 @@ public class Cadastro {
   @Column(name = "valor")
   private int valor;
 
-  @Column(name = "fotos")
-  private String fotos;
+  @Column(columnDefinition = "text[]", name = "image_urls")
+  private List<String> image_urls;
 }

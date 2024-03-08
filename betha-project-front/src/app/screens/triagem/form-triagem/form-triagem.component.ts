@@ -13,7 +13,7 @@ import { TabelaService } from "src/app/services/tabela.service";
 export class FormTriagemComponent {
   form: FormGroup;
   isEditMode: boolean = false;
-  evento: string = "";
+  result: string[] = [];
 
   constructor(
     private snackBar: MatSnackBar,
@@ -34,18 +34,17 @@ export class FormTriagemComponent {
       status: [data.infoCadastro.status],
       data_entrada: [data.infoCadastro.dataEntrada],
       desc: [data.infoCadastro.desc],
-      fotos: [null],
+      image_urls: [data.infoCadastro.image_urls],
     });
   }
-  receberEvento(evento: string) {
-    console.log("Evento recebido:", evento);
-    this.evento = evento;
+  receberSon(result: any) {
+    this.result = result;
   }
 
   onSubmit() {
-    console.log("dados antes" + this.data.infoCadastro.fotos);
-    const dadosAtualizados = { ...this.form.value, fotos: this.evento };
-    console.log("dados atualizados" + this.data.infoCadastro.fotos);
+    console.log("dados antes" + this.data.infoCadastro.image_urls);
+    const dadosAtualizados = { ...this.form.value, image_urls: this.result };
+    console.log("dados atualizados" + this.data.infoCadastro.image_urls);
 
     const idItem = this.data.infoCadastro._id;
     console.log(dadosAtualizados);

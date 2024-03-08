@@ -1,20 +1,17 @@
-<h2 mat-dialog-title>Laudo</h2>
+<h2 mat-dialog-title>Laudo da triagem</h2>
 <mat-dialog-content>
-
   <form class="form-group" [formGroup]="form">
     <div class="row">
       <mat-form-field class="col-md-6 mt-4">
         <mat-label>Laudo técnico</mat-label>
         <textarea matInput formControlName="desc" rows="12"></textarea>
       </mat-form-field>
-      <upload-image class="col-md-6 mt-4" (eventoFilho)="receberEvento($event)"></upload-image>
+      <upload-image class="col-md-6 mt-4" (imagUrlSon)="receberSon($event)"></upload-image>
+      <!-- <img [src]="form.get('fotos')?.value" alt=""> -->
     </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-
-
-
   <button class="botao-betha-cancel" mat-dialog-close>Fechar</button>
   <button class="botao-betha" mat-dialog-close cdkFocusInitial (click)="onSubmit()">Confirmar</button>
 </mat-dialog-actions>

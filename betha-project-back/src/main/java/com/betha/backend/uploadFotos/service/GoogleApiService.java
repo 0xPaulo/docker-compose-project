@@ -2,6 +2,7 @@ package com.betha.backend.uploadFotos.service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,10 +50,10 @@ public class GoogleApiService {
           .setFields("id").execute();
       String imageUrl = "https://lh3.googleusercontent.com/d/" + uploadedFile.getId();
       System.out.println("IMAGE URL: " + imageUrl);
-      file.delete();
       res.setStatus(200);
       res.setMsg("Imagem enviada pro drive");
-      res.setUrl(imageUrl + "=w150");
+      res.setUrl(imageUrl);
+      file.delete();
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -63,10 +64,22 @@ public class GoogleApiService {
   }
 
   private Drive createDriveService() throws GeneralSecurityException, IOException {
-    GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream(SERVICE_ACOUNT_KEY_PATH))
-        .createScoped(Collections.singleton(DriveScopes.DRIVE));
+    try {
+      GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream(SERVICE_ACOUNT_KEY_PATH))
+          .createScoped(Collections.singleton(DriveScopes.DRIVE));
 
-    return new Drive.Builder(GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY, credential)
-        .build();
+      return new Drive.Builder(GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY, credential)
+          .build();
+    } catch (FileNotFoundException e) {
+      System.err.println("Arquivo de chave de serviço não encontrado: " + SERVICE_ACOUNT_KEY_PATH);
+      e.printStackTrace();
+    } catch (IOException e) {
+      System.err.println("Erro ao ler o arquivo de chave de serviço.");
+      e.printStackTrace();
+    } catch (GeneralSecurityException e) {
+      System.err.println("Erro de segurança ao criar o serviço.");
+      e.printStackTrace();
+    }
+    return null;
   }
 }
