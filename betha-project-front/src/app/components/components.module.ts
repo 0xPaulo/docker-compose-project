@@ -33,6 +33,7 @@ import { ErrorDialogComponent } from "./errors/error-dialog/error-dialog.compone
 import { SemPermissaoComponent } from "./errors/sem-permissao/sem-permissao.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { ImageComponent } from "./upload-image/image.component";
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ImageComponent } from "./upload-image/image.component";
     SemPermissaoComponent,
     FormTriagemComponent,
     ImageComponent,
+    TestComponent,
   ],
   imports: [
     MatTabsModule,

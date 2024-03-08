@@ -70,8 +70,8 @@ export class ListaTriagemComponent implements OnInit {
           });
         } else {
           const dialogRef = this.dialog.open(FormTriagemComponent, {
-            width: "80%",
-            height: "516px",
+            width: "70%",
+            // height: "516px",
             data: { modoEdicao: true, infoCadastro: dados },
           });
           dialogRef.afterClosed().subscribe((result) => {

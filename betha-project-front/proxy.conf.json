@@ -1,0 +1,8 @@
+{
+  "/d/*": {
+    "target": "https://lh3.googleusercontent.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

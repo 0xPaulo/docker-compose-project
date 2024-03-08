@@ -3,6 +3,7 @@ package com.betha.backend.uploadFotos.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,18 +19,22 @@ public class GoogleApiController {
 
   @Autowired
   private GoogleApiService service;
+  ArrayList<String> arrayRes = new ArrayList<>();
 
   @PostMapping("/uploadToGoogleDrive")
-  public Object handleFileUpload(@RequestParam("image") MultipartFile file)
+  public Object handleFileUpload(@RequestParam("images[]") MultipartFile[] files)
       throws GeneralSecurityException, IOException {
-    if (file.isEmpty()) {
-      return "File is empty";
-    }
-    File tempFile = File.createTempFile("temp", null);
-    file.transferTo(tempFile);
-    GoogleApiRes res = service.uploadImageToDrive(tempFile);
-    System.out.println(res);
-    return res;
-  }
 
+    for (MultipartFile file : files) {
+      if (file.isEmpty()) {
+        continue;
+      }
+      File tempFile = File.createTempFile("temp", null);
+      file.transferTo(tempFile);
+      GoogleApiRes res = service.uploadImageToDrive(tempFile);
+      arrayRes.add(res.getUrl());
+    }
+    System.out.println(arrayRes);
+    return arrayRes;
+  }
 }
