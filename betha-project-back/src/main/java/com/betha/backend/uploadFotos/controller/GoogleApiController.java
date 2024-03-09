@@ -19,12 +19,12 @@ public class GoogleApiController {
 
   @Autowired
   private GoogleApiService service;
-  ArrayList<String> arrayRes = new ArrayList<>();
 
   @PostMapping("/uploadToGoogleDrive")
   public Object handleFileUpload(@RequestParam("images[]") MultipartFile[] files)
       throws GeneralSecurityException, IOException {
 
+    ArrayList<String> arrayRes = new ArrayList<>();
     for (MultipartFile file : files) {
       if (file.isEmpty()) {
         continue;
@@ -33,8 +33,8 @@ public class GoogleApiController {
       file.transferTo(tempFile);
       GoogleApiRes res = service.uploadImageToDrive(tempFile);
       arrayRes.add(res.getUrl());
+      System.out.println(arrayRes);
     }
-    System.out.println(arrayRes);
     return arrayRes;
   }
 }

@@ -1,17 +1,19 @@
 <div class="app">
   <h4>Selecione as fotos para anexar ao produto</h4>
-  <label for="inputField" class="botao-betha me-2">Escolher Foto</label>
+  <label for="inputField" class="botao-betha me-2">Escolher Fotos</label>
   <input type="file" id="inputField" accept=".jpg" style="display:none" multiple (change)="handleSelectFile($event)"
     [disabled]="isInputDisabled">
-  <button class="botao-betha" (click)="handleUpload()" [disabled]="!selectedFile">Salvar Foto</button>
+  <button class="botao-betha" (click)="handleUpload()" [disabled]="!selectedFile">Salvar Fotos</button>
   <div class="d-flex justify-content-center" *ngIf="loadingService.loading$ | async as isLoading">
     <div *ngIf="isLoading">
       <mat-spinner class="loading-spinner mt-4"></mat-spinner>
     </div>
   </div>
-  <div class="container-fotos" *ngIf="selectedFile.length > 0">
-    <div class="container-fotos-filha" *ngFor="let fileUrl of selectedFileUrls">
-      <img [src]="fileUrl" alt="Imagem">
+  <div *ngIf="!(loadingService.loading$ | async)">
+    <div class="container-fotos" *ngIf="selectedFile.length > 0">
+      <div class="container-fotos-filha" *ngFor="let fileUrl of selectedFileUrls">
+        <img [src]="fileUrl" alt="Imagem">
+      </div>
     </div>
   </div>
 </div>
