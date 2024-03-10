@@ -24,6 +24,36 @@ export class TabelaService {
       })
     );
   }
+  carregarCadastrosTriagem(filtro: string[]): Observable<Cadastro[]> {
+    return this.repository.carregarFiltro(filtro).pipe(
+      catchError(() => {
+        this.openDialogError();
+        return of([]);
+      })
+    );
+  }
+  filterStatusClass(status: any) {
+    switch (status) {
+      case "CANCELADO":
+        return "CANCELADO";
+      case "DISPONIVEL_TRIAGEM":
+        return "DISPONIVEL_TRIAGEM";
+      case "AGUARDANDO_CLIENTE":
+        return "AGUARDANDO_CLIENTE";
+      case "AGUARDANDO_MANUTENCAO":
+        return "AGUARDANDO_MANUTENCAO";
+      case "EM_MANUTENCAO":
+        return "EM_MANUTENCAO";
+      case "MANUTENCAO_REALIZADA":
+        return "MANUTENCAO_REALIZADA";
+      case "CONCLUIDO_CONSERTADO":
+        return "CONCLUIDO_CONSERTADO";
+      case "CONCLUIDO_N_CONSERTADO":
+        return "CONCLUIDO_N_CONSERTADO";
+      default:
+        return ""; // Retorna uma string vazia se o status não corresponder a nenhum dos casos acima
+    }
+  }
 
   openDialogError() {
     this.matDialog.open(ErrorDialogComponent);

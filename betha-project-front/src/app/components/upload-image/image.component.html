@@ -12,7 +12,8 @@
   <div *ngIf="!(loadingService.loading$ | async)">
     <div class="container-fotos" *ngIf="selectedFile.length > 0">
       <div class="container-fotos-filha" *ngFor="let fileUrl of selectedFileUrls">
-        <img [src]="fileUrl" alt="Imagem">
+        <img [src]="fileUrl">
+        <button class="botao-exluir" (click)="delete(fileUrl)">X</button>
       </div>
     </div>
   </div>

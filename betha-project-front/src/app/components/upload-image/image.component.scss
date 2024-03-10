@@ -15,6 +15,20 @@
   padding: 12px;
   flex-shrink: 1;
   box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+}
+.botao-exluir {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container-fotos-filha img {
