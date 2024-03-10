@@ -4,11 +4,11 @@
       <h5 class="ms-3">Itens em triagem</h5>
       <div class="demo-button-container">
         <div class="tabs twist">
-          <button class="tabs-button" (click)="carregarTabela()">
+          <button class="tabs-button" (click)="carregarNovaTabela()">
             <p class="ico-tabs-1">1</p>
             <p> Cadastros</p>
           </button>
-          <button class="tabs-button" (click)="filterStatus(['DISPONIVEL_TRIAGEM','AGUARDANDO_CLIENTE','CANCELADO'])">
+          <button class="tabs-button" (click)="filterStatus(filtro)">
             <p class="ico-tabs-2">2</p>
             <p>Triagem</p>
           </button>
@@ -49,23 +49,23 @@
 
             <div class="grid-2">
               <p class="linhas">Data de entrada: {{ element.dataEntrada | date: 'dd/MM/yyyy' }}</p>
-              <p style="cursor: pointer;" class="linhas"
-                [ngClass]="{'CANCELADO': element.status === 'CANCELADO', 'DISPONIVEL_TRIAGEM': element.status ==='DISPONIVEL_TRIAGEM', 'AGUARDANDO_CLIENTE': element.status === 'AGUARDANDO_CLIENTE', 'AGUARDANDO_MANUTENCAO' : element.status === 'AGUARDANDO_MANUTENCAO', 'EM_MANUTENCAO': element.status === 'EM_MANUTENCAO', 'MANUTENCAO_REALIZADA': element.status === 'MANUTENCAO_REALIZADA', 'CONCLUIDO_CONSERTADO' : element.status === 'CONCLUIDO_CONSERTADO', 'CONCLUIDO_N_CONSERTADO': element.status === 'CONCLUIDO_N_CONSERTADO'}"
+              <p style="cursor: pointer;" [ngClass]="getStatusClass(element.status)"
                 (click)="filterStatus([element.status])">
               </p>
-              <span style="cursor: pointer;" class="linhas" (click)="alternarDetalhes(element._id)">
+              <span style="cursor: pointer;" (click)="alternarDetalhes(element._id)">
                 {{ detalhesVisiveis[element._id] ? 'Menos detalhes' : 'Mais detalhes' }}
               </span>
             </div>
 
             <div class="descricao"
               [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}">
+              <p></p>
               <p>{{element.desc}}</p>
-              <p>{{element.email}}</p>
+              <p>Email: {{element.email}}</p>
             </div>
-            <div *ngFor="let url of element.image_urls">
-              <img [src]="url" alt="Imagem dinâmica">
-            </div>
+            <!-- <div *ngFor="let url of element.image_urls">
+              <img [src]="url" alt="Error ao carregar imagem">
+            </div> -->
           </div>
         </td>
       </ng-container>
@@ -79,7 +79,15 @@
             <mat-icon>add</mat-icon>
           </button>
           <button mat-icon-button (click)="openDialogDeletar(element)">
-            <mat-icon>done</mat-icon>
+            <mat-icon>mail</mat-icon>
+          </button>
+          <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
+            mat-icon-button (click)="openDialogDeletar(element)">
+            <mat-icon>description</mat-icon>
+          </button>
+          <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
+            mat-icon-button (click)="openDialogDeletar(element)">
+            <mat-icon>start</mat-icon>
           </button>
         </td>
       </ng-container>

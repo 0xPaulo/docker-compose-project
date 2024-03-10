@@ -8,7 +8,6 @@ import { TabelaService } from "src/app/services/tabela.service";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
 import { DeleteComponent } from "../../../components/delete/delete.component";
 import { ErrorDialogComponent } from "../../../components/errors/error-dialog/error-dialog.component";
-import { SemPermissaoComponent } from "../../../components/errors/sem-permissao/sem-permissao.component";
 
 @Component({
   selector: "lista-cadastro",
@@ -36,7 +35,7 @@ export class ListaComponent implements OnInit {
     this.tabelaService.carregarCadastros();
   }
   filterStatus(filtros: string[]) {
-    this.cadastros$ = this.repository.carregarTriagem(filtros);
+    this.cadastros$ = this.repository.carregarFiltro(filtros);
   }
 
   abrirDialogForm() {
@@ -45,7 +44,6 @@ export class ListaComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
-
   openDialogError() {
     this.dialog.open(ErrorDialogComponent);
   }
@@ -59,23 +57,23 @@ export class ListaComponent implements OnInit {
     const subscription = this.repository
       .findById(id)
       .subscribe((dados: Cadastro[]) => {
-        if (!(item.status === "DISPONIVEL_TRIAGEM")) {
-          const dialogPermi = this.dialog.open(SemPermissaoComponent, {
-            width: "40%",
-            data: { modoEdicao: true, infoCadastro: dados },
-          });
-          dialogPermi.afterClosed().subscribe((result) => {
-            subscription.unsubscribe();
-          });
-        } else {
-          const dialogRef = this.dialog.open(FormCadastroComponent, {
-            width: "80%",
-            data: { modoEdicao: true, infoCadastro: dados },
-          });
-          dialogRef.afterClosed().subscribe((result) => {
-            subscription.unsubscribe();
-          });
-        }
+        // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
+        //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
+        //     width: "40%",
+        //     data: { modoEdicao: true, infoCadastro: dados },
+        //   });
+        //   dialogPermi.afterClosed().subscribe((result) => {
+        //     subscription.unsubscribe();
+        //   });
+        // } else {
+        const dialogRef = this.dialog.open(FormCadastroComponent, {
+          width: "80%",
+          data: { modoEdicao: true, infoCadastro: dados },
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          subscription.unsubscribe();
+        });
+        // }
       });
   }
   openDialogDeletar(item: Cadastro) {
@@ -83,6 +81,9 @@ export class ListaComponent implements OnInit {
       width: "400px",
       data: { item: item },
     });
+  }
+  getStatusClass(status: string): string {
+    return this.tabelaService.filterStatusClass(status);
   }
 
   ngOnInit() {

@@ -16,7 +16,7 @@ export class RepositoryService {
     return this.httpClient.get<Cadastro[]>(this.API).pipe(delay(500), first());
   }
 
-  carregarTriagem(filtros: string[]): Observable<Cadastro[]> {
+  carregarFiltro(filtros: string[]): Observable<Cadastro[]> {
     const filtroString = filtros.join(",");
     const params = new HttpParams().set("filter", filtroString);
     return this.httpClient

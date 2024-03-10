@@ -51,8 +51,7 @@
 
             <div class="grid-2">
               <p class="linhas">Data de entrada: {{ element.dataEntrada | date: 'dd/MM/yyyy' }}</p>
-              <p style="cursor: pointer;" class="linhas"
-                [ngClass]="{'CANCELADO': element.status === 'CANCELADO', 'DISPONIVEL_TRIAGEM': element.status ==='DISPONIVEL_TRIAGEM', 'AGUARDANDO_CLIENTE': element.status === 'AGUARDANDO_CLIENTE', 'AGUARDANDO_MANUTENCAO' : element.status === 'AGUARDANDO_MANUTENCAO', 'EM_MANUTENCAO': element.status === 'EM_MANUTENCAO', 'MANUTENCAO_REALIZADA': element.status === 'MANUTENCAO_REALIZADA', 'CONCLUIDO_CONSERTADO' : element.status === 'CONCLUIDO_CONSERTADO', 'CONCLUIDO_N_CONSERTADO': element.status === 'CONCLUIDO_N_CONSERTADO'}"
+              <p style="cursor: pointer;" [ngClass]="getStatusClass(element.status)"
                 (click)="filterStatus([element.status])">
               </p>
               <span style="cursor: pointer;" class="linhas" (click)="alternarDetalhes(element._id)">
@@ -63,7 +62,7 @@
             <div class="descricao"
               [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}">
               <p>{{element.desc}}</p>
-              <p>{{element.email}}</p>
+              <p>Email: {{element.email}}</p>
             </div>
           </div>
         </td>

@@ -59,7 +59,6 @@ export class ImageComponent implements OnInit {
       if (response.ok) {
         this.loadingService.stopLoading();
         this.imagUrlSon.emit(result);
-        // this.image.url = result.url;
         this.onSucess();
       } else {
         this.onError();
@@ -69,6 +68,17 @@ export class ImageComponent implements OnInit {
       this.resultMessage = { type: "error", result: error.message };
     }
     setTimeout(() => (this.resultMessage = null), 5000);
+  }
+
+  delete(url: string): void {
+    const index = this.selectedFileUrls.findIndex((u) => u === url);
+    if (index !== -1) {
+      this.selectedFileUrls.splice(index, 1);
+      this.selectedFile.splice(index, 1);
+      if (this.selectedFile.length < 3) {
+        this.isInputDisabled = false;
+      }
+    }
   }
 
   onSucess() {
