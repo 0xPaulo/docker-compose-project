@@ -2,3 +2,5 @@ betha-project-back/target/
 betha-project-front/node_modules/
 betha-project-front/.angular/
 .vscode/settings.json
+cred.json
+betha-project-back/cred.json
