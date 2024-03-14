@@ -42,10 +42,6 @@ export class TabelaService {
         return "AGUARDANDO_CLIENTE";
       case "AGUARDANDO_MANUTENCAO":
         return "AGUARDANDO_MANUTENCAO";
-      case "EM_MANUTENCAO":
-        return "EM_MANUTENCAO";
-      case "MANUTENCAO_REALIZADA":
-        return "MANUTENCAO_REALIZADA";
       case "CONCLUIDO_CONSERTADO":
         return "CONCLUIDO_CONSERTADO";
       case "CONCLUIDO_N_CONSERTADO":

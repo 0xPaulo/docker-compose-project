@@ -14,8 +14,7 @@
             <p class="ico-tabs-2">2</p>
             <p>Triagem</p>
           </button>
-          <button class="tabs-button"
-            (click)="filterStatus(['EM_MANUTENCAO','AGUARDANDO_MANUTENCAO','MANUTENCAO_REALIZADA'])">
+          <button class="tabs-button" (click)="filterStatus(['AGUARDANDO_MANUTENCAO'])">
             <p class="ico-tabs-3">3</p>
             <p>Manutencao</p>
           </button>
@@ -76,8 +75,11 @@
           <button class="mt-2" mat-icon-button (click)="editarItem(element)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="openDialogDeletar(element)">
+          <!-- <button mat-icon-button (click)="openDialogDeletar(element)">
             <mat-icon>delete</mat-icon>
+          </button> -->
+          <button mat-icon-button (click)="openDialogDetalhe(element)">
+            <mat-icon>description</mat-icon>
           </button>
         </td>
       </ng-container>

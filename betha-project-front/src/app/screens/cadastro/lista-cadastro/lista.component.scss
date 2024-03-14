@@ -199,14 +199,7 @@ mat-card {
   background-color: #a91409;
   content: "Cancelado";
 }
-.EM_TRIAGEM:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
-  background-color: #0a6ab6;
-  content: "Em triagem";
-}
+
 .DISPONIVEL_TRIAGEM:before {
   color: white;
   font-weight: bold;
@@ -228,24 +221,8 @@ mat-card {
   font-weight: bold;
   border-radius: 3px;
   padding: 2px 7px;
-  background-color: #0096aa;
-  content: "Aguardando Técnico";
-}
-.EM_MANUTENCAO:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
   background-color: #4b2a8e;
-  content: "Em manutenção";
-}
-.MANUTENCAO_REALIZADA:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
-  background-color: #cc7a00;
-  content: "Manutenção Realizada";
+  content: "Aguardando Técnico";
 }
 .CONCLUIDO_CONSERTADO:before {
   color: white;
