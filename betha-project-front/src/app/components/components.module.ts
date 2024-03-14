@@ -20,6 +20,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { DataFormatPipe } from "../pipe/data-format.pipe";
+import { UpperToCamelCasePipe } from "../pipe/upper-to-camel-case.pipe";
 import { CadastroComponent } from "../screens/cadastro/cadastro.component";
 import { FormCadastroComponent } from "../screens/cadastro/form-cadastro/form-cadastro.component";
 import { ListaComponent } from "../screens/cadastro/lista-cadastro/lista.component";
@@ -29,14 +31,18 @@ import { ListaTriagemComponent } from "../screens/triagem/lista-triagem/lista-tr
 import { TriagemComponent } from "../screens/triagem/triagem.component";
 import { MyRouteTesteRoutes } from "./components-routing.module";
 import { DeleteComponent } from "./delete/delete.component";
+import { DetalheProdutoComponent } from "./detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "./errors/error-dialog/error-dialog.component";
 import { SemPermissaoComponent } from "./errors/sem-permissao/sem-permissao.component";
+import { TestComponent } from "./test/test.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { ImageComponent } from "./upload-image/image.component";
-import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
+    DataFormatPipe,
+    UpperToCamelCasePipe,
+    DetalheProdutoComponent,
     TriagemComponent,
     FormCadastroComponent,
     ToolbarComponent,
@@ -50,6 +56,7 @@ import { TestComponent } from './test/test.component';
     FormTriagemComponent,
     ImageComponent,
     TestComponent,
+    DetalheProdutoComponent,
   ],
   imports: [
     MatTabsModule,
@@ -77,6 +84,7 @@ import { TestComponent } from './test/test.component';
     MatTooltipModule,
     MatGridListModule,
   ],
+  // providers: [DatePipe],
   exports: [FormCadastroComponent],
 })
 export class ComponentsModule {}
