@@ -4,11 +4,16 @@
     <div class="row">
       <mat-form-field class="col-md-6 mt-4">
         <mat-label>Laudo técnico</mat-label>
-        <textarea matInput formControlName="desc" rows="12"></textarea>
+        <textarea matInput formControlName="desc" rows="9"></textarea>
       </mat-form-field>
       <upload-image class="col-md-6 mt-4" (imagUrlSon)="receberSon($event)"></upload-image>
-      <!-- <img [src]="form.get('fotos')?.value" alt=""> -->
     </div>
+
+    <mat-form-field>
+      <mat-label>Valor</mat-label>
+      <input matInput formControlName="valor">
+    </mat-form-field>
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

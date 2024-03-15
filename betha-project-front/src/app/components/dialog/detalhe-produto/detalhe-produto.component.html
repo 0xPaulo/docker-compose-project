@@ -31,8 +31,14 @@
       <h5 class="card-title">Observações</h5>
       <p class="card-text"><strong>Anotações:</strong> {{ data.infoCadastro.anotacao }}</p>
       <p class="card-text"><strong>Descrição do Problema:</strong> {{ data.infoCadastro.desc }}</p>
+      <p class="card-text"><strong>Valor </strong>R$: {{data.infoCadastro.valor}} </p>
     </div>
   </div>
+
+  <div *ngIf="form.get('image_urls')?.value">
+    <img *ngFor="let url of form.get('image_urls')?.value" [src]="url" alt="Imagem do item">
+  </div>
+
 
   <div class="d-flex justify-content-end">
     <button class="botao-betha" mat-dialog-close>Fechar</button>

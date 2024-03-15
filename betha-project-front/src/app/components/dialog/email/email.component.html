@@ -1,0 +1,31 @@
+<div class="container p-4 mt-3">
+  <h2 class="text-primary mb-4">Notificação de Manutenção</h2>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Detalhes do Produto</h5>
+          <p class="card-text"><strong>Modelo:</strong> {{ data.infoCadastro.item }}</p>
+          <p class="card-text"><strong>Número de Série:</strong> {{ data.infoCadastro.itemSerie }}</p>
+          <p class="card-text"><strong>Status:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
+          <p class="card-text"><strong>Data de Entrada:</strong> {{ data.infoCadastro.dataEntrada | dataFormat }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Decisão de Manutenção</h5>
+      <p class="card-text">Prezado(a) {{ data.infoCadastro.cliente }},</p>
+      <p class="card-text">Gostaríamos de informar que o seu produto {{ data.infoCadastro.item }} está aguardando
+        manutenção.</p>
+      <p class="card-text">Deseja continuar com a manutenção? Por favor, responda este e-mail com sua decisão.</p>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary" mat-dialog-close>Responder</button>
+  </div>
+</div>

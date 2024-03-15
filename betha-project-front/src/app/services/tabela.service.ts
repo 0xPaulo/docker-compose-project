@@ -1,7 +1,8 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable, catchError, of } from "rxjs";
-import { ErrorDialogComponent } from "../components/errors/error-dialog/error-dialog.component";
+
+import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
 import { Cadastro } from "../interfaces/cadastro";
 import { RepositoryService } from "./repository.service";
 

@@ -9,4 +9,5 @@ export interface Cadastro {
   valor: number;
   status: string;
   desc: string;
+  image_urls: string[];
 }
