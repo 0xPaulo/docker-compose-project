@@ -4,9 +4,10 @@ import { Observable } from "rxjs";
 import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
-import { ErrorDialogComponent } from "../../../components/errors/error-dialog/error-dialog.component";
 
-import { DetalheProdutoComponent } from "src/app/components/detalhe-produto/detalhe-produto.component";
+import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
+import { EmailComponent } from "src/app/components/dialog/email/email.component";
+import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
 import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
 
@@ -47,17 +48,21 @@ export class ListaTriagemComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
-  openDialogEmail(cadastro: Cadastro) {
-    console.log(cadastro._id);
+  openDialogEmail(dados: Cadastro) {
+    this.dialog.open(EmailComponent, {
+      width: "80%",
+      data: { infoCadastro: dados },
+    });
   }
-
   openDialogError() {
     this.dialog.open(ErrorDialogComponent);
   }
-  alternarDetalhes(index: number): void {
-    this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
+  openDialogDetalhe(dados: Cadastro) {
+    this.dialog.open(DetalheProdutoComponent, {
+      width: "80%",
+      data: { infoCadastro: dados },
+    });
   }
-
   editartriagem(item: Cadastro) {
     const id = item._id;
 
@@ -84,12 +89,8 @@ export class ListaTriagemComponent implements OnInit {
       // }
     );
   }
-
-  openDialogDetalhe(dados: Cadastro) {
-    this.dialog.open(DetalheProdutoComponent, {
-      width: "80%",
-      data: { infoCadastro: dados },
-    });
+  alternarDetalhes(index: number): void {
+    this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
   getStatusClass(status: string): string {

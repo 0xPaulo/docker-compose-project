@@ -37,6 +37,7 @@ export class FormCadastroComponent implements OnInit {
         status: [data.infoCadastro.status],
         data_entrada: [data.infoCadastro.dataEntrada],
         desc: [data.infoCadastro.desc],
+        valor: [data.infoCadastro.valor],
       });
     } else {
       this.form = formBuilder.group({

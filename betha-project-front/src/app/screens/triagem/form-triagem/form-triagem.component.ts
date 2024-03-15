@@ -32,9 +32,10 @@ export class FormTriagemComponent {
       item: [data.infoCadastro.item],
       itemSerie: [data.infoCadastro.itemSerie],
       status: [data.infoCadastro.status],
-      data_entrada: [data.infoCadastro.dataEntrada],
+      data_entrada: [Date.now],
       desc: [data.infoCadastro.desc],
       image_urls: [data.infoCadastro.image_urls],
+      valor: [data.infoCadastro.valor],
     });
   }
   receberSon(result: any) {

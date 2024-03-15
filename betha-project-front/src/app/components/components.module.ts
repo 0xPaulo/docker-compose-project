@@ -30,13 +30,14 @@ import { FormTriagemComponent } from "../screens/triagem/form-triagem/form-triag
 import { ListaTriagemComponent } from "../screens/triagem/lista-triagem/lista-triagem.component";
 import { TriagemComponent } from "../screens/triagem/triagem.component";
 import { MyRouteTesteRoutes } from "./components-routing.module";
-import { DeleteComponent } from "./delete/delete.component";
-import { DetalheProdutoComponent } from "./detalhe-produto/detalhe-produto.component";
-import { ErrorDialogComponent } from "./errors/error-dialog/error-dialog.component";
-import { SemPermissaoComponent } from "./errors/sem-permissao/sem-permissao.component";
+import { DeleteComponent } from "./dialog/delete/delete.component";
+import { DetalheProdutoComponent } from "./dialog/detalhe-produto/detalhe-produto.component";
+import { EmailComponent } from "./dialog/email/email.component";
+import { ErrorDialogComponent } from "./dialog/errors/error-dialog/error-dialog.component";
+import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permissao.component";
+import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { ImageComponent } from "./upload-image/image.component";
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ImageComponent } from "./upload-image/image.component";
     ImageComponent,
     TestComponent,
     DetalheProdutoComponent,
+    EmailComponent,
   ],
   imports: [
     MatTabsModule,
@@ -84,7 +86,6 @@ import { ImageComponent } from "./upload-image/image.component";
     MatTooltipModule,
     MatGridListModule,
   ],
-  // providers: [DatePipe],
   exports: [FormCadastroComponent],
 })
 export class ComponentsModule {}

@@ -26,6 +26,7 @@ export class DetalheProdutoComponent {
       status: [data.infoCadastro.status],
       data_entrada: [data.infoCadastro.dataEntrada],
       desc: [data.infoCadastro.desc],
+      image_urls: [data.infoCadastro.image_urls],
     });
     this.dia = data.infoCadastro.dataEntrada;
   }

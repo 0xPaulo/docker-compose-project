@@ -5,10 +5,9 @@ import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
-import { DetalheProdutoComponent } from "src/app/components/detalhe-produto/detalhe-produto.component";
-import { SemPermissaoComponent } from "src/app/components/errors/sem-permissao/sem-permissao.component";
+import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
+import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
-import { ErrorDialogComponent } from "../../../components/errors/error-dialog/error-dialog.component";
 
 @Component({
   selector: "lista-cadastro",
@@ -55,27 +54,27 @@ export class ListaComponent implements OnInit {
   editarItem(item: Cadastro) {
     const id = item._id;
 
-    const subscription = this.repository
-      .findById(id)
-      .subscribe((dados: Cadastro[]) => {
-        if (!(item.status === "DISPONIVEL_TRIAGEM")) {
-          const dialogPermi = this.dialog.open(SemPermissaoComponent, {
-            width: "40%",
-            data: { modoEdicao: true, infoCadastro: dados },
-          });
-          dialogPermi.afterClosed().subscribe((result) => {
-            subscription.unsubscribe();
-          });
-        } else {
-          const dialogRef = this.dialog.open(FormCadastroComponent, {
-            width: "80%",
-            data: { modoEdicao: true, infoCadastro: dados },
-          });
-          dialogRef.afterClosed().subscribe((result) => {
-            subscription.unsubscribe();
-          });
-        }
-      });
+    const subscription = this.repository.findById(id).subscribe(
+      (dados: Cadastro[]) => {
+        // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
+        //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
+        //     width: "40%",
+        //     data: { modoEdicao: true, infoCadastro: dados },
+        //   });
+        //   dialogPermi.afterClosed().subscribe((result) => {
+        //     subscription.unsubscribe();
+        //   });
+        // } else {
+        const dialogRef = this.dialog.open(FormCadastroComponent, {
+          width: "80%",
+          data: { modoEdicao: true, infoCadastro: dados },
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          subscription.unsubscribe();
+        });
+      }
+      // }
+    );
   }
   openDialogDetalhe(dados: Cadastro) {
     this.dialog.open(DetalheProdutoComponent, {
