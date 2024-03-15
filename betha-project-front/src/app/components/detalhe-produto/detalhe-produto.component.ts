@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
-  selector: "app-detalhe-produto",
+  selector: "detalhe-produto",
   templateUrl: "./detalhe-produto.component.html",
   styleUrls: ["./detalhe-produto.component.scss"],
 })
@@ -28,8 +28,5 @@ export class DetalheProdutoComponent {
       desc: [data.infoCadastro.desc],
     });
     this.dia = data.infoCadastro.dataEntrada;
-  }
-  chamardata() {
-    console.log(this.dia);
   }
 }

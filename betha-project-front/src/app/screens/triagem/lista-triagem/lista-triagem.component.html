@@ -77,15 +77,15 @@
           <button class="mt-2" mat-icon-button (click)="editartriagem(element)">
             <mat-icon>add</mat-icon>
           </button>
-          <button mat-icon-button (click)="openDialogDeletar(element)">
-            <mat-icon>mail</mat-icon>
-          </button>
-          <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
-            mat-icon-button (click)="openDialogDeletar(element)">
+          <button mat-icon-button (click)="openDialogDetalhe(element)">
             <mat-icon>description</mat-icon>
           </button>
           <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
-            mat-icon-button (click)="openDialogDeletar(element)">
+            mat-icon-button (click)="openDialogDetalhe(element)">
+            <mat-icon>mail</mat-icon>
+          </button>
+          <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
+            mat-icon-button (click)="openDialogDetalhe(element)">
             <mat-icon>start</mat-icon>
           </button>
         </td>
