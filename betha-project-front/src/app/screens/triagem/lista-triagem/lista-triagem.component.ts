@@ -4,9 +4,9 @@ import { Observable } from "rxjs";
 import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
-import { DeleteComponent } from "../../../components/delete/delete.component";
 import { ErrorDialogComponent } from "../../../components/errors/error-dialog/error-dialog.component";
 
+import { DetalheProdutoComponent } from "src/app/components/detalhe-produto/detalhe-produto.component";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
 import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
 
@@ -85,10 +85,10 @@ export class ListaTriagemComponent implements OnInit {
     );
   }
 
-  openDialogDeletar(item: Cadastro) {
-    this.dialog.open(DeleteComponent, {
-      width: "400px",
-      data: { item: item },
+  openDialogDetalhe(dados: Cadastro) {
+    this.dialog.open(DetalheProdutoComponent, {
+      width: "80%",
+      data: { infoCadastro: dados },
     });
   }
 

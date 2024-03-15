@@ -1,29 +1,40 @@
-<div class="container p-3">
-  <h2>Detalhes do Cadastro</h2>
+<div class="container p-4 mt-3">
+  <h2 class="text-primary mb-4">Detalhes do Cadastro</h2>
 
   <div class="row">
     <div class="col-md-6">
-      <p><strong>Nome:</strong> {{ data.infoCadastro.cliente }}</p>
-      <p><strong>Endereço:</strong> {{ data.infoCadastro.endereco }}</p>
-      <p><strong>Telefone:</strong> {{ data.infoCadastro.telefone }}</p>
-      <p><strong>Email:</strong> {{ data.infoCadastro.email }}</p>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Informações Pessoais</h5>
+          <p class="card-text"><strong>Nome:</strong> {{ data.infoCadastro.cliente }}</p>
+          <p class="card-text"><strong>Endereço:</strong> {{ data.infoCadastro.endereco }}</p>
+          <p class="card-text"><strong>Telefone:</strong> {{ data.infoCadastro.telefone }}</p>
+          <p class="card-text"><strong>Email:</strong> {{ data.infoCadastro.email }}</p>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
-      <p><strong>Modelo:</strong> {{ data.infoCadastro.item }}</p>
-      <p><strong>Número de Série:</strong> {{ data.infoCadastro.itemSerie }}</p>
-      <p><strong>Opção:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
-      <p><strong>Data de Entrada:</strong> {{ dia | dataFormat }}</p>
-
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Detalhes do Item</h5>
+          <p class="card-text"><strong>Modelo:</strong> {{ data.infoCadastro.item }}</p>
+          <p class="card-text"><strong>Número de Série:</strong> {{ data.infoCadastro.itemSerie }}</p>
+          <p class="card-text"><strong>Opção:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
+          <p class="card-text"><strong>Data de Entrada:</strong> {{ dia | dataFormat }}</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="mt-4">
-    <p><strong>Anotações:</strong> {{ data.infoCadastro.anotacao }}</p>
-    <p><strong>Descrição do Problema:</strong> {{ data.infoCadastro.desc }}</p>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Observações</h5>
+      <p class="card-text"><strong>Anotações:</strong> {{ data.infoCadastro.anotacao }}</p>
+      <p class="card-text"><strong>Descrição do Problema:</strong> {{ data.infoCadastro.desc }}</p>
+    </div>
   </div>
 
-  <mat-dialog-actions align="end">
-    <button class="botao-betha" (click)='chamardata()'>chamar data</button>
+  <div class="d-flex justify-content-end">
     <button class="botao-betha" mat-dialog-close>Fechar</button>
-  </mat-dialog-actions>
+  </div>
 </div>
