@@ -75,11 +75,12 @@
           <button class="mt-2" mat-icon-button (click)="editarItem(element)">
             <mat-icon>edit</mat-icon>
           </button>
-          <!-- <button mat-icon-button (click)="openDialogDeletar(element)">
-            <mat-icon>delete</mat-icon>
-          </button> -->
           <button mat-icon-button (click)="openDialogDetalhe(element)">
             <mat-icon>description</mat-icon>
+          </button>
+          <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
+            mat-icon-button (click)="openDialoDelete(element)">
+            <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>

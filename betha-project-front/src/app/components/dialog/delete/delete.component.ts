@@ -1,12 +1,12 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RepositoryService } from 'src/app/services/repository.service';
-import { TabelaService } from 'src/app/services/tabela.service';
+import { Component, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { RepositoryService } from "src/app/services/repository.service";
+import { TabelaService } from "src/app/services/tabela.service";
 
 @Component({
-  selector: 'app-delete',
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.scss'],
+  selector: "app-delete",
+  templateUrl: "./delete.component.html",
+  styleUrls: ["./delete.component.scss"],
 })
 export class DeleteComponent {
   constructor(
@@ -16,14 +16,14 @@ export class DeleteComponent {
   ) {}
 
   onDelete() {
-    const id_number = this.data.item._id;
+    const id_number = this.data.infoCadastro._id;
     const idString = String(id_number);
     this.repository.delete(idString).subscribe(
       () => {
         this.tabelaService.emitListaAtualizada.emit();
       },
       (error) => {
-        console.error('Nao deu certo', error);
+        console.error("Nao deu certo", error);
       }
     );
   }

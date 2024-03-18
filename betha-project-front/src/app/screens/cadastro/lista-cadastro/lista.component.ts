@@ -5,6 +5,7 @@ import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
+import { DeleteComponent } from "src/app/components/dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
@@ -75,6 +76,12 @@ export class ListaComponent implements OnInit {
       }
       // }
     );
+  }
+
+  openDialoDelete(dados: Cadastro) {
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      data: { infoCadastro: dados },
+    });
   }
   openDialogDetalhe(dados: Cadastro) {
     this.dialog.open(DetalheProdutoComponent, {
