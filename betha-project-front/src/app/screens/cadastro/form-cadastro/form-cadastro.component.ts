@@ -38,6 +38,7 @@ export class FormCadastroComponent implements OnInit {
         data_entrada: [data.infoCadastro.dataEntrada],
         desc: [data.infoCadastro.desc],
         valor: [data.infoCadastro.valor],
+        laudo: [data.infoCadastro.laudo],
       });
     } else {
       this.form = formBuilder.group({
@@ -51,6 +52,8 @@ export class FormCadastroComponent implements OnInit {
         status: [null],
         data_entrada: [null],
         desc: [null],
+        valor: [null],
+        laudo: [null],
       });
     }
   }
