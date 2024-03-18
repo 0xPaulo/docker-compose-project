@@ -36,6 +36,7 @@ export class FormTriagemComponent {
       desc: [data.infoCadastro.desc],
       image_urls: [data.infoCadastro.image_urls],
       valor: [data.infoCadastro.valor],
+      laudo: [data.infoCadastro.laudo],
     });
   }
   receberSon(result: any) {
