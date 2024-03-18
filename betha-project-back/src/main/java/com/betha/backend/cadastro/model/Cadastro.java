@@ -67,6 +67,9 @@ public class Cadastro {
   @Column(name = "descricao_defeito")
   private String desc;
 
+  @Column(name = "laudo")
+  private String laudo;
+
   @Column(name = "data_saida")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime dataSaida;

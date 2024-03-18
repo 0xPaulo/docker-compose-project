@@ -19,6 +19,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatMenuModule } from "@angular/material/menu";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DataFormatPipe } from "../pipe/data-format.pipe";
 import { UpperToCamelCasePipe } from "../pipe/upper-to-camel-case.pipe";
@@ -61,6 +62,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     EmailComponent,
   ],
   imports: [
+    MatMenuModule,
     MatTabsModule,
     MatExpansionModule,
     FormsModule,

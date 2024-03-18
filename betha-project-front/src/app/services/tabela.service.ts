@@ -48,7 +48,7 @@ export class TabelaService {
       case "CONCLUIDO_N_CONSERTADO":
         return "CONCLUIDO_N_CONSERTADO";
       default:
-        return ""; // Retorna uma string vazia se o status não corresponder a nenhum dos casos acima
+        return "";
     }
   }
 
