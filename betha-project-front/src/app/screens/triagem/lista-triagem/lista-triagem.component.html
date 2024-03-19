@@ -62,9 +62,6 @@
               <p>{{element.desc}}</p>
               <p>Email: {{element.email}}</p>
             </div>
-            <!-- <div *ngFor="let url of element.image_urls">
-              <img [src]="url" alt="Error ao carregar imagem">
-            </div> -->
           </div>
         </td>
       </ng-container>
@@ -73,7 +70,9 @@
       <ng-container matColumnDef="ico">
         <th mat-header-cell *matHeaderCellDef>
 
+
         <td mat-cell *matCellDef="let element" class="linhas cor-icone">
+
           <button class="mt-2" mat-icon-button (click)="editartriagem(element)">
             <mat-icon>add</mat-icon>
           </button>
@@ -84,11 +83,20 @@
             mat-icon-button (click)="openDialogEmail(element)">
             <mat-icon>mail</mat-icon>
           </button>
-          <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
-            mat-icon-button (click)="openDialogDetalhe(element)">
+
+
+          <button [matMenuTriggerFor]="menu"
+            [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
+            mat-icon-button>
             <mat-icon>start</mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="chamarManutencao(element)">Encaminhar para manutenção</button>
+              <button mat-menu-item (click)="chamarCancelamento(element)">Cancelar</button>
+            </mat-menu>
           </button>
         </td>
+
+
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef=" displayedColumns"></tr>
