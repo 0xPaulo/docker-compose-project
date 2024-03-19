@@ -5,6 +5,7 @@ import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { EmailComponent } from "src/app/components/dialog/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
@@ -23,6 +24,7 @@ export class ListaTriagemComponent implements OnInit {
   filtro: string[] = ["DISPONIVEL_TRIAGEM", "AGUARDANDO_CLIENTE", "CANCELADO"];
 
   constructor(
+    private snackBar: MatSnackBar,
     private repository: RepositoryService,
     private dialog: MatDialog,
     private tabelaService: TabelaService
@@ -36,7 +38,7 @@ export class ListaTriagemComponent implements OnInit {
   }
 
   carregarNovaTabela() {
-    this.tabelaService.carregarCadastros();
+    return (this.cadastros$ = this.tabelaService.carregarCadastros());
   }
   filterStatus(filtros: string[]) {
     this.cadastros$ = this.repository.carregarFiltro(filtros);
@@ -93,8 +95,42 @@ export class ListaTriagemComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
+  chamarCancelamento(element: Partial<Cadastro>) {
+    const id = element._id;
+    const elementAtualizado = { ...element, status: "CANCELADO" };
+    this.repository.mudarStatus(id, elementAtualizado).subscribe(
+      (result) => {
+        this.tabelaService.emitListaAtualizada.emit();
+        this.onSucess();
+      },
+      () => {
+        this.onError();
+      }
+    );
+  }
+  chamarManutencao(element: Partial<Cadastro>) {
+    const id = element._id;
+    const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
+    this.repository.mudarStatus(id, elementAtualizado).subscribe(
+      (result) => {
+        this.tabelaService.emitListaAtualizada.emit();
+        this.onSucess();
+      },
+      () => {
+        this.onError();
+      }
+    );
+  }
+
   getStatusClass(status: string): string {
     return this.tabelaService.filterStatusClass(status);
+  }
+
+  onError() {
+    this.snackBar.open("Acorreu um erro", "", { duration: 5000 });
+  }
+  onSucess() {
+    this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
   }
   ngOnInit() {
     this.tabelaService.emitListaAtualizada.subscribe(() => {

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, first, tap } from "rxjs";
+import { Observable, catchError, delay, first, of, tap } from "rxjs";
 import { Cadastro } from "./../interfaces/cadastro";
 
 @Injectable({
@@ -24,16 +24,28 @@ export class RepositoryService {
       .pipe(delay(500));
   }
 
+  mudarStatus(id: string | undefined, element: Partial<Cadastro>) {
+    return this.httpClient.patch<Cadastro>(`${this.API}/${id}`, element).pipe(
+      tap(),
+      catchError((error) => {
+        console.log("Erro ao atualizar registro", error);
+        return of(null);
+      })
+    );
+  }
+
+  update(id: string, chamado: Partial<Cadastro>) {
+    return this.httpClient.patch<Cadastro>(`${this.API}/${id}`, chamado).pipe(
+      catchError((error) => {
+        console.error("Erro ao atualizar o registro:", error);
+        return of(null);
+      })
+    );
+  }
   save(chamado: Partial<Cadastro>) {
     return this.httpClient
       .post<Cadastro>(this.API, chamado)
       .pipe(tap(() => {}));
-  }
-
-  update(id: string, chamado: Partial<Cadastro>) {
-    console.log(chamado);
-
-    return this.httpClient.patch<Cadastro>(`${this.API}/${id}`, chamado);
   }
 
   delete(id: string) {
@@ -42,7 +54,6 @@ export class RepositoryService {
 
   findById(id: string): Observable<Cadastro[]> {
     const url = `${this.API}/${id}`;
-
     return this.httpClient.get<Cadastro[]>(url).pipe(
       catchError((error) => {
         console.debug(`Aconteceu esse erro ao buscar id (${id}):  ${error}`);
