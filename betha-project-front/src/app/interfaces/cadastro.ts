@@ -10,4 +10,9 @@ export interface Cadastro {
   status: string;
   desc: string;
   image_urls: string[];
+  telefone: string;
+  endereco: string;
+  anotacao: string;
+  itemSerie: string;
+  laudo: string;
 }
