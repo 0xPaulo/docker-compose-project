@@ -15,7 +15,7 @@ export class FormTriagemComponent {
   form: FormGroup;
   isEditMode: boolean = false;
   result: string[] = [];
-
+  id: string = "";
   constructor(
     private datePipe: DatePipe,
     private snackBar: MatSnackBar,
@@ -24,6 +24,7 @@ export class FormTriagemComponent {
     private tabelaService: TabelaService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.id = data.infoCadastro._id;
     this.isEditMode = true;
     this.form = formBuilder.group({
       cliente: [data.infoCadastro.cliente],
