@@ -19,10 +19,11 @@
       <div class="card-body">
         <h5 class="card-title">Decisão de Manutenção</h5>
         <p class="card-text">Prezado(a) {{ data.infoCadastro.cliente }}, gostaríamos de informar que o seu produto ({{
-          data.infoCadastro.item }}) está aguardando manutenção. Nossos técnicos informaram que o valor do reparo ficou
+          data.infoCadastro.item }}) está aguardando manutenção.<br>De acordo com nossos técnicos, é essencial proceder
+          com
+          a {{data.infoCadastro.laudo}} O valor do reparo ficou
           em
-          R$: {{data.infoCadastro.valor}}. Deseja continuar com a manutenção? Por favor, responda este e-mail com apenas
-          sim ou não.</p>
+          R$: {{data.infoCadastro.valor}}. Se desejar continuar com a manutenção por favor, responda este e-mail.</p>
       </div>
     </div>
   </mat-dialog-content>
