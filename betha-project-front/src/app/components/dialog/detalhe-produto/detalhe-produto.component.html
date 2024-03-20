@@ -31,7 +31,10 @@
         <h2 class="card-title">Observações</h2>
         <p class="card-text"><strong>Anotações:</strong> {{ data.infoCadastro.anotacao }}</p>
         <p class="card-text"><strong>Descrição do Problema:</strong> {{ data.infoCadastro.desc }}</p>
-        <p class="card-text"><strong>Valor </strong>R$: {{data.infoCadastro.valor}} </p>
+        <div *ngIf="data.infoCadastro.laudo">
+          <p class="card-text"><strong>Laudo técnico:</strong> {{data.infoCadastro.laudo}}</p>
+        </div>
+        <p class="card-text mt-2"><strong>Valor </strong>R$: {{data.infoCadastro.valor}} </p>
       </div>
     </div>
 

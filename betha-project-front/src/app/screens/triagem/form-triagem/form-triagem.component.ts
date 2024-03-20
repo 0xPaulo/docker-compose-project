@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -11,7 +11,7 @@ import { TabelaService } from "src/app/services/tabela.service";
   templateUrl: "./form-triagem.component.html",
   styleUrls: ["./form-triagem.component.scss"],
 })
-export class FormTriagemComponent implements OnInit {
+export class FormTriagemComponent {
   form: FormGroup;
   isEditMode: boolean = false;
   result: string[] = [];
@@ -47,14 +47,13 @@ export class FormTriagemComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("data: ", this.form.value);
-    let dadosAtualizados = { ...this.form.value, image_urls: this.result };
+    this.form.patchValue({ image_urls: this.result });
     const dataInicial = this.form.value.data_entrada;
     const dataFormatada = this.datePipe.transform(
       dataInicial,
       "yyyy-MM-ddTHH:mm:ss"
     );
-    dadosAtualizados = { ...this.form.value, dataEntrada: dataFormatada };
+    const dadosAtualizados = { ...this.form.value, dataEntrada: dataFormatada };
     const idItem = this.data.infoCadastro._id;
     this.service.update(idItem, dadosAtualizados).subscribe(
       (result) => {
@@ -71,8 +70,5 @@ export class FormTriagemComponent implements OnInit {
   }
   onSucess() {
     this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
-  }
-  ngOnInit(): void {
-    console.log(this.form.value);
   }
 }
