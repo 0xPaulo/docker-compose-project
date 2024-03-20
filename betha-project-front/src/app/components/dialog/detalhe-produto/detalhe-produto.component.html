@@ -41,7 +41,7 @@
         <h2 class="card-title">Fotos da triagem</h2>
         <div class="container-fotos" *ngIf="form.get('image_urls')?.value">
           <div class="container-fotos-filha" *ngFor="let url of form.get('image_urls')?.value">
-            <img [src]="url">
+            <img [src]="url" alt="Loading image error">
           </div>
         </div>
       </div>
