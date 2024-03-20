@@ -40,6 +40,7 @@ public class CadastroService {
           .dataSaida(cadastro.getDataSaida())
           .valor(cadastro.getValor())
           .image_urls(cadastro.getImage_urls())
+          .laudo(cadastro.getLaudo())
           .build();
 
       return cadastroRepository.save(cadastroAtualizado);
@@ -64,6 +65,7 @@ public class CadastroService {
         .desc(cadastro.getDesc())
         .dataSaida(cadastro.getDataSaida())
         .valor(cadastro.getValor())
+        .laudo(cadastro.getLaudo())
         .build();
 
     return cadastroRepository.save(novoCadastro);
