@@ -1,4 +1,5 @@
-import { Component, Inject } from "@angular/core";
+import { DatePipe } from "@angular/common";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -10,12 +11,13 @@ import { TabelaService } from "src/app/services/tabela.service";
   templateUrl: "./form-triagem.component.html",
   styleUrls: ["./form-triagem.component.scss"],
 })
-export class FormTriagemComponent {
+export class FormTriagemComponent implements OnInit {
   form: FormGroup;
   isEditMode: boolean = false;
   result: string[] = [];
 
   constructor(
+    private datePipe: DatePipe,
     private snackBar: MatSnackBar,
     private service: RepositoryService,
     private formBuilder: FormBuilder,
@@ -32,25 +34,28 @@ export class FormTriagemComponent {
       item: [data.infoCadastro.item],
       itemSerie: [data.infoCadastro.itemSerie],
       status: [data.infoCadastro.status],
-      data_entrada: [Date.now],
+      data_entrada: [data.infoCadastro.dataEntrada],
       desc: [data.infoCadastro.desc],
       image_urls: [data.infoCadastro.image_urls],
       valor: [data.infoCadastro.valor],
       laudo: [data.infoCadastro.laudo],
     });
   }
+
   receberSon(result: any) {
     this.result = result;
   }
 
   onSubmit() {
-    console.log("dados antes" + this.data.infoCadastro.image_urls);
-    const dadosAtualizados = { ...this.form.value, image_urls: this.result };
-    console.log("dados atualizados" + this.data.infoCadastro.image_urls);
-
+    console.log("data: ", this.form.value);
+    let dadosAtualizados = { ...this.form.value, image_urls: this.result };
+    const dataInicial = this.form.value.data_entrada;
+    const dataFormatada = this.datePipe.transform(
+      dataInicial,
+      "yyyy-MM-ddTHH:mm:ss"
+    );
+    dadosAtualizados = { ...this.form.value, dataEntrada: dataFormatada };
     const idItem = this.data.infoCadastro._id;
-    console.log(dadosAtualizados);
-    console.log(idItem);
     this.service.update(idItem, dadosAtualizados).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
@@ -66,5 +71,8 @@ export class FormTriagemComponent {
   }
   onSucess() {
     this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
+  }
+  ngOnInit(): void {
+    console.log(this.form.value);
   }
 }
