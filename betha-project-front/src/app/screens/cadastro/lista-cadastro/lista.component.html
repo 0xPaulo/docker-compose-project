@@ -1,14 +1,14 @@
 <div class="card-container">
   <mat-card-content>
     <div class="table-toolbar pt-2">
-      <h5 class="ms-3">Itens cadastrados</h5>
+      <h5 class="ms-4">Itens cadastrados</h5>
       <div class="demo-button-container">
-        <button (click)="abrirDialogForm()" class="ms-3 personalizado-button">+ Cadastrar
+        <button (click)="abrirDialogForm()" class="ms-4 personalizado-button">+ Cadastrar
         </button>
         <div class="tabs twist">
           <button class="tabs-button" (click)="carregarTabela()">
             <p class="ico-tabs-1">1</p>
-            <p> Cadastros</p>
+            <p class="first_button"> Cadastros</p>
           </button>
           <button class="tabs-button" (click)="filterStatus(['DISPONIVEL_TRIAGEM','AGUARDANDO_CLIENTE','CANCELADO'])">
             <p class="ico-tabs-2">2</p>
@@ -18,7 +18,8 @@
             <p class="ico-tabs-3">3</p>
             <p>Manutencao</p>
           </button>
-          <button class="tabs-button" (click)="filterStatus(['CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO'])">
+          <button class="tabs-button last-button"
+            (click)="filterStatus(['CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO'])">
             <p class="ico-tabs-4">4</p>
             <p>Concluido</p>
           </button>

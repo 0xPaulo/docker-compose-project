@@ -54,6 +54,26 @@
   margin: 0 5px;
   padding: 5px;
 }
+.first_button::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  right: 123px;
+  width: 18px;
+  height: 34px;
+  background-color: #ebedf0;
+  transform: skewX(0deg);
+}
+.last-button::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  right: 9px;
+  width: 18px;
+  height: 34px;
+  background-color: #ebedf0;
+  transform: skewX(29deg);
+}
 .tabs p {
   margin: 0px 0px 0px 10px;
   transform: skewX(30deg);
@@ -135,6 +155,12 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+@media (max-width: 840px) {
+  .tabs {
+    display: none;
+  }
+}
+
 .grid-1 {
   align-content: start;
   margin: 0px;
