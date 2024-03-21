@@ -1,9 +1,9 @@
 <div class="card-container">
   <mat-card-content>
     <div class="table-toolbar pt-2">
-      <h5 class="ms-3">Itens em triagem</h5>
-      <div class="demo-button-container">
-        <div class="tabs twist">
+      <h5 class="ms-4 ">Itens em triagem</h5>
+      <div class="demo-button-container ">
+        <div class="tabs twist first_button">
           <button class="tabs-button" (click)="carregarNovaTabela()">
             <p class="ico-tabs-1">1</p>
             <p> Cadastros</p>
@@ -16,7 +16,8 @@
             <p class="ico-tabs-3">3</p>
             <p>Manutencao</p>
           </button>
-          <button class="tabs-button" (click)="filterStatus(['CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO'])">
+          <button class="tabs-button last-button"
+            (click)="filterStatus(['CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO'])">
             <p class="ico-tabs-4">4</p>
             <p>Concluido</p>
           </button>
