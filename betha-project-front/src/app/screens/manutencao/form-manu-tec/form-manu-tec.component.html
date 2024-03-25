@@ -1,0 +1,61 @@
+<div class="container p-4 mt-3">
+  <h3 class=" text-primary"><strong>Escolha o técnico para o item {{id}}</strong></h3>
+  <mat-dialog-content class="mat-typography">
+    <form class="form-group" [formGroup]="form">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <mat-form-field class="custom-mat-form-field">
+                <mat-label>Escolha um Técnico</mat-label>
+                <mat-select [formControl]="toppings" class="custom-mat-select">
+                  <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Detalhes do Item</h2>
+              <p class="card-text"><strong>Modelo:</strong> {{ data.infoCadastro.item }}</p>
+              <p class="card-text"><strong>Número de Série:</strong> {{ data.infoCadastro.itemSerie }}</p>
+              <p class="card-text"><strong>Opção:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
+              <p class="card-text"><strong>Data de Entrada:</strong> {{ dia | dataFormat }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Observações</h2>
+          <p class="card-text"><strong>Anotações:</strong> {{ data.infoCadastro.anotacao }}</p>
+          <p class="card-text"><strong>Descrição do Problema:</strong> {{ data.infoCadastro.desc }}</p>
+          <div *ngIf="data.infoCadastro.laudo">
+            <p class="card-text"><strong>Laudo técnico:</strong> {{data.infoCadastro.laudo}}</p>
+          </div>
+          <p class="card-text mt-2"><strong>Valor </strong>R$: {{data.infoCadastro.valor}} </p>
+        </div>
+      </div>
+
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Fotos da triagem</h2>
+          <div class="container-fotos" *ngIf="form.get('image_urls')?.value">
+            <div class="container-fotos-filha" *ngFor="let url of form.get('image_urls')?.value">
+              <img [src]="url" alt="Loading image error">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button class="botao-betha-cancel" mat-dialog-close>Fechar</button>
+    <button class="botao-betha" mat-dialog-close cdkFocusInitial (click)="onSubmit()">Confirmar</button>
+  </mat-dialog-actions>

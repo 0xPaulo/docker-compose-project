@@ -1,0 +1,20 @@
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.title {
+  padding: 20px 20px 0px 20px;
+}
+.botao-betha {
+  margin-right: 0px !important;
+}
+.mat-mdc-form-field {
+  display: block;
+}
+:host {
+  --mdc-filled-text-field-container-color: #00000000;
+  --mdc-filled-text-field-focus-active-indicator-color: #00000000;
+  --mdc-filled-text-field-focus-active-indicator-color: rgb(0, 119, 255);
+}
