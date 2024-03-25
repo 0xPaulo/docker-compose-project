@@ -15,4 +15,8 @@ export class HomeComponent {
   triagem() {
     this.router.navigate(["triagem"]);
   }
+
+  manutencao() {
+    this.router.navigate(["manutencao"]);
+  }
 }
