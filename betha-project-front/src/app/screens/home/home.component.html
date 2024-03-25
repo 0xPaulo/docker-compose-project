@@ -7,13 +7,13 @@
     </div>
     <mat-card-content>
       <mat-grid-list cols="2" rowHeight="125px" gutterSize="10px">
-        <mat-grid-tile style="cursor: pointer;" (click)="cadastros()" class="custom-tile">Cadastros<mat-icon
+        <mat-grid-tile style="cursor: pointer;" (click)="cadastros()" class="custom-tile">Cadastro<mat-icon
             class="transform-icon">edit_square</mat-icon></mat-grid-tile>
-        <mat-grid-tile class="custom-tile" style="cursor: pointer;" (click)="triagem()">Triagens<mat-icon
+        <mat-grid-tile class="custom-tile" style="cursor: pointer;" (click)="triagem()">Triagem<mat-icon
             class="transform-icon">history_toggle_off</mat-icon></mat-grid-tile>
-        <mat-grid-tile class="custom-tile">Em manutenção<mat-icon
+        <mat-grid-tile class="custom-tile" style="cursor: pointer;" (click)="manutencao()">Manutenção<mat-icon
             class="transform-icon">engineering</mat-icon></mat-grid-tile>
-        <mat-grid-tile class="custom-tile">Concluídos<mat-icon
+        <mat-grid-tile class="custom-tile">Concluído<mat-icon
             class="transform-icon">check_box</mat-icon></mat-grid-tile>
       </mat-grid-list>
       <div class="linhas-bottom-page"></div>

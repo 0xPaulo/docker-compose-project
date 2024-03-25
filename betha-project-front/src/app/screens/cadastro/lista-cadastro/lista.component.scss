@@ -203,15 +203,19 @@ mat-card {
 }
 .invisivel {
   opacity: 0;
-  max-height: 0;
+  width: 0.0016px;
+  height: 0.0016px;
   overflow: hidden;
-  transition: opacity 0.3s ease, max-height 0.3s ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
 }
 
 .visivel {
   opacity: 1;
   max-height: 100px;
-  transition: opacity 0.3s ease, max-height 0.3s ease;
+  transform: scaleY(1);
+  transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
 }
 
 .cor-icone {
