@@ -1,0 +1,268 @@
+.table-toolbar {
+  background-color: #ebedf0;
+  border: 1px solid rgba(209, 209, 209, 0.397);
+}
+.table-toolbar h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.demo-button-container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.personalizado-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.personalizado-button:active {
+  transform: scale(0.95);
+}
+
+.tabs {
+  padding: 12px 12px 0px 12px;
+  display: flex;
+}
+.tabs-button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  cursor: default;
+  text-align: left;
+  display: flex;
+  gap: 8px;
+}
+.twist {
+  transform: skewX(-30deg);
+}
+.tabs button {
+  cursor: pointer;
+  background-color: #b5c0cc;
+  flex-grow: 1;
+  margin: 0 5px;
+  padding: 5px;
+}
+
+.first_button::before {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 7px;
+  width: 18px;
+  height: 36px;
+  background-color: #ebedf0;
+  transform: skewX(29deg);
+}
+.last-button::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  right: 8px;
+  width: 18px;
+  height: 34px;
+  background-color: #ebedf0;
+  transform: skewX(29deg);
+}
+.tabs p {
+  margin: 0px 0px 0px 10px;
+  transform: skewX(30deg);
+  color: black;
+  font-weight: bolder;
+}
+.ico-tabs-1 {
+  text-align: center;
+  width: 24px;
+  background-color: #4f5559;
+  border-radius: 100%;
+  color: white !important;
+}
+.ico-tabs-2 {
+  text-align: center;
+  width: 24px;
+  background-color: #0a6ab6;
+  color: white !important;
+  border-radius: 100%;
+}
+.ico-tabs-3 {
+  text-align: center;
+  width: 24px;
+  background-color: #4b2a8e;
+  color: white !important;
+  border-radius: 100%;
+}
+.ico-tabs-4 {
+  text-align: center;
+  width: 24px;
+  background-color: #78ca00;
+  color: white !important;
+  border-radius: 100%;
+}
+.custom-id-cell {
+  position: relative;
+}
+
+.custom-id-cell .id-number {
+  position: relative;
+  display: inline-block;
+  padding: 0 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  // background-color: #0000ff18;
+}
+
+.custom-id-cell .id-number::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // border: 2px solid red;
+  background-color: #4c77af77;
+  border-radius: 2rem;
+  box-sizing: border-box;
+  width: 48px;
+  height: 24px;
+}
+.grid {
+  display: grid;
+  margin: 0px !important;
+}
+.grid-template-columns {
+  grid-template-columns: 3fr 1fr;
+}
+@media (max-width: 1080px) {
+  .grid-template-columns {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+@media (max-width: 870px) {
+  .grid-template-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 840px) {
+  .tabs {
+    display: none;
+  }
+}
+.grid-1 {
+  align-content: start;
+  margin: 0px;
+}
+.grid-2 p {
+  margin: 5px !important;
+}
+.grid-2 {
+  text-align: right;
+  justify-content: end;
+}
+.grid-2 span {
+  color: #0000ff;
+}
+.font-cell-edit h1 {
+  font-size: medium;
+  font-weight: bolder;
+}
+.font-cell-edit h2 {
+  color: rgb(75, 75, 75);
+  font-size: small;
+  font-weight: bold;
+}
+.font-cell-edit p {
+  font-size: small;
+  font-weight: bold;
+  color: rgb(75, 75, 75);
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+mat-card {
+  width: 100%;
+  // max-width: 2000px;
+  height: auto;
+}
+.invisivel {
+  opacity: 0;
+  width: 0.0016px;
+  height: 0.0016px;
+  overflow: hidden;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
+}
+
+.visivel {
+  opacity: 1;
+  max-height: 100px;
+  transform: scaleY(1);
+  transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
+}
+
+.cor-icone {
+  color: rgb(75, 75, 75);
+}
+.CANCELADO:before {
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 2px 7px;
+  background-color: #a91409;
+  content: "Cancelado";
+}
+.DISPONIVEL_TRIAGEM:before {
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 2px 7px;
+  background-color: #00b85e;
+  content: "Disponível para triagem";
+}
+.AGUARDANDO_CLIENTE:before {
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 2px 7px;
+  background-color: #0287c3;
+  content: "Aguardando cliente";
+}
+.AGUARDANDO_MANUTENCAO:before {
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 2px 7px;
+  background-color: #4b2a8e;
+  content: "Aguardando Técnico";
+}
+.CONCLUIDO_CONSERTADO:before {
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 2px 7px;
+  background-color: #78ca00;
+  content: "Finalizado";
+}
+.CONCLUIDO_N_CONSERTADO:before {
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 2px 7px;
+  background-color: #cc5700;
+  content: "Finalizado com falha";
+}

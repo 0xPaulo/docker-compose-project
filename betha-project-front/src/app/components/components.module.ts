@@ -27,6 +27,9 @@ import { CadastroComponent } from "../screens/cadastro/cadastro.component";
 import { FormCadastroComponent } from "../screens/cadastro/form-cadastro/form-cadastro.component";
 import { ListaComponent } from "../screens/cadastro/lista-cadastro/lista.component";
 import { HomeComponent } from "../screens/home/home.component";
+import { FormManuTecComponent } from "../screens/manutencao/form-manu-tec/form-manu-tec.component";
+import { ListaManuComponent } from "../screens/manutencao/lista-manu/lista-manu.component";
+import { ManutencaoComponent } from "../screens/manutencao/manutencao.component";
 import { FormTriagemComponent } from "../screens/triagem/form-triagem/form-triagem.component";
 import { ListaTriagemComponent } from "../screens/triagem/lista-triagem/lista-triagem.component";
 import { TriagemComponent } from "../screens/triagem/triagem.component";
@@ -42,6 +45,9 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 
 @NgModule({
   declarations: [
+    FormManuTecComponent,
+    ListaManuComponent,
+    ManutencaoComponent,
     DataFormatPipe,
     UpperToCamelCasePipe,
     DetalheProdutoComponent,
