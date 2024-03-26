@@ -28,8 +28,7 @@
 
     <div class="card mb-4">
       <div class="card-body">
-        <h2 class="card-title">Observações</h2>
-        <p class="card-text"><strong>Anotações:</strong> {{ data.infoCadastro.anotacao }}</p>
+        <h2 class="card-title">Observações da triagem</h2>
         <p class="card-text"><strong>Descrição do Problema:</strong> {{ data.infoCadastro.desc }}</p>
         <div *ngIf="data.infoCadastro.laudo">
           <p class="card-text"><strong>Laudo técnico:</strong> {{data.infoCadastro.laudo}}</p>
