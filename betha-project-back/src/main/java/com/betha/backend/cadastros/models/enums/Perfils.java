@@ -1,4 +1,4 @@
-package com.betha.backend.cadastros.models.enums;
+package com.betha.backend.cadastros.models.Enums;
 
 public enum Perfils {
   ADMIN("Administrador"),

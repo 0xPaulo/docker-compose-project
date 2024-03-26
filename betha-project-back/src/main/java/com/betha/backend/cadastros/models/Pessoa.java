@@ -1,6 +1,6 @@
 package com.betha.backend.cadastros.models;
 
-import com.betha.backend.cadastros.models.enums.Perfils;
+import com.betha.backend.cadastros.models.Enums.Perfils;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
