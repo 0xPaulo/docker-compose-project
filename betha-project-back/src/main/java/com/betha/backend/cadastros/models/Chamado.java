@@ -42,33 +42,36 @@ public class Chamado {
   @JoinColumn(name = "tecnico_id_fk")
   private Tecnico tecnico;
 
-  @Column
+  @Column(name = "name_item")
   private String nomeItem;
 
-  @Column
+  @Column(name = "item_serie")
   private String itemSerie;
 
-  @Column
+  @Column(name = "defeito_relatado")
   private String defeitoRelatado;
 
-  @Enumerated(EnumType.STRING)
-  private com.betha.backend.cadastro.model.Enum.Status status;
+  @Column(name = "descricao_defeito")
+  private String descricaoDefeito;
 
-  @Column
+  @Enumerated(EnumType.STRING)
+  private com.betha.backend.cadastros.models.Enums.Status status;
+
+  @Column(name = "data_entrada")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime dataEntrada;
 
-  @Column
+  @Column(name = "analise_tecnica")
   private String analiseTecnica;
 
   @Column
   private String laudo;
 
-  @Column
+  @Column(name = "data_saida")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime dataSaida;
 
-  @Column
+  @Column(name = "custo_estimado")
   private int custoEstimado;
 
   @Column(columnDefinition = "text[]", name = "image_urls")
