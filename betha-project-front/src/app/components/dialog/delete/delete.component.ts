@@ -9,6 +9,8 @@ import { TabelaService } from "src/app/services/tabela.service";
   styleUrls: ["./delete.component.scss"],
 })
 export class DeleteComponent {
+  id_number = this.data.infoCadastro._id;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private repository: RepositoryService,
@@ -16,8 +18,8 @@ export class DeleteComponent {
   ) {}
 
   onDelete() {
-    const id_number = this.data.infoCadastro._id;
-    const idString = String(id_number);
+    // const id_number = this.data.infoCadastro._id;
+    const idString = String(this.id_number);
     this.repository.delete(idString).subscribe(
       () => {
         this.tabelaService.emitListaAtualizada.emit();
