@@ -127,3 +127,10 @@ html {
   );
   background-size: 100% 100%;
 }
+
+:root {
+  --mdc-filled-text-field-disabled-container-color: whitesmoke;
+  --mdc-filled-text-field-disabled-label-text-color: #0009;
+  --mdc-filled-text-field-disabled-input-text-color: rgba(0, 0, 0, 0.459);
+  --mdc-filled-text-field-disabled-active-indicator-color: rgba(0, 0, 0, 0.42);
+}
