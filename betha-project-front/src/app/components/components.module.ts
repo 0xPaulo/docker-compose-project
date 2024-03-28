@@ -19,6 +19,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatMenuModule } from "@angular/material/menu";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DataFormatPipe } from "../pipe/data-format.pipe";
@@ -33,6 +34,7 @@ import { ManutencaoComponent } from "../screens/manutencao/manutencao.component"
 import { FormTriagemComponent } from "../screens/triagem/form-triagem/form-triagem.component";
 import { ListaTriagemComponent } from "../screens/triagem/lista-triagem/lista-triagem.component";
 import { TriagemComponent } from "../screens/triagem/triagem.component";
+import { BuscaClienteComponent } from "./busca-cliente/busca-cliente.component";
 import { MyRouteTesteRoutes } from "./components-routing.module";
 import { DeleteComponent } from "./dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "./dialog/detalhe-produto/detalhe-produto.component";
@@ -66,8 +68,10 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     TestComponent,
     DetalheProdutoComponent,
     EmailComponent,
+    BuscaClienteComponent,
   ],
   imports: [
+    MatAutocompleteModule,
     MatMenuModule,
     MatTabsModule,
     MatExpansionModule,
