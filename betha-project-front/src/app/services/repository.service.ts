@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, first, map, of, tap } from "rxjs";
-import { ClienteNames } from "../interfaces/clienteNames";
+import { Observable, catchError, delay, first, of, tap } from "rxjs";
 import { Cadastro } from "./../interfaces/cadastro";
 
 @Injectable({
@@ -61,23 +60,5 @@ export class RepositoryService {
         throw error;
       })
     );
-  }
-
-  buscarNomeCliente(nomeCliente: string): Observable<string[]> {
-    if (nomeCliente) {
-      return this.httpClient
-        .get<any[]>(`http://localhost:8080/api/clientes?nome=${nomeCliente}`)
-        .pipe(
-          map(
-            (response) => response.map((obj: ClienteNames) => obj.cliente),
-            catchError((error) => {
-              console.error("Erro ao buscar clientes:", error);
-              throw error;
-            })
-          )
-        );
-    } else {
-      return of([]);
-    }
   }
 }
