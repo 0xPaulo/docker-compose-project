@@ -4,7 +4,7 @@
   <mat-tab label="Cliente"><mat-dialog-content>
       <form class="form-group" [formGroup]="form">
 
-        <busca-cliente class="t-4"></busca-cliente>
+        <busca-cliente (clienteSelecionadoOut)="receberSon($event)" class="t-4"></busca-cliente>
 
         <mat-form-field class="col-md-12 mt-3">
           <mat-label>Nome</mat-label>
@@ -17,19 +17,18 @@
 
         <mat-form-field class="col-md-12">
           <mat-label>Telefone</mat-label>
-          <input [disabled]="inputDesabilitado" matInput placeholder="" formControlName="telefone">
+          <input matInput placeholder="" formControlName="telefone">
         </mat-form-field>
         <mat-form-field class="col-md-12">
           <mat-label>Email</mat-label>
           <input matInput placeholder="" formControlName="email">
         </mat-form-field>
-
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
       <button class="botao-betha-cancel" (click)="habilitarCampos()">Editar cliente</button>
-      <button class="botao-betha" [mat-dialog-close]=" true" cdkFocusInitial (click)="onSubmit()">Salvar
+      <button class="botao-betha" cdkFocusInitial (click)="onSubmitCliente()">Salvar
         cliente</button>
       <!-- submit uma parte depois submit outra parte -->
     </mat-dialog-actions>
