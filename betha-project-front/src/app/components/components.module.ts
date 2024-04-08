@@ -26,6 +26,7 @@ import { DataFormatPipe } from "../pipe/data-format.pipe";
 import { UpperToCamelCasePipe } from "../pipe/upper-to-camel-case.pipe";
 import { CadastroComponent } from "../screens/cadastro/cadastro.component";
 import { FormCadastroComponent } from "../screens/cadastro/form-cadastro/form-cadastro.component";
+import { FormCriarCadastroComponent } from "../screens/cadastro/form-criar-cadastro/form-criar-cadastro.component";
 import { ListaComponent } from "../screens/cadastro/lista-cadastro/lista.component";
 import { HomeComponent } from "../screens/home/home.component";
 import { FormManuTecComponent } from "../screens/manutencao/form-manu-tec/form-manu-tec.component";
@@ -44,9 +45,11 @@ import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permiss
 import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { PossuiCadastroComponent } from './dialog/possui-cadastro/possui-cadastro.component';
 
 @NgModule({
   declarations: [
+    FormCriarCadastroComponent,
     FormManuTecComponent,
     ListaManuComponent,
     ManutencaoComponent,
@@ -69,6 +72,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     DetalheProdutoComponent,
     EmailComponent,
     BuscaClienteComponent,
+    PossuiCadastroComponent,
   ],
   imports: [
     MatAutocompleteModule,

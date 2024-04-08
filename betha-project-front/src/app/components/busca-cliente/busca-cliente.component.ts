@@ -24,7 +24,7 @@ import { ClienteService } from "src/app/services/cliente.service";
     <div class="erro-busca-cliente" *ngIf="mostrarMensagemErro">
       Cliente não encontrado.
     </div>
-    <button class="botao-betha" (click)="buscarCliente()">Buscar</button>
+    <button class="botao-betha mb-4" (click)="buscarCliente()">Buscar</button>
   `,
   styleUrls: ["./busca-cliente.component.scss"],
 })
@@ -52,15 +52,24 @@ export class BuscaClienteComponent {
         tap((resposta) => {
           this.mostrarMensagemErro = resposta.length === 0;
           this.clienteCompleto = resposta;
-          console.log(this.clienteCompleto);
         }),
         map((resposta) => resposta.map((obj: FormCliente) => obj.nome))
       );
   }
 
   lidarClienteSelecionado(event: MatAutocompleteSelectedEvent) {
-    this.clienteSelecionadoRoot = event.option.value;
-    console.log("!" + this.clienteSelecionadoRoot);
-    this.clienteSelecionadoOut.emit(this.clienteSelecionadoRoot);
+    let nomeClienteSelecionadoRoot = event.option.value;
+    this.clienteCompleto.forEach((cliente) => {
+      if (cliente.nome === nomeClienteSelecionadoRoot) {
+        this.clienteSelecionadoRoot = cliente;
+      }
+    });
+    if (this.clienteSelecionadoRoot) {
+      console.log(this.clienteSelecionadoRoot);
+      console.log("Deu certo!!!");
+      this.clienteSelecionadoOut.emit(this.clienteSelecionadoRoot);
+    } else {
+      console.log(`${nomeClienteSelecionadoRoot} nao encontrado`);
+    }
   }
 }
