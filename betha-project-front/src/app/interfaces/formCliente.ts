@@ -4,4 +4,8 @@ export interface FormCliente {
   endereco: string;
   telefone: string;
   email: string;
+
+  chamados?: [];
+  imagem?: string;
+  perfil?: string;
 }

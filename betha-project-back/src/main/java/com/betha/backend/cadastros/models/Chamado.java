@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,10 +18,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
 @Entity
 @Getter
 @Setter
@@ -36,7 +40,8 @@ public class Chamado {
 
   @ManyToOne
   @JoinColumn(name = "cliente_id_fk")
-  private Cliente cliente;
+  @JsonBackReference
+  private Cliente clienteId;
 
   @ManyToOne
   @JoinColumn(name = "tecnico_id_fk")
@@ -48,24 +53,18 @@ public class Chamado {
   @Column(name = "item_serie")
   private String itemSerie;
 
-  @Column(name = "defeito_relatado")
-  private String defeitoRelatado;
-
-  @Column(name = "descricao_defeito")
-  private String descricaoDefeito;
-
   @Enumerated(EnumType.STRING)
   private com.betha.backend.cadastros.models.Enums.Status status;
 
-  @Column(name = "data_entrada")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private LocalDateTime dataEntrada;
+  @Column(name = "defeito_relatado")
+  private String defeitoRelatado;
 
   @Column(name = "analise_tecnica")
   private String analiseTecnica;
 
-  @Column
-  private String laudo;
+  @Column(name = "data_entrada")
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private LocalDateTime dataEntrada;
 
   @Column(name = "data_saida")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

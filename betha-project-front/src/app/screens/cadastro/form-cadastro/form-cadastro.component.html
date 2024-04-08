@@ -3,9 +3,6 @@
 <mat-tab-group color="primary" fitInkBarToContent>
   <mat-tab label="Cliente"><mat-dialog-content>
       <form class="form-group" [formGroup]="form">
-
-        <busca-cliente (clienteSelecionadoOut)="receberSon($event)" class="t-4"></busca-cliente>
-
         <mat-form-field class="col-md-12 mt-3">
           <mat-label>Nome</mat-label>
           <input matInput placeholder="" formControlName="cliente">
@@ -27,8 +24,8 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
-      <button class="botao-betha-cancel" (click)="habilitarCampos()">Editar cliente</button>
-      <button class="botao-betha" cdkFocusInitial (click)="onSubmitCliente()">Salvar
+      <button class="botao-betha-cancel" (click)="habilitarCampos()">Editar cadastro</button>
+      <button class="botao-betha" mat-dialog-close cdkFocusInitial (click)="onSubmit()">Salvar
         cliente</button>
       <!-- submit uma parte depois submit outra parte -->
     </mat-dialog-actions>
@@ -69,6 +66,7 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
+      <button class="botao-betha-cancel" (click)="habilitarCampos()">Editar cadastro</button>
       <button class="botao-betha" [mat-dialog-close]=" true" cdkFocusInitial (click)="onSubmit()">Salvar
         cadastro</button>
     </mat-dialog-actions>

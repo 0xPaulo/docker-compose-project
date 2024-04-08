@@ -17,7 +17,7 @@ export class FormCadastroComponent implements OnInit {
   isEditMode: boolean = false;
   activeTab: string = "cliente";
   inputDesabilitado: boolean = true;
-  nomeSelecionado: string = "";
+
   constructor(
     private snackBar: MatSnackBar,
     private service: RepositoryService,
@@ -68,26 +68,7 @@ export class FormCadastroComponent implements OnInit {
     }
   }
 
-  onSubmitCliente() {
-    const clienteFormFields = {
-      nome: this.form.get("cliente")?.value,
-      endereco: this.form.get("endereco")?.value,
-      email: this.form.get("email")?.value,
-      telefone: this.form.get("telefone")?.value,
-    };
-
-    this.clienteService.createCliente(clienteFormFields).subscribe(
-      (result) => {
-        this.onSucess();
-      },
-      () => {
-        this.onError();
-      }
-    );
-  }
-
   onSubmit() {
-    // antigo
     if (this.isEditMode) {
       const dataInicial = this.form.value.data_entrada;
       const dataFormatada = this.datePipe.transform(
@@ -120,15 +101,6 @@ export class FormCadastroComponent implements OnInit {
         }
       );
     }
-  }
-
-  receberSon(nomeSelecionado: string) {
-    console.log("receber son chegou" + nomeSelecionado);
-    // errado string
-    this.nomeSelecionado = nomeSelecionado;
-    this.form.patchValue({
-      telefone: nomeSelecionado,
-    });
   }
 
   habilitarCampos() {
