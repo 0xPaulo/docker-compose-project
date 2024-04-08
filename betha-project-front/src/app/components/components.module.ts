@@ -19,12 +19,14 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatMenuModule } from "@angular/material/menu";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DataFormatPipe } from "../pipe/data-format.pipe";
 import { UpperToCamelCasePipe } from "../pipe/upper-to-camel-case.pipe";
 import { CadastroComponent } from "../screens/cadastro/cadastro.component";
 import { FormCadastroComponent } from "../screens/cadastro/form-cadastro/form-cadastro.component";
+import { FormCriarCadastroComponent } from "../screens/cadastro/form-criar-cadastro/form-criar-cadastro.component";
 import { ListaComponent } from "../screens/cadastro/lista-cadastro/lista.component";
 import { HomeComponent } from "../screens/home/home.component";
 import { FormManuTecComponent } from "../screens/manutencao/form-manu-tec/form-manu-tec.component";
@@ -33,6 +35,7 @@ import { ManutencaoComponent } from "../screens/manutencao/manutencao.component"
 import { FormTriagemComponent } from "../screens/triagem/form-triagem/form-triagem.component";
 import { ListaTriagemComponent } from "../screens/triagem/lista-triagem/lista-triagem.component";
 import { TriagemComponent } from "../screens/triagem/triagem.component";
+import { BuscaClienteComponent } from "./busca-cliente/busca-cliente.component";
 import { MyRouteTesteRoutes } from "./components-routing.module";
 import { DeleteComponent } from "./dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "./dialog/detalhe-produto/detalhe-produto.component";
@@ -42,9 +45,11 @@ import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permiss
 import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { PossuiCadastroComponent } from './dialog/possui-cadastro/possui-cadastro.component';
 
 @NgModule({
   declarations: [
+    FormCriarCadastroComponent,
     FormManuTecComponent,
     ListaManuComponent,
     ManutencaoComponent,
@@ -66,8 +71,11 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     TestComponent,
     DetalheProdutoComponent,
     EmailComponent,
+    BuscaClienteComponent,
+    PossuiCadastroComponent,
   ],
   imports: [
+    MatAutocompleteModule,
     MatMenuModule,
     MatTabsModule,
     MatExpansionModule,

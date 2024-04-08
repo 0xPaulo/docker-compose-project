@@ -58,7 +58,7 @@ export class EmailComponent {
     );
   }
   onError() {
-    this.snackBar.open("Acorreu um erro", "", { duration: 5000 });
+    this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
   }
   onSucess() {
     this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
