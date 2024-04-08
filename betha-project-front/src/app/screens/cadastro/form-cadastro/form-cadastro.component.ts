@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ClienteService } from "src/app/services/cliente.service";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
@@ -15,12 +16,14 @@ export class FormCadastroComponent implements OnInit {
   form: FormGroup;
   isEditMode: boolean = false;
   activeTab: string = "cliente";
+  inputDesabilitado: boolean = true;
 
   constructor(
     private snackBar: MatSnackBar,
     private service: RepositoryService,
     private formBuilder: FormBuilder,
     private tabelaService: TabelaService,
+    private clienteService: ClienteService,
     private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -39,6 +42,13 @@ export class FormCadastroComponent implements OnInit {
         desc: [data.infoCadastro.desc],
         valor: [data.infoCadastro.valor],
         laudo: [data.infoCadastro.laudo],
+      });
+      Object.keys(this.form.controls).forEach((property) => {
+        const control = this.form.get(property);
+        if (control) {
+          control.disable();
+        }
+        this.inputDesabilitado = false;
       });
     } else {
       this.form = formBuilder.group({
@@ -93,8 +103,28 @@ export class FormCadastroComponent implements OnInit {
     }
   }
 
+  habilitarCampos() {
+    if (!this.inputDesabilitado) {
+      Object.keys(this.form.controls).forEach((property) => {
+        const control = this.form.get(property);
+        if (control) {
+          control.enable();
+        }
+      });
+      return (this.inputDesabilitado = true);
+    } else {
+      Object.keys(this.form.controls).forEach((property) => {
+        const control = this.form.get(property);
+        if (control) {
+          control.disable();
+        }
+      });
+    }
+    return (this.inputDesabilitado = false);
+  }
+
   onError() {
-    this.snackBar.open("Acorreu um erro", "", { duration: 5000 });
+    this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
   }
   onSucess() {
     this.snackBar.open("Cadastrado com sucesso", "", { duration: 5000 });

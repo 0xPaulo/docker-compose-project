@@ -57,10 +57,13 @@
               </span>
             </div>
 
-            <div class="descricao"
+            <div class="descricao mb-3"
               [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}">
-              <p></p>
-              <p>{{element.desc}}</p>
+              <p>Numero de serie: {{element.itemSerie}}</p>
+              <div *ngIf="element.laudo !== null && element.valor !== 0">
+                <p>Laudo Técnico: {{element.laudo}}</p>
+                <p>Custo: R${{element.valor}}</p>
+              </div>
               <p>Email: {{element.email}}</p>
             </div>
           </div>

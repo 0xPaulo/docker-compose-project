@@ -8,6 +8,7 @@ import { TabelaService } from "src/app/services/tabela.service";
 import { DeleteComponent } from "src/app/components/dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
+import { PossuiCadastroComponent } from "src/app/components/dialog/possui-cadastro/possui-cadastro.component";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
 
 @Component({
@@ -40,8 +41,8 @@ export class ListaComponent implements OnInit {
   }
 
   abrirDialogForm() {
-    const dialogRef = this.dialog.open(FormCadastroComponent, {
-      width: "80%",
+    const dialogRef = this.dialog.open(PossuiCadastroComponent, {
+      maxWidth: "600px",
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
