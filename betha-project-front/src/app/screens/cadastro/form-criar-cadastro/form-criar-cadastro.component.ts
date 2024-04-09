@@ -102,7 +102,6 @@ export class FormCriarCadastroComponent implements OnInit {
           console.log("resultado V");
           console.log(resultado);
           this.novoClienteSalvoNoBanco = resultado;
-          // this.mostrarCliente = false;
           this.onSucess();
         },
         () => {
