@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormChamado } from "src/app/interfaces/formChamado";
 import { FormCliente } from "src/app/interfaces/formCliente";
@@ -22,11 +22,16 @@ export class FormCriarCadastroComponent implements OnInit {
   activeTab: string = "cliente";
   inputDesabilitado: boolean = true;
   clienteRecebido!: FormCliente;
+  clienteIdExiste: boolean = false;
   possuiCadastro: boolean = false;
   mostrarCliente = false;
   novoClienteSalvoNoBanco!: FormCliente;
+  msgError!: string;
+  msgErrorCadastro!: string;
 
   constructor(
+    private dialogRef: MatDialogRef<any, boolean>,
+    private changeDetector: ChangeDetectorRef,
     private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
     private service: RepositoryService,
@@ -37,72 +42,81 @@ export class FormCriarCadastroComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.possuiCadastro = data.possuiCadastro;
-    this.mostrarCliente = data.mostrarCliente;
+    // this.mostrarCliente = data.mostrarCliente;
 
-    this.form = formBuilder.group({
-      cliente: [null],
-      endereco: [null],
-      telefone: [null],
-      email: [null],
+    this.form = this.formBuilder.group({
+      cliente: [null, Validators.required],
+      endereco: [null, Validators.required],
+      telefone: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
     });
     this.formChamado = formBuilder.group({
       clienteId: [null],
-      nomeItem: [null],
-      itemSerie: [null],
-      status: [null],
-      data_entrada: [null],
-      defeitoRelatado: [null],
+      nomeItem: [null, Validators.required],
+      itemSerie: [null, Validators.required],
+      // status: [null, Validators.required],
+      data_entrada: [null, Validators.required],
+      defeitoRelatado: [null, Validators.required],
     });
   }
 
-  onSubmitCliente() {
-    let clienteFormFields: FormCliente = {
-      nome: "",
-      endereco: "",
-      telefone: "",
-      email: "",
-    };
-    if (this.possuiCadastro) {
-      clienteFormFields = {
-        id: this.clienteRecebido.id,
-        nome: this.form.get("cliente")?.value,
-        endereco: this.form.get("endereco")?.value,
-        email: this.form.get("email")?.value,
-        telefone: this.form.get("telefone")?.value,
-      };
+  verificaAndSubmit() {
+    if (this.form.invalid) {
+      this.msgError = "Por favor, preencha todos os campos.";
+      console.log(this.msgError);
     } else {
-      clienteFormFields = {
-        nome: this.form.get("cliente")?.value,
-        endereco: this.form.get("endereco")?.value,
-        email: this.form.get("email")?.value,
-        telefone: this.form.get("telefone")?.value,
-      };
+      this.onSubmitCliente();
     }
-
-    this.clienteService.createCliente(clienteFormFields).subscribe(
-      (resultado) => {
-        console.log("resultado V");
-        console.log(resultado);
-        this.novoClienteSalvoNoBanco = resultado;
-        this.mostrarCliente = false;
-        this.onSucess();
-      },
-      () => {
-        this.onError();
-      }
-    );
   }
-  receberSon(clienteRecebido: FormCliente) {
-    this.clienteRecebido = clienteRecebido;
-    console.log(clienteRecebido);
-    console.log("cliente recebido para ir para o chamado ^^");
-    this.formChamado.patchValue({
-      clienteId: clienteRecebido.id,
-      nomeItem: this.formChamado.get("nomeItem")?.value,
-    });
+  onSubmitCliente() {
+    this.msgError = "";
+    if (this.form.invalid) {
+      this.changeDetector.detectChanges();
+    } else {
+      let clienteFormFields: FormCliente = {
+        nome: "",
+        endereco: "",
+        telefone: "",
+        email: "",
+      };
 
-    console.log(this.formChamado.value);
-    console.log("formChamado atualizado ^^");
+      if (this.possuiCadastro) {
+        clienteFormFields = {
+          id: this.clienteRecebido.id,
+          nome: this.form.get("cliente")?.value,
+          endereco: this.form.get("endereco")?.value,
+          email: this.form.get("email")?.value,
+          telefone: this.form.get("telefone")?.value,
+        };
+      } else {
+        clienteFormFields = {
+          nome: this.form.get("cliente")?.value,
+          endereco: this.form.get("endereco")?.value,
+          email: this.form.get("email")?.value,
+          telefone: this.form.get("telefone")?.value,
+        };
+      }
+
+      this.clienteService.createCliente(clienteFormFields).subscribe(
+        (resultado) => {
+          console.log("resultado V");
+          console.log(resultado);
+          this.novoClienteSalvoNoBanco = resultado;
+          // this.mostrarCliente = false;
+          this.onSucess();
+        },
+        () => {
+          this.onError();
+        }
+      );
+    }
+  }
+  validarAndSubmitCadastro() {
+    if (this.formChamado.invalid || this.clienteIdExiste === false) {
+      this.msgErrorCadastro = "Por favor, preencha todos os campos.";
+    } else {
+      this.onSubmit();
+    }
   }
 
   onSubmit() {
@@ -150,41 +164,25 @@ export class FormCriarCadastroComponent implements OnInit {
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
+        this.dialogRef.close(true);
       },
       () => {
         this.onError();
       }
     );
   }
-
-  desabilitarCampos() {
-    Object.keys(this.form.controls).forEach((property) => {
-      const control = this.form.get(property);
-      if (control) {
-        control.disable();
-      }
-      this.inputDesabilitado = false;
+  receberSon(clienteRecebido: FormCliente) {
+    this.clienteRecebido = clienteRecebido;
+    this.clienteIdExiste = true;
+    console.log(clienteRecebido);
+    console.log("cliente recebido para ir para o chamado ^^");
+    this.formChamado.patchValue({
+      clienteId: clienteRecebido.id,
+      nomeItem: this.formChamado.get("nomeItem")?.value,
     });
-  }
 
-  habilitarCampos() {
-    if (!this.inputDesabilitado) {
-      Object.keys(this.form.controls).forEach((property) => {
-        const control = this.form.get(property);
-        if (control) {
-          control.enable();
-        }
-      });
-      return (this.inputDesabilitado = true);
-    } else {
-      Object.keys(this.form.controls).forEach((property) => {
-        const control = this.form.get(property);
-        if (control) {
-          control.disable();
-        }
-      });
-    }
-    return (this.inputDesabilitado = false);
+    console.log(this.formChamado.value);
+    console.log("formChamado atualizado ^^");
   }
   onError() {
     this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
