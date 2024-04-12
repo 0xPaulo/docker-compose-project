@@ -11,7 +11,7 @@
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Configurando ⏷</span>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Planejado ⏷</span>
         <!-- <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Registrado ⏷</span> -->
-        <button style="font-size: 18px;" mat-button [matMenuTriggerFor]="menu">Registrado ⏷</button>
+        <button mat-button [matMenuTriggerFor]="menu">Registrado ⏷</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="criarCliente()">Cadastrar cliente</button>
           <button mat-menu-item>Cadastrar tecnico</button>
