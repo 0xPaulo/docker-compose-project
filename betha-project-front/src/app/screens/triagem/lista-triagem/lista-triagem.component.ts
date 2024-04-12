@@ -9,6 +9,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { EmailComponent } from "src/app/components/dialog/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
+import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
 import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
 
@@ -18,9 +19,9 @@ import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
   styleUrls: ["./lista-triagem.component.scss"],
 })
 export class ListaTriagemComponent implements OnInit {
-  cadastros$: Observable<Cadastro[]>;
+  cadastros$: Observable<ChamadoCompleto[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
-  displayedColumns = ["_id", "info", "ico"];
+  displayedColumns = ["id", "info", "ico"];
   filtro: string[] = ["DISPONIVEL_TRIAGEM", "AGUARDANDO_CLIENTE", "CANCELADO"];
 
   constructor(
@@ -32,7 +33,7 @@ export class ListaTriagemComponent implements OnInit {
     this.cadastros$ = this.carregarTabelaTriagem(this.filtro);
   }
 
-  carregarTabelaTriagem(filtro: string[]): Observable<Cadastro[]> {
+  carregarTabelaTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
     return (this.cadastros$ =
       this.tabelaService.carregarCadastrosTriagem(filtro));
   }
@@ -69,7 +70,7 @@ export class ListaTriagemComponent implements OnInit {
     const id = item._id;
 
     const subscription = this.repository.findById(id).subscribe(
-      (dados: Cadastro[]) => {
+      (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
         //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
         //     width: "40%",

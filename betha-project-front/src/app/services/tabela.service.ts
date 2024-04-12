@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { Observable, catchError, of } from "rxjs";
 
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
-import { Cadastro } from "../interfaces/cadastro";
+import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
 import { RepositoryService } from "./repository.service";
 
 @Injectable({
@@ -17,7 +17,7 @@ export class TabelaService {
     private matDialog: MatDialog
   ) {}
 
-  carregarCadastros(): Observable<Cadastro[]> {
+  carregarCadastros(): Observable<ChamadoCompleto[]> {
     return this.repository.listarTodos().pipe(
       catchError(() => {
         this.openDialogError();
@@ -25,7 +25,7 @@ export class TabelaService {
       })
     );
   }
-  carregarCadastrosTriagem(filtro: string[]): Observable<Cadastro[]> {
+  carregarCadastrosTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
     return this.repository.carregarFiltro(filtro).pipe(
       catchError(() => {
         this.openDialogError();

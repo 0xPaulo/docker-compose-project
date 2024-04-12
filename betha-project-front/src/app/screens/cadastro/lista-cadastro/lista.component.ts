@@ -9,6 +9,7 @@ import { DeleteComponent } from "src/app/components/dialog/delete/delete.compone
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { PossuiCadastroComponent } from "src/app/components/dialog/possui-cadastro/possui-cadastro.component";
+import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
 
 @Component({
@@ -17,9 +18,9 @@ import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/fo
   styleUrls: ["./lista.component.scss"],
 })
 export class ListaComponent implements OnInit {
-  cadastros$: Observable<Cadastro[]>;
+  cadastros$: Observable<ChamadoCompleto[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
-  displayedColumns = ["_id", "info", "ico"];
+  displayedColumns = ["id", "info", "ico"];
 
   constructor(
     private repository: RepositoryService,
@@ -29,7 +30,7 @@ export class ListaComponent implements OnInit {
     this.cadastros$ = this.carregarTabela();
   }
 
-  carregarTabela(): Observable<Cadastro[]> {
+  carregarTabela(): Observable<ChamadoCompleto[]> {
     return (this.cadastros$ = this.tabelaService.carregarCadastros());
   }
 
@@ -57,7 +58,7 @@ export class ListaComponent implements OnInit {
     const id = item._id;
 
     const subscription = this.repository.findById(id).subscribe(
-      (dados: Cadastro[]) => {
+      (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
         //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
         //     width: "40%",
