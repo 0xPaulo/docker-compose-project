@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.betha.backend.cadastros.models.Enums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -54,7 +55,7 @@ public class Chamado {
   private String itemSerie;
 
   @Enumerated(EnumType.STRING)
-  private com.betha.backend.cadastros.models.Enums.Status status;
+  private Status status;
 
   @Column(name = "defeito_relatado")
   private String defeitoRelatado;

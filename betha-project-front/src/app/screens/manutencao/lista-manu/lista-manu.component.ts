@@ -6,6 +6,7 @@ import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produ
 import { EmailComponent } from "src/app/components/dialog/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { Cadastro } from "src/app/interfaces/cadastro";
+import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 import { FormCadastroComponent } from "../../cadastro/form-cadastro/form-cadastro.component";
@@ -17,7 +18,7 @@ import { FormManuTecComponent } from "../form-manu-tec/form-manu-tec.component";
   styleUrls: ["./lista-manu.component.scss"],
 })
 export class ListaManuComponent implements OnInit {
-  cadastros$: Observable<Cadastro[]>;
+  cadastros$: Observable<ChamadoCompleto[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["_id", "info", "ico"];
   filtro: string[] = ["AGUARDANDO_MANUTENCAO"];
@@ -31,7 +32,7 @@ export class ListaManuComponent implements OnInit {
     this.cadastros$ = this.carregarTabelaTriagem(this.filtro);
   }
 
-  carregarTabelaTriagem(filtro: string[]): Observable<Cadastro[]> {
+  carregarTabelaTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
     return (this.cadastros$ =
       this.tabelaService.carregarCadastrosTriagem(filtro));
   }
@@ -68,7 +69,7 @@ export class ListaManuComponent implements OnInit {
     const id = item._id;
 
     const subscription = this.repository.findById(id).subscribe(
-      (dados: Cadastro[]) => {
+      (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
         //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
         //     width: "40%",
