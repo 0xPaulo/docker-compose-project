@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
 import { Cadastro } from "src/app/interfaces/cadastro";
+import { CadastroService } from "src/app/services/cadastro.service";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
@@ -23,6 +24,7 @@ export class ListaComponent implements OnInit {
   displayedColumns = ["id", "info", "ico"];
 
   constructor(
+    private cadastroService: CadastroService,
     private repository: RepositoryService,
     private dialog: MatDialog,
     private tabelaService: TabelaService
@@ -54,10 +56,12 @@ export class ListaComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  editarItem(item: Cadastro) {
-    const id = item._id;
+  editarItem(item: ChamadoCompleto) {
+    const id = item.id;
+    console.log(id);
+    console.log(item);
 
-    const subscription = this.repository.findById(id).subscribe(
+    const subscription = this.cadastroService.findById(id).subscribe(
       (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
         //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
@@ -69,7 +73,7 @@ export class ListaComponent implements OnInit {
         //   });
         // } else {
         const dialogRef = this.dialog.open(FormCadastroComponent, {
-          width: "80%",
+          maxWidth: "600px",
           data: { modoEdicao: true, infoCadastro: dados },
         });
         dialogRef.afterClosed().subscribe((result) => {
@@ -85,7 +89,7 @@ export class ListaComponent implements OnInit {
       data: { infoCadastro: dados },
     });
   }
-  openDialogDetalhe(dados: Cadastro) {
+  openDialogDetalhe(dados: ChamadoCompleto) {
     this.dialog.open(DetalheProdutoComponent, {
       width: "80%",
       data: { infoCadastro: dados },

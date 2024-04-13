@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, catchError, delay, first, of, tap } from "rxjs";
+import { Cadastro } from "../interfaces/cadastro";
 import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
 
 @Injectable({
@@ -13,13 +14,9 @@ export class RepositoryService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // listarTodos() {
-  //   return this.httpClient.get<Cadastro[]>(this.API).pipe(delay(500), first());
-  // }
   listarTodos() {
-    return this.httpClient
-      .get<ChamadoCompleto[]>(this.API2)
-      .pipe(delay(500), first());
+    // nao é mais usado
+    return this.httpClient.get<Cadastro[]>(this.API).pipe(delay(500), first());
   }
 
   carregarFiltro(filtros: string[]): Observable<ChamadoCompleto[]> {
@@ -43,6 +40,7 @@ export class RepositoryService {
   }
 
   update(id: string, chamado: Partial<ChamadoCompleto>) {
+    // sem uso
     return this.httpClient
       .patch<ChamadoCompleto>(`${this.API}/${id}`, chamado)
       .pipe(
@@ -59,10 +57,12 @@ export class RepositoryService {
   }
 
   delete(id: string) {
+    // nao mais usado
     return this.httpClient.delete<ChamadoCompleto>(`${this.API}/${id}`);
   }
 
   findById(id: string): Observable<ChamadoCompleto[]> {
+    // nao é mais usado
     const url = `${this.API}/${id}`;
     return this.httpClient.get<ChamadoCompleto[]>(url).pipe(
       catchError((error) => {
