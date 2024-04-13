@@ -1,11 +1,12 @@
 package com.betha.backend.cadastros.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
-import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.ClienteRepository;
 import com.betha.backend.cadastros.service.ChamadoService;
 
 @RestController
-@RequestMapping("/api/cadastro") // trocar
-public class ChamadoController {
+@RequestMapping("/cadastros")
+public class CadastrosController {
 
   @Autowired
   ChamadoService chamadoService;
@@ -37,33 +37,21 @@ public class ChamadoController {
     return chamadoService.salvarChamadoBanco(chamado);
   }
 
+  @DeleteMapping("/{id}")
+  public void deletar(@PathVariable Long id) {
+    this.chamadoRepository.deleteById(id);
+  }
+
   @GetMapping()
-  // trocar par aum service
-  public List<ChamadoCompletoDTO> mapearChamadoCompletoDTO() {
-    List<Chamado> chamados = chamadoRepository.findAll();
-    List<ChamadoCompletoDTO> chamadoCompletoDTO = new ArrayList<>();
-    for (Chamado chamado : chamados) {
+  public List<ChamadoCompletoDTO> buscarTodosChamados() {
+    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados();
+    return resultado;
+  }
 
-      Cliente cliente = chamado.getClienteId();
+  @GetMapping("/{id}")
+  public ChamadoCompletoDTO buscarChamadoPeloId(@PathVariable Long id) {
 
-      ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
-      dto.setClienteId(cliente.getId());
-      dto.setClienteNome(cliente.getNome());
-      dto.setClienteEmail(cliente.getEmail());
-      dto.setClienteTelefone(cliente.getTelefone());
-      dto.setClienteEndereco(cliente.getEndereco());
-
-      dto.setId(chamado.getId());
-      dto.setNomeItem(chamado.getNomeItem());
-      dto.setItemSerie(chamado.getItemSerie());
-      dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
-      dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
-      dto.setCustoEstimado(chamado.getCustoEstimado());
-      dto.setDataEntrada(chamado.getDataEntrada());
-      dto.setStatus(chamado.getStatus());
-
-      chamadoCompletoDTO.add(dto);
-    }
-    return chamadoCompletoDTO;
+    ChamadoCompletoDTO resultado = chamadoService.buscarPeloId(id);
+    return resultado;
   }
 }

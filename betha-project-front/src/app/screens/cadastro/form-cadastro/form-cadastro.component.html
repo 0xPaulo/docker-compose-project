@@ -5,20 +5,20 @@
       <form class="form-group" [formGroup]="form">
         <mat-form-field class="col-md-12 mt-3">
           <mat-label>Nome</mat-label>
-          <input matInput placeholder="" formControlName="cliente">
+          <input matInput placeholder="" formControlName="clienteNome">
         </mat-form-field>
         <mat-form-field class="col-md-12">
           <mat-label>Endereço</mat-label>
-          <input matInput placeholder="" formControlName="endereco">
+          <input matInput placeholder="" formControlName="clienteEndereco">
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
           <mat-label>Telefone</mat-label>
-          <input matInput placeholder="" formControlName="telefone">
+          <input matInput placeholder="" formControlName="clienteTelefone">
         </mat-form-field>
         <mat-form-field class="col-md-12">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="" formControlName="email">
+          <input matInput placeholder="" formControlName="clienteEmail">
         </mat-form-field>
       </form>
     </mat-dialog-content>
@@ -34,7 +34,7 @@
       <form class="form-group" [formGroup]="form">
         <mat-form-field class="col-md-12">
           <mat-label>Modelo</mat-label>
-          <input matInput placeholder="" formControlName="item">
+          <input matInput placeholder="" formControlName="nomeItem">
         </mat-form-field>
         <mat-form-field class="col-md-12">
           <mat-label>Número de série</mat-label>
@@ -54,13 +54,13 @@
 
         <mat-form-field class="col-md-12">
           <mat-label>Data de Entrada</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="data_entrada">
+          <input matInput [matDatepicker]="picker" formControlName="dataEntrada">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-md-12 mt-4">
           <mat-label class="label-size">Descrição do Problema</mat-label>
-          <textarea matInput formControlName="desc"></textarea>
+          <textarea matInput formControlName="defeitoRelatado"></textarea>
         </mat-form-field>
       </form>
     </mat-dialog-content>

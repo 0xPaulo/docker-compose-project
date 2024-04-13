@@ -42,7 +42,7 @@ export class FormCriarCadastroComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.possuiCadastro = data.possuiCadastro;
-    // this.mostrarCliente = data.mostrarCliente;
+    this.mostrarCliente = data.mostrarCliente;
 
     this.form = this.formBuilder.group({
       cliente: [null, Validators.required],
@@ -79,7 +79,7 @@ export class FormCriarCadastroComponent implements OnInit {
         telefone: "",
         email: "",
       };
-
+      // tirar essas partes que nao sao usadas mais
       if (this.possuiCadastro) {
         clienteFormFields = {
           id: this.clienteRecebido.id,

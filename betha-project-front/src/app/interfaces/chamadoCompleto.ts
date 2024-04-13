@@ -9,10 +9,10 @@ export interface ChamadoCompleto {
   custoEstimado: number;
   clienteEmail: string;
   dataEntrada: string;
-  // endereco: string;
+  clienteEndereco: string;
+  clienteTelefone: string;
+  image_urls: string[];
   // data_saida: string;
-  // image_urls: string[];
-  // telefone: string;
   // anotacao: string;
   // defeito: string;
 }

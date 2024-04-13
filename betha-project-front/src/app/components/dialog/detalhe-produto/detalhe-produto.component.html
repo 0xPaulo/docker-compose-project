@@ -6,10 +6,10 @@
         <div class="card mb-4">
           <div class="card-body">
             <h2 class="card-title">Informações Pessoais</h2>
-            <p class="card-text"><strong>Nome:</strong> {{ data.infoCadastro.cliente }}</p>
-            <p class="card-text"><strong>Endereço:</strong> {{ data.infoCadastro.endereco }}</p>
-            <p class="card-text"><strong>Telefone:</strong> {{ data.infoCadastro.telefone }}</p>
-            <p class="card-text"><strong>Email:</strong> {{ data.infoCadastro.email }}</p>
+            <p class="card-text"><strong>Nome:</strong> {{ data.infoCadastro.clienteNome }}</p>
+            <p class="card-text"><strong>Endereço:</strong> {{ data.infoCadastro.clienteEndereco }}</p>
+            <p class="card-text"><strong>Telefone:</strong> {{ data.infoCadastro.clienteTelefone }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ data.infoCadastro.clienteEmail }}</p>
           </div>
         </div>
       </div>
@@ -17,9 +17,9 @@
         <div class="card mb-4">
           <div class="card-body">
             <h2 class="card-title">Detalhes do Item</h2>
-            <p class="card-text"><strong>Modelo:</strong> {{ data.infoCadastro.item }}</p>
+            <p class="card-text"><strong>Modelo:</strong> {{ data.infoCadastro.nomeItem }}</p>
             <p class="card-text"><strong>Número de Série:</strong> {{ data.infoCadastro.itemSerie }}</p>
-            <p class="card-text"><strong>Opção:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
+            <p class="card-text"><strong>Fase:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
             <p class="card-text"><strong>Data de Entrada:</strong> {{ dia | dataFormat }}</p>
           </div>
         </div>
@@ -29,11 +29,11 @@
     <div class="card mb-4">
       <div class="card-body">
         <h2 class="card-title">Observações da triagem</h2>
-        <p class="card-text"><strong>Descrição do Problema:</strong> {{ data.infoCadastro.desc }}</p>
-        <div *ngIf="data.infoCadastro.laudo">
-          <p class="card-text"><strong>Laudo técnico:</strong> {{data.infoCadastro.laudo}}</p>
+        <p class="card-text"><strong>Descrição do Problema:</strong> {{ data.infoCadastro.defeitoRelatado }}</p>
+        <div *ngIf="data.infoCadastro.analiseTecnica">
+          <p class="card-text"><strong>Laudo técnico:</strong> {{data.infoCadastro.analiseTecnica}}</p>
         </div>
-        <p class="card-text mt-2"><strong>Valor </strong>R$: {{data.infoCadastro.valor}} </p>
+        <p class="card-text mt-2"><strong>Valor </strong>R$: {{data.infoCadastro.custoEstimado}} </p>
       </div>
     </div>
 

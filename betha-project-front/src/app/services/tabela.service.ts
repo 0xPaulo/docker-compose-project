@@ -4,6 +4,7 @@ import { Observable, catchError, of } from "rxjs";
 
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
 import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
+import { CadastroService } from "./cadastro.service";
 import { RepositoryService } from "./repository.service";
 
 @Injectable({
@@ -13,12 +14,13 @@ export class TabelaService {
   emitListaAtualizada = new EventEmitter<void>();
 
   constructor(
+    private cadastroService: CadastroService,
     private repository: RepositoryService,
     private matDialog: MatDialog
   ) {}
 
   carregarCadastros(): Observable<ChamadoCompleto[]> {
-    return this.repository.listarTodos().pipe(
+    return this.cadastroService.listarTodos().pipe(
       catchError(() => {
         this.openDialogError();
         return of([]);
