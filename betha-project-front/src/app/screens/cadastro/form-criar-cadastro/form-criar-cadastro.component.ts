@@ -41,21 +41,19 @@ export class FormCriarCadastroComponent implements OnInit {
     private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.possuiCadastro = data.possuiCadastro;
     this.mostrarCliente = data.mostrarCliente;
 
     this.form = this.formBuilder.group({
-      cliente: [null, Validators.required],
-      endereco: [null, Validators.required],
-      telefone: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      clienteNome: [null, Validators.required],
+      clienteEndereco: [null, Validators.required],
+      clienteTelefone: [null, Validators.required],
+      clienteEmail: [null, [Validators.required, Validators.email]],
     });
     this.formChamado = formBuilder.group({
       clienteId: [null],
       nomeItem: [null, Validators.required],
       itemSerie: [null, Validators.required],
-      // status: [null, Validators.required],
-      data_entrada: [null, Validators.required],
+      dataEntrada: [null, Validators.required],
       defeitoRelatado: [null, Validators.required],
     });
   }
@@ -70,46 +68,42 @@ export class FormCriarCadastroComponent implements OnInit {
   }
   onSubmitCliente() {
     this.msgError = "";
-    if (this.form.invalid) {
-      this.changeDetector.detectChanges();
-    } else {
-      let clienteFormFields: FormCliente = {
-        nome: "",
-        endereco: "",
-        telefone: "",
-        email: "",
+    let clienteFormFields: FormCliente = {
+      clienteNome: "",
+      clienteEndereco: "",
+      clienteTelefone: "",
+      clienteEmail: "",
+    };
+    if (this.possuiCadastro) {
+      clienteFormFields = {
+        id: this.clienteRecebido.id,
+        clienteNome: this.form.get("clienteNome")?.value,
+        clienteEndereco: this.form.get("clienteEndereco")?.value,
+        clienteEmail: this.form.get("clienteEmail")?.value,
+        clienteTelefone: this.form.get("clienteTelefone")?.value,
       };
-      // tirar essas partes que nao sao usadas mais
-      if (this.possuiCadastro) {
-        clienteFormFields = {
-          id: this.clienteRecebido.id,
-          nome: this.form.get("cliente")?.value,
-          endereco: this.form.get("endereco")?.value,
-          email: this.form.get("email")?.value,
-          telefone: this.form.get("telefone")?.value,
-        };
-      } else {
-        clienteFormFields = {
-          nome: this.form.get("cliente")?.value,
-          endereco: this.form.get("endereco")?.value,
-          email: this.form.get("email")?.value,
-          telefone: this.form.get("telefone")?.value,
-        };
-      }
-
-      this.clienteService.createCliente(clienteFormFields).subscribe(
-        (resultado) => {
-          console.log("resultado V");
-          console.log(resultado);
-          this.novoClienteSalvoNoBanco = resultado;
-          this.onSucess();
-        },
-        () => {
-          this.onError();
-        }
-      );
+    } else {
+      clienteFormFields = {
+        clienteNome: this.form.get("clienteNome")?.value,
+        clienteEndereco: this.form.get("clienteEndereco")?.value,
+        clienteEmail: this.form.get("clienteEmail")?.value,
+        clienteTelefone: this.form.get("clienteTelefone")?.value,
+      };
     }
+
+    this.clienteService.createCliente(clienteFormFields).subscribe(
+      (resultado) => {
+        console.log("resultado V");
+        console.log(resultado);
+        this.novoClienteSalvoNoBanco = resultado;
+        this.onSucess();
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
+
   validarAndSubmitCadastro() {
     if (this.formChamado.invalid || this.clienteIdExiste === false) {
       this.msgErrorCadastro = "Por favor, preencha todos os campos.";
@@ -127,7 +121,7 @@ export class FormCriarCadastroComponent implements OnInit {
       dataEntrada: "",
       defeitoRelatado: "",
     };
-    const dataInicial = this.formChamado.get("data_entrada")?.value;
+    const dataInicial = this.formChamado.get("dataEntrada")?.value;
     const dataFormatada = this.datePipe.transform(
       dataInicial,
       "yyyy-MM-ddTHH:mm:ss"
@@ -141,7 +135,7 @@ export class FormCriarCadastroComponent implements OnInit {
         defeitoRelatado: this.formChamado.get("defeitoRelatado")?.value,
         itemSerie: this.formChamado.get("itemSerie")?.value,
         nomeItem: this.formChamado.get("nomeItem")?.value,
-        status: this.formChamado.get("status")?.value,
+        status: "DISPONIVEL_TRIAGEM",
       };
       console.log(dadosParaSalvar);
       console.log("dados para salvar ^^");
@@ -154,7 +148,7 @@ export class FormCriarCadastroComponent implements OnInit {
         defeitoRelatado: this.formChamado.get("defeitoRelatado")?.value,
         itemSerie: this.formChamado.get("itemSerie")?.value,
         nomeItem: this.formChamado.get("nomeItem")?.value,
-        status: this.formChamado.get("status")?.value,
+        status: "DISPONIVEL_TRIAGEM",
       };
       console.log(dadosParaSalvar);
       console.log("dados para salvar ^^");
