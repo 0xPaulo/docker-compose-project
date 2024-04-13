@@ -56,10 +56,10 @@ export class DialogCriarClienteComponent implements OnInit {
   onSubmitCliente() {
     this.msgError = "";
     const clienteFormFields = {
-      nome: this.form.get("cliente")?.value,
-      endereco: this.form.get("endereco")?.value,
-      email: this.form.get("email")?.value,
-      telefone: this.form.get("telefone")?.value,
+      clienteNome: this.form.get("clienteNome")?.value,
+      clienteEndereco: this.form.get("clienteEndereco")?.value,
+      clienteEmail: this.form.get("clienteEmail")?.value,
+      clienteTelefone: this.form.get("clienteTelefone")?.value,
     };
     this.clienteService.createCliente(clienteFormFields).subscribe(
       (resultado) => {

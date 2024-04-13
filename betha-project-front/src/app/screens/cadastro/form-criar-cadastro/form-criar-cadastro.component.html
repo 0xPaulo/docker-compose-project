@@ -12,30 +12,30 @@
 
           <mat-form-field class="col-md-12 mt-3">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="" formControlName="cliente">
-            <mat-error *ngIf="form.get('cliente')!.invalid && form.get('cliente')!.touched">
+            <input matInput placeholder="" formControlName="clienteNome">
+            <mat-error *ngIf="form.get('clienteNome')!.invalid && form.get('clienteNome')!.touched">
               Nome é obrigatório
             </mat-error>
           </mat-form-field>
           <mat-form-field class="col-md-12">
             <mat-label>Endereço</mat-label>
-            <input matInput placeholder="" formControlName="endereco">
-            <mat-error *ngIf="form.get('endereco')!.invalid && form.get('endereco')!.touched">
+            <input matInput placeholder="" formControlName="clienteEndereco">
+            <mat-error *ngIf="form.get('clienteEndereco')!.invalid && form.get('clienteEndereco')!.touched">
               Endereco é obrigatório
             </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-md-12">
             <mat-label>Telefone</mat-label>
-            <input matInput placeholder="" formControlName="telefone">
-            <mat-error *ngIf="form.get('telefone')!.invalid && form.get('telefone')!.touched">
+            <input matInput placeholder="" formControlName="clienteTelefone">
+            <mat-error *ngIf="form.get('clienteTelefone')!.invalid && form.get('clienteTelefone')!.touched">
               Telefone é obrigatório
             </mat-error>
           </mat-form-field>
           <mat-form-field class="col-md-12">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="" formControlName="email">
-            <mat-error *ngIf="form.get('email')!.invalid && form.get('email')!.touched">
+            <input matInput placeholder="" formControlName="clienteEmail">
+            <mat-error *ngIf="form.get('clienteEmail')!.invalid && form.get('clienteEmail')!.touched">
               Email não reconhecido
             </mat-error>
           </mat-form-field>
@@ -43,9 +43,6 @@
       </mat-dialog-content>
       <mat-dialog-actions align="end">
         <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
-        <!-- <div *ngIf="possuiCadastro">
-          <button class="botao-betha-cancel" (click)="habilitarCampos()">Editar cliente</button>
-        </div> -->
         <button class="botao-betha" (click)="verificaAndSubmit()">Salvar
           cliente</button>
         <!-- cdkFocusInitial -->
@@ -90,7 +87,7 @@
 
         <mat-form-field class="col-md-12">
           <mat-label>Data de Entrada</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="data_entrada">
+          <input matInput [matDatepicker]="picker" formControlName="dataEntrada">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
