@@ -64,8 +64,6 @@ export class BuscaClienteComponent {
       }
     });
     if (this.clienteSelecionadoRoot) {
-      console.log(this.clienteSelecionadoRoot);
-      console.log("Deu certo!!!");
       this.clienteSelecionadoOut.emit(this.clienteSelecionadoRoot);
     } else {
       console.log(`${nomeClienteSelecionadoRoot} nao encontrado`);

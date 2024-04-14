@@ -51,6 +51,7 @@ export class RepositoryService {
       );
   }
   save(chamado: Partial<ChamadoCompleto>) {
+    // sem uso
     return this.httpClient
       .post<ChamadoCompleto>(this.API, chamado)
       .pipe(tap(() => {}));

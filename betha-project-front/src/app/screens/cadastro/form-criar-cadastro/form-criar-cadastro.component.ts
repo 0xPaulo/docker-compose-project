@@ -90,11 +90,11 @@ export class FormCriarCadastroComponent implements OnInit {
         clienteTelefone: this.form.get("clienteTelefone")?.value,
       };
     }
+    console.log("oq esta indo");
+    console.log(clienteFormFields);
 
     this.clienteService.createCliente(clienteFormFields).subscribe(
       (resultado) => {
-        console.log("resultado V");
-        console.log(resultado);
         this.novoClienteSalvoNoBanco = resultado;
         this.onSucess();
       },
@@ -137,8 +137,6 @@ export class FormCriarCadastroComponent implements OnInit {
         nomeItem: this.formChamado.get("nomeItem")?.value,
         status: "DISPONIVEL_TRIAGEM",
       };
-      console.log(dadosParaSalvar);
-      console.log("dados para salvar ^^");
     } else {
       const cliente = this.clienteRecebido;
 
@@ -150,8 +148,6 @@ export class FormCriarCadastroComponent implements OnInit {
         nomeItem: this.formChamado.get("nomeItem")?.value,
         status: "DISPONIVEL_TRIAGEM",
       };
-      console.log(dadosParaSalvar);
-      console.log("dados para salvar ^^");
     }
     this.cadastroService.createCadastro(dadosParaSalvar).subscribe(
       (result) => {
@@ -167,15 +163,10 @@ export class FormCriarCadastroComponent implements OnInit {
   receberSon(clienteRecebido: FormCliente) {
     this.clienteRecebido = clienteRecebido;
     this.clienteIdExiste = true;
-    console.log(clienteRecebido);
-    console.log("cliente recebido para ir para o chamado ^^");
     this.formChamado.patchValue({
       clienteId: clienteRecebido.id,
       nomeItem: this.formChamado.get("nomeItem")?.value,
     });
-
-    console.log(this.formChamado.value);
-    console.log("formChamado atualizado ^^");
   }
   onError() {
     this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });

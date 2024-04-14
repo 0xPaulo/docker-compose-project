@@ -30,7 +30,7 @@ export class FormCadastroComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     // if (data) {
-    this.isEditMode = true;
+    // this.isEditMode = true;
     this.form = formBuilder.group({
       clienteNome: [data.infoCadastro.clienteNome],
       clienteEndereco: [data.infoCadastro.clienteEndereco],
@@ -72,39 +72,39 @@ export class FormCadastroComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.isEditMode) {
-      const dataInicial = this.form.value.dataEntrada;
-      const dataFormatada = this.datePipe.transform(
-        dataInicial,
-        "yyyy-MM-ddTHH:mm:ss"
-      );
-      const dadosParaSalvar = {
-        ...this.form.value,
-        dataEntrada: dataFormatada,
-      };
+    // if (this.isEditMode) {
+    const dataInicial = this.form.value.dataEntrada;
+    const dataFormatada = this.datePipe.transform(
+      dataInicial,
+      "yyyy-MM-ddTHH:mm:ss"
+    );
+    const dadosParaSalvar = {
+      ...this.form.value,
+      dataEntrada: dataFormatada,
+    };
 
-      const id_item: string = this.data.infoCadastro.id;
-      this.cadastroService.update(id_item, dadosParaSalvar).subscribe(
-        (result) => {
-          this.tabelaService.emitListaAtualizada.emit();
-          this.onSucess();
-        },
-        () => {
-          this.onError();
-        }
-      );
-    } else {
-      this.service.save(this.form.value).subscribe(
-        (result) => {
-          this.tabelaService.emitListaAtualizada.emit();
-          this.onSucess();
-        },
-        () => {
-          this.onError();
-        }
-      );
-    }
+    const id_item: string = this.data.infoCadastro.id;
+    this.cadastroService.update(id_item, dadosParaSalvar).subscribe(
+      (result) => {
+        this.tabelaService.emitListaAtualizada.emit();
+        this.onSucess();
+      },
+      () => {
+        this.onError();
+      }
+    );
+    // } else {
+    this.service.save(this.form.value).subscribe(
+      (result) => {
+        this.tabelaService.emitListaAtualizada.emit();
+        this.onSucess();
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
+  // }
 
   habilitarCampos() {
     if (!this.inputDesabilitado) {

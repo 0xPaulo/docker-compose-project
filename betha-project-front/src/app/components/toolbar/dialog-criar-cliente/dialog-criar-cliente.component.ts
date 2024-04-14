@@ -38,10 +38,10 @@ export class DialogCriarClienteComponent implements OnInit {
     private datePipe: DatePipe
   ) {
     this.form = this.formBuilder.group({
-      cliente: [null, Validators.required],
-      endereco: [null, Validators.required],
-      telefone: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      clienteNome: [null, Validators.required],
+      clienteEndereco: [null, Validators.required],
+      clienteTelefone: [null, Validators.required],
+      clienteEmail: [null, [Validators.required, Validators.email]],
     });
   }
 
@@ -58,13 +58,14 @@ export class DialogCriarClienteComponent implements OnInit {
     const clienteFormFields = {
       clienteNome: this.form.get("clienteNome")?.value,
       clienteEndereco: this.form.get("clienteEndereco")?.value,
-      clienteEmail: this.form.get("clienteEmail")?.value,
       clienteTelefone: this.form.get("clienteTelefone")?.value,
+      clienteEmail: this.form.get("clienteEmail")?.value,
     };
+    console.log("oq esta indo");
+    console.log(clienteFormFields);
+
     this.clienteService.createCliente(clienteFormFields).subscribe(
       (resultado) => {
-        console.log("resultado V");
-        console.log(resultado);
         this.novoClienteSalvoNoBanco = resultado;
         this.dialogRef.close(true);
 
