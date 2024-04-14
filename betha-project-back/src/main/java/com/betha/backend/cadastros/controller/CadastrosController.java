@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,9 +50,13 @@ public class CadastrosController {
   }
 
   @GetMapping("/{id}")
-  public ChamadoCompletoDTO buscarChamadoPeloId(@PathVariable Long id) {
-
+  public ChamadoCompletoDTO buscarTodosChamadosPeloId(@PathVariable Long id) {
     ChamadoCompletoDTO resultado = chamadoService.buscarPeloId(id);
     return resultado;
+  }
+
+  @PatchMapping("/{id}")
+  public Chamado editarChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
+    return chamadoService.editar(id, chamadoCompletoDTO);
   }
 }

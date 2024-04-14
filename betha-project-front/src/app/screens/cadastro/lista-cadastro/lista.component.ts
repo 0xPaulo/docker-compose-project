@@ -58,8 +58,6 @@ export class ListaComponent implements OnInit {
 
   editarItem(item: ChamadoCompleto) {
     const id = item.id;
-    console.log(id);
-    console.log(item);
 
     const subscription = this.cadastroService.findById(id).subscribe(
       (dados: ChamadoCompleto[]) => {
@@ -74,7 +72,7 @@ export class ListaComponent implements OnInit {
         // } else {
         const dialogRef = this.dialog.open(FormCadastroComponent, {
           maxWidth: "600px",
-          data: { modoEdicao: true, infoCadastro: dados },
+          data: { infoCadastro: dados },
         });
         dialogRef.afterClosed().subscribe((result) => {
           subscription.unsubscribe();

@@ -12,11 +12,14 @@ import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
+import com.betha.backend.cadastros.repository.ClienteRepository;
 
 @Service
 public class ChamadoService {
   @Autowired
   private ChamadoRepository chamadoRepository;
+  @Autowired
+  private ClienteRepository clienteRepository;
 
   public Chamado salvarChamadoBanco(Chamado novoChamado) {
     Chamado chamadoTemp = Chamado.builder()
@@ -85,5 +88,40 @@ public class ChamadoService {
     dto.setDataEntrada(chamado.getDataEntrada());
     dto.setStatus(chamado.getStatus());
     return dto;
+  }
+
+  public Chamado editar(Long id, ChamadoCompletoDTO chamadoRecebido) {
+    Chamado chamadoExistente = chamadoRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
+    Cliente clienteExistente = chamadoExistente.getClienteId();
+
+    System.out.println(chamadoExistente);
+    System.out.println(clienteExistente);
+
+    Cliente clienteTemp = clienteExistente.builder()
+        .id(clienteExistente.getId())
+        .nome(chamadoRecebido.getNomeItem())
+        .email(chamadoRecebido.getClienteEmail())
+        .endereco(chamadoRecebido.getClienteEndereco())
+        .telefone(chamadoRecebido.getClienteTelefone())
+        .build();
+
+    Chamado chamadoTemp = chamadoExistente.builder()
+        .id(chamadoExistente.getId())
+        .clienteId(chamadoExistente.getClienteId())
+        .nomeItem(chamadoRecebido.getNomeItem())
+        .itemSerie(chamadoRecebido.getItemSerie())
+        .defeitoRelatado(chamadoRecebido.getDefeitoRelatado())
+        .analiseTecnica(chamadoExistente.getAnaliseTecnica())
+        .custoEstimado(chamadoExistente.getCustoEstimado())
+        .dataEntrada(chamadoRecebido.getDataEntrada())
+        .status(chamadoRecebido.getStatus()).build();
+
+    System.out.println(clienteTemp);
+    System.out.println(chamadoTemp);
+
+    clienteRepository.save(clienteTemp);
+    chamadoRepository.save(chamadoTemp);
+    return chamadoTemp;
   }
 }
