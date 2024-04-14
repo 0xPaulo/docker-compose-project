@@ -1,7 +1,8 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable, catchError, of } from "rxjs";
+import { Observable, catchError, delay, of } from "rxjs";
 
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
 import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
 import { CadastroService } from "./cadastro.service";
@@ -13,7 +14,11 @@ import { RepositoryService } from "./repository.service";
 export class TabelaService {
   emitListaAtualizada = new EventEmitter<void>();
 
+  private readonly API = "http://localhost:8080/api/lista";
+  private readonly API2 = "http://localhost:8080/registros";
+
   constructor(
+    private httpClient: HttpClient,
     private cadastroService: CadastroService,
     private repository: RepositoryService,
     private matDialog: MatDialog
@@ -52,6 +57,13 @@ export class TabelaService {
       default:
         return "";
     }
+  }
+  carregarFiltro(filtros: string[]): Observable<ChamadoCompleto[]> {
+    const filtroString = filtros.join(",");
+    const params = new HttpParams().set("params", filtroString);
+    return this.httpClient
+      .get<ChamadoCompleto[]>(`${this.API2}/filtro`, { params })
+      .pipe(delay(500));
   }
 
   openDialogError() {

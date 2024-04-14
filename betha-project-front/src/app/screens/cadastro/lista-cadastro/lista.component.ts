@@ -40,7 +40,7 @@ export class ListaComponent implements OnInit {
     this.tabelaService.carregarCadastros();
   }
   filterStatus(filtros: string[]) {
-    this.cadastros$ = this.repository.carregarFiltro(filtros);
+    this.cadastros$ = this.tabelaService.carregarFiltro(filtros);
   }
 
   abrirDialogForm() {

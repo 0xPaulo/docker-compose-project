@@ -20,6 +20,7 @@ export class RepositoryService {
   }
 
   carregarFiltro(filtros: string[]): Observable<ChamadoCompleto[]> {
+    // sem uso
     const filtroString = filtros.join(",");
     const params = new HttpParams().set("filter", filtroString);
     return this.httpClient
