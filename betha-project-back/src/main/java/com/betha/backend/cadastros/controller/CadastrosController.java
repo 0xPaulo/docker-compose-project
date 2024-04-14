@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
-import com.betha.backend.cadastros.repository.ClienteRepository;
 import com.betha.backend.cadastros.service.ChamadoService;
 
 @RestController
@@ -25,11 +24,15 @@ import com.betha.backend.cadastros.service.ChamadoService;
 public class CadastrosController {
 
   @Autowired
-  ChamadoService chamadoService;
+  private final ChamadoService chamadoService;
   @Autowired
-  ClienteRepository clienteRepository;
-  @Autowired
-  ChamadoRepository chamadoRepository;
+  private final ChamadoRepository chamadoRepository;
+
+  CadastrosController(ChamadoService chamadoService,
+      ChamadoRepository chamadoRepository) {
+    this.chamadoService = chamadoService;
+    this.chamadoRepository = chamadoRepository;
+  }
 
   @PostMapping()
   @ResponseStatus(HttpStatus.CREATED)
