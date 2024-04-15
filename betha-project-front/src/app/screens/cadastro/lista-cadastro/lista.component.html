@@ -47,7 +47,6 @@
               <h1>Cliente: {{ element.clienteNome }}</h1>
               <h2>Item: {{ element.nomeItem }}</h2>
               <p>Defeito relatado: {{element.defeitoRelatado}}</p>
-
             </div>
 
             <div class="grid-2">
@@ -55,7 +54,7 @@
               <p style="cursor: pointer;" [ngClass]="getStatusClass(element.status)"
                 (click)="filterStatus([element.status])">
               </p>
-              <span style="cursor: pointer;" class="linhas" (click)="alternarDetalhes(element.id)">
+              <span style="cursor: pointer;" (click)="alternarDetalhes(element.id)">
                 {{ detalhesVisiveis[element.id] ? 'Menos detalhes' : 'Mais detalhes' }}
               </span>
             </div>

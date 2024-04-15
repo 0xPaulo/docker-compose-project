@@ -44,4 +44,20 @@ export class CadastroService {
         })
       );
   }
+
+  mudarStatus(id: string | undefined, element: Partial<ChamadoCompleto>) {
+    console.log(element);
+    console.log(id);
+    console.log("mudar status");
+    return null;
+    // return this.httpClient
+    //   .patch<ChamadoCompleto>(`${this.APIcadastro}/${id}`, element)
+    //   .pipe(
+    //     tap(),
+    //     catchError((error) => {
+    //       console.log("Erro ao atualizar registro", error);
+    //       return of(null);
+    //     })
+    //   );
+  }
 }
