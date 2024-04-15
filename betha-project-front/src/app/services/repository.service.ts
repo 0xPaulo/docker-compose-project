@@ -29,6 +29,7 @@ export class RepositoryService {
   }
 
   mudarStatus(id: string | undefined, element: Partial<ChamadoCompleto>) {
+    // sem uso
     return this.httpClient
       .patch<ChamadoCompleto>(`${this.API}/${id}`, element)
       .pipe(

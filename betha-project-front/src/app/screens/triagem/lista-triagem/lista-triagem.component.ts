@@ -10,7 +10,7 @@ import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produ
 import { EmailComponent } from "src/app/components/dialog/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
-import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
+import { CadastroService } from "src/app/services/cadastro.service";
 import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
 
 @Component({
@@ -25,6 +25,7 @@ export class ListaTriagemComponent implements OnInit {
   filtro: string[] = ["DISPONIVEL_TRIAGEM", "AGUARDANDO_CLIENTE", "CANCELADO"];
 
   constructor(
+    private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
     private repository: RepositoryService,
     private dialog: MatDialog,
@@ -34,23 +35,22 @@ export class ListaTriagemComponent implements OnInit {
   }
 
   carregarTabelaTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ =
-      this.tabelaService.carregarCadastrosTriagem(filtro));
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro));
   }
 
   carregarNovaTabela() {
     return (this.cadastros$ = this.tabelaService.carregarCadastros());
   }
   filterStatus(filtros: string[]) {
-    this.cadastros$ = this.repository.carregarFiltro(filtros);
+    this.cadastros$ = this.tabelaService.carregarFiltro(filtros);
   }
 
-  abrirDialogForm() {
-    const dialogRef = this.dialog.open(FormCadastroComponent, {
-      width: "80%",
-    });
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
+  // abrirDialogForm() {
+  //   const dialogRef = this.dialog.open(FormCadastroComponent, {
+  //     maxWidth: "600px",
+  //   });
+  //   dialogRef.afterClosed().subscribe((result) => {});
+  // }
   openDialogEmail(dados: Cadastro) {
     this.dialog.open(EmailComponent, {
       width: "80%",
@@ -69,7 +69,7 @@ export class ListaTriagemComponent implements OnInit {
   editartriagem(item: Cadastro) {
     const id = item._id;
 
-    const subscription = this.repository.findById(id).subscribe(
+    const subscription = this.cadastroService.findById(id).subscribe(
       (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
         //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
@@ -96,31 +96,33 @@ export class ListaTriagemComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  chamarCancelamento(element: Partial<Cadastro>) {
-    const id = element._id;
+  chamarCancelamento(element: Partial<ChamadoCompleto>) {
+    const id = element.id;
     const elementAtualizado = { ...element, status: "CANCELADO" };
-    this.repository.mudarStatus(id, elementAtualizado).subscribe(
-      (result) => {
-        this.tabelaService.emitListaAtualizada.emit();
-        this.onSucess();
-      },
-      () => {
-        this.onError();
-      }
-    );
+    this.cadastroService.mudarStatus(id, elementAtualizado);
+    // .subscribe(
+    //   (result) => {
+    //     this.tabelaService.emitListaAtualizada.emit();
+    //     this.onSucess();
+    //   },
+    //   () => {
+    //     this.onError();
+    //   }
+    // );
   }
-  chamarManutencao(element: Partial<Cadastro>) {
-    const id = element._id;
+  chamarManutencao(element: Partial<ChamadoCompleto>) {
+    const id = element.id;
     const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
-    this.repository.mudarStatus(id, elementAtualizado).subscribe(
-      (result) => {
-        this.tabelaService.emitListaAtualizada.emit();
-        this.onSucess();
-      },
-      () => {
-        this.onError();
-      }
-    );
+    this.cadastroService.mudarStatus(id, elementAtualizado);
+    // .subscribe(
+    //   (result) => {
+    //     this.tabelaService.emitListaAtualizada.emit();
+    //     this.onSucess();
+    //   },
+    //   () => {
+    //     this.onError();
+    //   }
+    // );
   }
 
   getStatusClass(status: string): string {

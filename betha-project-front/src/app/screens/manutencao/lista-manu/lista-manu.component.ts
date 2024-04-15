@@ -33,8 +33,7 @@ export class ListaManuComponent implements OnInit {
   }
 
   carregarTabelaTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ =
-      this.tabelaService.carregarCadastrosTriagem(filtro));
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro));
   }
 
   carregarNovaTabela() {

@@ -13,6 +13,7 @@ import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.ClienteRepository;
+import com.betha.backend.cadastros.repository.TabelaRepository;
 
 @Service
 public class ChamadoService {
@@ -20,6 +21,8 @@ public class ChamadoService {
   private ChamadoRepository chamadoRepository;
   @Autowired
   private ClienteRepository clienteRepository;
+  @Autowired
+  private TabelaRepository tabelaRepository;
 
   public Chamado salvarChamadoBanco(Chamado novoChamado) {
     Chamado chamadoTemp = Chamado.builder()
@@ -39,8 +42,13 @@ public class ChamadoService {
 
   }
 
-  public List<ChamadoCompletoDTO> todosChamados() {
-    List<Chamado> chamados = chamadoRepository.findAll();
+  public List<ChamadoCompletoDTO> todosChamados(List<String> params) {
+    List<Chamado> chamados = new ArrayList<>();
+    if (params != null && !params.isEmpty()) {
+      chamados = tabelaRepository.findByStatusInFilter(params);
+    } else {
+      chamados = chamadoRepository.findAll();
+    }
     List<ChamadoCompletoDTO> chamadoCompletoDTO = new ArrayList<>();
     for (Chamado chamado : chamados) {
 
@@ -65,6 +73,7 @@ public class ChamadoService {
       chamadoCompletoDTO.add(dto);
     }
     return chamadoCompletoDTO;
+
   }
 
   public ChamadoCompletoDTO buscarPeloId(Long id) {
