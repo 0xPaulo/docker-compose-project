@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, first, of } from "rxjs";
+import { Observable, catchError, delay, first, of, tap } from "rxjs";
 import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
 import { FormChamado } from "../interfaces/formChamado";
 
@@ -46,18 +46,14 @@ export class CadastroService {
   }
 
   mudarStatus(id: string | undefined, element: Partial<ChamadoCompleto>) {
-    console.log(element);
-    console.log(id);
-    console.log("mudar status");
-    return null;
-    // return this.httpClient
-    //   .patch<ChamadoCompleto>(`${this.APIcadastro}/${id}`, element)
-    //   .pipe(
-    //     tap(),
-    //     catchError((error) => {
-    //       console.log("Erro ao atualizar registro", error);
-    //       return of(null);
-    //     })
-    //   );
+    return this.httpClient
+      .patch<ChamadoCompleto>(`${this.APIcadastro}/${id}`, element)
+      .pipe(
+        tap(),
+        catchError((error) => {
+          console.log("Erro ao atualizar registro", error);
+          return of(null);
+        })
+      );
   }
 }
