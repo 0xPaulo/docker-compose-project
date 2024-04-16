@@ -85,7 +85,7 @@ export class ImageComponent implements OnInit {
     this.snackBar.open("Imagem salva com sucesso", "", { duration: 5000 });
   }
   onError() {
-    this.snackBar.open("Acorreu um erro", "", { duration: 5000 });
+    this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
   }
   ngOnInit(): void {}
 }

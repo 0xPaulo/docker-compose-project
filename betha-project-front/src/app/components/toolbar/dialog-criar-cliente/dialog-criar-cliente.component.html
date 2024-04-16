@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Cadastrar cliente</h2>
+<div class="p-4">
+  <form class="form-group" [formGroup]="form">
+    <div *ngIf="msgError" class="campos-invalidos">
+      {{ msgError }}
+    </div>
+
+
+    <mat-form-field class="col-md-12 mt-3">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="" formControlName="clienteNome">
+      <mat-error *ngIf="form.get('clienteNome')!.invalid && form.get('clienteNome')!.touched">
+        Nome é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <mat-label>Endereço</mat-label>
+      <input matInput placeholder="" formControlName="clienteEndereco">
+      <mat-error *ngIf="form.get('clienteEndereco')!.invalid && form.get('clienteEndereco')!.touched">
+        Endereco é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-12">
+      <mat-label>Telefone</mat-label>
+      <input matInput placeholder="" formControlName="clienteTelefone">
+      <mat-error *ngIf="form.get('clienteTelefone')!.invalid && form.get('clienteTelefone')!.touched">
+        Telefone é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="" formControlName="clienteEmail">
+      <mat-error *ngIf="form.get('clienteEmail')!.invalid && form.get('clienteEmail')!.touched">
+        Email não reconhecido
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+</div>
+<mat-dialog-actions align="end">
+  <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
+
+  <button class="botao-betha" (click)="verificaAndSubmit()">Salvar
+    cliente</button>
+  <!-- cdkFocusInitial -->
+</mat-dialog-actions>

@@ -15,4 +15,6 @@ public interface CadastroRepository extends JpaRepository<Cadastro, Long> {
   @Query("SELECT c FROM Cadastro c WHERE c.status IN :statusList")
   List<Cadastro> findByStatusInFilter(@Param("statusList") List<String> statusList);
 
+  List<Cadastro> findByClienteContainingIgnoreCase(String nome);
+
 }

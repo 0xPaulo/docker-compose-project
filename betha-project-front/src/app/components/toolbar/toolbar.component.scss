@@ -24,6 +24,9 @@
 .itens {
   font-size: 18px;
 }
+.itens button {
+  font-size: 18px;
+}
 .icons button mat-icon {
   font-size: 24px;
 }
@@ -43,13 +46,19 @@
   .itens {
     font-size: 15px;
   }
+  .itens button {
+    font-size: 15px;
+  }
   .icons button mat-icon {
     font-size: 19px;
   }
 }
 @media (max-width: 999px) {
   .itens {
-    font-size: 12px;
+    font-size: 15px;
+  }
+  .itens button {
+    font-size: 15px;
   }
 }
 @media (max-width: 840px) {

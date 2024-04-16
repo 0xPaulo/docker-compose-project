@@ -1,0 +1,111 @@
+<h2 mat-dialog-title>Cadastro de Produto</h2>
+
+<mat-tab-group color="primary" fitInkBarToContent>
+
+  <div *ngIf="mostrarCliente">
+
+    <mat-tab label="Cliente"><mat-dialog-content>
+        <form class="form-group" [formGroup]="form">
+          <div *ngIf="msgError" class="campos-invalidos">
+            {{ msgError }}
+          </div>
+
+          <mat-form-field class="col-md-12 mt-3">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="" formControlName="clienteNome">
+            <mat-error *ngIf="form.get('clienteNome')!.invalid && form.get('clienteNome')!.touched">
+              Nome é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+            <mat-label>Endereço</mat-label>
+            <input matInput placeholder="" formControlName="clienteEndereco">
+            <mat-error *ngIf="form.get('clienteEndereco')!.invalid && form.get('clienteEndereco')!.touched">
+              Endereco é obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-md-12">
+            <mat-label>Telefone</mat-label>
+            <input matInput placeholder="" formControlName="clienteTelefone">
+            <mat-error *ngIf="form.get('clienteTelefone')!.invalid && form.get('clienteTelefone')!.touched">
+              Telefone é obrigatório
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="" formControlName="clienteEmail">
+            <mat-error *ngIf="form.get('clienteEmail')!.invalid && form.get('clienteEmail')!.touched">
+              Email não reconhecido
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
+        <button class="botao-betha" (click)="verificaAndSubmit()">Salvar
+          cliente</button>
+        <!-- cdkFocusInitial -->
+      </mat-dialog-actions>
+
+    </mat-tab>
+  </div>
+
+  <mat-tab label="Produto"><mat-dialog-content>
+      <form class="form-group" [formGroup]="formChamado">
+        <div *ngIf="msgErrorCadastro" class="campos-invalidos mb-2">
+          {{ msgErrorCadastro }}
+        </div>
+
+        <busca-cliente (clienteSelecionadoOut)="receberSon($event)" class="t-4"></busca-cliente>
+
+        <mat-form-field class="col-md-12">
+          <mat-label>Modelo</mat-label>
+          <input matInput placeholder="" formControlName="nomeItem">
+          <mat-error *ngIf="formChamado.get('nomeItem')!.invalid && formChamado.get('nomeItem')!.touched">
+            Esse campo é obrigatório
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <mat-label>Número de série</mat-label>
+          <input matInput placeholder="" formControlName="itemSerie">
+          <mat-error *ngIf="formChamado.get('itemSerie')!.invalid && formChamado.get('itemSerie')!.touched">
+            Esse campo é obrigatório
+          </mat-error>
+        </mat-form-field>
+        <!-- <mat-form-field class="col-md-12">
+            <mat-label>Escolha uma opção</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="DISPONIVEL_TRIAGEM">Disponivel para triagem</mat-option>
+              <mat-option value="AGUARDANDO_CLIENTE">Aguardando confirmação do Cliente</mat-option>
+              <mat-option value="CANCELADO">Cancelado pelo cliente</mat-option>
+              <mat-option value="AGUARDANDO_MANUTENCAO">Pronto para manutenção</mat-option>
+              <mat-option value="CONCLUIDO_CONSERTADO">Produto consertado</mat-option>
+              <mat-option value="CONCLUIDO_N_CONSERTADO">Não foi possivel consertar</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+        <mat-form-field class="col-md-12">
+          <mat-label>Data de Entrada</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dataEntrada">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <mat-label>Descrição do Problema</mat-label>
+          <textarea matInput formControlName="defeitoRelatado"></textarea>
+          <mat-error *ngIf="formChamado.get('defeitoRelatado')!.invalid && formChamado.get('defeitoRelatado')!.touched">
+            Esse campo é obrigatório
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
+      <button class="botao-betha" cdkFocusInitial (click)="validarAndSubmitCadastro()">Salvar
+        cadastro</button>
+      <!-- [mat-dialog-close]=" true" -->
+    </mat-dialog-actions>
+  </mat-tab>
+
+</mat-tab-group>
