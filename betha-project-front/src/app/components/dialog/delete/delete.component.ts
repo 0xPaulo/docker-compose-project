@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CadastroService } from "src/app/services/cadastro.service";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
@@ -9,10 +10,11 @@ import { TabelaService } from "src/app/services/tabela.service";
   styleUrls: ["./delete.component.scss"],
 })
 export class DeleteComponent {
-  id_number = this.data.infoCadastro._id;
+  id_number = this.data.infoCadastro.id;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private cadastroService: CadastroService,
     private repository: RepositoryService,
     private tabelaService: TabelaService
   ) {}
@@ -20,7 +22,7 @@ export class DeleteComponent {
   onDelete() {
     // const id_number = this.data.infoCadastro._id;
     const idString = String(this.id_number);
-    this.repository.delete(idString).subscribe(
+    this.cadastroService.delete(idString).subscribe(
       () => {
         this.tabelaService.emitListaAtualizada.emit();
       },
