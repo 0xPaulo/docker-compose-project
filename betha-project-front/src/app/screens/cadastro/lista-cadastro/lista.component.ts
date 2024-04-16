@@ -2,12 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
 import { Cadastro } from "src/app/interfaces/cadastro";
+import { CadastroService } from "src/app/services/cadastro.service";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 import { DeleteComponent } from "src/app/components/dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
+import { PossuiCadastroComponent } from "src/app/components/dialog/possui-cadastro/possui-cadastro.component";
+import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
 
 @Component({
@@ -16,11 +19,12 @@ import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/fo
   styleUrls: ["./lista.component.scss"],
 })
 export class ListaComponent implements OnInit {
-  cadastros$: Observable<Cadastro[]>;
+  cadastros$: Observable<ChamadoCompleto[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
-  displayedColumns = ["_id", "info", "ico"];
+  displayedColumns = ["id", "info", "ico"];
 
   constructor(
+    private cadastroService: CadastroService,
     private repository: RepositoryService,
     private dialog: MatDialog,
     private tabelaService: TabelaService
@@ -28,7 +32,7 @@ export class ListaComponent implements OnInit {
     this.cadastros$ = this.carregarTabela();
   }
 
-  carregarTabela(): Observable<Cadastro[]> {
+  carregarTabela(): Observable<ChamadoCompleto[]> {
     return (this.cadastros$ = this.tabelaService.carregarCadastros());
   }
 
@@ -36,12 +40,12 @@ export class ListaComponent implements OnInit {
     this.tabelaService.carregarCadastros();
   }
   filterStatus(filtros: string[]) {
-    this.cadastros$ = this.repository.carregarFiltro(filtros);
+    this.cadastros$ = this.tabelaService.carregarFiltro(filtros);
   }
 
   abrirDialogForm() {
-    const dialogRef = this.dialog.open(FormCadastroComponent, {
-      width: "80%",
+    const dialogRef = this.dialog.open(PossuiCadastroComponent, {
+      maxWidth: "600px",
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
@@ -52,11 +56,11 @@ export class ListaComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  editarItem(item: Cadastro) {
-    const id = item._id;
+  editarItem(item: ChamadoCompleto) {
+    const id = item.id;
 
-    const subscription = this.repository.findById(id).subscribe(
-      (dados: Cadastro[]) => {
+    const subscription = this.cadastroService.findById(id).subscribe(
+      (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
         //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
         //     width: "40%",
@@ -67,8 +71,8 @@ export class ListaComponent implements OnInit {
         //   });
         // } else {
         const dialogRef = this.dialog.open(FormCadastroComponent, {
-          width: "80%",
-          data: { modoEdicao: true, infoCadastro: dados },
+          maxWidth: "600px",
+          data: { infoCadastro: dados },
         });
         dialogRef.afterClosed().subscribe((result) => {
           subscription.unsubscribe();
@@ -83,7 +87,7 @@ export class ListaComponent implements OnInit {
       data: { infoCadastro: dados },
     });
   }
-  openDialogDetalhe(dados: Cadastro) {
+  openDialogDetalhe(dados: ChamadoCompleto) {
     this.dialog.open(DetalheProdutoComponent, {
       width: "80%",
       data: { infoCadastro: dados },

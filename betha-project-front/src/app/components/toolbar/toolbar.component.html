@@ -10,7 +10,12 @@
         <span (click)="onHome()" style="cursor: pointer;">Visão geral</span>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Configurando ⏷</span>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Planejado ⏷</span>
-        <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Registrado ⏷</span>
+        <!-- <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Registrado ⏷</span> -->
+        <button mat-button [matMenuTriggerFor]="menu">Registrado ⏷</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="criarCliente()">Cadastrar cliente</button>
+          <button mat-menu-item>Cadastrar tecnico</button>
+        </mat-menu>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Executando ⏷</span>
       </div>
       <div class="icons">

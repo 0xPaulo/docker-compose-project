@@ -1,9 +1,11 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable, catchError, of } from "rxjs";
+import { Observable, catchError, delay, of, tap } from "rxjs";
 
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
-import { Cadastro } from "../interfaces/cadastro";
+import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
+import { CadastroService } from "./cadastro.service";
 import { RepositoryService } from "./repository.service";
 
 @Injectable({
@@ -12,21 +14,18 @@ import { RepositoryService } from "./repository.service";
 export class TabelaService {
   emitListaAtualizada = new EventEmitter<void>();
 
+  private readonly API = "http://localhost:8080/api/lista";
+  private readonly API2 = "http://localhost:8080/cadastros";
+
   constructor(
+    private httpClient: HttpClient,
+    private cadastroService: CadastroService,
     private repository: RepositoryService,
     private matDialog: MatDialog
   ) {}
 
-  carregarCadastros(): Observable<Cadastro[]> {
-    return this.repository.listarTodos().pipe(
-      catchError(() => {
-        this.openDialogError();
-        return of([]);
-      })
-    );
-  }
-  carregarCadastrosTriagem(filtro: string[]): Observable<Cadastro[]> {
-    return this.repository.carregarFiltro(filtro).pipe(
+  carregarCadastros(): Observable<ChamadoCompleto[]> {
+    return this.cadastroService.listarTodos().pipe(
       catchError(() => {
         this.openDialogError();
         return of([]);
@@ -50,6 +49,16 @@ export class TabelaService {
       default:
         return "";
     }
+  }
+  carregarFiltro(filtros: string[]): Observable<ChamadoCompleto[]> {
+    const filtroString = filtros.join(",");
+    const params = new HttpParams().set("params", filtroString);
+    return this.httpClient
+      .get<ChamadoCompleto[]>(`${this.API2}`, { params })
+      .pipe(
+        tap((resultado) => console.log(resultado)),
+        delay(500)
+      );
   }
 
   openDialogError() {
