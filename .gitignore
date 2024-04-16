@@ -4,3 +4,5 @@ betha-project-front/.angular/
 .vscode/settings.json
 cred.json
 betha-project-back/cred.json
+chamado_rows.csv
+cliente_rows.csv
