@@ -16,18 +16,18 @@ export class DetalheProdutoComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.form = formBuilder.group({
-      cliente: [data.infoCadastro.cliente],
-      endereco: [data.infoCadastro.endereco],
-      telefone: [data.infoCadastro.telefone],
-      email: [data.infoCadastro.email],
+      clienteNome: [data.infoCadastro.clienteNome],
+      clienteEndereco: [data.infoCadastro.clienteEndereco],
+      clienteTelefone: [data.infoCadastro.clienteTelefone],
+      clienteEmail: [data.infoCadastro.clienteEmail],
       anotacao: [data.infoCadastro.anotacao],
-      item: [data.infoCadastro.item],
+      nomeItem: [data.infoCadastro.nomeItem],
       itemSerie: [data.infoCadastro.itemSerie],
       status: [data.infoCadastro.status],
-      data_entrada: [data.infoCadastro.dataEntrada],
-      desc: [data.infoCadastro.desc],
+      defeitoRelatado: [data.infoCadastro.defeitoRelatado],
       image_urls: [data.infoCadastro.image_urls],
-      laudo: [data.infoCadastro.laudo],
+      analiseTecnica: [data.infoCadastro.analiseTecnica],
+      custoEstimado: [data.infoCadastro.custoEstimado],
     });
     this.dia = data.infoCadastro.dataEntrada;
   }

@@ -30,10 +30,10 @@
     <mat-table (formSubmitted)="carregarNovaTabela()" *ngIf="cadastros$ | async as cadastros ; else loading"
       [dataSource]="cadastros">
       <!-- ID Column -->
-      <ng-container matColumnDef="_id">
+      <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element" class="custom-id-cell">
-          <span class="id-number">{{ element._id }}</span>
+          <span class="id-number">{{ element.id }}</span>
         </td>
       </ng-container>
 
@@ -43,11 +43,10 @@
         <td style="width: 100%; " mat-cell *matCellDef="let element" class="linhas">
           <div class="grid grid-template-columns font-cell-edit">
 
-            <div class="grid-1" (click)="alternarDetalhes(element._id)" style="cursor: pointer;">
-              <h1>{{ element.cliente }}</h1>
-              <h2>{{ element.item }}</h2>
-              <p>{{element.desc}}</p>
-
+            <div class="grid-1" (click)="alternarDetalhes(element.id)" style="cursor: pointer;">
+              <h1>Cliente: {{ element.clienteNome }}</h1>
+              <h2>Item: {{ element.nomeItem }}</h2>
+              <p>Defeito relatado: {{element.defeitoRelatado}}</p>
             </div>
 
             <div class="grid-2">
@@ -55,19 +54,19 @@
               <p style="cursor: pointer;" [ngClass]="getStatusClass(element.status)"
                 (click)="filterStatus([element.status])">
               </p>
-              <span style="cursor: pointer;" class="linhas" (click)="alternarDetalhes(element._id)">
-                {{ detalhesVisiveis[element._id] ? 'Menos detalhes' : 'Mais detalhes' }}
+              <span style="cursor: pointer;" (click)="alternarDetalhes(element.id)">
+                {{ detalhesVisiveis[element.id] ? 'Menos detalhes' : 'Mais detalhes' }}
               </span>
             </div>
 
             <div class="descricao mb-3"
-              [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}">
+              [ngClass]="{'invisivel': !detalhesVisiveis[element.id], 'visivel': detalhesVisiveis[element.id]}">
               <p>Numero de serie: {{element.itemSerie}}</p>
-              <div *ngIf="element.laudo !== null && element.valor !== 0">
-                <p>Laudo Técnico: {{element.laudo}}</p>
-                <p>Custo: R${{element.valor}}</p>
+              <div *ngIf="element.analiseTecnica !== null && element.custoEstimado !== 0">
+                <p>Laudo Técnico: {{element.analiseTecnica}}</p>
+                <p>Custo: R${{element.custoEstimado}}</p>
               </div>
-              <p>Email: {{element.email}}</p>
+              <p>Email: {{element.clienteEmail}}</p>
             </div>
           </div>
         </td>
@@ -84,7 +83,7 @@
           <button mat-icon-button (click)="openDialogDetalhe(element)">
             <mat-icon>description</mat-icon>
           </button>
-          <button [ngClass]="{'invisivel': !detalhesVisiveis[element._id], 'visivel': detalhesVisiveis[element._id]}"
+          <button [ngClass]="{'invisivel': !detalhesVisiveis[element.id], 'visivel': detalhesVisiveis[element.id]}"
             mat-icon-button (click)="openDialoDelete(element)">
             <mat-icon>delete</mat-icon>
           </button>

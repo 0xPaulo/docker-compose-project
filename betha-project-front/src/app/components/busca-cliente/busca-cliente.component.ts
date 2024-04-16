@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Component, EventEmitter, Output } from "@angular/core";
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { Observable, map, of, tap } from "rxjs";
-import { FormCliente } from "src/app/interfaces/formCliente";
 import { ClienteService } from "src/app/services/cliente.service";
 
 @Component({
@@ -53,7 +52,7 @@ export class BuscaClienteComponent {
           this.mostrarMensagemErro = resposta.length === 0;
           this.clienteCompleto = resposta;
         }),
-        map((resposta) => resposta.map((obj: FormCliente) => obj.nome))
+        map((resposta) => resposta.map((obj: any) => obj.nome))
       );
   }
 
@@ -65,8 +64,6 @@ export class BuscaClienteComponent {
       }
     });
     if (this.clienteSelecionadoRoot) {
-      console.log(this.clienteSelecionadoRoot);
-      console.log("Deu certo!!!");
       this.clienteSelecionadoOut.emit(this.clienteSelecionadoRoot);
     } else {
       console.log(`${nomeClienteSelecionadoRoot} nao encontrado`);

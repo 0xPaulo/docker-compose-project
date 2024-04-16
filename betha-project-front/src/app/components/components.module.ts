@@ -42,10 +42,11 @@ import { DetalheProdutoComponent } from "./dialog/detalhe-produto/detalhe-produt
 import { EmailComponent } from "./dialog/email/email.component";
 import { ErrorDialogComponent } from "./dialog/errors/error-dialog/error-dialog.component";
 import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permissao.component";
+import { PossuiCadastroComponent } from "./dialog/possui-cadastro/possui-cadastro.component";
 import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
+import { DialogCriarClienteComponent } from "./toolbar/dialog-criar-cliente/dialog-criar-cliente.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { PossuiCadastroComponent } from './dialog/possui-cadastro/possui-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { PossuiCadastroComponent } from './dialog/possui-cadastro/possui-cadastr
     EmailComponent,
     BuscaClienteComponent,
     PossuiCadastroComponent,
+    DialogCriarClienteComponent,
   ],
   imports: [
     MatAutocompleteModule,
