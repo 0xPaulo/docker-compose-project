@@ -109,7 +109,7 @@ public class ChamadoService {
 
     Cliente clienteTemp = clienteExistente.builder()
         .id(clienteExistente.getId())
-        .nome(chamadoRecebido.getNomeItem())
+        .nome(chamadoRecebido.getClienteNome())
         .email(chamadoRecebido.getClienteEmail())
         .endereco(chamadoRecebido.getClienteEndereco())
         .telefone(chamadoRecebido.getClienteTelefone())

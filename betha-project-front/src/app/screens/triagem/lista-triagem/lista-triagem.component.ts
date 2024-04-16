@@ -51,18 +51,18 @@ export class ListaTriagemComponent implements OnInit {
   //   });
   //   dialogRef.afterClosed().subscribe((result) => {});
   // }
-  openDialogEmail(dados: Cadastro) {
+  openDialogEmail(dados: ChamadoCompleto) {
     this.dialog.open(EmailComponent, {
-      width: "80%",
+      width: "60%",
       data: { infoCadastro: dados },
     });
   }
   openDialogError() {
     this.dialog.open(ErrorDialogComponent);
   }
-  openDialogDetalhe(dados: Cadastro) {
+  openDialogDetalhe(dados: ChamadoCompleto) {
     this.dialog.open(DetalheProdutoComponent, {
-      width: "80%",
+      width: "60%",
       data: { infoCadastro: dados },
     });
   }
@@ -99,30 +99,28 @@ export class ListaTriagemComponent implements OnInit {
   chamarCancelamento(element: Partial<ChamadoCompleto>) {
     const id = element.id;
     const elementAtualizado = { ...element, status: "CANCELADO" };
-    this.cadastroService.mudarStatus(id, elementAtualizado);
-    // .subscribe(
-    //   (result) => {
-    //     this.tabelaService.emitListaAtualizada.emit();
-    //     this.onSucess();
-    //   },
-    //   () => {
-    //     this.onError();
-    //   }
-    // );
+    this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
+      (result) => {
+        this.tabelaService.emitListaAtualizada.emit();
+        this.onSucess();
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
   chamarManutencao(element: Partial<ChamadoCompleto>) {
     const id = element.id;
     const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
-    this.cadastroService.mudarStatus(id, elementAtualizado);
-    // .subscribe(
-    //   (result) => {
-    //     this.tabelaService.emitListaAtualizada.emit();
-    //     this.onSucess();
-    //   },
-    //   () => {
-    //     this.onError();
-    //   }
-    // );
+    this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
+      (result) => {
+        this.tabelaService.emitListaAtualizada.emit();
+        this.onSucess();
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
 
   getStatusClass(status: string): string {
@@ -140,4 +138,7 @@ export class ListaTriagemComponent implements OnInit {
       this.carregarTabelaTriagem(this.filtro);
     });
   }
+}
+function subscribe(arg0: (result: any) => void, arg1: () => void) {
+  throw new Error("Function not implemented.");
 }
