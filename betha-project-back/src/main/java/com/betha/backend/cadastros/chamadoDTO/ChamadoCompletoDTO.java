@@ -1,6 +1,7 @@
 package com.betha.backend.cadastros.chamadoDTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.betha.backend.cadastros.models.Enums.Status;
 
@@ -27,8 +28,8 @@ public class ChamadoCompletoDTO {
   private int custoEstimado;
   private LocalDateTime dataEntrada;
   private Status status;
+  private List<String> image_urls;
   // private Long tecnico;
   // private LocalDateTime dataSaida;
-  // private List<String> image_urls;
 
 }
