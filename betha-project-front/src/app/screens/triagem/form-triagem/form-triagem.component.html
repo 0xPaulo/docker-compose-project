@@ -4,18 +4,18 @@
 <mat-dialog-content>
   <form class="form-group" [formGroup]="form">
     <div class="row">
-      <mat-form-field class="col-md-6 mt-4">
+      <mat-form-field class="col-md-12 mt-4">
         <mat-label>Laudo técnico</mat-label>
-        <textarea matInput formControlName="laudo" rows="4"></textarea>
+        <textarea matInput formControlName="analiseTecnica" rows="4"></textarea>
       </mat-form-field>
-      <upload-image class="col-md-6 mt-4" (imagUrlSon)="receberSon($event)"></upload-image>
     </div>
 
-    <mat-form-field>
+    <mat-form-field class="mt-1">
       <mat-label>Valor</mat-label>
-      <input matInput formControlName="valor">
+      <input matInput formControlName="custoEstimado">
     </mat-form-field>
 
+    <upload-image class="col-md-12 mt-5" (imagUrlSon)="receberSon($event)"></upload-image>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

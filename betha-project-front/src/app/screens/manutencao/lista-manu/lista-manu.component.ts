@@ -20,7 +20,7 @@ import { FormManuTecComponent } from "../form-manu-tec/form-manu-tec.component";
 export class ListaManuComponent implements OnInit {
   cadastros$: Observable<ChamadoCompleto[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
-  displayedColumns = ["_id", "info", "ico"];
+  displayedColumns = ["id", "info", "ico"];
   filtro: string[] = ["AGUARDANDO_MANUTENCAO"];
 
   constructor(

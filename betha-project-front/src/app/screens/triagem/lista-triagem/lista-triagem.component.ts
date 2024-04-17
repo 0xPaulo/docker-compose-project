@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
-import { Cadastro } from "src/app/interfaces/cadastro";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
@@ -66,8 +65,8 @@ export class ListaTriagemComponent implements OnInit {
       data: { infoCadastro: dados },
     });
   }
-  editartriagem(item: Cadastro) {
-    const id = item._id;
+  editartriagem(item: ChamadoCompleto) {
+    const id = item.id;
 
     const subscription = this.cadastroService.findById(id).subscribe(
       (dados: ChamadoCompleto[]) => {
@@ -81,9 +80,10 @@ export class ListaTriagemComponent implements OnInit {
         //   });
         // } else {
         const dialogRef = this.dialog.open(FormTriagemComponent, {
-          width: "70%",
+          // width: "70%",
           // height: "516px",
-          data: { modoEdicao: true, infoCadastro: dados },
+          maxWidth: "600px",
+          data: { infoCadastro: dados },
         });
         dialogRef.afterClosed().subscribe((result) => {
           subscription.unsubscribe();
@@ -138,7 +138,4 @@ export class ListaTriagemComponent implements OnInit {
       this.carregarTabelaTriagem(this.filtro);
     });
   }
-}
-function subscribe(arg0: (result: any) => void, arg1: () => void) {
-  throw new Error("Function not implemented.");
 }

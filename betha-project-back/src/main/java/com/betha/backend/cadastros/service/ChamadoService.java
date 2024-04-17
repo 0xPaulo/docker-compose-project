@@ -69,6 +69,7 @@ public class ChamadoService {
       dto.setCustoEstimado(chamado.getCustoEstimado());
       dto.setDataEntrada(chamado.getDataEntrada());
       dto.setStatus(chamado.getStatus());
+      dto.setImage_urls(chamado.getImage_urls());
 
       chamadoCompletoDTO.add(dto);
     }
@@ -96,6 +97,7 @@ public class ChamadoService {
     dto.setCustoEstimado(chamado.getCustoEstimado());
     dto.setDataEntrada(chamado.getDataEntrada());
     dto.setStatus(chamado.getStatus());
+    dto.setImage_urls(chamado.getImage_urls());
     return dto;
   }
 
@@ -121,9 +123,10 @@ public class ChamadoService {
         .nomeItem(chamadoRecebido.getNomeItem())
         .itemSerie(chamadoRecebido.getItemSerie())
         .defeitoRelatado(chamadoRecebido.getDefeitoRelatado())
-        .analiseTecnica(chamadoExistente.getAnaliseTecnica())
-        .custoEstimado(chamadoExistente.getCustoEstimado())
+        .analiseTecnica(chamadoRecebido.getAnaliseTecnica())
+        .custoEstimado(chamadoRecebido.getCustoEstimado())
         .dataEntrada(chamadoRecebido.getDataEntrada())
+        .image_urls(chamadoRecebido.getImage_urls())
         .status(chamadoRecebido.getStatus()).build();
 
     System.out.println(clienteTemp);

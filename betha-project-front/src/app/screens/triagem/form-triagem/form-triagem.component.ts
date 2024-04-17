@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
+import { CadastroService } from "./../../../services/cadastro.service";
 
 @Component({
   selector: "app-form-triagem",
@@ -13,10 +14,11 @@ import { TabelaService } from "src/app/services/tabela.service";
 })
 export class FormTriagemComponent {
   form: FormGroup;
-  isEditMode: boolean = false;
+  // isEditMode: boolean = false;
   result: string[] = [];
   id: string = "";
   constructor(
+    private cadastroService: CadastroService,
     private datePipe: DatePipe,
     private snackBar: MatSnackBar,
     private service: RepositoryService,
@@ -24,22 +26,20 @@ export class FormTriagemComponent {
     private tabelaService: TabelaService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.id = data.infoCadastro._id;
-    this.isEditMode = true;
+    this.id = data.infoCadastro.id;
     this.form = formBuilder.group({
-      cliente: [data.infoCadastro.cliente],
-      endereco: [data.infoCadastro.endereco],
-      telefone: [data.infoCadastro.telefone],
-      email: [data.infoCadastro.email],
-      anotacao: [data.infoCadastro.anotacao],
-      item: [data.infoCadastro.item],
+      clienteNome: [data.infoCadastro.clienteNome],
+      clienteEndereco: [data.infoCadastro.clienteEndereco],
+      clienteTelefone: [data.infoCadastro.clienteTelefone],
+      clienteEmail: [data.infoCadastro.clienteEmail],
+      nomeItem: [data.infoCadastro.nomeItem],
       itemSerie: [data.infoCadastro.itemSerie],
       status: [data.infoCadastro.status],
-      data_entrada: [data.infoCadastro.dataEntrada],
-      desc: [data.infoCadastro.desc],
+      defeitoRelatado: [data.infoCadastro.defeitoRelatado],
       image_urls: [data.infoCadastro.image_urls],
-      valor: [data.infoCadastro.valor],
-      laudo: [data.infoCadastro.laudo],
+      analiseTecnica: [data.infoCadastro.analiseTecnica],
+      custoEstimado: [data.infoCadastro.custoEstimado],
+      dataEntrada: [data.infoCadastro.dataEntrada],
     });
   }
 
@@ -49,14 +49,9 @@ export class FormTriagemComponent {
 
   onSubmit() {
     this.form.patchValue({ image_urls: this.result });
-    const dataInicial = this.form.value.data_entrada;
-    const dataFormatada = this.datePipe.transform(
-      dataInicial,
-      "yyyy-MM-ddTHH:mm:ss"
-    );
-    const dadosAtualizados = { ...this.form.value, dataEntrada: dataFormatada };
-    const idItem = this.data.infoCadastro._id;
-    this.service.update(idItem, dadosAtualizados).subscribe(
+    const dadosAtualizados = { ...this.form.value };
+    const idItem = this.data.infoCadastro.id;
+    this.cadastroService.update(idItem, dadosAtualizados).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
