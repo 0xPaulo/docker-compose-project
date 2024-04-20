@@ -5,11 +5,10 @@ import { Observable } from "rxjs";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { EmailComponent } from "src/app/components/dialog/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
-import { Cadastro } from "src/app/interfaces/cadastro";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
+import { CadastroService } from "src/app/services/cadastro.service";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
-import { FormCadastroComponent } from "../../cadastro/form-cadastro/form-cadastro.component";
 import { FormManuTecComponent } from "../form-manu-tec/form-manu-tec.component";
 
 @Component({
@@ -24,6 +23,7 @@ export class ListaManuComponent implements OnInit {
   filtro: string[] = ["AGUARDANDO_MANUTENCAO"];
 
   constructor(
+    private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
     private repository: RepositoryService,
     private dialog: MatDialog,
@@ -40,34 +40,34 @@ export class ListaManuComponent implements OnInit {
     return (this.cadastros$ = this.tabelaService.carregarCadastros());
   }
   filterStatus(filtros: string[]) {
-    this.cadastros$ = this.repository.carregarFiltro(filtros);
+    this.cadastros$ = this.tabelaService.carregarFiltro(filtros);
   }
 
-  abrirDialogForm() {
-    const dialogRef = this.dialog.open(FormCadastroComponent, {
-      width: "80%",
-    });
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
-  openDialogEmail(dados: Cadastro) {
+  // abrirDialogForm() {
+  //   const dialogRef = this.dialog.open(FormCadastroComponent, {
+  //     width: "80%",
+  //   });
+  //   dialogRef.afterClosed().subscribe((result) => {});
+  // }
+  openDialogEmail(dados: ChamadoCompleto) {
     this.dialog.open(EmailComponent, {
-      width: "80%",
+      width: "60%",
       data: { infoCadastro: dados },
     });
   }
   openDialogError() {
     this.dialog.open(ErrorDialogComponent);
   }
-  openDialogDetalhe(dados: Cadastro) {
+  openDialogDetalhe(dados: ChamadoCompleto) {
     this.dialog.open(DetalheProdutoComponent, {
-      width: "80%",
+      width: "60%",
       data: { infoCadastro: dados },
     });
   }
-  addTecnico(item: Cadastro) {
-    const id = item._id;
+  addTecnico(item: ChamadoCompleto) {
+    const id = item.id;
 
-    const subscription = this.repository.findById(id).subscribe(
+    const subscription = this.cadastroService.findById(id).subscribe(
       (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
         //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
@@ -79,9 +79,9 @@ export class ListaManuComponent implements OnInit {
         //   });
         // } else {
         const dialogRef = this.dialog.open(FormManuTecComponent, {
-          width: "70%",
+          width: "60%",
           // height: "516px",
-          data: { modoEdicao: true, infoCadastro: dados },
+          data: { infoCadastro: dados },
         });
         dialogRef.afterClosed().subscribe((result) => {
           subscription.unsubscribe();
@@ -94,10 +94,10 @@ export class ListaManuComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  chamarCancelamento(element: Partial<Cadastro>) {
-    const id = element._id;
+  chamarCancelamento(element: Partial<ChamadoCompleto>) {
+    const id = element.id;
     const elementAtualizado = { ...element, status: "CANCELADO" };
-    this.repository.mudarStatus(id, elementAtualizado).subscribe(
+    this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
@@ -107,10 +107,10 @@ export class ListaManuComponent implements OnInit {
       }
     );
   }
-  chamarManutencao(element: Partial<Cadastro>) {
-    const id = element._id;
+  chamarManutencao(element: Partial<ChamadoCompleto>) {
+    const id = element.id;
     const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
-    this.repository.mudarStatus(id, elementAtualizado).subscribe(
+    this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();

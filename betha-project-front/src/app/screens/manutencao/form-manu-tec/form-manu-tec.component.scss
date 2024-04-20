@@ -18,3 +18,29 @@
   --mdc-filled-text-field-focus-active-indicator-color: #00000000;
   --mdc-filled-text-field-focus-active-indicator-color: rgb(0, 119, 255);
 }
+.campo-destaque {
+  padding: 5px;
+  background-color: rgba(128, 128, 128, 0.247);
+}
+.campo {
+  padding: 5px;
+}
+.tec-info {
+  position: relative;
+}
+
+.tec-info img {
+  position: absolute;
+  top: -20px;
+  right: 10px;
+  border-radius: 50%;
+  width: 50px;
+  border: 2px solid rgba(0, 0, 255, 0);
+}
+.tec-info img:hover {
+  border: 2px solid rgb(26, 77, 243);
+}
+
+.text-container {
+  margin-top: 20px; /* Ajuste este valor conforme necessário para garantir que os parágrafos não fiquem sobrepostos à imagem */
+}

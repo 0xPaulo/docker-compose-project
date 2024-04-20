@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.betha.backend.cadastros.models.Enums.Perfils;
+import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,19 +39,15 @@ public class Tecnico {
   @Column
   private String nome;
 
-  @Column
-  private String email;
-
-  @Column
-  private String telefone;
-
-  @Column
-  private String endereco;
+  @Column(name = "tecnico_categorias")
+  @Enumerated(EnumType.STRING)
+  private TecnicoCategorias tecnicoCategorias;
 
   @Column
   private String imagem;
 
   @Column
+  @Enumerated(EnumType.STRING)
   private Perfils perfil;
 
   @OneToMany(mappedBy = "tecnico")
