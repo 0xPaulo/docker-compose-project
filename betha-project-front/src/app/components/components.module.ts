@@ -21,7 +21,9 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatRadioModule } from "@angular/material/radio";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CapitalizePipe } from "../pipe/capitalize.pipe";
 import { DataFormatPipe } from "../pipe/data-format.pipe";
 import { UpperToCamelCasePipe } from "../pipe/upper-to-camel-case.pipe";
 import { CadastroComponent } from "../screens/cadastro/cadastro.component";
@@ -50,6 +52,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 
 @NgModule({
   declarations: [
+    CapitalizePipe,
     FormCriarCadastroComponent,
     FormManuTecComponent,
     ListaManuComponent,
@@ -77,6 +80,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     DialogCriarClienteComponent,
   ],
   imports: [
+    MatRadioModule,
     MatAutocompleteModule,
     MatMenuModule,
     MatTabsModule,

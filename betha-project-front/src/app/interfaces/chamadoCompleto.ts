@@ -12,6 +12,7 @@ export interface ChamadoCompleto {
   clienteEndereco: string;
   clienteTelefone: string;
   image_urls: string[];
+  tecnico: string;
   // data_saida: string;
   // anotacao: string;
   // defeito: string;

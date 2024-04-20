@@ -49,7 +49,6 @@ public class CadastrosController {
 
   @GetMapping()
   public List<ChamadoCompletoDTO> buscarTodosChamados(@RequestParam(required = false) List<String> params) {
-    System.out.println(params);
     List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados(params);
     return resultado;
   }
