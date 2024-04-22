@@ -55,11 +55,19 @@
         </div>
       </div>
       <div class="card mb-4">
-        <div class="card-body">
+        <!-- <div class="card-body">
           <h2 class="card-title">Fotos da triagem</h2>
           <div class="container-fotos" *ngIf="form.get('image_urls')?.value">
             <div class="container-fotos-filha" *ngFor="let url of form.get('image_urls')?.value">
               <img [src]="url" alt="Loading image error">
+            </div>
+          </div>
+        </div> -->
+        <div class="card-body">
+          <h2 class="card-title">Fotos da triagem</h2>
+          <div class="container-fotos" *ngIf="imageUrl">
+            <div class="container-fotos-filha">
+              <img [src]="imageUrl" alt="Loading image error">
             </div>
           </div>
         </div>
