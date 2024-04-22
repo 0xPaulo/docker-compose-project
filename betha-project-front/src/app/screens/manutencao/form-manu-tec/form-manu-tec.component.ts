@@ -1,10 +1,11 @@
 import { DatePipe } from "@angular/common";
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatRadioChange } from "@angular/material/radio";
 import { MatSelectChange } from "@angular/material/select";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ImgProxyService } from "src/app/services/img-proxy.service";
 import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 import { CadastroService } from "./../../../services/cadastro.service";
@@ -15,7 +16,7 @@ import { TecnicoService } from "./../../../services/tecnico.service";
   templateUrl: "./form-manu-tec.component.html",
   styleUrls: ["./form-manu-tec.component.scss"],
 })
-export class FormManuTecComponent {
+export class FormManuTecComponent implements OnInit {
   form: FormGroup;
   id: string = "";
   dia: string = "";
@@ -33,7 +34,10 @@ export class FormManuTecComponent {
 
   msgDeErro!: string;
 
+  imageUrl: string | ArrayBuffer = "";
+
   constructor(
+    private imgProxyService: ImgProxyService,
     private dialogRef: MatDialogRef<any, boolean>,
     private tecnicoService: TecnicoService,
     private cadastroService: CadastroService,
@@ -64,6 +68,7 @@ export class FormManuTecComponent {
     this.dia = data.infoCadastro.dataEntrada;
     this.chamarBuscarTodos();
   }
+
   chamarBuscarTodos(filtro?: string) {
     this.tecnicoService.buscarTodos(filtro).subscribe(
       (resultado) => {
@@ -144,5 +149,16 @@ export class FormManuTecComponent {
   }
   onSucess() {
     this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
+  }
+  ngOnInit(): void {
+    const imageUrl =
+      "https://lh3.googleusercontent.com/d/1pveDRcPLsjOH8suALuxW6GOM18LL7yV4";
+    this.imgProxyService.getImage(imageUrl).subscribe((blob) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        this.imageUrl = reader.result as string;
+      };
+      reader.readAsDataURL(blob);
+    });
   }
 }
