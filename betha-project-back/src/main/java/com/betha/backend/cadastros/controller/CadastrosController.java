@@ -48,7 +48,7 @@ public class CadastrosController {
   }
 
   @GetMapping()
-  public List<ChamadoCompletoDTO> buscarTodosChamados(@RequestParam(required = false) List<String> params) {
+  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> params) {
     List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados(params);
     return resultado;
   }
@@ -61,6 +61,7 @@ public class CadastrosController {
 
   @PatchMapping("/{id}")
   public Chamado editarChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
-    return chamadoService.editar(id, chamadoCompletoDTO);
+    Chamado resultado = chamadoService.editar(id, chamadoCompletoDTO);
+    return resultado;
   }
 }

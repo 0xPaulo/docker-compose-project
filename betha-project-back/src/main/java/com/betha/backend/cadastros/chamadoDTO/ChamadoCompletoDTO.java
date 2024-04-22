@@ -13,6 +13,8 @@ import lombok.Setter;
 public class ChamadoCompletoDTO {
 
   private Long clienteId;
+  private Long tecnico;
+
   private String clienteNome;
   private String clienteEmail;
   private String clienteTelefone;
@@ -29,7 +31,6 @@ public class ChamadoCompletoDTO {
   private LocalDateTime dataEntrada;
   private Status status;
   private List<String> image_urls;
-  // private Long tecnico;
   // private LocalDateTime dataSaida;
 
 }

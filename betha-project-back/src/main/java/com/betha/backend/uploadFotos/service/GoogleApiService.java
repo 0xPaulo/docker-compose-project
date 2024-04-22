@@ -48,7 +48,8 @@ public class GoogleApiService {
       FileContent mediaContent = new FileContent("image/jpeg", file);
       com.google.api.services.drive.model.File uploadedFile = drive.files().create(fileMetaData, mediaContent)
           .setFields("id").execute();
-      String imageUrl = "https://lh3.googleusercontent.com/d/" + uploadedFile.getId();
+      String imageUrl = "https://lh3.googleusercontent.com/d/" +
+          uploadedFile.getId();
       System.out.println("IMAGE URL: " + imageUrl);
       res.setStatus(200);
       res.setMsg("Imagem enviada pro drive");

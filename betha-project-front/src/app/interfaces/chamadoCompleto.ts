@@ -1,3 +1,5 @@
+import { FormTecnico } from "./formTecnico";
+
 export interface ChamadoCompleto {
   id: string;
   clienteNome: string;
@@ -12,7 +14,7 @@ export interface ChamadoCompleto {
   clienteEndereco: string;
   clienteTelefone: string;
   image_urls: string[];
-  tecnico: string;
+  tecnico: FormTecnico;
   // data_saida: string;
   // anotacao: string;
   // defeito: string;
