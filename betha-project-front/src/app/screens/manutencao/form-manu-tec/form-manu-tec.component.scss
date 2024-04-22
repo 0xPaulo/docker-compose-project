@@ -24,6 +24,7 @@
 }
 .campo {
   padding: 5px;
+  padding-right: 25px;
 }
 .tec-info {
   position: relative;
@@ -43,4 +44,13 @@
 
 .text-container {
   margin-top: 20px; /* Ajuste este valor conforme necessário para garantir que os parágrafos não fiquem sobrepostos à imagem */
+}
+.container-padding-right {
+  padding-right: 0px !important;
+}
+.padding-botao-confirmar {
+  margin-right: 25px !important;
+}
+.error {
+  color: red;
 }

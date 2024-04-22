@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable, catchError, delay, of, tap } from "rxjs";
+import { Observable, catchError, delay, of } from "rxjs";
 
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
@@ -56,7 +56,7 @@ export class TabelaService {
     return this.httpClient
       .get<ChamadoCompleto[]>(`${this.API2}`, { params })
       .pipe(
-        tap((resultado) => console.log(resultado)),
+        // tap((resultado) => console.log(resultado)),
         delay(500)
       );
   }

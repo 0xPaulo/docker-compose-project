@@ -106,9 +106,6 @@ public class ChamadoService {
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
     Cliente clienteExistente = chamadoExistente.getClienteId();
 
-    System.out.println(chamadoExistente);
-    System.out.println(clienteExistente);
-
     Cliente clienteTemp = clienteExistente.builder()
         .id(clienteExistente.getId())
         .nome(chamadoRecebido.getClienteNome())
@@ -127,13 +124,30 @@ public class ChamadoService {
         .custoEstimado(chamadoRecebido.getCustoEstimado())
         .dataEntrada(chamadoRecebido.getDataEntrada())
         .image_urls(chamadoRecebido.getImage_urls())
-        .status(chamadoRecebido.getStatus()).build();
-
-    System.out.println(clienteTemp);
-    System.out.println(chamadoTemp);
+        .status(chamadoRecebido.getStatus())
+        .build();
 
     clienteRepository.save(clienteTemp);
     chamadoRepository.save(chamadoTemp);
     return chamadoTemp;
   }
 }
+// testar
+// clienteExistente.setNome(chamadoRecebido.getClienteNome());
+// clienteExistente.setEmail(chamadoRecebido.getClienteEmail());
+// clienteExistente.setEndereco(chamadoRecebido.getClienteEndereco());
+// clienteExistente.setTelefone(chamadoRecebido.getClienteTelefone());
+
+// chamadoExistente.setNomeItem(chamadoRecebido.getNomeItem());
+// chamadoExistente.setItemSerie(chamadoRecebido.getItemSerie());
+// chamadoExistente.setDefeitoRelatado(chamadoRecebido.getDefeitoRelatado());
+// chamadoExistente.setAnaliseTecnica(chamadoRecebido.getAnaliseTecnica());
+// chamadoExistente.setCustoEstimado(chamadoRecebido.getCustoEstimado());
+// chamadoExistente.setDataEntrada(chamadoRecebido.getDataEntrada());
+// chamadoExistente.setImage_urls(chamadoRecebido.getImage_urls());
+// chamadoExistente.setStatus(chamadoRecebido.getStatus());
+
+// clienteRepository.save(clienteExistente);
+// chamadoRepository.save(chamadoExistente);
+
+// return chamadoExistente;

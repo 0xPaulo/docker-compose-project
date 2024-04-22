@@ -1,9 +1,10 @@
-<div class="container p-4 mt-3">
+<div class="container p-4 mt-3 container-padding-right">
   <h3 class=" text-primary"><strong>Escolha o técnico para o item {{id}}</strong></h3>
   <mat-dialog-content class="mat-typography">
     <form class="form-group" [formGroup]="form">
       <div class="row">
         <div class="col-md-6">
+
           <div class="card mb-4">
             <div class="card-body">
               <div class="campo">
@@ -22,6 +23,7 @@
           </div>
         </div>
         <div class="col-md-6 campo">
+
           <div class="card mb-4">
             <mat-radio-group color="primary" aria-label="Select an option" (change)="filtroTecnico($event)">
               <mat-radio-button value="1">Telas</mat-radio-button>
@@ -32,12 +34,10 @@
             <div class="card-body">
               <mat-form-field class="custom-mat-form-field">
                 <mat-label>Escolha um Técnico</mat-label>
-                <mat-select [formControl]="matSelectValores" (selectionChange)="onSelectionChange($event)"
-                  class="custom-mat-select">
+                <mat-select (selectionChange)="onSelectionChange($event)" class="custom-mat-select">
                   <mat-option *ngFor="let nome of tecnicosNomes" [value]="nome">{{nome}}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <!-- colocar tabela com as info do tecnico -->
               <div *ngIf="tecnicoNomeSelecionado" class="tec-info">
                 <a href="/">
                   <img [src]="imageUrlTec" alt="">
@@ -50,6 +50,8 @@
               </div>
             </div>
           </div>
+          <div class="error" *ngIf="msgDeErro">
+            {{msgDeErro}}</div>
         </div>
       </div>
       <div class="card mb-4">
@@ -57,7 +59,7 @@
           <h2 class="card-title">Fotos da triagem</h2>
           <div class="container-fotos" *ngIf="form.get('image_urls')?.value">
             <div class="container-fotos-filha" *ngFor="let url of form.get('image_urls')?.value">
-              <img crossorigin="anonymous" [src]="url" alt="Loading image error">
+              <img [src]="url" alt="Loading image error">
             </div>
           </div>
         </div>
@@ -66,5 +68,6 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button class="botao-betha-cancel" mat-dialog-close>Fechar</button>
-    <button class="botao-betha" mat-dialog-close cdkFocusInitial (click)="onSubmit()">Confirmar</button>
+    <button class="botao-betha padding-botao-confirmar" cdkFocusInitial (click)="verificaSubmit()">Confirmar</button>
+    <!-- mat-dialog-close -->
   </mat-dialog-actions>

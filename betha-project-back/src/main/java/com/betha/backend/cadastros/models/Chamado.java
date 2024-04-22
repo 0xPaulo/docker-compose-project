@@ -46,6 +46,7 @@ public class Chamado {
 
   @ManyToOne
   @JoinColumn(name = "tecnico_id_fk")
+  @JsonBackReference
   private Tecnico tecnico;
 
   @Column(name = "name_item")

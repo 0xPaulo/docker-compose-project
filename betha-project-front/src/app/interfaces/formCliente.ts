@@ -8,4 +8,5 @@ export interface FormCliente {
   chamados?: [];
   imagem?: string;
   perfil?: string;
+  nome?: string;
 }

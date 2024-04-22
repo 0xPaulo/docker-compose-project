@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { Component, Inject } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatRadioChange } from "@angular/material/radio";
 import { MatSelectChange } from "@angular/material/select";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -21,17 +21,20 @@ export class FormManuTecComponent {
   dia: string = "";
 
   tecnicosCompleto!: any[];
-  matSelectValores = new FormControl("");
   tecnicosNomes!: string[];
 
   tecnicoNomeSelecionado: string = "";
   tecnicoEspecialidadeSelecionado: string = "";
   tecnicoChamadosSelecionado: string = "";
   imagemTecnico: string = "";
+  tecnicoID!: Number;
 
   imageUrlTec: string = "";
 
+  msgDeErro!: string;
+
   constructor(
+    private dialogRef: MatDialogRef<any, boolean>,
     private tecnicoService: TecnicoService,
     private cadastroService: CadastroService,
     private datePipe: DatePipe,
@@ -43,19 +46,20 @@ export class FormManuTecComponent {
   ) {
     this.id = data.infoCadastro.id;
     this.form = formBuilder.group({
-      cliente: [data.infoCadastro.cliente],
-      endereco: [data.infoCadastro.endereco],
-      telefone: [data.infoCadastro.telefone],
-      email: [data.infoCadastro.email],
-      anotacao: [data.infoCadastro.anotacao],
-      item: [data.infoCadastro.item],
+      clienteNome: [data.infoCadastro.clienteNome],
+      clienteEndereco: [data.infoCadastro.clienteEndereco],
+      clienteTelefone: [data.infoCadastro.clienteTelefone],
+      clienteEmail: [data.infoCadastro.clienteEmail],
+      nomeItem: [data.infoCadastro.nomeItem],
       itemSerie: [data.infoCadastro.itemSerie],
       status: [data.infoCadastro.status],
-      data_entrada: [data.infoCadastro.dataEntrada],
-      desc: [data.infoCadastro.desc],
+      dataEntrada: [data.infoCadastro.dataEntrada],
+      defeitoRelatado: [data.infoCadastro.defeitoRelatado],
       image_urls: [data.infoCadastro.image_urls],
-      valor: [data.infoCadastro.valor],
-      laudo: [data.infoCadastro.laudo],
+      custoEstimado: [data.infoCadastro.custoEstimado],
+      analiseTecnica: [data.infoCadastro.analiseTecnica],
+      // tecnico: [data.infoCadastro.tecnico.nome],
+      // tecnico: [data.infoCadastro.tecnico, Validators.required],
     });
     this.dia = data.infoCadastro.dataEntrada;
     this.chamarBuscarTodos();
@@ -74,7 +78,6 @@ export class FormManuTecComponent {
   filtroTecnico(event: MatRadioChange) {
     let filtro = this.tecnicoService.handleFilter(event);
     this.chamarBuscarTodos(filtro);
-    // this.tecnicoService.buscarTodos(filtro).subscribe();
   }
 
   onSelectionChange(event: MatSelectChange) {
@@ -84,6 +87,9 @@ export class FormManuTecComponent {
         this.tecnicoNomeSelecionado = tecnico.nome;
         this.tecnicoEspecialidadeSelecionado = tecnico.tecnicoCategorias;
         this.imagemTecnico = tecnico.id;
+        this.tecnicoID = tecnico.id;
+        // this.form.patchValue({ tecnico: this.tecnicoID });
+        this.msgDeErro = "";
       }
     });
     switch (+this.imagemTecnico) {
@@ -109,16 +115,24 @@ export class FormManuTecComponent {
         console.log("O número não está entre 1 e 6");
     }
   }
+  verificaSubmit() {
+    if (this.form.invalid) {
+      this.msgDeErro = "Por favor, escolha um tecnico para o serviço";
+    } else {
+      this.onSubmit();
+    }
+  }
 
   onSubmit() {
     // this.form.patchValue({ tecnico: this.form.get("tecnico")?.value });
-    // const dadosAtualizados = { ...this.form.value, dataEntrada: dataFormatada };
-
+    // const dadosAtualizados = { ...this.form.value, tecnico: this.tecnicoID };
     const idItem = this.data.infoCadastro.id;
-    this.cadastroService.update(idItem, this.form).subscribe(
+    // const formValues = this.form.getRawValue();
+    this.tecnicoService.setTecnico(idItem, this.tecnicoID).subscribe(
       (result) => {
-        this.tabelaService.emitListaAtualizada.emit();
+        this.dialogRef.close(true);
         this.onSucess();
+        this.tabelaService.emitListaAtualizada.emit();
       },
       () => {
         this.onError();

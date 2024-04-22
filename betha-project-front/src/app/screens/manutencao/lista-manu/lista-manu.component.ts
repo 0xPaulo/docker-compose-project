@@ -80,6 +80,7 @@ export class ListaManuComponent implements OnInit {
         // } else {
         const dialogRef = this.dialog.open(FormManuTecComponent, {
           width: "60%",
+          // width: "516px%",
           // height: "516px",
           data: { infoCadastro: dados },
         });

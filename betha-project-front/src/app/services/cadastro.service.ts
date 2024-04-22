@@ -35,6 +35,7 @@ export class CadastroService {
     );
   }
   update(id: string, chamado: Partial<ChamadoCompleto>) {
+    console.log(chamado);
     return this.httpClient
       .patch<ChamadoCompleto>(`${this.APIcadastro}/${id}`, chamado)
       .pipe(
