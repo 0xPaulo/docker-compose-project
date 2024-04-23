@@ -54,3 +54,22 @@
 .error {
   color: red;
 }
+.container-fotos-filha {
+  padding: 12px;
+  flex-shrink: 1;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+.container-fotos-filha img {
+  max-width: 100%;
+  height: auto;
+}
+.container-fotos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}

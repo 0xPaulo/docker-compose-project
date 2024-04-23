@@ -34,7 +34,7 @@ export class FormManuTecComponent implements OnInit {
 
   msgDeErro!: string;
 
-  imageUrl: string | ArrayBuffer = "";
+  imageUrl: string[] = [];
 
   constructor(
     private imgProxyService: ImgProxyService,
@@ -62,8 +62,8 @@ export class FormManuTecComponent implements OnInit {
       image_urls: [data.infoCadastro.image_urls],
       custoEstimado: [data.infoCadastro.custoEstimado],
       analiseTecnica: [data.infoCadastro.analiseTecnica],
-      // tecnico: [data.infoCadastro.tecnico.nome],
       // tecnico: [data.infoCadastro.tecnico, Validators.required],
+      // se tem tecnico nao deixa escolher outro
     });
     this.dia = data.infoCadastro.dataEntrada;
     this.chamarBuscarTodos();
@@ -151,14 +151,35 @@ export class FormManuTecComponent implements OnInit {
     this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
   }
   ngOnInit(): void {
-    const imageUrl =
-      "https://lh3.googleusercontent.com/d/1pveDRcPLsjOH8suALuxW6GOM18LL7yV4";
-    this.imgProxyService.getImage(imageUrl).subscribe((blob) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        this.imageUrl = reader.result as string;
-      };
-      reader.readAsDataURL(blob);
+    // const imageUrls = [
+    //   "https://lh3.googleusercontent.com/d/1EHraJ6bZ9CTFoTembwjU_c8RWidupFpW",
+    //   "https://lh3.googleusercontent.com/d/1pveDRcPLsjOH8suALuxW6GOM18LL7yV4",
+    // ];
+    const imageUrls: string[] = this.data.infoCadastro.image_urls;
+    imageUrls.forEach((url) => {
+      this.imgProxyService.getImage(url).subscribe((blob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.imageUrl.push(reader.result as string);
+        };
+        reader.readAsDataURL(blob);
+      });
     });
   }
 }
+// ngOnInit(): void {
+//   const imageUrls = [
+//     "https://lh3.googleusercontent.com/d/1pveDRcPLsjOH8suALuxW6GOM18LL7yV4",
+//     // Adicione mais URLs de imagem aqui
+//   ];
+//   imageUrls.forEach(url => {
+//     this.imgProxyService.getImage(url).subscribe((blob) => {
+//       const reader = new FileReader();
+//       reader.onloadend = () => {
+//         this.imageUrl.push(reader.result as string); // Adiciona a URL da imagem ao array
+//       };
+//       reader.readAsDataURL(blob); // Lê o Blob como Data URL
+//     });
+//   });
+// }
+// }
