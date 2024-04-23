@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.betha.backend.cadastros.models.Enums.Perfils;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,7 +51,6 @@ public class Cliente {
   private Perfils perfil;
 
   @OneToMany(mappedBy = "clienteId")
-  @JsonManagedReference
   private List<Chamado> chamados = new ArrayList<>();
 
 }

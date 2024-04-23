@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.betha.backend.cadastros.models.Enums.Perfils;
 import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,7 +51,6 @@ public class Tecnico {
   private Perfils perfil;
 
   @OneToMany(mappedBy = "tecnico")
-  @JsonManagedReference
   private List<Chamado> chamados = new ArrayList<>();
 
 }
