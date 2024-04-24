@@ -7,6 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Tecnico;
+import com.betha.backend.cadastros.models.Enums.Status;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.TecnicoRepository;
 
@@ -25,6 +26,7 @@ public class TecnicoService {
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tecnico não encontrado"));
 
     chamadoExistente.setTecnico(tecnicoExistente);
+    chamadoExistente.setStatus(Status.EM_MANUTENCAO);
     chamadoRepository.save(chamadoExistente);
 
     return chamadoExistente;

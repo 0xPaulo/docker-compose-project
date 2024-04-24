@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.betha.backend.cadastros.models.Enums.Status;
+import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +14,6 @@ import lombok.Setter;
 public class ChamadoCompletoDTO {
 
   private Long clienteId;
-  private Long tecnico;
-
   private String clienteNome;
   private String clienteEmail;
   private String clienteTelefone;
@@ -33,4 +32,9 @@ public class ChamadoCompletoDTO {
   private List<String> image_urls;
   // private LocalDateTime dataSaida;
 
+  private Long tecnico;
+  private String tecnicoImg;
+  private String tecnicoNome;
+  private TecnicoCategorias tecnicoCategorias;
+  // criar numero de chamados
 }

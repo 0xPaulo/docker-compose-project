@@ -27,3 +27,18 @@
 .mdc-dialog__actions {
   margin-right: 20px;
 }
+.tec-info {
+  position: relative;
+}
+
+.tec-info img {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  border-radius: 50%;
+  width: 80px;
+  border: 2px solid rgba(0, 0, 255, 0);
+}
+.tec-info img:hover {
+  border: 2px solid rgb(26, 77, 243);
+}

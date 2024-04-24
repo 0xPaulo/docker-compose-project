@@ -22,8 +22,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 campo">
 
+        <div class="col-md-6 campo">
           <div class="card mb-4">
             <mat-radio-group color="primary" aria-label="Select an option" (change)="filtroTecnico($event)">
               <mat-radio-button value="1">Telas</mat-radio-button>
@@ -34,7 +34,8 @@
             <div class="card-body">
               <mat-form-field class="custom-mat-form-field">
                 <mat-label>Escolha um Técnico</mat-label>
-                <mat-select (selectionChange)="onSelectionChange($event)" class="custom-mat-select">
+                <mat-select formControlName="tecnico" (selectionChange)="onSelectionChange($event)"
+                  class="custom-mat-select">
                   <mat-option *ngFor="let nome of tecnicosNomes" [value]="nome">{{nome}}</mat-option>
                 </mat-select>
               </mat-form-field>

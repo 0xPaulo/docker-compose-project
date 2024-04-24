@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Cliente;
+import com.betha.backend.cadastros.models.Tecnico;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.ClienteRepository;
 import com.betha.backend.cadastros.repository.TabelaRepository;
@@ -53,6 +54,7 @@ public class ChamadoService {
     for (Chamado chamado : chamados) {
 
       Cliente cliente = chamado.getClienteId();
+      Tecnico tecnico = chamado.getTecnico();
 
       ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
       dto.setClienteId(cliente.getId());
@@ -71,6 +73,13 @@ public class ChamadoService {
       dto.setStatus(chamado.getStatus());
       dto.setImage_urls(chamado.getImage_urls());
 
+      if (tecnico != null) {
+        dto.setTecnico(tecnico.getId());
+        dto.setTecnicoImg(tecnico.getImagem());
+        dto.setTecnicoNome(tecnico.getNome());
+        dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
+      }
+
       chamadoCompletoDTO.add(dto);
     }
     return chamadoCompletoDTO;
@@ -81,6 +90,7 @@ public class ChamadoService {
     Chamado chamado = chamadoRepository.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
     Cliente cliente = chamado.getClienteId();
+    Tecnico tecnico = chamado.getTecnico();
     ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
 
     dto.setClienteId(cliente.getId());
@@ -98,6 +108,10 @@ public class ChamadoService {
     dto.setDataEntrada(chamado.getDataEntrada());
     dto.setStatus(chamado.getStatus());
     dto.setImage_urls(chamado.getImage_urls());
+
+    if (tecnico != null) {
+      dto.setTecnico(tecnico.getId());
+    }
     return dto;
   }
 
