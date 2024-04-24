@@ -37,6 +37,16 @@
       </div>
     </div>
 
+    <div *ngIf="data.infoCadastro.tecnico" class="card mb-4 tec-info">
+      <div class="card-body">
+        <h2 class="card-title">Tecnico encaminhado </h2>
+        <!-- <p class="card-text"><strong>Técnico:</strong> {{data.infoCadastro.tecnico}}</p> -->
+        <p class="card-text"><strong>Técnico: </strong> {{data.infoCadastro.tecnicoNome}}</p>
+        <p class="card-text"><strong>Especialista em: </strong> {{data.infoCadastro.tecnicoCategorias | capitalize}}</p>
+        <img [src]="tecnicoImg" alt="Problema ao carregar">
+      </div>
+    </div>
+
 
     <div class="card mb-4">
       <div class="card-body">
