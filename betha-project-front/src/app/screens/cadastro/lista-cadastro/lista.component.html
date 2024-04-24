@@ -14,12 +14,12 @@
             <p class="ico-tabs-2">2</p>
             <p>Triagem</p>
           </button>
-          <button class="tabs-button" (click)="filterStatus(['AGUARDANDO_MANUTENCAO'])">
+          <button class="tabs-button" (click)="filterStatus(['AGUARDANDO_MANUTENCAO','EM_MANUTENCAO'])">
             <p class="ico-tabs-3">3</p>
             <p>Manutencao</p>
           </button>
           <button class="tabs-button last-button"
-            (click)="filterStatus(['CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO'])">
+            (click)="filterStatus(['CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO','EM_MANUTENCAO'])">
             <p class="ico-tabs-4">4</p>
             <p>Concluido</p>
           </button>

@@ -20,7 +20,7 @@ export class ListaManuComponent implements OnInit {
   cadastros$: Observable<ChamadoCompleto[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
-  filtro: string[] = ["AGUARDANDO_MANUTENCAO"];
+  filtro: string[] = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO"];
 
   constructor(
     private cadastroService: CadastroService,
