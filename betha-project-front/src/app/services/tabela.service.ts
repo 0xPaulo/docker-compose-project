@@ -46,6 +46,8 @@ export class TabelaService {
         return "CONCLUIDO_CONSERTADO";
       case "CONCLUIDO_N_CONSERTADO":
         return "CONCLUIDO_N_CONSERTADO";
+      case "EM_MANUTENCAO":
+        return "EM_MANUTENCAO";
       default:
         return "";
     }

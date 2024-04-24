@@ -5,6 +5,7 @@ public enum Status {
   AGUARDANDO_CLIENTE("Aguardando confirmação do Cliente"),
   CANCELADO("Cancelado pelo cliente"),
   AGUARDANDO_MANUTENCAO("Pronto para manutenção"),
+  EM_MANUTENCAO("Pronto esta em manutenção"),
   CONCLUIDO_CONSERTADO("Produto consertado"),
   CONCLUIDO_N_CONSERTADO("Não foi possivel consertar");
 
