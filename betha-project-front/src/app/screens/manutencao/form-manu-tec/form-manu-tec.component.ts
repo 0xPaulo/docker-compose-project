@@ -1,6 +1,6 @@
 import { DatePipe } from "@angular/common";
 import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatRadioChange } from "@angular/material/radio";
 import { MatSelectChange } from "@angular/material/select";
@@ -27,14 +27,16 @@ export class FormManuTecComponent implements OnInit {
   tecnicoNomeSelecionado: string = "";
   tecnicoEspecialidadeSelecionado: string = "";
   tecnicoChamadosSelecionado: string = "";
-  imagemTecnico: string = "";
+  imagemTecnico: any;
   tecnicoID!: Number;
 
-  imageUrlTec: string = "";
+  tecnicoImg!: string | ArrayBuffer;
 
   msgDeErro!: string;
 
   imageUrl: string[] = [];
+
+  tecnicoExisteNome!: string;
 
   constructor(
     private imgProxyService: ImgProxyService,
@@ -62,11 +64,69 @@ export class FormManuTecComponent implements OnInit {
       image_urls: [data.infoCadastro.image_urls],
       custoEstimado: [data.infoCadastro.custoEstimado],
       analiseTecnica: [data.infoCadastro.analiseTecnica],
-      // tecnico: [data.infoCadastro.tecnico, Validators.required],
-      // se tem tecnico nao deixa escolher outro
+      tecnico: [data.infoCadastro.tecnico, Validators.required],
+      tecnicoNome: [data.infoCadastro.tecnicoNome],
+      tecnicoImg: [data.infoCadastro.tecnicoImg],
+      tecnicoCategorias: [data.infoCadastro.tecnicoCategorias],
     });
     this.dia = data.infoCadastro.dataEntrada;
     this.chamarBuscarTodos();
+    console.log(this.form.value);
+    if (this.data.infoCadastro.tecnico) {
+      this.tecnicoNomeSelecionado = this.data.infoCadastro.tecnicoNome;
+      this.tecnicoEspecialidadeSelecionado =
+        this.data.infoCadastro.tecnicoCategorias;
+      this.imagemTecnico = this.data.infoCadastro.tecnicoImg;
+      this.tecnicoID = this.data.infoCadastro.tecnico;
+
+      this.imgProxyService.getImage(this.imagemTecnico).subscribe((blob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.tecnicoImg = reader.result as string;
+        };
+        reader.readAsDataURL(blob);
+      });
+    }
+  }
+  onSelectionChange(event: MatSelectChange) {
+    let tecnicoSelecionado = event.value;
+    this.tecnicosCompleto.forEach((tecnico) => {
+      if (tecnico.nome === tecnicoSelecionado) {
+        this.tecnicoNomeSelecionado = tecnico.nome;
+        this.tecnicoEspecialidadeSelecionado = tecnico.tecnicoCategorias;
+        this.imagemTecnico = tecnico.imagem;
+        this.tecnicoID = tecnico.id;
+        this.msgDeErro = "";
+      }
+    });
+    this.imgProxyService.getImage(this.imagemTecnico).subscribe((blob) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        this.tecnicoImg = reader.result as string;
+      };
+      reader.readAsDataURL(blob);
+    });
+  }
+  verificaSubmit() {
+    if (this.form.invalid) {
+      this.msgDeErro = "Por favor, escolha um tecnico para o serviço";
+    } else {
+      this.onSubmit();
+    }
+  }
+
+  onSubmit() {
+    const idItem = this.data.infoCadastro.id;
+    this.tecnicoService.setTecnico(idItem, this.tecnicoID).subscribe(
+      (result) => {
+        this.dialogRef.close(true);
+        this.onSucess();
+        this.tabelaService.emitListaAtualizada.emit();
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
 
   chamarBuscarTodos(filtro?: string) {
@@ -84,66 +144,6 @@ export class FormManuTecComponent implements OnInit {
     let filtro = this.tecnicoService.handleFilter(event);
     this.chamarBuscarTodos(filtro);
   }
-
-  onSelectionChange(event: MatSelectChange) {
-    let tecnicoSelecionado = event.value;
-    this.tecnicosCompleto.forEach((tecnico) => {
-      if (tecnico.nome === tecnicoSelecionado) {
-        this.tecnicoNomeSelecionado = tecnico.nome;
-        this.tecnicoEspecialidadeSelecionado = tecnico.tecnicoCategorias;
-        this.imagemTecnico = tecnico.id;
-        this.tecnicoID = tecnico.id;
-        // this.form.patchValue({ tecnico: this.tecnicoID });
-        this.msgDeErro = "";
-      }
-    });
-    switch (+this.imagemTecnico) {
-      case 1:
-        this.imageUrlTec = "/assets/image/tecnicos/tec1.jpg";
-        break;
-      case 2:
-        this.imageUrlTec = "/assets/image/tecnicos/tec3.jpg";
-        break;
-      case 3:
-        this.imageUrlTec = "/assets/image/tecnicos/tec2.jpg";
-        break;
-      case 4:
-        this.imageUrlTec = "/assets/image/tecnicos/tec5.jpg";
-        break;
-      case 5:
-        this.imageUrlTec = "/assets/image/tecnicos/tec4.jpg";
-        break;
-      case 6:
-        this.imageUrlTec = "/assets/image/tecnicos/tec6.jpg";
-        break;
-      default:
-        console.log("O número não está entre 1 e 6");
-    }
-  }
-  verificaSubmit() {
-    if (this.form.invalid) {
-      this.msgDeErro = "Por favor, escolha um tecnico para o serviço";
-    } else {
-      this.onSubmit();
-    }
-  }
-
-  onSubmit() {
-    // this.form.patchValue({ tecnico: this.form.get("tecnico")?.value });
-    // const dadosAtualizados = { ...this.form.value, tecnico: this.tecnicoID };
-    const idItem = this.data.infoCadastro.id;
-    // const formValues = this.form.getRawValue();
-    this.tecnicoService.setTecnico(idItem, this.tecnicoID).subscribe(
-      (result) => {
-        this.dialogRef.close(true);
-        this.onSucess();
-        this.tabelaService.emitListaAtualizada.emit();
-      },
-      () => {
-        this.onError();
-      }
-    );
-  }
   onError() {
     this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
   }
@@ -151,35 +151,19 @@ export class FormManuTecComponent implements OnInit {
     this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
   }
   ngOnInit(): void {
-    // const imageUrls = [
-    //   "https://lh3.googleusercontent.com/d/1EHraJ6bZ9CTFoTembwjU_c8RWidupFpW",
-    //   "https://lh3.googleusercontent.com/d/1pveDRcPLsjOH8suALuxW6GOM18LL7yV4",
-    // ];
-    const imageUrls: string[] = this.data.infoCadastro.image_urls;
-    imageUrls.forEach((url) => {
-      this.imgProxyService.getImage(url).subscribe((blob) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          this.imageUrl.push(reader.result as string);
-        };
-        reader.readAsDataURL(blob);
+    if (this.data.infoCadastro.image_urls) {
+      const imageUrls: string[] = this.data.infoCadastro.image_urls;
+      imageUrls.forEach((url) => {
+        this.imgProxyService.getImage(url).subscribe((blob) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            this.imageUrl.push(reader.result as string);
+          };
+          reader.readAsDataURL(blob);
+        });
       });
-    });
+    } else {
+      console.log("imagens nao iniciadas");
+    }
   }
 }
-// ngOnInit(): void {
-//   const imageUrls = [
-//     "https://lh3.googleusercontent.com/d/1pveDRcPLsjOH8suALuxW6GOM18LL7yV4",
-//     // Adicione mais URLs de imagem aqui
-//   ];
-//   imageUrls.forEach(url => {
-//     this.imgProxyService.getImage(url).subscribe((blob) => {
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         this.imageUrl.push(reader.result as string); // Adiciona a URL da imagem ao array
-//       };
-//       reader.readAsDataURL(blob); // Lê o Blob como Data URL
-//     });
-//   });
-// }
-// }

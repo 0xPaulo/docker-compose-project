@@ -111,6 +111,10 @@ public class ChamadoService {
 
     if (tecnico != null) {
       dto.setTecnico(tecnico.getId());
+      dto.setTecnicoNome(tecnico.getNome());
+      dto.setTecnicoImg(tecnico.getImagem());
+      dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
+
     }
     return dto;
   }
