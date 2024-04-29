@@ -36,8 +36,6 @@ export class FormManuTecComponent implements OnInit {
 
   imageUrl: string[] = [];
 
-  tecnicoExisteNome!: string;
-
   constructor(
     private imgProxyService: ImgProxyService,
     private dialogRef: MatDialogRef<any, boolean>,
@@ -133,6 +131,8 @@ export class FormManuTecComponent implements OnInit {
     this.tecnicoService.buscarTodos(filtro).subscribe(
       (resultado) => {
         this.tecnicosCompleto = resultado;
+        console.log(this.tecnicosCompleto);
+
         this.tecnicosNomes = resultado.map((obj: any) => obj.nome);
       },
       (error) => {

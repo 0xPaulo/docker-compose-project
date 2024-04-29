@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable, catchError, delay, of } from "rxjs";
+import { Observable, catchError, delay, of, tap } from "rxjs";
 
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
@@ -14,8 +14,7 @@ import { RepositoryService } from "./repository.service";
 export class TabelaService {
   emitListaAtualizada = new EventEmitter<void>();
 
-  private readonly API = "http://localhost:8080/api/lista";
-  private readonly API2 = "http://localhost:8080/cadastros";
+  private readonly API = "http://localhost:8080/cadastros";
 
   constructor(
     private httpClient: HttpClient,
@@ -56,9 +55,9 @@ export class TabelaService {
     const filtroString = filtros.join(",");
     const params = new HttpParams().set("params", filtroString);
     return this.httpClient
-      .get<ChamadoCompleto[]>(`${this.API2}`, { params })
+      .get<ChamadoCompleto[]>(`${this.API}`, { params })
       .pipe(
-        // tap((resultado) => console.log(resultado)),
+        tap((resultado) => console.log(resultado)),
         delay(500)
       );
   }

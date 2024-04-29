@@ -20,7 +20,6 @@ public class CadastroService {
     this.cadastroRepository = cadastroRepository;
   }
 
-  @SuppressWarnings("null")
   public Cadastro editarItem(Long id, Cadastro cadastro) {
     Optional<Cadastro> cadastroExistenteOptional = cadastroRepository.findById(id);
 
@@ -50,7 +49,6 @@ public class CadastroService {
     });
   }
 
-  @SuppressWarnings("null")
   public Cadastro createCadastro(Cadastro cadastro) {
     Cadastro novoCadastro = Cadastro.builder()
         .cliente(cadastro.getCliente())

@@ -29,8 +29,6 @@ export class FormCadastroComponent implements OnInit {
     private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // if (data) {
-    // this.isEditMode = true;
     this.form = formBuilder.group({
       clienteNome: [data.infoCadastro.clienteNome],
       clienteEndereco: [data.infoCadastro.clienteEndereco],
@@ -53,26 +51,9 @@ export class FormCadastroComponent implements OnInit {
       }
       this.inputDesabilitado = false;
     });
-    // } else {
-    // this.form = formBuilder.group({
-    //   cliente: [null],
-    //   endereco: [null],
-    //   telefone: [null],
-    //   email: [null],
-    //   anotacao: [null],
-    //   item: [null],
-    //   itemSerie: [null],
-    //   status: [null],
-    //   data_entrada: [null],
-    //   desc: [null],
-    //   valor: [null],
-    //   laudo: [null],
-    // });
-    // }
   }
 
   onSubmit() {
-    // if (this.isEditMode) {
     const dataInicial = this.form.value.dataEntrada;
     const dataFormatada = this.datePipe.transform(
       dataInicial,
@@ -93,7 +74,6 @@ export class FormCadastroComponent implements OnInit {
         this.onError();
       }
     );
-    // } else {
     this.service.save(this.form.value).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
@@ -104,7 +84,6 @@ export class FormCadastroComponent implements OnInit {
       }
     );
   }
-  // }
 
   habilitarCampos() {
     if (!this.inputDesabilitado) {
