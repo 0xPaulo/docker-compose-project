@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { EmailComponent } from "src/app/components/dialog/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
+import { SemPermissaoComponent } from "src/app/components/dialog/errors/sem-permissao/sem-permissao.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { CadastroService } from "src/app/services/cadastro.service";
 import { RepositoryService } from "src/app/services/repository.service";
@@ -29,13 +30,14 @@ export class ListaManuComponent implements OnInit {
     private dialog: MatDialog,
     private tabelaService: TabelaService
   ) {
-    this.cadastros$ = this.carregarTabelaTriagem(this.filtro);
+    this.cadastros$ = this.carregarTabelaManu(this.filtro);
   }
 
-  carregarTabelaTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
+  carregarTabelaManu(filtro: string[]): Observable<ChamadoCompleto[]> {
     return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro));
   }
 
+  // 1 cadastros
   carregarNovaTabela() {
     return (this.cadastros$ = this.tabelaService.carregarCadastros());
   }
@@ -66,30 +68,29 @@ export class ListaManuComponent implements OnInit {
   }
   addTecnico(item: ChamadoCompleto) {
     const id = item.id;
-
-    const subscription = this.cadastroService.findById(id).subscribe(
-      (dados: ChamadoCompleto[]) => {
-        // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
-        //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
-        //     width: "40%",
-        //     data: { modoEdicao: true, infoCadastro: dados },
-        //   });
-        //   dialogPermi.afterClosed().subscribe((result) => {
-        //     subscription.unsubscribe();
-        //   });
-        // } else {
-        const dialogRef = this.dialog.open(FormManuTecComponent, {
-          width: "60%",
-          // width: "516px%",
-          // height: "516px",
-          data: { infoCadastro: dados },
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-          subscription.unsubscribe();
-        });
-      }
-      // }
-    );
+    const subscription = this.cadastroService
+      .findById(id)
+      .subscribe((dados: ChamadoCompleto[]) => {
+        if (!(item.status === "AGUARDANDO_MANUTENCAO")) {
+          const dialogPermi = this.dialog.open(SemPermissaoComponent, {
+            width: "40%",
+            data: { modoEdicao: true, infoCadastro: dados },
+          });
+          dialogPermi.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        } else {
+          const dialogRef = this.dialog.open(FormManuTecComponent, {
+            width: "60%",
+            // width: "516px%",
+            // height: "516px",
+            data: { infoCadastro: dados },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        }
+      });
   }
   alternarDetalhes(index: number): void {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
@@ -134,7 +135,7 @@ export class ListaManuComponent implements OnInit {
   }
   ngOnInit() {
     this.tabelaService.emitListaAtualizada.subscribe(() => {
-      this.carregarTabelaTriagem(this.filtro);
+      this.carregarTabelaManu(this.filtro);
     });
   }
 }

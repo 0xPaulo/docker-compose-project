@@ -36,5 +36,4 @@ public class ChamadoCompletoDTO {
   private String tecnicoImg;
   private String tecnicoNome;
   private TecnicoCategorias tecnicoCategorias;
-  // criar numero de chamados
 }
