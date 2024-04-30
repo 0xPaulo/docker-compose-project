@@ -55,14 +55,6 @@
         </div>
       </div>
       <div class="card mb-4">
-        <!-- <div class="card-body">
-          <h2 class="card-title">Fotos da triagem</h2>
-          <div class="container-fotos" *ngIf="form.get('image_urls')?.value">
-            <div class="container-fotos-filha" *ngFor="let url of form.get('image_urls')?.value">
-              <img [src]="url" alt="Loading image error">
-            </div>
-          </div>
-        </div> -->
         <div class="card-body">
           <h2 class="card-title">Fotos da triagem</h2>
           <div class="container-fotos" *ngIf="imageUrl">
@@ -77,5 +69,4 @@
   <mat-dialog-actions align="end">
     <button class="botao-betha-cancel" mat-dialog-close>Fechar</button>
     <button class="botao-betha padding-botao-confirmar" cdkFocusInitial (click)="verificaSubmit()">Confirmar</button>
-    <!-- mat-dialog-close -->
   </mat-dialog-actions>

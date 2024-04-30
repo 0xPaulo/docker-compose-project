@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Finalizar pedido</h2>
+<mat-dialog-content>Você está prestes a finalizar o pedido. Clique em 'Finalizar' se tudo ocorreu conforme esperado, ou
+  reenvie para manutenção caso tenha encontrado algum problema.</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="trocarStatus('CONCLUIDO')" style="padding: 3px 16px; margin-left: 12px; margin-bottom: 6px;"
+    class="botao-betha" mat-dialog-close>Finalizar Pedido</button>
+
+  <button (click)="trocarStatus('AMANUTENCAO')" style="padding: 3px 16px; margin-bottom: 6px;"
+    class="botao-betha-cancel" mat-dialog-close>Enviar para
+    amanutenção</button>
+
+</mat-dialog-actions>

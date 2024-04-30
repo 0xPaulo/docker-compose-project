@@ -12,6 +12,7 @@ import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.models.Tecnico;
+import com.betha.backend.cadastros.models.Enums.Status;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.ClienteRepository;
 import com.betha.backend.cadastros.repository.TabelaRepository;
@@ -149,23 +150,27 @@ public class ChamadoService {
     chamadoRepository.save(chamadoTemp);
     return chamadoTemp;
   }
+
+  public Chamado editarStatus(Long id, String status) {
+    Chamado chamadoExistente = chamadoRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
+
+    Status statusEncontrado = null;
+    for (Status s : Status.values()) {
+      if (s.getDescricao().equals(status)) {
+        statusEncontrado = s;
+        break;
+      }
+    }
+
+    if (statusEncontrado == null) {
+      throw new IllegalArgumentException("Status não reconhecido: " + status);
+    }
+
+    chamadoExistente.setStatus(statusEncontrado);
+    chamadoRepository.save(chamadoExistente);
+
+    return chamadoExistente;
+  }
+
 }
-// testar
-// clienteExistente.setNome(chamadoRecebido.getClienteNome());
-// clienteExistente.setEmail(chamadoRecebido.getClienteEmail());
-// clienteExistente.setEndereco(chamadoRecebido.getClienteEndereco());
-// clienteExistente.setTelefone(chamadoRecebido.getClienteTelefone());
-
-// chamadoExistente.setNomeItem(chamadoRecebido.getNomeItem());
-// chamadoExistente.setItemSerie(chamadoRecebido.getItemSerie());
-// chamadoExistente.setDefeitoRelatado(chamadoRecebido.getDefeitoRelatado());
-// chamadoExistente.setAnaliseTecnica(chamadoRecebido.getAnaliseTecnica());
-// chamadoExistente.setCustoEstimado(chamadoRecebido.getCustoEstimado());
-// chamadoExistente.setDataEntrada(chamadoRecebido.getDataEntrada());
-// chamadoExistente.setImage_urls(chamadoRecebido.getImage_urls());
-// chamadoExistente.setStatus(chamadoRecebido.getStatus());
-
-// clienteRepository.save(clienteExistente);
-// chamadoRepository.save(chamadoExistente);
-
-// return chamadoExistente;

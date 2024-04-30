@@ -1,5 +1,5 @@
-import { Component, Inject } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component, Inject, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ImgProxyService } from "src/app/services/img-proxy.service";
 
@@ -8,37 +8,18 @@ import { ImgProxyService } from "src/app/services/img-proxy.service";
   templateUrl: "./detalhe-produto.component.html",
   styleUrls: ["./detalhe-produto.component.scss"],
 })
-export class DetalheProdutoComponent {
-  form: FormGroup;
+export class DetalheProdutoComponent implements OnInit {
   dia: string = "";
   tecnicoImg!: string | ArrayBuffer;
+  imageUrl: string[] = [];
 
   constructor(
     private imgProxyService: ImgProxyService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.form = formBuilder.group({
-      clienteNome: [data.infoCadastro.clienteNome],
-      clienteEndereco: [data.infoCadastro.clienteEndereco],
-      clienteTelefone: [data.infoCadastro.clienteTelefone],
-      clienteEmail: [data.infoCadastro.clienteEmail],
-      anotacao: [data.infoCadastro.anotacao],
-      nomeItem: [data.infoCadastro.nomeItem],
-      itemSerie: [data.infoCadastro.itemSerie],
-      status: [data.infoCadastro.status],
-      defeitoRelatado: [data.infoCadastro.defeitoRelatado],
-      image_urls: [data.infoCadastro.image_urls],
-      analiseTecnica: [data.infoCadastro.analiseTecnica],
-      custoEstimado: [data.infoCadastro.custoEstimado],
-      tecnico: [data.infoCadastro.tecnico],
-      tecnicoImg: [data.infoCadastro.tecnicoImg],
-      // tecnicoNome: [data.infoCadastro.tecnicoNome],
-      // nao precisa de nada disso
-      tecnicoCategorias: [data.infoCadastro.tecnicoCategorias],
-    });
     this.dia = data.infoCadastro.dataEntrada;
-    console.log(this.form.value);
+
     if (data.infoCadastro.tecnico) {
       this.imgProxyService
         .getImage(this.data.infoCadastro.tecnicoImg)
@@ -49,6 +30,22 @@ export class DetalheProdutoComponent {
           };
           reader.readAsDataURL(blob);
         });
+    }
+  }
+  ngOnInit(): void {
+    if (this.data.infoCadastro.image_urls) {
+      const imageUrls: string[] = this.data.infoCadastro.image_urls;
+      imageUrls.forEach((url) => {
+        this.imgProxyService.getImage(url).subscribe((blob) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            this.imageUrl.push(reader.result as string);
+          };
+          reader.readAsDataURL(blob);
+        });
+      });
+    } else {
+      console.log("imagens nao iniciadas");
     }
   }
 }

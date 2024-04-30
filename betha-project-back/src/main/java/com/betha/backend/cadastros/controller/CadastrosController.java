@@ -64,4 +64,11 @@ public class CadastrosController {
     Chamado resultado = chamadoService.editar(id, chamadoCompletoDTO);
     return resultado;
   }
+
+  @PatchMapping("change-status/{id}")
+  public Chamado editarStatus(@PathVariable Long id, @RequestBody String status) {
+    System.out.println(status + id);
+    Chamado resultado = chamadoService.editarStatus(id, status);
+    return resultado;
+  }
 }

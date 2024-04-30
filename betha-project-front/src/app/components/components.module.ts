@@ -34,6 +34,8 @@ import { HomeComponent } from "../screens/home/home.component";
 import { FormManuTecComponent } from "../screens/manutencao/form-manu-tec/form-manu-tec.component";
 import { ListaManuComponent } from "../screens/manutencao/lista-manu/lista-manu.component";
 import { ManutencaoComponent } from "../screens/manutencao/manutencao.component";
+import { TecnicoTabelaComponent } from "../screens/tecnico-tela/tecnico-tabela/tecnico-tabela.component";
+import { TecnicoComponent } from "../screens/tecnico-tela/tecnico.component";
 import { FormTriagemComponent } from "../screens/triagem/form-triagem/form-triagem.component";
 import { ListaTriagemComponent } from "../screens/triagem/lista-triagem/lista-triagem.component";
 import { TriagemComponent } from "../screens/triagem/triagem.component";
@@ -49,9 +51,12 @@ import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { DialogCriarClienteComponent } from "./toolbar/dialog-criar-cliente/dialog-criar-cliente.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { FinalizarPedidoComponent } from './dialog/finalizar-pedido/finalizar-pedido.component';
 
 @NgModule({
   declarations: [
+    TecnicoComponent,
+    TecnicoTabelaComponent,
     CapitalizePipe,
     FormCriarCadastroComponent,
     FormManuTecComponent,
@@ -78,6 +83,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     BuscaClienteComponent,
     PossuiCadastroComponent,
     DialogCriarClienteComponent,
+    FinalizarPedidoComponent,
   ],
   imports: [
     MatRadioModule,
