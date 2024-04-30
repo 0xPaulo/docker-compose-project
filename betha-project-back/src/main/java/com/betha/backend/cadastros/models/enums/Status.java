@@ -1,13 +1,13 @@
 package com.betha.backend.cadastros.models.Enums;
 
 public enum Status {
-  DISPONIVEL_TRIAGEM("Disponivel para triagem"),
-  AGUARDANDO_CLIENTE("Aguardando confirmação do Cliente"),
-  CANCELADO("Cancelado pelo cliente"),
-  AGUARDANDO_MANUTENCAO("Pronto para manutenção"),
-  EM_MANUTENCAO("Pronto esta em manutenção"),
-  CONCLUIDO_CONSERTADO("Produto consertado"),
-  CONCLUIDO_N_CONSERTADO("Não foi possivel consertar");
+  DISPONIVEL_TRIAGEM("DISPONIVEL"),
+  AGUARDANDO_CLIENTE("ACLIENTE"),
+  CANCELADO("CANCELADO"),
+  AGUARDANDO_MANUTENCAO("AMANUTENCAO"),
+  EM_MANUTENCAO("EMANUTENCAO"),
+  CONCLUIDO_CONSERTADO("CONCLUIDO"),
+  CONCLUIDO_N_CONSERTADO("NCONCLUIDO");
 
   private final String descricao;
 

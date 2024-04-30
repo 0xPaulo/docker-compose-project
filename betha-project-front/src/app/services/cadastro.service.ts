@@ -57,4 +57,19 @@ export class CadastroService {
         })
       );
   }
+
+  finalizarPedido(id: string, statusPedido: string) {
+    return this.httpClient
+      .patch<ChamadoCompleto>(
+        `${this.APIcadastro}/change-status/${id}`,
+        statusPedido
+      )
+      .pipe(
+        tap(),
+        catchError((error) => {
+          console.log("Erro ao atualizar registro", error);
+          return of(null);
+        })
+      );
+  }
 }

@@ -15,6 +15,9 @@ export class ToolbarComponent {
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
+  chamarTabelaTecnico() {
+    this.router.navigate(["tecnico"]);
+  }
   onCadastro() {
     this.router.navigate(["cadastrar"]);
   }

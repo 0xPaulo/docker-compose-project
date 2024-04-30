@@ -8,7 +8,12 @@
       <div class="itens">
         <span (click)="onCadastro()" style="cursor: pointer;">AMBIENTE DE CADASTRO</span>
         <span (click)="onHome()" style="cursor: pointer;">Visão geral</span>
-        <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Configurando ⏷</span>
+        <!-- <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Configurando ⏷</span> -->
+        <button mat-button [matMenuTriggerFor]="menu">Configurando ⏷</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="chamarTabelaTecnico()">Tecnico perfil</button>
+          <button mat-menu-item>Cadastrar tecnico</button>
+        </mat-menu>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Planejado ⏷</span>
         <!-- <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Registrado ⏷</span> -->
         <button mat-button [matMenuTriggerFor]="menu">Registrado ⏷</button>
