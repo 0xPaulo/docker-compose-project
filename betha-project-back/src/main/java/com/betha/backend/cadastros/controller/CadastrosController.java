@@ -66,9 +66,8 @@ public class CadastrosController {
   }
 
   @PatchMapping("change-status/{id}")
-  public Chamado editarStatus(@PathVariable Long id, @RequestBody String status) {
-    System.out.println(status + id);
-    Chamado resultado = chamadoService.editarStatus(id, status);
+  public Chamado editarStatus(@PathVariable Long id, @RequestBody List<String> dados) {
+    Chamado resultado = chamadoService.editarStatus(id, dados);
     return resultado;
   }
 }

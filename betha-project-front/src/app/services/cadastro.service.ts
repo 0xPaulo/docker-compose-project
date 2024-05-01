@@ -58,11 +58,11 @@ export class CadastroService {
       );
   }
 
-  finalizarPedido(id: string, statusPedido: string) {
+  finalizarPedido(id: string, dadosPedido: string[]) {
     return this.httpClient
       .patch<ChamadoCompleto>(
         `${this.APIcadastro}/change-status/${id}`,
-        statusPedido
+        dadosPedido
       )
       .pipe(
         tap(),

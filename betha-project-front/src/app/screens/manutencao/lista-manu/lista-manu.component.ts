@@ -21,7 +21,11 @@ export class ListaManuComponent implements OnInit {
   cadastros$: Observable<ChamadoCompleto[]>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
-  filtro: string[] = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO"];
+  filtro: string[] = [
+    "AGUARDANDO_MANUTENCAO",
+    "EM_MANUTENCAO",
+    "VOLTOU_MANUTENCAO",
+  ];
 
   constructor(
     private cadastroService: CadastroService,
@@ -71,7 +75,10 @@ export class ListaManuComponent implements OnInit {
     const subscription = this.cadastroService
       .findById(id)
       .subscribe((dados: ChamadoCompleto[]) => {
-        if (!(item.status === "AGUARDANDO_MANUTENCAO")) {
+        if (
+          item.status !== "AGUARDANDO_MANUTENCAO" &&
+          item.status !== "VOLTOU_MANUTENCAO"
+        ) {
           const dialogPermi = this.dialog.open(SemPermissaoComponent, {
             width: "40%",
             data: { modoEdicao: true, infoCadastro: dados },

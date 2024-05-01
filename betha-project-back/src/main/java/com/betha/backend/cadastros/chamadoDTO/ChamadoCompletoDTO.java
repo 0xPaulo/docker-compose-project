@@ -36,4 +36,5 @@ public class ChamadoCompletoDTO {
   private String tecnicoImg;
   private String tecnicoNome;
   private TecnicoCategorias tecnicoCategorias;
+  private String motivoNaoConclusao;
 }

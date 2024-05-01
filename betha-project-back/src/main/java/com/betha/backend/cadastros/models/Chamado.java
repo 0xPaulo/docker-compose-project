@@ -64,6 +64,9 @@ public class Chamado {
   @Column(name = "analise_tecnica")
   private String analiseTecnica;
 
+  @Column(name = "motivo_Nao_Conclusao")
+  private String motivoNaoConclusao;
+
   @Column(name = "data_entrada")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime dataEntrada;
