@@ -1,12 +1,30 @@
 <h2 mat-dialog-title>Finalizar pedido</h2>
-<mat-dialog-content>Você está prestes a finalizar o pedido. Clique em 'Finalizar' se tudo ocorreu conforme esperado, ou
+<div class="error" *ngIf="msgError">
+  {{msgError}}
+</div>
+<mat-dialog-content *ngIf="!addMsgBol">Você está prestes a finalizar o pedido. Clique em 'Finalizar' se tudo ocorreu
+  conforme esperado, ou
   reenvie para manutenção caso tenha encontrado algum problema.</mat-dialog-content>
+
+<!-- <div align="center"> -->
+<form [formGroup]="form">
+  <div *ngIf="addMsgBol" align="center">
+    <mat-form-field class="retorno mt-2">
+      <mat-label>Qual o motivo do retorno?</mat-label>
+      <textarea matInput formControlName="motivoNaoConclusao" matInput></textarea>
+    </mat-form-field>
+  </div>
+</form>
+
+
 <mat-dialog-actions align="end">
   <button (click)="trocarStatus('CONCLUIDO')" style="padding: 3px 16px; margin-left: 12px; margin-bottom: 6px;"
     class="botao-betha" mat-dialog-close>Finalizar Pedido</button>
 
-  <button (click)="trocarStatus('AMANUTENCAO')" style="padding: 3px 16px; margin-bottom: 6px;"
-    class="botao-betha-cancel" mat-dialog-close>Enviar para
+  <button *ngIf="!addMsgBol" (click)="addMsg('VMANUTENCAO')" style="padding: 3px 16px; margin-bottom: 6px;"
+    class="botao-betha-cancel">Enviar para
     amanutenção</button>
-
+  <button *ngIf="addMsgBol" (click)="verificaTrocarStatus('VMANUTENCAO')" style="padding: 3px 16px; margin-bottom: 6px;"
+    class="botao-betha-cancel">Enviar para
+    amanutenção</button>
 </mat-dialog-actions>

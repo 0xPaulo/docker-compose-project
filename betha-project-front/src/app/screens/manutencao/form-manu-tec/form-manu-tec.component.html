@@ -46,6 +46,9 @@
                 <div class="text-container">
                   <p><strong>Tecnico: </strong> {{tecnicoNomeSelecionado}}</p>
                   <p><strong>Especialidade: </strong>{{tecnicoEspecialidadeSelecionado | capitalize}}</p>
+                  <div *ngIf="motivoNaoConclusao">
+                    <p class="card-text"><strong>Motivo da volta: </strong>{{motivoNaoConclusao}}</p>
+                  </div>
                 </div>
               </div>
             </div>

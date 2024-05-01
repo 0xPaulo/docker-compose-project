@@ -15,6 +15,7 @@ export interface ChamadoCompleto {
   clienteTelefone: string;
   image_urls: string[];
   tecnico: FormTecnico;
+  motivoNaoConclusao: string;
   // data_saida: string;
   // anotacao: string;
   // defeito: string;

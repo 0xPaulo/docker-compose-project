@@ -36,6 +36,7 @@ export class FormManuTecComponent implements OnInit {
 
   imageUrl: string[] = [];
 
+  motivoNaoConclusao: string = "";
   constructor(
     private imgProxyService: ImgProxyService,
     private dialogRef: MatDialogRef<any, boolean>,
@@ -68,6 +69,8 @@ export class FormManuTecComponent implements OnInit {
       tecnicoCategorias: [data.infoCadastro.tecnicoCategorias],
     });
     this.dia = data.infoCadastro.dataEntrada;
+    this.motivoNaoConclusao = data.infoCadastro.motivoNaoConclusao;
+
     this.chamarBuscarTodos();
     console.log(this.form.value);
     if (this.data.infoCadastro.tecnico) {

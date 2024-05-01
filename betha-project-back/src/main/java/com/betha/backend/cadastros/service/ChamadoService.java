@@ -73,6 +73,7 @@ public class ChamadoService {
       dto.setDataEntrada(chamado.getDataEntrada());
       dto.setStatus(chamado.getStatus());
       dto.setImage_urls(chamado.getImage_urls());
+      dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
 
       if (tecnico != null) {
         dto.setTecnico(tecnico.getId());
@@ -109,6 +110,7 @@ public class ChamadoService {
     dto.setDataEntrada(chamado.getDataEntrada());
     dto.setStatus(chamado.getStatus());
     dto.setImage_urls(chamado.getImage_urls());
+    dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
 
     if (tecnico != null) {
       dto.setTecnico(tecnico.getId());
@@ -151,23 +153,24 @@ public class ChamadoService {
     return chamadoTemp;
   }
 
-  public Chamado editarStatus(Long id, String status) {
+  public Chamado editarStatus(Long id, List<String> dados) {
     Chamado chamadoExistente = chamadoRepository.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
 
     Status statusEncontrado = null;
     for (Status s : Status.values()) {
-      if (s.getDescricao().equals(status)) {
+      if (s.getDescricao().equals(dados.get(0))) {
         statusEncontrado = s;
         break;
       }
     }
 
     if (statusEncontrado == null) {
-      throw new IllegalArgumentException("Status não reconhecido: " + status);
+      throw new IllegalArgumentException("Status não reconhecido: " + dados.get(0));
     }
-
+    // voltar o motivo do chamado no ser concluido
     chamadoExistente.setStatus(statusEncontrado);
+    chamadoExistente.setMotivoNaoConclusao(dados.get(1));
     chamadoRepository.save(chamadoExistente);
 
     return chamadoExistente;
