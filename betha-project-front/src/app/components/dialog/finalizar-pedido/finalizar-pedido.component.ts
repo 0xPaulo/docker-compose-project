@@ -47,22 +47,24 @@ export class FinalizarPedidoComponent {
     }
   }
   trocarStatus(status: string) {
+    const id = this.data.infoCadastro.id;
     let msgTxt = this.form.get("motivoNaoConclusao")?.value;
     if (status === "VMANUTENCAO") {
-      const id = this.data.infoCadastro.id;
       this.dados.push(status);
       this.dados.push(msgTxt);
-      this.cadastroService.finalizarPedido(id, this.dados).subscribe(
-        (result) => {
-          this.tabelaService.emitListaAtualizada.emit();
-          this.onSucess();
-          this.dialogRef.close(true);
-        },
-        () => {
-          this.onError();
-        }
-      );
+    } else if (status === "CONCLUIDO") {
+      this.dados.push(status);
     }
+    this.cadastroService.finalizarPedido(id, this.dados).subscribe(
+      (result) => {
+        this.tabelaService.emitListaAtualizada.emit();
+        this.onSucess();
+        this.dialogRef.close(true);
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
 
   onError() {

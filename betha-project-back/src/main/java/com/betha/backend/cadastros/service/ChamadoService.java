@@ -168,9 +168,10 @@ public class ChamadoService {
     if (statusEncontrado == null) {
       throw new IllegalArgumentException("Status não reconhecido: " + dados.get(0));
     }
-    // voltar o motivo do chamado no ser concluido
     chamadoExistente.setStatus(statusEncontrado);
-    chamadoExistente.setMotivoNaoConclusao(dados.get(1));
+    if (dados.size() >= 2) {
+      chamadoExistente.setMotivoNaoConclusao(dados.get(1));
+    }
     chamadoRepository.save(chamadoExistente);
 
     return chamadoExistente;
