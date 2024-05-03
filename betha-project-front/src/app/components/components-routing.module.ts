@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CadastroComponent } from "../screens/cadastro/cadastro.component";
 import { ListaComponent } from "../screens/cadastro/lista-cadastro/lista.component";
+import { ConcluidoComponent } from "../screens/concluido/concluido.component";
 import { HomeComponent } from "../screens/home/home.component";
 import { LoginComponent } from "../screens/login/login.component";
 import { ManutencaoComponent } from "../screens/manutencao/manutencao.component";
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: "triagem", component: TriagemComponent },
   { path: "manutencao", component: ManutencaoComponent },
   { path: "tecnico", component: TecnicoComponent },
+  { path: "concluido", component: ConcluidoComponent },
 ];
 
 @NgModule({

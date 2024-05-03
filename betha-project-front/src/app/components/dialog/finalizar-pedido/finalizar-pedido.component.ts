@@ -52,7 +52,7 @@ export class FinalizarPedidoComponent {
     if (status === "VMANUTENCAO") {
       this.dados.push(status);
       this.dados.push(msgTxt);
-    } else if (status === "CONCLUIDO") {
+    } else if (status === "AFINALIZAR") {
       this.dados.push(status);
     }
     this.cadastroService.finalizarPedido(id, this.dados).subscribe(
