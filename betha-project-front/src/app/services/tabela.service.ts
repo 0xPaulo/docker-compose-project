@@ -49,6 +49,8 @@ export class TabelaService {
         return "EM_MANUTENCAO";
       case "VOLTOU_MANUTENCAO":
         return "VOLTOU_MANUTENCAO";
+      case "AGUARDANDO_FINALIZAR":
+        return "AGUARDANDO_FINALIZAR";
       default:
         return "";
     }

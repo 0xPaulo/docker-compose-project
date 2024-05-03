@@ -30,6 +30,8 @@ import { CadastroComponent } from "../screens/cadastro/cadastro.component";
 import { FormCadastroComponent } from "../screens/cadastro/form-cadastro/form-cadastro.component";
 import { FormCriarCadastroComponent } from "../screens/cadastro/form-criar-cadastro/form-criar-cadastro.component";
 import { ListaComponent } from "../screens/cadastro/lista-cadastro/lista.component";
+import { ConcluidoComponent } from "../screens/concluido/concluido.component";
+import { ListaConcluidoComponent } from "../screens/concluido/lista-concluido/lista-concluido.component";
 import { HomeComponent } from "../screens/home/home.component";
 import { FormManuTecComponent } from "../screens/manutencao/form-manu-tec/form-manu-tec.component";
 import { ListaManuComponent } from "../screens/manutencao/lista-manu/lista-manu.component";
@@ -43,18 +45,22 @@ import { BuscaClienteComponent } from "./busca-cliente/busca-cliente.component";
 import { MyRouteTesteRoutes } from "./components-routing.module";
 import { DeleteComponent } from "./dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "./dialog/detalhe-produto/detalhe-produto.component";
-import { EmailComponent } from "./dialog/email/email.component";
+import { EmailContatoComponent } from "./dialog/email/email-contato/email-contato.component";
+import { EmailComponent } from "./dialog/email/email/email.component";
 import { ErrorDialogComponent } from "./dialog/errors/error-dialog/error-dialog.component";
 import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permissao.component";
+import { FinalizarPedidoComponent } from "./dialog/finalizar-pedido/finalizar-pedido.component";
 import { PossuiCadastroComponent } from "./dialog/possui-cadastro/possui-cadastro.component";
 import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { DialogCriarClienteComponent } from "./toolbar/dialog-criar-cliente/dialog-criar-cliente.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { FinalizarPedidoComponent } from './dialog/finalizar-pedido/finalizar-pedido.component';
+import { EntregueClienteComponent } from './dialog/entregue-cliente/entregue-cliente.component';
 
 @NgModule({
   declarations: [
+    ConcluidoComponent,
+    ListaConcluidoComponent,
     TecnicoComponent,
     TecnicoTabelaComponent,
     CapitalizePipe,
@@ -84,6 +90,8 @@ import { FinalizarPedidoComponent } from './dialog/finalizar-pedido/finalizar-pe
     PossuiCadastroComponent,
     DialogCriarClienteComponent,
     FinalizarPedidoComponent,
+    EmailContatoComponent,
+    EntregueClienteComponent,
   ],
   imports: [
     MatRadioModule,
