@@ -7,3 +7,5 @@ betha-project-back/cred.json
 chamado_rows.csv
 cliente_rows.csv
 sem-uso
+.env
+.vscode/launch.json

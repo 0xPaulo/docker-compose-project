@@ -286,6 +286,14 @@ mat-card {
   background-color: #cc5700;
   content: "Voltou da manutenção";
 }
+.AGUARDANDO_FINALIZAR:before {
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 2px 7px;
+  background-color: #0058cc;
+  content: "Aguardando finalizar";
+}
 p {
   margin-top: 0;
   margin-bottom: 0.4rem;

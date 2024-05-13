@@ -18,13 +18,14 @@
 
 
 <mat-dialog-actions align="end">
-  <button (click)="trocarStatus('AFINALIZAR')" style="padding: 3px 16px; margin-left: 12px; margin-bottom: 6px;"
-    class="botao-betha" mat-dialog-close>Finalizar Pedido</button>
+  <button *ngIf="!addMsgBol" (click)="trocarStatus('AFINALIZAR')"
+    style="padding: 3px 16px; margin-left: 12px; margin-bottom: 6px;" class="botao-betha" mat-dialog-close>Finalizar
+    Pedido</button>
 
   <button *ngIf="!addMsgBol" (click)="addMsg('VMANUTENCAO')" style="padding: 3px 16px; margin-bottom: 6px;"
     class="botao-betha-cancel">Enviar para
-    amanutenção</button>
+    manutenção</button>
   <button *ngIf="addMsgBol" (click)="verificaTrocarStatus('VMANUTENCAO')" style="padding: 3px 16px; margin-bottom: 6px;"
     class="botao-betha-cancel">Enviar para
-    amanutenção</button>
+    manutenção</button>
 </mat-dialog-actions>

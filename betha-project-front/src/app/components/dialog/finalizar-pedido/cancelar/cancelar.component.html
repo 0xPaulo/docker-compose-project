@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Finalizar pedido</h2>
+
+<mat-dialog-content>Você está prestes a finalizar o pedido sem que ele tenha sido consertado. Tem certeza de que deseja
+  prosseguir com essa ação?</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button (click)="trocarStatus('NCONCLUIDO')" style="padding: 3px 16px; margin-left: 12px; margin-bottom: 6px;"
+    class="botao-betha" mat-dialog-close>Sim</button>
+
+  <button class="botao-betha" style="padding: 3px 16px; margin-left: 0px; margin-bottom: 6px;"
+    mat-dialog-close>Não</button>
+</mat-dialog-actions>
