@@ -19,4 +19,7 @@ export class HomeComponent {
   manutencao() {
     this.router.navigate(["manutencao"]);
   }
+  concluido() {
+    this.router.navigate(["concluido"]);
+  }
 }

@@ -58,43 +58,10 @@ export class TecnicoTabelaComponent implements OnInit {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }
 
-  // chamarManutencao(element: Partial<ChamadoCompleto>) {
-  //   const id = element.id;
-  //   const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
-  //   this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
-  //     (result) => {
-  //       this.tabelaService.emitListaAtualizada.emit();
-  //       this.onSucess();
-  //     },
-  //     () => {
-  //       this.onError();
-  //     }
-  //   );
-  // }
-  // finalizar(element: Partial<ChamadoCompleto>) {
-  //   const id = element.id;
-  //   const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
-  //   this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
-  //     (result) => {
-  //       this.tabelaService.emitListaAtualizada.emit();
-  //       this.onSucess();
-  //     },
-  //     () => {
-  //       this.onError();
-  //     }
-  //   );
-  // }
-
   getStatusClass(status: string): string {
     return this.tabelaService.filterStatusClass(status);
   }
 
-  // onError() {
-  //   this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
-  // }
-  // onSucess() {
-  //   this.snackBar.open("Atualizado com sucesso", "", { duration: 5000 });
-  // }
   ngOnInit() {
     this.tabelaService.emitListaAtualizada.subscribe(() => {
       this.carregarTabelaManu(this.filtro);

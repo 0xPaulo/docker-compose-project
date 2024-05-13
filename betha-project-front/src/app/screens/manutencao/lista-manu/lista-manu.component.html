@@ -18,7 +18,7 @@
             <p>Manutencao</p>
           </button>
           <button class="tabs-button last-button"
-            (click)="filterStatus(['CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO'])">
+            (click)="filterStatus(['CANCELADO','CONCLUIDO_CONSERTADO','CONCLUIDO_N_CONSERTADO','AGUARDANDO_FINALIZAR'])">
             <p class="ico-tabs-4">4</p>
             <p>Concluido</p>
           </button>
@@ -85,12 +85,12 @@
             <mat-icon>description</mat-icon>
           </button>
           <button [ngClass]="{'invisivel': !detalhesVisiveis[element.id], 'visivel': detalhesVisiveis[element.id]}"
-            mat-icon-button (click)="openDialogEmail(element)">
-            <mat-icon>mail</mat-icon>
+            mat-icon-button (click)="chamarCancelamento(element,'NCONCLUIDO')">
+            <mat-icon>close</mat-icon>
           </button>
 
 
-          <button [matMenuTriggerFor]="menu"
+          <!-- <button [matMenuTriggerFor]="menu"
             [ngClass]="{'invisivel': !detalhesVisiveis[element.id], 'visivel': detalhesVisiveis[element.id]}"
             mat-icon-button>
             <mat-icon>start</mat-icon>
@@ -98,7 +98,7 @@
               <button mat-menu-item (click)="chamarManutencao(element)">Encaminhar para manutenção</button>
               <button mat-menu-item (click)="chamarCancelamento(element)">Cliente cancelou</button>
             </mat-menu>
-          </button>
+          </button> -->
         </td>
 
 

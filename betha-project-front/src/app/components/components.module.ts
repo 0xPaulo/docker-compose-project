@@ -47,18 +47,20 @@ import { DeleteComponent } from "./dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "./dialog/detalhe-produto/detalhe-produto.component";
 import { EmailContatoComponent } from "./dialog/email/email-contato/email-contato.component";
 import { EmailComponent } from "./dialog/email/email/email.component";
+import { EntregueClienteComponent } from "./dialog/entregue-cliente/entregue-cliente.component";
 import { ErrorDialogComponent } from "./dialog/errors/error-dialog/error-dialog.component";
 import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permissao.component";
+import { CancelarComponent } from "./dialog/finalizar-pedido/cancelar/cancelar.component";
 import { FinalizarPedidoComponent } from "./dialog/finalizar-pedido/finalizar-pedido.component";
 import { PossuiCadastroComponent } from "./dialog/possui-cadastro/possui-cadastro.component";
 import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { DialogCriarClienteComponent } from "./toolbar/dialog-criar-cliente/dialog-criar-cliente.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { EntregueClienteComponent } from './dialog/entregue-cliente/entregue-cliente.component';
 
 @NgModule({
   declarations: [
+    CancelarComponent,
     ConcluidoComponent,
     ListaConcluidoComponent,
     TecnicoComponent,

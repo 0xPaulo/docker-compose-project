@@ -6,7 +6,7 @@ import { TabelaService } from "src/app/services/tabela.service";
 
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
-import { EmailComponent } from "src/app/components/dialog/email/email.component";
+import { EmailComponent } from "src/app/components/dialog/email/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { CadastroService } from "src/app/services/cadastro.service";

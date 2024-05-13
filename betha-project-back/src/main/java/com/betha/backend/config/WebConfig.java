@@ -12,7 +12,7 @@ public class WebConfig {
   public WebMvcConfigurer corsConfig() {
     return new WebMvcConfigurer() {
       @Override
-      public void addCorsMappings(@SuppressWarnings("null") CorsRegistry registry) {
+      public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("http://localhost:4200")
             .allowedMethods("*").allowedHeaders(
                 org.springframework.http.HttpHeaders.CONTENT_TYPE, org.springframework.http.HttpHeaders.AUTHORIZATION);

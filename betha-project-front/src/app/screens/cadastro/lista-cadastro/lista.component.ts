@@ -3,7 +3,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
 import { Cadastro } from "src/app/interfaces/cadastro";
 import { CadastroService } from "src/app/services/cadastro.service";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 import { DeleteComponent } from "src/app/components/dialog/delete/delete.component";
@@ -25,7 +24,6 @@ export class ListaComponent implements OnInit {
 
   constructor(
     private cadastroService: CadastroService,
-    private repository: RepositoryService,
     private dialog: MatDialog,
     private tabelaService: TabelaService
   ) {
@@ -39,6 +37,7 @@ export class ListaComponent implements OnInit {
   carregarNovaTabela() {
     this.tabelaService.carregarCadastros();
   }
+
   filterStatus(filtros: string[]) {
     this.cadastros$ = this.tabelaService.carregarFiltro(filtros);
   }
@@ -49,16 +48,9 @@ export class ListaComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
-  openDialogError() {
-    this.dialog.open(ErrorDialogComponent);
-  }
-  alternarDetalhes(index: number): void {
-    this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
-  }
 
   editarItem(item: ChamadoCompleto) {
     const id = item.id;
-
     const subscription = this.cadastroService.findById(id).subscribe(
       (dados: ChamadoCompleto[]) => {
         // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
@@ -87,14 +79,24 @@ export class ListaComponent implements OnInit {
       data: { infoCadastro: dados },
     });
   }
+
   openDialogDetalhe(dados: ChamadoCompleto) {
     this.dialog.open(DetalheProdutoComponent, {
       width: "80%",
       data: { infoCadastro: dados },
     });
   }
+
+  alternarDetalhes(index: number): void {
+    this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
+  }
+
   getStatusClass(status: string): string {
     return this.tabelaService.filterStatusClass(status);
+  }
+
+  openDialogError() {
+    this.dialog.open(ErrorDialogComponent);
   }
 
   ngOnInit() {

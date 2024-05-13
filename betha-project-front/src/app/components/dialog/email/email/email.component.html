@@ -1,0 +1,36 @@
+<div class="container mt-3">
+  <h2 class="text-primary p-4 mb-4"><strong>Notificação de Manutenção</strong></h2>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Detalhes do Produto</h5>
+            <p class="card-text"><strong>Item:</strong> {{ data.infoCadastro.nomeItem }}</p>
+            <p class="card-text"><strong>Número de Série:</strong> {{ data.infoCadastro.itemSerie }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
+            <p class="card-text"><strong>Data de Entrada:</strong> {{ data.infoCadastro.dataEntrada | dataFormat }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Decisão de Manutenção</h5>
+        <p class="card-text">Prezado(a) {{ data.infoCadastro.clienteNome }}, gostaríamos de informar que o seu produto
+          ({{
+          data.infoCadastro.nomeItem }}) está aguardando manutenção.<br>De acordo com nossos técnicos, é essencial
+          proceder
+          com
+          a assistencia de manutençao de {{data.infoCadastro.analiseTecnica}}. O valor do reparo ficou
+          em
+          R$: {{data.infoCadastro.custoEstimado}}. Se desejar continuar com a manutenção por favor, responda este
+          e-mail.</p>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button class="botao-betha" mat-dialog-close (click)="handleSendEmail()">Enviar</button>
+    <button class="botao-betha" mat-dialog-close>Fechar</button>
+  </mat-dialog-actions>
