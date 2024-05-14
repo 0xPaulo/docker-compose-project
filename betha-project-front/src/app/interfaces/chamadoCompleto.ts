@@ -16,7 +16,7 @@ export interface ChamadoCompleto {
   image_urls: string[];
   tecnico: FormTecnico;
   motivoNaoConclusao: string;
-  // data_saida: string;
+  dataSaida: string;
   // anotacao: string;
   // defeito: string;
 }

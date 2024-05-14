@@ -21,6 +21,9 @@
             <p class="card-text"><strong>Número de Série:</strong> {{ data.infoCadastro.itemSerie }}</p>
             <p class="card-text"><strong>Fase:</strong> {{ data.infoCadastro.status | upperToCamelCase }}</p>
             <p class="card-text"><strong>Data de Entrada:</strong> {{ dia | dataFormat }}</p>
+            <div *ngIf="saida">
+              <p class="card-text"><strong>Data de Saida:</strong> {{ saida | dataFormat }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -44,6 +47,7 @@
         <p class="card-text"><strong>Técnico: </strong> {{data.infoCadastro.tecnicoNome}}</p>
         <p class="card-text"><strong>Especialista em: </strong> {{data.infoCadastro.tecnicoCategorias | capitalize}}</p>
         <img [src]="tecnicoImg" alt="Problema ao carregar">
+
         <div *ngIf="motivoNaoConclusao">
           <p class="card-text"><strong>Motivo da volta: </strong>{{motivoNaoConclusao}}</p>
         </div>
@@ -61,7 +65,6 @@
         </div>
       </div>
     </div>
-
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
