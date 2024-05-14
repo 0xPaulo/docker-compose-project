@@ -1,5 +1,6 @@
 package com.betha.backend.cadastros.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +73,9 @@ public class ChamadoService {
       dto.setCustoEstimado(chamado.getCustoEstimado());
       dto.setDataEntrada(chamado.getDataEntrada());
       dto.setStatus(chamado.getStatus());
+      if (chamado.getStatus().toString() == "CONCLUIDO_CONSERTADO") {
+        dto.setDataSaida(chamado.getDataSaida());
+      }
       dto.setImage_urls(chamado.getImage_urls());
       dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
 
@@ -167,7 +171,10 @@ public class ChamadoService {
 
     if (statusEncontrado == null) {
       throw new IllegalArgumentException("Status não reconhecido: " + dados.get(0));
+    } else if (statusEncontrado.toString() == "CONCLUIDO_CONSERTADO") {
+      chamadoExistente.setDataSaida(LocalDateTime.now());
     }
+
     chamadoExistente.setStatus(statusEncontrado);
     if (dados.size() >= 2) {
       chamadoExistente.setMotivoNaoConclusao(dados.get(1));
