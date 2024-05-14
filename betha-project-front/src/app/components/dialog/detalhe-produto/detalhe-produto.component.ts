@@ -10,6 +10,7 @@ import { ImgProxyService } from "src/app/services/img-proxy.service";
 })
 export class DetalheProdutoComponent implements OnInit {
   dia: string = "";
+  saida: string = "";
   motivoNaoConclusao: string = "";
   tecnicoImg!: string | ArrayBuffer;
   imageUrl: string[] = [];
@@ -20,6 +21,9 @@ export class DetalheProdutoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.dia = data.infoCadastro.dataEntrada;
+    if (data.infoCadastro.dataSaida) {
+      this.saida = data.infoCadastro.dataSaida;
+    }
     this.motivoNaoConclusao = data.infoCadastro.motivoNaoConclusao;
     if (data.infoCadastro.tecnico) {
       this.imgProxyService

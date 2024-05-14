@@ -30,7 +30,7 @@ public class ChamadoCompletoDTO {
   private LocalDateTime dataEntrada;
   private Status status;
   private List<String> image_urls;
-  // private LocalDateTime dataSaida;
+  private LocalDateTime dataSaida;
 
   private Long tecnico;
   private String tecnicoImg;
