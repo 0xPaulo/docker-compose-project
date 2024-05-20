@@ -37,7 +37,7 @@ import lombok.Setter;
 public class Tecnico implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column
   private Long id;
 
@@ -63,6 +63,12 @@ public class Tecnico implements UserDetails {
 
   @OneToMany(mappedBy = "tecnico")
   private List<Chamado> chamados = new ArrayList<>();
+
+  public Tecnico(String email, String senha, Perfils perfil) {
+    this.email = email;
+    this.senha = senha;
+    this.perfil = perfil;
+  }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
