@@ -28,9 +28,9 @@ public class SecurityConfig {
         // reset spring security
         .authorizeHttpRequests(
             authorize -> authorize
+                // .anyRequest().permitAll())
                 .requestMatchers(HttpMethod.POST, "/tecnicos/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/tecnicos/login").permitAll()
-                // .requestMatchers(HttpMethod.GET, "/cadastros").permitAll()
                 .requestMatchers(HttpMethod.GET, "/cadastros").hasRole("ADMIN")
                 .anyRequest().authenticated())
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

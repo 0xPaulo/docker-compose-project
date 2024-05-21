@@ -36,7 +36,7 @@ public class GoogleApiService {
     GoogleApiRes res = new GoogleApiRes();
 
     try {
-      String folderId = "1f-ZVTel6pKMIv93WGdmwpsXygi55hlHF";
+      String folderId = System.getProperty("FOLDER_ID");
       Drive drive = createDriveService();
       com.google.api.services.drive.model.File fileMetaData = new com.google.api.services.drive.model.File();
       String fileName = file.getName().toLowerCase();
