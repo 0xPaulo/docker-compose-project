@@ -1,4 +1,5 @@
 betha-project-back/target/
+.env
 betha-project-front/node_modules/
 betha-project-front/.angular/
 .vscode/settings.json
