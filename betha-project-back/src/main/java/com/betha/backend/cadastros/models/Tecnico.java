@@ -1,7 +1,12 @@
 package com.betha.backend.cadastros.models;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.betha.backend.cadastros.models.Enums.Perfils;
 import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
@@ -29,15 +34,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "tecnico", schema = "manutencao")
 
-public class Tecnico {
+public class Tecnico implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column
   private Long id;
 
   @Column
   private String nome;
+
+  @Column
+  private String email;
+
+  @Column
+  private String senha;
 
   @Column(name = "tecnico_categorias")
   @Enumerated(EnumType.STRING)
@@ -52,5 +63,49 @@ public class Tecnico {
 
   @OneToMany(mappedBy = "tecnico")
   private List<Chamado> chamados = new ArrayList<>();
+
+  public Tecnico(String email, String senha, Perfils perfil) {
+    this.email = email;
+    this.senha = senha;
+    this.perfil = perfil;
+  }
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    if (this.perfil == Perfils.ADMIN)
+      return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+    else
+      return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+  }
+
+  @Override
+  public String getPassword() {
+    return senha;
+  }
+
+  @Override
+  public String getUsername() {
+    return email;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 
 }
