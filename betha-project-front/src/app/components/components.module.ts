@@ -33,6 +33,7 @@ import { ListaComponent } from "../screens/cadastro/lista-cadastro/lista.compone
 import { ConcluidoComponent } from "../screens/concluido/concluido.component";
 import { ListaConcluidoComponent } from "../screens/concluido/lista-concluido/lista-concluido.component";
 import { HomeComponent } from "../screens/home/home.component";
+import { LoginComponent } from "../screens/login/login.component";
 import { FormManuTecComponent } from "../screens/manutencao/form-manu-tec/form-manu-tec.component";
 import { ListaManuComponent } from "../screens/manutencao/lista-manu/lista-manu.component";
 import { ManutencaoComponent } from "../screens/manutencao/manutencao.component";
@@ -60,6 +61,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 
 @NgModule({
   declarations: [
+    LoginComponent,
     CancelarComponent,
     ConcluidoComponent,
     ListaConcluidoComponent,

@@ -3,7 +3,6 @@ package com.betha.backend.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,11 +27,11 @@ public class SecurityConfig {
         // reset spring security
         .authorizeHttpRequests(
             authorize -> authorize
-                // .anyRequest().permitAll())
-                .requestMatchers(HttpMethod.POST, "/tecnicos/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/tecnicos/login").permitAll()
-                .requestMatchers(HttpMethod.GET, "/cadastros").hasRole("ADMIN")
-                .anyRequest().authenticated())
+                .anyRequest().permitAll())
+        // .requestMatchers(HttpMethod.POST, "/tecnicos/register").permitAll()
+        // .requestMatchers(HttpMethod.GET, "/tecnicos/login").permitAll()
+        // .requestMatchers(HttpMethod.GET, "/cadastros").hasRole("ADMIN")
+        // .anyRequest().authenticated())
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }

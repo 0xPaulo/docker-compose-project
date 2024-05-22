@@ -44,7 +44,7 @@ public class TecnicoController {
     this.tokenService = tokenService;
   }
 
-  @GetMapping("/login")
+  @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody @Valid AuthenticateDTO dados) {
     var usernamePassword = new UsernamePasswordAuthenticationToken(dados.email(), dados.senha());
     var auth = this.authenticationManager.authenticate(usernamePassword);

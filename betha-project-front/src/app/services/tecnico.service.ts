@@ -9,8 +9,13 @@ import { MostrarCadastro } from "../interfaces/mostrarCadastro";
 })
 export class TecnicoService {
   private APItecnico = "http://localhost:8080/tecnicos";
+  private APIlogar = "http://localhost:8080/tecnicos/login";
 
   constructor(private httpClient: HttpClient) {}
+
+  logar(body: string[]) {
+    return this.httpClient.post<string>(this.APIlogar, body);
+  }
 
   buscarTodos(filtro?: string): Observable<string[]> {
     if (filtro) {

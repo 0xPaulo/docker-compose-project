@@ -12,11 +12,14 @@
     </div>
     <!-- --------------------------------------------------------------------------->
     <div class="col-6 border-radius-right" style="background-color: rgb(255, 255, 255);">
-      <form style="padding: 40px;" action="">
+      <form [formGroup]="form" style="padding: 40px;" action="">
+        <div *ngIf="msgError" class="campos-invalidos">
+          {{ msgError }}
+        </div>
         <div class="mb-2">
           <label for="usuario" class="mb-1 form-label label-size">Usuário</label>
           <input type="email" class=" form-control input-size blur" id="usuario"
-            placeholder="Acesse com usuário, e-mail ou telefone">
+            placeholder="Acesse com usuário, e-mail ou telefone" formControlName="email">
         </div>
         <div class="form-check ms-1">
           <input class="form-check-input blur" type="checkbox" value="" id="user-verificado">
@@ -26,7 +29,7 @@
         </div>
         <div class="mb-2">
           <label for="senha" class="mb-1 form-label label-size">Senha</label>
-          <input type="password" class="form-control input-size blur" id="senha">
+          <input type="password" class="form-control input-size blur" id="senha" formControlName="senha">
         </div>
         <div class="form-check ms-1">
           <input class="form-check-input blur" type="checkbox" value="" id="user-remember">
@@ -35,7 +38,7 @@
           </label>
         </div>
         <div class="d-grid gap-2 mt-4">
-          <button (click)="onACESSAR()" class="btn btn-primary" type="button">ACESSAR</button>
+          <button (click)="verificaLogin()" class="btn btn-primary" type="button">ACESSAR</button>
         </div>
       </form>
       <!-- ---------------------------------------------------------------- -->
