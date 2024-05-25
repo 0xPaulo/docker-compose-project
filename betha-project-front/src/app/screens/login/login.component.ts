@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { AuthService } from "./../../services/auth.service";
 import { TecnicoService } from "./../../services/tecnico.service";
 
 @Component({
@@ -13,6 +14,7 @@ export class LoginComponent {
   msgError: string = "";
 
   constructor(
+    private authService: AuthService,
     private tecnicoService: TecnicoService,
     private router: Router,
     private formBuilder: FormBuilder
@@ -36,12 +38,12 @@ export class LoginComponent {
     this.tecnicoService.logar(this.form.value).subscribe(
       (resposta) => {
         console.log(resposta);
+        this.authService.login(resposta);
         this.router.navigate(["home"]);
       },
       (error) => {
         this.msgError = "Acesso não autorizado";
         console.error("Acesso não autorizado");
-        // this.router.navigate(["home"]);
       }
     );
     console.log(this.form.value);

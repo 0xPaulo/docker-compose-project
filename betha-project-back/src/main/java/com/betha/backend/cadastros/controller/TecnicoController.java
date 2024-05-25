@@ -28,7 +28,7 @@ import com.betha.backend.cadastros.service.TokenService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/tecnicos")
+@RequestMapping("/tecnico")
 public class TecnicoController {
 
   private final TecnicoRepository tecnicoRepository;

@@ -8,16 +8,27 @@ import { LoginComponent } from "../screens/login/login.component";
 import { ManutencaoComponent } from "../screens/manutencao/manutencao.component";
 import { TecnicoComponent } from "../screens/tecnico-tela/tecnico.component";
 import { TriagemComponent } from "../screens/triagem/triagem.component";
+import { AuthGuard } from "./authGuard";
+import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permissao.component";
 
 const routes: Routes = [
-  { path: "lista", component: ListaComponent },
+  { path: "lista", component: ListaComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
-  { path: "home", component: HomeComponent },
-  { path: "cadastrar", component: CadastroComponent },
-  { path: "triagem", component: TriagemComponent },
-  { path: "manutencao", component: ManutencaoComponent },
-  { path: "tecnico", component: TecnicoComponent },
-  { path: "concluido", component: ConcluidoComponent },
+  { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
+  { path: "cadastrar", component: CadastroComponent, canActivate: [AuthGuard] },
+  { path: "triagem", component: TriagemComponent, canActivate: [AuthGuard] },
+  {
+    path: "manutencao",
+    component: ManutencaoComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "tecnico", component: TecnicoComponent, canActivate: [AuthGuard] },
+  {
+    path: "concluido",
+    component: ConcluidoComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "error", component: SemPermissaoComponent },
 ];
 
 @NgModule({

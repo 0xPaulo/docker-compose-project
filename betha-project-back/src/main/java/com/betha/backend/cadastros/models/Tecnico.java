@@ -73,9 +73,9 @@ public class Tecnico implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     if (this.perfil == Perfils.ADMIN)
-      return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+      return List.of(new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("RECEPCAO"));
     else
-      return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+      return List.of(new SimpleGrantedAuthority("RECEPCAO"));
   }
 
   @Override

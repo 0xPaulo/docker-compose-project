@@ -8,8 +8,8 @@ import { MostrarCadastro } from "../interfaces/mostrarCadastro";
   providedIn: "root",
 })
 export class TecnicoService {
-  private APItecnico = "http://localhost:8080/tecnicos";
-  private APIlogar = "http://localhost:8080/tecnicos/login";
+  private APItecnico = "http://localhost:8080/tecnico";
+  private APIlogar = "http://localhost:8080/tecnico/login";
 
   constructor(private httpClient: HttpClient) {}
 

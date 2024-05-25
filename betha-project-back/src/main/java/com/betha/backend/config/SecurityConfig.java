@@ -3,6 +3,7 @@ package com.betha.backend.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,13 +26,23 @@ public class SecurityConfig {
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // reset spring security
+        // .anyRequest().permitAll())
         .authorizeHttpRequests(
             authorize -> authorize
-                .anyRequest().permitAll())
-        // .requestMatchers(HttpMethod.POST, "/tecnicos/register").permitAll()
-        // .requestMatchers(HttpMethod.GET, "/tecnicos/login").permitAll()
-        // .requestMatchers(HttpMethod.GET, "/cadastros").hasRole("ADMIN")
-        // .anyRequest().authenticated())
+                .requestMatchers(HttpMethod.POST, "/tecnico/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/tecnico/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "/tecnico/login").permitAll()
+                // .requestMatchers(HttpMethod.GET,
+                // "/lista",
+                // "/home",
+                // "/cadastrar",
+                // "/triagem",
+                // "/manutencao",
+                // "/tecnico",
+                // "/concluido",
+                // "/cadastros")
+                // .hasRole("ADMIN")
+                .anyRequest().authenticated())
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
