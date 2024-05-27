@@ -21,6 +21,7 @@ export class ListaTriagemComponent implements OnInit {
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
   filtro: string[] = ["DISPONIVEL_TRIAGEM", "AGUARDANDO_CLIENTE", "CANCELADO"];
+  URL: string = "triagem";
 
   constructor(
     private cadastroService: CadastroService,
@@ -32,7 +33,10 @@ export class ListaTriagemComponent implements OnInit {
   }
 
   carregarTabelaTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro));
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(
+      filtro,
+      this.URL
+    ));
   }
 
   carregarNovaTabela() {

@@ -26,6 +26,8 @@ export class ListaManuComponent implements OnInit {
     "VOLTOU_MANUTENCAO",
   ];
 
+  URL: string = "manutencao";
+
   constructor(
     private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
@@ -36,7 +38,10 @@ export class ListaManuComponent implements OnInit {
   }
 
   carregarTabelaManu(filtro: string[]): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro));
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(
+      filtro,
+      this.URL
+    ));
   }
 
   carregarNovaTabela() {

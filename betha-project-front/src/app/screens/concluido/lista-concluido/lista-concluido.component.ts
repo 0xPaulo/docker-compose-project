@@ -23,12 +23,17 @@ export class ListaConcluidoComponent implements OnInit {
     "AGUARDANDO_FINALIZAR",
   ];
 
+  URL: string = "concluido";
+
   constructor(private dialog: MatDialog, private tabelaService: TabelaService) {
     this.cadastros$ = this.carregarTabelaManu(this.filtro);
   }
 
   carregarTabelaManu(filtro: string[]): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro));
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(
+      filtro,
+      this.URL
+    ));
   }
 
   carregarNovaTabela() {
