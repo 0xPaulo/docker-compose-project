@@ -72,10 +72,32 @@ public class Tecnico implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    if (this.perfil == Perfils.ADMIN)
-      return List.of(new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("RECEPCAO"));
-    else
-      return List.of(new SimpleGrantedAuthority("RECEPCAO"));
+    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+    switch (this.perfil) {
+      case ADMIN:
+        authorities.addAll(List.of(
+            new SimpleGrantedAuthority("ROLE_ADMIN"),
+            new SimpleGrantedAuthority("ROLE_RECEPCAO"),
+            new SimpleGrantedAuthority("ROLE_TRIAGEM"),
+            new SimpleGrantedAuthority("ROLE_TECNICO"),
+            new SimpleGrantedAuthority("ROLE_MANUTENCAO")));
+        break;
+      case RECEPCAO:
+        authorities.add(new SimpleGrantedAuthority("ROLE_RECEPCAO"));
+        break;
+      case TRIAGEM:
+        authorities.add(new SimpleGrantedAuthority("ROLE_TRIAGEM"));
+        break;
+      case TECNICO:
+        authorities
+            .addAll(List.of(new SimpleGrantedAuthority("ROLE_TECNICO"), new SimpleGrantedAuthority("ROLE_ADMIN")));
+        break;
+      case MANUTENCAO:
+        authorities.add(new SimpleGrantedAuthority("ROLE_MANUTENCAO"));
+        break;
+    }
+    return authorities;
   }
 
   @Override
