@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ComponentsModule } from "./components/components.module";
-import { RepositoryService } from "./services/repository.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +17,7 @@ import { RepositoryService } from "./services/repository.service";
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [RepositoryService, DatePipe],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

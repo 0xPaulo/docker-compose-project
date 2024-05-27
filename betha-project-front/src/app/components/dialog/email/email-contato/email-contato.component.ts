@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CadastroService } from "src/app/services/cadastro.service";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 @Component({
@@ -20,7 +19,6 @@ export class EmailContatoComponent {
     private cadastroService: CadastroService,
     private datePipe: DatePipe,
     private tabelaService: TabelaService,
-    private repository: RepositoryService,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any

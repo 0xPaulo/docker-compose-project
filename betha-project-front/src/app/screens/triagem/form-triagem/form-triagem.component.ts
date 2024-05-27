@@ -3,7 +3,6 @@ import { Component, Inject } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 import { CadastroService } from "./../../../services/cadastro.service";
 
@@ -21,7 +20,6 @@ export class FormTriagemComponent {
     private cadastroService: CadastroService,
     private datePipe: DatePipe,
     private snackBar: MatSnackBar,
-    private service: RepositoryService,
     private formBuilder: FormBuilder,
     private tabelaService: TabelaService,
     @Inject(MAT_DIALOG_DATA) public data: any

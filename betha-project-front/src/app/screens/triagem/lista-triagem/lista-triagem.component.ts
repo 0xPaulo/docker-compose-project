@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -26,7 +25,6 @@ export class ListaTriagemComponent implements OnInit {
   constructor(
     private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
-    private repository: RepositoryService,
     private dialog: MatDialog,
     private tabelaService: TabelaService
   ) {

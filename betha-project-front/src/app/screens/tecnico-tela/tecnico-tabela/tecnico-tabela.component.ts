@@ -7,7 +7,6 @@ import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dia
 import { FinalizarPedidoComponent } from "src/app/components/dialog/finalizar-pedido/finalizar-pedido.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { CadastroService } from "src/app/services/cadastro.service";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 @Component({
@@ -25,7 +24,6 @@ export class TecnicoTabelaComponent implements OnInit {
     private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
     private tabelaService: TabelaService,
-    private repository: RepositoryService,
     private dialog: MatDialog
   ) {
     this.cadastros$ = this.carregarTabelaManu(this.filtro);

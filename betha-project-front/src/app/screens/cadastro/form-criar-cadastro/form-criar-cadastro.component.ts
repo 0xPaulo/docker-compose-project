@@ -6,7 +6,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormChamado } from "src/app/interfaces/formChamado";
 import { FormCliente } from "src/app/interfaces/formCliente";
 import { ClienteService } from "src/app/services/cliente.service";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 import { CadastroService } from "./../../../services/cadastro.service";
 
@@ -34,7 +33,6 @@ export class FormCriarCadastroComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
-    private service: RepositoryService,
     private formBuilder: FormBuilder,
     private tabelaService: TabelaService,
     private clienteService: ClienteService,

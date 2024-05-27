@@ -6,7 +6,6 @@ import { MatRadioChange } from "@angular/material/radio";
 import { MatSelectChange } from "@angular/material/select";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ImgProxyService } from "src/app/services/img-proxy.service";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 import { CadastroService } from "./../../../services/cadastro.service";
 import { TecnicoService } from "./../../../services/tecnico.service";
@@ -44,7 +43,6 @@ export class FormManuTecComponent implements OnInit {
     private cadastroService: CadastroService,
     private datePipe: DatePipe,
     private snackBar: MatSnackBar,
-    private service: RepositoryService,
     private formBuilder: FormBuilder,
     private tabelaService: TabelaService,
     @Inject(MAT_DIALOG_DATA) public data: any

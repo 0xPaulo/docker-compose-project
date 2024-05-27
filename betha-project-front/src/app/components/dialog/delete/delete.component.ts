@@ -1,7 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CadastroService } from "src/app/services/cadastro.service";
-import { RepositoryService } from "src/app/services/repository.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 @Component({
@@ -15,7 +14,6 @@ export class DeleteComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private cadastroService: CadastroService,
-    private repository: RepositoryService,
     private tabelaService: TabelaService
   ) {}
 
