@@ -6,7 +6,6 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
 import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
 import { CadastroService } from "./cadastro.service";
-import { RepositoryService } from "./repository.service";
 
 @Injectable({
   providedIn: "root",
@@ -15,11 +14,11 @@ export class TabelaService {
   emitListaAtualizada = new EventEmitter<void>();
 
   private readonly API = "http://localhost:8080/cadastros";
+  private readonly authorizeHttpAPI = "http://localhost:8080/";
 
   constructor(
     private httpClient: HttpClient,
     private cadastroService: CadastroService,
-    private repository: RepositoryService,
     private matDialog: MatDialog
   ) {}
 
@@ -55,15 +54,27 @@ export class TabelaService {
         return "";
     }
   }
-  carregarFiltro(filtros: string[]): Observable<ChamadoCompleto[]> {
+  carregarFiltro(
+    filtros: string[],
+    URL?: string
+  ): Observable<ChamadoCompleto[]> {
     const filtroString = filtros.join(",");
     const params = new HttpParams().set("params", filtroString);
-    return this.httpClient
-      .get<ChamadoCompleto[]>(`${this.API}`, { params })
-      .pipe(
-        tap((resultado) => console.log(resultado)),
-        delay(500)
-      );
+    if (URL) {
+      return this.httpClient
+        .get<ChamadoCompleto[]>(`${this.authorizeHttpAPI}${URL}`, { params })
+        .pipe(
+          tap((resultado) => console.log(resultado)),
+          delay(500)
+        );
+    } else {
+      return this.httpClient
+        .get<ChamadoCompleto[]>(`${this.API}`, { params })
+        .pipe(
+          tap((resultado) => console.log(resultado)),
+          delay(500)
+        );
+    }
   }
 
   openDialogError() {

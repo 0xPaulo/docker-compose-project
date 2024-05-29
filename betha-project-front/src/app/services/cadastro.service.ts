@@ -9,6 +9,8 @@ import { FormChamado } from "../interfaces/formChamado";
 })
 export class CadastroService {
   private readonly APIcadastro = "http://localhost:8080/cadastros";
+  private readonly authorizeHttpAPI = "http://localhost:8080/";
+
   constructor(private httpClient: HttpClient) {}
 
   createCadastro(cadastro: FormChamado) {
@@ -25,7 +27,7 @@ export class CadastroService {
     return this.httpClient.delete<ChamadoCompleto>(`${this.APIcadastro}/${id}`);
   }
 
-  findById(id: string): Observable<ChamadoCompleto[]> {
+  findById(id: string, URL?: string): Observable<ChamadoCompleto[]> {
     const url = `${this.APIcadastro}/${id}`;
     return this.httpClient.get<ChamadoCompleto[]>(url).pipe(
       catchError((error) => {
@@ -34,16 +36,25 @@ export class CadastroService {
       })
     );
   }
-  update(id: string, chamado: Partial<ChamadoCompleto>) {
-    console.log(chamado);
-    return this.httpClient
-      .patch<ChamadoCompleto>(`${this.APIcadastro}/${id}`, chamado)
-      .pipe(
-        catchError((error) => {
-          console.error("Erro ao atualizar o registro:", error);
-          return of(null);
-        })
-      );
+  update(id: string, chamado: Partial<ChamadoCompleto>, URL?: string) {
+    if (URL) {
+      return this.httpClient
+        .patch<ChamadoCompleto>(`${this.authorizeHttpAPI}${URL}/${id}`, chamado)
+        .pipe(
+          catchError((error) => {
+            console.error("Erro ao atualizar o registro:", error);
+            return of(null);
+          })
+        );
+    } else
+      return this.httpClient
+        .patch<ChamadoCompleto>(`${this.APIcadastro}/${id}`, chamado)
+        .pipe(
+          catchError((error) => {
+            console.error("Erro ao atualizar o registro:", error);
+            return of(null);
+          })
+        );
   }
 
   mudarStatus(id: string | undefined, element: Partial<ChamadoCompleto>) {
