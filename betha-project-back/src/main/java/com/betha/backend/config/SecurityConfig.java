@@ -25,23 +25,35 @@ public class SecurityConfig {
     return httpSecurity
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        // reset spring security
-        // .anyRequest().permitAll())
         .authorizeHttpRequests(
             authorize -> authorize
+
                 .requestMatchers(HttpMethod.POST, "/tecnico/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/tecnico/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/tecnico/login").permitAll()
-                // .requestMatchers(HttpMethod.GET,
-                // "/lista",
-                // "/home",
-                // "/cadastrar",
-                // "/triagem",
-                // "/manutencao",
-                // "/tecnico",
-                // "/concluido",
-                // "/cadastros")
-                // .hasRole("ADMIN")
+
+                // Cadastrar
+                .requestMatchers(HttpMethod.GET, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
+                .requestMatchers(HttpMethod.PATCH, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
+                .requestMatchers(HttpMethod.POST, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
+                .requestMatchers(HttpMethod.DELETE, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
+                .requestMatchers(HttpMethod.POST, "/clientes").hasAnyRole("ADMIN", "RECEPCAO")
+
+                // Triagem
+                .requestMatchers(HttpMethod.GET, "/triagem").hasAnyRole("ADMIN", "TRIAGEM")
+                .requestMatchers(HttpMethod.PATCH, "/triagem").hasAnyRole("ADMIN", "TRIAGEM")
+
+                // Tecnico
+                .requestMatchers(HttpMethod.GET, "/tecnico").hasAnyRole("ADMIN", "TECNICO")
+                .requestMatchers(HttpMethod.POST, "/tecnico").hasAnyRole("ADMIN", "TECNICO")
+                .requestMatchers(HttpMethod.PATCH, "/tecnico").hasAnyRole("ADMIN", "TECNICO")
+                .requestMatchers(HttpMethod.POST, "/uploadToGoogleDrive").permitAll()
+                .requestMatchers(HttpMethod.GET, "/proxy").permitAll()
+                .requestMatchers(HttpMethod.GET, "/concluido").hasAnyRole("ADMIN", "TECNICO")
+
+                // Manutencao
+                // trocar para url manutencao e cada um com o seu
+                .requestMatchers(HttpMethod.GET, "/tecnico").hasAnyRole("ADMIN", "MANUTENCAO") // sem route controler
+
+                .requestMatchers(HttpMethod.POST, "/tecnico/register").hasRole("ADMIN")
                 .anyRequest().authenticated())
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
