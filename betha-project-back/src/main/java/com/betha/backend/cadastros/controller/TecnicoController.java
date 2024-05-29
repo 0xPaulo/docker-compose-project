@@ -71,7 +71,7 @@ public class TecnicoController {
       List<Tecnico> tecnicos = tecnicoRepository.findByTecnicoCategorias(categoria);
       return tecnicos;
     }
-    List<Tecnico> resultado = this.tecnicoRepository.findAll();
+    List<Tecnico> resultado = this.tecnicoRepository.buscarTecnicosManutencao();
     return resultado;
 
   }

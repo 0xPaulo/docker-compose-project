@@ -14,5 +14,8 @@ public interface TecnicoRepository extends JpaRepository<Tecnico, Long> {
   @Query("SELECT t FROM Tecnico t WHERE t.tecnicoCategorias = :categoria")
   List<Tecnico> findByTecnicoCategorias(@Param("categoria") TecnicoCategorias categoria);
 
+  @Query("SELECT t FROM Tecnico t WHERE t.perfil = 'MANUTENCAO'")
+  List<Tecnico> buscarTecnicosManutencao();
+
   UserDetails findByEmail(String login);
 }
