@@ -12,8 +12,9 @@ export class HomeComponent implements OnInit {
   isADMIN: boolean = false;
   isRECEPCAO: boolean = false;
   isTRIAGEM: boolean = false;
-  isTECNICO: boolean = false;
   isMANUTENCAO: boolean = false;
+  isTECNICO: boolean = false;
+  isCONCLUIDO: boolean = false;
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   cadastros() {
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
       this.isRECEPCAO = true;
       this.isTRIAGEM = true;
       this.isTECNICO = true;
+      this.isCONCLUIDO = true;
     }
     if (decodedToken.perfil === "RECEPCAO") {
       this.isRECEPCAO = true;
@@ -54,6 +56,7 @@ export class HomeComponent implements OnInit {
       this.isTRIAGEM = true;
     }
     if (decodedToken.perfil === "TECNICO") {
+      this.isCONCLUIDO = true;
       this.isTECNICO = true;
     }
     if (decodedToken.perfil === "MANUTENCAO") {

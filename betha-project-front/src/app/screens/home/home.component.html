@@ -27,9 +27,9 @@
           Manutenção
           <mat-icon class="transform-icon">engineering</mat-icon>
         </mat-grid-tile>
-        <mat-grid-tile [ngClass]="{'acesso': !isTECNICO}" class="custom-tile tile-concluido" style="cursor: pointer;"
+        <mat-grid-tile [ngClass]="{'acesso': !isCONCLUIDO}" class="custom-tile tile-concluido" style="cursor: pointer;"
           (click)="concluido()">
-          <div *ngIf="!isTECNICO" class="icone-cadeado"></div>
+          <div *ngIf="!isCONCLUIDO" class="icone-cadeado"></div>
           Concluído
           <mat-icon class="transform-icon">check_box</mat-icon>
         </mat-grid-tile>
