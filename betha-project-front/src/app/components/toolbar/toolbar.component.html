@@ -6,41 +6,37 @@
         <img src="../../../assets/image/betha-brands.svg" alt="" style="cursor: pointer;" (click)="onLogin()">
       </div>
       <div class="itens">
-        <span (click)="onCadastro()" style="cursor: pointer;">AMBIENTE DE CADASTRO</span>
+        <span class="ambiente-de-cadastro">AMBIENTE DE CADASTRO</span>
         <span (click)="onHome()" style="cursor: pointer;">Visão geral</span>
         <button mat-button [matMenuTriggerFor]="menu">Configurando ⏷</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="chamarTabelaTecnico()">Tecnico perfil</button>
-          <button mat-menu-item>Cadastrar tecnico</button>
+          <button mat-menu-item>Trocar para perfil Admin</button>
+          <button mat-menu-item>Trocar para perfil Tecnico</button>
+          <button mat-menu-item>Trocar para perfil Recepção</button>
         </mat-menu>
-        <button mat-button [matMenuTriggerFor]="menu">Registrado ⏷</button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="criarCliente()">Cadastrar cliente</button>
-          <button mat-menu-item>Cadastrar tecnico</button>
+        <button mat-button [matMenuTriggerFor]="menuR">Registrado ⏷</button>
+        <mat-menu #menuR="matMenu">
+          <button mat-menu-item>Registra novo cliente</button>
+          <button mat-menu-item>Registra novo tecnico</button>
         </mat-menu>
-        <!-- até aqui dixar util -->
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Planejado ⏷</span>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Executando ⏷</span>
       </div>
       <div class="icons">
-        <button mat-icon-button matTooltip="{{errorMessage}}">
-          <mat-icon>wifi</mat-icon>
-        </button>
-        <button mat-icon-button matTooltip="{{errorMessage}}">
-          <mat-icon>headset_mic</mat-icon>
-        </button>
-        <button mat-icon-button matTooltip="{{errorMessage}}">
-          <mat-icon>grid_view</mat-icon>
-        </button>
-        <button mat-icon-button matTooltip="{{errorMessage}}">
+
+        <button [matMenuTriggerFor]="menu" mat-icon-button>
           <mat-icon>settings</mat-icon>
         </button>
         <button mat-icon-button matTooltip="{{errorMessage}}">
           <mat-icon>notifications</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="{{errorMessage}}">
+        <button [matMenuTriggerFor]="person" mat-icon-button>
           <mat-icon>person</mat-icon>
         </button>
+        <mat-menu #person="matMenu">
+          <button mat-menu-item>Meus chamados</button>
+          <button (click)="sair()" mat-menu-item>Sair</button>
+        </mat-menu>
       </div>
     </div>
     <!-- </mat-toolbar-row> -->

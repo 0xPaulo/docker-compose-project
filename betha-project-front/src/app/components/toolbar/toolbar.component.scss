@@ -53,12 +53,16 @@
     font-size: 19px;
   }
 }
+
 @media (max-width: 999px) {
   .itens {
     font-size: 15px;
   }
   .itens button {
     font-size: 15px;
+  }
+  .ambiente-de-cadastro {
+    display: none;
   }
 }
 @media (max-width: 840px) {
