@@ -36,9 +36,9 @@ export class LoginComponent {
 
   onACESSAR() {
     this.tecnicoService.logar(this.form.value).subscribe(
-      (resposta) => {
+      (resposta: any) => {
         console.log(resposta);
-        this.authService.login(resposta);
+        this.authService.saveSessionStorageToken(resposta.token);
         this.router.navigate(["home"]);
       },
       (error) => {

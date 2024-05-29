@@ -7,14 +7,32 @@
     </div>
     <mat-card-content>
       <mat-grid-list cols="2" rowHeight="125px" gutterSize="10px">
-        <mat-grid-tile style="cursor: pointer;" (click)="cadastros()" class="custom-tile">Cadastro<mat-icon
-            class="transform-icon">edit_square</mat-icon></mat-grid-tile>
-        <mat-grid-tile class="custom-tile" style="cursor: pointer;" (click)="triagem()">Triagem<mat-icon
-            class="transform-icon">history_toggle_off</mat-icon></mat-grid-tile>
-        <mat-grid-tile class="custom-tile" style="cursor: pointer;" (click)="manutencao()">Manutenção<mat-icon
-            class="transform-icon">engineering</mat-icon></mat-grid-tile>
-        <mat-grid-tile class="custom-tile" style="cursor: pointer;" (click)="concluido()">Concluído<mat-icon
-            class="transform-icon">check_box</mat-icon></mat-grid-tile>
+
+        <mat-grid-tile [ngClass]="{'acesso': !isRECEPCAO}" class="custom-tile tile-cadastro" style="cursor: pointer;"
+          (click)="cadastros()">
+          <div *ngIf="!isRECEPCAO" class="icone-cadeado"></div>
+          Cadastro
+          <mat-icon class="transform-icon">edit_square</mat-icon>
+        </mat-grid-tile>
+
+        <mat-grid-tile [ngClass]="{'acesso': !isTRIAGEM}" class="custom-tile tile-triagem" style="cursor: pointer;"
+          (click)="triagem()">
+          <div *ngIf="!isTRIAGEM" class="icone-cadeado"></div>
+          Triagem
+          <mat-icon class="transform-icon">history_toggle_off</mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile [ngClass]="{'acesso': !isTECNICO}" class="custom-tile tile-manutencao" style="cursor: pointer;"
+          (click)="manutencao()">
+          <div *ngIf="!isTECNICO" class="icone-cadeado"></div>
+          Manutenção
+          <mat-icon class="transform-icon">engineering</mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile [ngClass]="{'acesso': !isTECNICO}" class="custom-tile tile-concluido" style="cursor: pointer;"
+          (click)="concluido()">
+          <div *ngIf="!isTECNICO" class="icone-cadeado"></div>
+          Concluído
+          <mat-icon class="transform-icon">check_box</mat-icon>
+        </mat-grid-tile>
       </mat-grid-list>
       <div class="linhas-bottom-page"></div>
     </mat-card-content>

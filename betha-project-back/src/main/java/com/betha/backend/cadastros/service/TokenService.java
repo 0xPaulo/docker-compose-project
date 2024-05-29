@@ -21,11 +21,13 @@ public class TokenService {
 
   public String generateToken(Tecnico tecnico) {
     try {
+
       Algorithm algorithm = Algorithm.HMAC256(secret);
       String token = JWT.create()
           .withIssuer("auth-api")
           .withSubject(tecnico.getEmail())
           .withExpiresAt(genExpirationDate())
+          .withClaim("perfil", tecnico.getPerfil().toString())
           .sign(algorithm);
       return token;
     } catch (JWTCreationException e) {

@@ -74,3 +74,27 @@ mat-grid-tile {
   );
   background-size: 100% 100%;
 }
+
+// sem acesso classes
+.acesso.tile-cadastro {
+  pointer-events: none;
+}
+
+.acesso.tile-triagem {
+  pointer-events: none;
+}
+
+.acesso.tile-manutencao {
+  pointer-events: none;
+}
+
+.acesso.tile-concluido {
+  pointer-events: none;
+}
+.icone-cadeado {
+  content: url("/assets/image/lock.svg");
+  width: 25px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
