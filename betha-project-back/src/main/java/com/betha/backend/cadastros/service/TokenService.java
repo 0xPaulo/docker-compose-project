@@ -28,6 +28,8 @@ public class TokenService {
           .withSubject(tecnico.getEmail())
           .withExpiresAt(genExpirationDate())
           .withClaim("perfil", tecnico.getPerfil().toString())
+          .withClaim("id", tecnico.getId().toString())
+          .withClaim("nome", tecnico.getNome().toString())
           .sign(algorithm);
       return token;
     } catch (JWTCreationException e) {
