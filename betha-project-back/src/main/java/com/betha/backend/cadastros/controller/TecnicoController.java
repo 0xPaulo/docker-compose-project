@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betha.backend.cadastros.chamadoDTO.AuthenticateDTO;
+import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.chamadoDTO.LoginResponseDTO;
 import com.betha.backend.cadastros.chamadoDTO.RegisterDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Tecnico;
 import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
+import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.TecnicoRepository;
+import com.betha.backend.cadastros.service.ChamadoService;
 import com.betha.backend.cadastros.service.TecnicoService;
 import com.betha.backend.cadastros.service.TokenService;
 
@@ -35,13 +38,16 @@ public class TecnicoController {
   private final TecnicoService tecnicoService;
   private final AuthenticationManager authenticationManager;
   private final TokenService tokenService;
+  private final ChamadoService chamadoService;
 
   public TecnicoController(TecnicoRepository tecnicoRepository, TecnicoService tecnicoService,
-      AuthenticationManager authenticationManager, TokenService tokenService) {
+      AuthenticationManager authenticationManager, TokenService tokenService, ChamadoRepository chamadoRepository,
+      ChamadoService chamadoService) {
     this.tecnicoRepository = tecnicoRepository;
     this.tecnicoService = tecnicoService;
     this.authenticationManager = authenticationManager;
     this.tokenService = tokenService;
+    this.chamadoService = chamadoService;
   }
 
   @PostMapping("/login")
@@ -80,6 +86,11 @@ public class TecnicoController {
   public Chamado editarChamado(@PathVariable Long id, @RequestBody Long tecnicoID) {
     Chamado resultado = tecnicoService.editar(id, tecnicoID);
     return resultado;
+  }
+
+  @GetMapping("/chamados")
+  public List<ChamadoCompletoDTO> buscarTodosChamadosDoTecnico(@RequestParam(required = false) String params) {
+    return this.chamadoService.todosChamadosDo(params);
   }
 
 }

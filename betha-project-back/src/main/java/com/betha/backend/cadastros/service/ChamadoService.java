@@ -45,6 +45,50 @@ public class ChamadoService {
 
   }
 
+  public List<ChamadoCompletoDTO> todosChamadosDo(String clienteID) {
+    List<Chamado> chamados = new ArrayList<>();
+    chamados = this.chamadoRepository.buscarChamadosDo(clienteID);
+    List<ChamadoCompletoDTO> chamadoCompletoDTOs = new ArrayList<>();
+
+    for (Chamado chamado : chamados) {
+
+      Cliente cliente = chamado.getClienteId();
+      Tecnico tecnico = chamado.getTecnico();
+      ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
+      dto.setClienteId(cliente.getId());
+      dto.setClienteNome(cliente.getNome());
+      dto.setClienteEmail(cliente.getEmail());
+      dto.setClienteTelefone(cliente.getTelefone());
+      dto.setClienteEndereco(cliente.getEndereco());
+
+      dto.setId(chamado.getId());
+      dto.setNomeItem(chamado.getNomeItem());
+      dto.setItemSerie(chamado.getItemSerie());
+      dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
+      dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
+      dto.setCustoEstimado(chamado.getCustoEstimado());
+      dto.setDataEntrada(chamado.getDataEntrada());
+      dto.setStatus(chamado.getStatus());
+      if (chamado.getStatus().toString() == "CONCLUIDO_CONSERTADO") {
+        dto.setDataSaida(chamado.getDataSaida());
+      }
+      dto.setImage_urls(chamado.getImage_urls());
+      dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
+
+      if (tecnico != null) {
+        dto.setTecnico(tecnico.getId());
+        dto.setTecnicoImg(tecnico.getImagem());
+        dto.setTecnicoNome(tecnico.getNome());
+        dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
+      }
+
+      chamadoCompletoDTOs.add(dto);
+
+    }
+
+    return chamadoCompletoDTOs;
+  }
+
   public List<ChamadoCompletoDTO> todosChamados(List<String> params) {
     List<Chamado> chamados = new ArrayList<>();
     if (params != null && !params.isEmpty()) {
