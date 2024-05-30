@@ -77,6 +77,16 @@ export class TabelaService {
     }
   }
 
+  carregarTabela(subId: string, URL?: string): Observable<ChamadoCompleto[]> {
+    const params = new HttpParams().set("params", subId);
+    return this.httpClient
+      .get<ChamadoCompleto[]>(`${this.authorizeHttpAPI}${URL}`, { params })
+      .pipe(
+        tap((resultado) => console.log(resultado)),
+        delay(500)
+      );
+  }
+
   openDialogError() {
     this.matDialog.open(ErrorDialogComponent);
   }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Observable } from "rxjs";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { FinalizarPedidoComponent } from "src/app/components/dialog/finalizar-pedido/finalizar-pedido.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
-import { CadastroService } from "src/app/services/cadastro.service";
+import { AuthService } from "src/app/services/auth.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 @Component({
@@ -19,22 +18,22 @@ export class TecnicoTabelaComponent implements OnInit {
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
   filtro: string[] = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO"];
+  subId: string = this.authService.getIdToken();
+  URL: string = "tecnico/chamados";
+  nomeTecnico = this.authService.getNome();
 
   constructor(
-    private cadastroService: CadastroService,
-    private snackBar: MatSnackBar,
+    private authService: AuthService,
     private tabelaService: TabelaService,
     private dialog: MatDialog
   ) {
-    this.cadastros$ = this.carregarTabelaManu(this.filtro);
+    this.cadastros$ = this.carregarTabelaManu(this.subId);
   }
-
-  carregarTabelaManu(filtro: string[]): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro));
-  }
-
-  carregarNovaTabela() {
-    return (this.cadastros$ = this.tabelaService.carregarCadastros());
+  carregarTabelaManu(subId?: string): Observable<ChamadoCompleto[]> {
+    return (this.cadastros$ = this.tabelaService.carregarTabela(
+      this.subId,
+      this.URL
+    ));
   }
 
   finalizarPedido(dados: ChamadoCompleto) {
@@ -61,8 +60,12 @@ export class TecnicoTabelaComponent implements OnInit {
   }
 
   ngOnInit() {
+    const getId = this.authService.getIdToken();
+    if (getId) {
+      this.subId = getId;
+    }
     this.tabelaService.emitListaAtualizada.subscribe(() => {
-      this.carregarTabelaManu(this.filtro);
+      this.carregarTabelaManu(this.subId);
     });
   }
 }

@@ -1,10 +1,10 @@
 <div class="card-container">
   <mat-card-content>
     <div class="table-toolbar pt-2">
-      <h5 class="ms-4 ">Tabela do Tecnico: </h5>
+      <h5 class="ms-4 ">Tabela do Tecnico: {{nomeTecnico}}</h5>
     </div>
 
-    <mat-table (formSubmitted)="carregarNovaTabela()" *ngIf="cadastros$ | async as cadastros ; else loading"
+    <mat-table (formSubmitted)="carregarTabelaManu()" *ngIf="cadastros$ | async as cadastros ; else loading"
       [dataSource]="cadastros">
       <!-- ID Column -->
       <ng-container matColumnDef="id">
