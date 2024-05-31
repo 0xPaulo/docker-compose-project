@@ -31,11 +31,16 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/tecnico/login").permitAll()
 
                 // Cadastrar
-                .requestMatchers(HttpMethod.GET, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
-                .requestMatchers(HttpMethod.PATCH, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
-                .requestMatchers(HttpMethod.POST, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
-                .requestMatchers(HttpMethod.DELETE, "/cadastros").hasAnyRole("ADMIN", "RECEPCAO")
-                .requestMatchers(HttpMethod.POST, "/clientes").hasAnyRole("ADMIN", "RECEPCAO")
+                .requestMatchers(HttpMethod.GET, "/cadastros").hasAnyRole("ADMIN",
+                    "RECEPCAO")
+                .requestMatchers(HttpMethod.PATCH, "/cadastros").hasAnyRole("ADMIN",
+                    "RECEPCAO")
+                .requestMatchers(HttpMethod.POST, "/cadastros").hasAnyRole("ADMIN",
+                    "RECEPCAO")
+                .requestMatchers(HttpMethod.DELETE, "/cadastros").hasAnyRole("ADMIN",
+                    "RECEPCAO")
+                .requestMatchers(HttpMethod.POST, "/clientes").hasAnyRole("ADMIN",
+                    "RECEPCAO")
 
                 // Triagem
                 .requestMatchers(HttpMethod.GET, "/triagem").hasAnyRole("ADMIN", "TRIAGEM")
@@ -51,10 +56,12 @@ public class SecurityConfig {
 
                 // Manutencao
                 // trocar para url manutencao e cada um com o seu
-                .requestMatchers(HttpMethod.GET, "/tecnico").hasAnyRole("ADMIN", "MANUTENCAO") // sem route controler
+                .requestMatchers(HttpMethod.GET, "/tecnico").hasAnyRole("ADMIN",
+                    "MANUTENCAO") // sem route controler
 
                 .requestMatchers(HttpMethod.POST, "/tecnico/register").hasRole("ADMIN")
-                .anyRequest().authenticated())
+                // .anyRequest().authenticated())
+                .anyRequest().permitAll())
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
