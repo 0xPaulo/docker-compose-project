@@ -17,6 +17,10 @@ public class ProxyController {
     this.webClient = webClientBuilder.build();
   }
 
+  // Metodo recebe uma URL o spring faça a requisiçao via webClient, recupera
+  // a informaçao e redireciona para o front.
+  // Esse metodo foi criado para burlar o CORS do Google Drive
+
   @GetMapping(value = "/proxy", produces = MediaType.IMAGE_JPEG_VALUE)
   public Mono<byte[]> proxyImage(@RequestParam String imageUrl) {
     return webClient.get()
