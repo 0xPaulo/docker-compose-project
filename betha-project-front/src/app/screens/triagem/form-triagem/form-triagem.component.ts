@@ -16,6 +16,7 @@ export class FormTriagemComponent {
   // isEditMode: boolean = false;
   result: string[] = [];
   id: string = "";
+  URL: string = "triagem";
   constructor(
     private cadastroService: CadastroService,
     private datePipe: DatePipe,
@@ -49,7 +50,7 @@ export class FormTriagemComponent {
     this.form.patchValue({ image_urls: this.result });
     const dadosAtualizados = { ...this.form.value };
     const idItem = this.data.infoCadastro.id;
-    this.cadastroService.update(idItem, dadosAtualizados).subscribe(
+    this.cadastroService.update(idItem, dadosAtualizados, this.URL).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
