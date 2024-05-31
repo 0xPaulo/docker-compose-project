@@ -10,7 +10,7 @@ import com.betha.backend.cadastros.models.Chamado;
 
 public interface ChamadoRepository extends JpaRepository<Chamado, Long> {
 
-  @Query("SELECT c FROM Chamado c WHERE c.tecnico.id = :id")
+  @Query("SELECT c FROM Chamado c WHERE c.tecnico.id = :id AND c.status = 'EM_MANUTENCAO'")
   List<Chamado> buscarChamadosDo(@Param("id") String tecnico);
 
 }
