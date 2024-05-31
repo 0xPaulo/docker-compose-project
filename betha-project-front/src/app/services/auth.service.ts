@@ -30,6 +30,14 @@ export class AuthService {
     }
     return "";
   }
+  getPerfilToken(): string {
+    const token = sessionStorage.getItem("jwtToken");
+    if (token) {
+      const decodedToken: CustomJwtPayload = jwtDecode(token);
+      return decodedToken.perfil;
+    }
+    return "";
+  }
   getNome(): string {
     const token = sessionStorage.getItem("jwtToken");
     if (token) {
