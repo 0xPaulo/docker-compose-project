@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable, catchError, delay, of, tap } from "rxjs";
+import { Observable, delay, first, tap } from "rxjs";
 
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
@@ -23,13 +23,11 @@ export class TabelaService {
   ) {}
 
   carregarCadastros(): Observable<ChamadoCompleto[]> {
-    return this.cadastroService.listarTodos().pipe(
-      catchError(() => {
-        this.openDialogError();
-        return of([]);
-      })
-    );
+    return this.httpClient
+      .get<ChamadoCompleto[]>(this.API)
+      .pipe(delay(500), first());
   }
+
   filterStatusClass(status: any) {
     switch (status) {
       case "CANCELADO":
