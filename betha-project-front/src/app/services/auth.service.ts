@@ -1,29 +1,44 @@
 import { Injectable } from "@angular/core";
+import { jwtDecode } from "jwt-decode";
+import { CustomJwtPayload } from "../interfaces/CustomJwtPayload ";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  private readonly TOKEN_KEY = "authToken"; // Chave para armazenar o token no localStorage
+  private readonly TOKEN_KEY = "jwtToken";
 
   constructor() {}
 
-  // Método para salvar o token após login bem-sucedido
-  login(token: string): void {
+  saveSessionStorageToken(token: string): void {
     sessionStorage.setItem(this.TOKEN_KEY, token);
   }
 
-  // Método para verificar se o usuário está autenticado
   isLoggedIn(): boolean {
     return !!sessionStorage.getItem(this.TOKEN_KEY);
   }
 
-  // Método para obter o token de autenticação
   getToken(): string | null {
     return sessionStorage.getItem(this.TOKEN_KEY);
   }
 
-  // Método para realizar logout
+  getIdToken(): string {
+    const token = sessionStorage.getItem("jwtToken");
+    if (token) {
+      const decodedToken: CustomJwtPayload = jwtDecode(token);
+      return decodedToken.id;
+    }
+    return "";
+  }
+  getNome(): string {
+    const token = sessionStorage.getItem("jwtToken");
+    if (token) {
+      const decodedToken: CustomJwtPayload = jwtDecode(token);
+      return decodedToken.nome;
+    }
+    return "";
+  }
+
   logout(): void {
     sessionStorage.removeItem(this.TOKEN_KEY);
   }
