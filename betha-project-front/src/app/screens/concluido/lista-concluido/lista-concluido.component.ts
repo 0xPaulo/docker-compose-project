@@ -26,10 +26,10 @@ export class ListaConcluidoComponent implements OnInit {
   URL: string = "concluido";
 
   constructor(private dialog: MatDialog, private tabelaService: TabelaService) {
-    this.cadastros$ = this.carregarTabelaManu(this.filtro);
+    this.cadastros$ = this.carregarTabelaConclu(this.filtro);
   }
 
-  carregarTabelaManu(filtro: string[]): Observable<ChamadoCompleto[]> {
+  carregarTabelaConclu(filtro: string[]): Observable<ChamadoCompleto[]> {
     return (this.cadastros$ = this.tabelaService.carregarFiltro(
       filtro,
       this.URL
@@ -77,7 +77,7 @@ export class ListaConcluidoComponent implements OnInit {
 
   ngOnInit() {
     this.tabelaService.emitListaAtualizada.subscribe(() => {
-      this.carregarTabelaManu(this.filtro);
+      this.carregarTabelaConclu(this.filtro);
     });
   }
 }
