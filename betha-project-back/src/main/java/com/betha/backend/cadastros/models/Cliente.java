@@ -3,8 +3,6 @@ package com.betha.backend.cadastros.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.betha.backend.cadastros.models.Enums.Perfils;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,22 +32,20 @@ public class Cliente {
   private Long id;
 
   @Column
+  @NotNull
   private String nome;
 
   @Column
+  @NotNull
   private String email;
 
   @Column
+  @NotNull
   private String telefone;
 
   @Column
+  @NotNull
   private String endereco;
-
-  @Column
-  private String imagem;
-
-  @Column
-  private Perfils perfil;
 
   @OneToMany(mappedBy = "clienteId")
   private List<Chamado> chamados = new ArrayList<>();

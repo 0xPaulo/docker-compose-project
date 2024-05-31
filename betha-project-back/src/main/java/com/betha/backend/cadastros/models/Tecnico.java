@@ -20,6 +20,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,12 +43,15 @@ public class Tecnico implements UserDetails {
   private Long id;
 
   @Column
+  @NotNull
   private String nome;
 
-  @Column
+  @Column(unique = true)
+  @NotNull
   private String email;
 
   @Column
+  @NotNull
   private String senha;
 
   @Column(name = "tecnico_categorias")
@@ -59,6 +63,7 @@ public class Tecnico implements UserDetails {
 
   @Column
   @Enumerated(EnumType.STRING)
+  @NotNull
   private Perfils perfil;
 
   @OneToMany(mappedBy = "tecnico")

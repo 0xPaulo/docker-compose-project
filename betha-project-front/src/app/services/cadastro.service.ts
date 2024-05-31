@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, first, of, tap } from "rxjs";
+import { Observable, catchError, of, tap } from "rxjs";
 import { ChamadoCompleto } from "../interfaces/chamadoCompleto";
 import { FormChamado } from "../interfaces/formChamado";
 
@@ -15,12 +15,6 @@ export class CadastroService {
 
   createCadastro(cadastro: FormChamado) {
     return this.httpClient.post(this.APIcadastro, cadastro);
-  }
-
-  listarTodos() {
-    return this.httpClient
-      .get<ChamadoCompleto[]>(this.APIcadastro)
-      .pipe(delay(500), first());
   }
 
   delete(id: string) {

@@ -1,16 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
-import { Cadastro } from "src/app/interfaces/cadastro";
 import { CadastroService } from "src/app/services/cadastro.service";
 import { TabelaService } from "src/app/services/tabela.service";
 
 import { DeleteComponent } from "src/app/components/dialog/delete/delete.component";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
+import { SemPermissaoComponent } from "src/app/components/dialog/errors/sem-permissao/sem-permissao.component";
 import { PossuiCadastroComponent } from "src/app/components/dialog/possui-cadastro/possui-cadastro.component";
+import { Cadastro } from "src/app/interfaces/cadastro";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { FormCadastroComponent } from "src/app/screens/cadastro/form-cadastro/form-cadastro.component";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "lista-cadastro",
@@ -23,6 +25,7 @@ export class ListaComponent implements OnInit {
   displayedColumns = ["id", "info", "ico"];
 
   constructor(
+    private authService: AuthService,
     private cadastroService: CadastroService,
     private dialog: MatDialog,
     private tabelaService: TabelaService
@@ -51,27 +54,36 @@ export class ListaComponent implements OnInit {
 
   editarItem(item: ChamadoCompleto) {
     const id = item.id;
-    const subscription = this.cadastroService.findById(id).subscribe(
-      (dados: ChamadoCompleto[]) => {
-        // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
-        //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
-        //     width: "40%",
-        //     data: { modoEdicao: true, infoCadastro: dados },
-        //   });
-        //   dialogPermi.afterClosed().subscribe((result) => {
-        //     subscription.unsubscribe();
-        //   });
-        // } else {
-        const dialogRef = this.dialog.open(FormCadastroComponent, {
-          maxWidth: "600px",
-          data: { infoCadastro: dados },
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-          subscription.unsubscribe();
-        });
-      }
-      // }
-    );
+    const perfil = this.authService.getPerfilToken();
+    const subscription = this.cadastroService
+      .findById(id)
+      .subscribe((dados: ChamadoCompleto[]) => {
+        if (perfil === "ADMIN") {
+          const dialogRef = this.dialog.open(FormCadastroComponent, {
+            maxWidth: "600px",
+            data: { infoCadastro: dados },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        } else if (!(item.status === "DISPONIVEL_TRIAGEM")) {
+          const dialogPermi = this.dialog.open(SemPermissaoComponent, {
+            width: "40%",
+            data: { modoEdicao: true, infoCadastro: dados },
+          });
+          dialogPermi.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        } else {
+          const dialogRef = this.dialog.open(FormCadastroComponent, {
+            maxWidth: "600px",
+            data: { infoCadastro: dados },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        }
+      });
   }
 
   openDialoDelete(dados: Cadastro) {

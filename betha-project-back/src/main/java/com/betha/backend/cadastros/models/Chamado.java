@@ -19,6 +19,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +44,7 @@ public class Chamado {
 
   @ManyToOne
   @JoinColumn(name = "cliente_id_fk")
+  @NotNull
   private Cliente clienteId;
 
   @ManyToOne
@@ -50,15 +52,18 @@ public class Chamado {
   private Tecnico tecnico;
 
   @Column(name = "name_item")
+  @NotNull
   private String nomeItem;
 
   @Column(name = "item_serie")
+  @NotNull
   private String itemSerie;
 
   @Enumerated(EnumType.STRING)
   private Status status;
 
   @Column(name = "defeito_relatado")
+  @NotNull
   private String defeitoRelatado;
 
   @Column(name = "analise_tecnica")

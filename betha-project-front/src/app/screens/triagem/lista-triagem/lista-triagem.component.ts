@@ -7,7 +7,9 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { EmailComponent } from "src/app/components/dialog/email/email/email.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
+import { SemPermissaoComponent } from "src/app/components/dialog/errors/sem-permissao/sem-permissao.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
+import { AuthService } from "src/app/services/auth.service";
 import { CadastroService } from "src/app/services/cadastro.service";
 import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
 
@@ -24,6 +26,7 @@ export class ListaTriagemComponent implements OnInit {
   URL: string = "triagem";
 
   constructor(
+    private authService: AuthService,
     private cadastroService: CadastroService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
@@ -70,30 +73,38 @@ export class ListaTriagemComponent implements OnInit {
   editartriagem(item: ChamadoCompleto) {
     const id = item.id;
 
-    const subscription = this.cadastroService.findById(id).subscribe(
-      (dados: ChamadoCompleto[]) => {
-        // if (!(item.status === "DISPONIVEL_TRIAGEM")) {
-        //   const dialogPermi = this.dialog.open(SemPermissaoComponent, {
-        //     width: "40%",
-        //     data: { modoEdicao: true, infoCadastro: dados },
-        //   });
-        //   dialogPermi.afterClosed().subscribe((result) => {
-        //     subscription.unsubscribe();
-        //   });
-        // } else {
-        const dialogRef = this.dialog.open(FormTriagemComponent, {
-          // width: "70%",
-          // height: "516px",
-          maxWidth: "600px",
-          data: { infoCadastro: dados },
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-          subscription.unsubscribe();
-        });
-      }
-      // }
-    );
+    const subscription = this.cadastroService
+      .findById(id)
+      .subscribe((dados: ChamadoCompleto[]) => {
+        const perfil = this.authService.getPerfilToken();
+        if (perfil === "ADMIN") {
+          const dialogRef = this.dialog.open(FormTriagemComponent, {
+            maxWidth: "600px",
+            data: { infoCadastro: dados },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        } else if (!(item.status === "DISPONIVEL_TRIAGEM")) {
+          const dialogPermi = this.dialog.open(SemPermissaoComponent, {
+            width: "40%",
+            data: { modoEdicao: true, infoCadastro: dados },
+          });
+          dialogPermi.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        } else {
+          const dialogRef = this.dialog.open(FormTriagemComponent, {
+            maxWidth: "600px",
+            data: { infoCadastro: dados },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            subscription.unsubscribe();
+          });
+        }
+      });
   }
+
   alternarDetalhes(index: number): void {
     this.detalhesVisiveis[index] = !this.detalhesVisiveis[index];
   }

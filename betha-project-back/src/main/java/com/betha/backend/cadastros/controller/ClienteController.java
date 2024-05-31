@@ -2,8 +2,8 @@ package com.betha.backend.cadastros.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +21,6 @@ import com.betha.backend.cadastros.service.ClienteService;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-  @Autowired
   private final ClienteRepository clienteRepository;
   private final ClienteService clienteService;
 
@@ -31,12 +30,14 @@ public class ClienteController {
   }
 
   @GetMapping()
+  @Secured({ "ROLE_RECEPCAO" })
   public List<Cliente> buscarClientesPorNome(@RequestParam("nome") String nome) {
     List<Cliente> valor = this.clienteRepository.findByNomeContainingIgnoreCase(nome);
     return valor;
   }
 
   @PostMapping()
+  @Secured({ "ROLE_RECEPCAO" })
   @ResponseStatus(HttpStatus.CREATED)
   public Cliente salvarCliente(@RequestBody FormCliente cliente) {
     return clienteService.salvarClienteBanco(cliente);
