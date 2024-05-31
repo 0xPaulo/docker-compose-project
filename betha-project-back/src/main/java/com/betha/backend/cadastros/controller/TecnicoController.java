@@ -3,6 +3,7 @@ package com.betha.backend.cadastros.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,17 +51,19 @@ public class TecnicoController {
     this.chamadoService = chamadoService;
   }
 
+  // Verifica se email e senha existem no banco
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody @Valid AuthenticateDTO dados) {
     var usernamePassword = new UsernamePasswordAuthenticationToken(dados.email(), dados.senha());
     var auth = this.authenticationManager.authenticate(usernamePassword);
-
     var token = tokenService.generateToken((Tecnico) auth.getPrincipal());
     return ResponseEntity.ok(new LoginResponseDTO(token));
   }
 
+  // Salva um novo Tecnico na tabela
+  @Secured({ "ROLE_ADMIN" })
   @PostMapping("/register")
-  public ResponseEntity register(@RequestBody @Valid RegisterDTO dados) {
+  public ResponseEntity registrarTecino(@RequestBody @Valid RegisterDTO dados) {
     if (this.tecnicoRepository.findByEmail(dados.email()) != null)
       return ResponseEntity.badRequest().build();
     String encryptPassword = new BCryptPasswordEncoder().encode(dados.senha());
@@ -69,7 +72,9 @@ public class TecnicoController {
     return ResponseEntity.ok().build();
   }
 
+  // Busca Tecnicos disponiveis para o chamado
   @GetMapping()
+  @Secured({ "ROLE_TECNICO" })
   public List<Tecnico> buscarTodosTecnicos(@RequestParam(required = false) String params) {
     if (params != null) {
       String categoriaString = params;
@@ -79,16 +84,19 @@ public class TecnicoController {
     }
     List<Tecnico> resultado = this.tecnicoRepository.buscarTecnicosManutencao();
     return resultado;
-
   }
 
+  // Definir tecnico para o chamado
   @PatchMapping("/{id}")
+  @Secured({ "ROLE_TECNICO" })
   public Chamado editarChamado(@PathVariable Long id, @RequestBody Long tecnicoID) {
     Chamado resultado = tecnicoService.editar(id, tecnicoID);
     return resultado;
   }
 
+  // Buscar todos os chamados Do Tecnico X
   @GetMapping("/chamados")
+  @Secured({ "ROLE_MANUTENCAO" })
   public List<ChamadoCompletoDTO> buscarTodosChamadosDoTecnico(@RequestParam(required = false) String params) {
     return this.chamadoService.todosChamadosDo(params);
   }
