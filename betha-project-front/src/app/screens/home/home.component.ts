@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       this.isTECNICO = true;
     }
     if (decodedToken.perfil === "MANUTENCAO") {
-      this.router.navigate(["tecnico"]);
+      this.router.navigate(["chamado"]); // mudar url
     }
   }
 }
