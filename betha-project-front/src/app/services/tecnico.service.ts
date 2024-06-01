@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { MatRadioChange } from "@angular/material/radio";
 import { Observable, catchError, of, tap } from "rxjs";
 import { MostrarCadastro } from "../interfaces/mostrarCadastro";
+import { TecnicoForm } from "../interfaces/tecnico";
 
 @Injectable({
   providedIn: "root",
@@ -10,11 +11,16 @@ import { MostrarCadastro } from "../interfaces/mostrarCadastro";
 export class TecnicoService {
   private APItecnico = "http://localhost:8080/tecnico";
   private APIlogar = "http://localhost:8080/tecnico/login";
+  private APIregister = "http://localhost:8080/tecnico/register";
 
   constructor(private httpClient: HttpClient) {}
 
   logar(body: string[]) {
     return this.httpClient.post<string>(this.APIlogar, body);
+  }
+
+  registrarTecnico(tecnico: TecnicoForm) {
+    return this.httpClient.post(this.APIregister, tecnico);
   }
 
   buscarTodos(filtro?: string): Observable<string[]> {

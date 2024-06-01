@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>Cadastrar Tecnico</h2>
+<div class="p-4">
+  <form class="form-group" [formGroup]="form">
+    <div *ngIf="msgError" class="campos-invalidos">
+      {{ msgError }}
+    </div>
+
+
+    <mat-form-field class="col-md-12 mt-1">
+      <mat-label>Nome do tecnico</mat-label>
+      <input matInput placeholder="" formControlName="tecnicoNome">
+      <mat-error *ngIf="form.get('tecnicoNome')!.invalid && form.get('tecnicoNome')!.touched">
+        Nome é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-12">
+      <mat-label>Escolha o perfil </mat-label>
+      <mat-select formControlName="tecnicoPerfil">
+        <mat-option value="RECEPCAO">Recepção</mat-option>
+        <mat-option value="TRIAGEM">Triagem</mat-option>
+        <mat-option value="TECNICO">Gerente Técnico</mat-option>
+        <mat-option value="MANUTENCAO">Manutenção</mat-option>
+        <mat-option value="ADMIN">Admin</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('tecnicoPerfil')!.invalid && form.get('tecnicoPerfil')!.touched">
+        Escolha uma das opções
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="form.get('tecnicoPerfil')?.value === 'MANUTENCAO' && form.get('tecnicoPerfil')?.touched">
+      <mat-form-field class="col-md-12">
+        <mat-label>Escolha a especialidade </mat-label>
+        <mat-select formControlName="tecnicoCategoria">
+          <mat-option value="GERAL">Geral</mat-option>
+          <mat-option value="TELAS">Telas</mat-option>
+          <mat-option value="PLACAS">Componentes</mat-option>
+          <mat-option value="MOBILE">Mobile</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('tecnicoCategoria')!.invalid && form.get('tecnicoCategoria')!.touched">
+          Escolha uma das opções
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <mat-form-field class="col-md-12">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="" formControlName="tecnicoEmail">
+      <mat-error *ngIf="form.get('tecnicoEmail')!.invalid && form.get('tecnicoEmail')!.touched">
+        Email não reconhecido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-12">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" placeholder="" formControlName="tecnicoSenha">
+      <mat-error *ngIf="form.get('tecnicoSenha')!.invalid && form.get('tecnicoSenha')!.touched">
+        Senha é obrigatória
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+</div>
+<mat-dialog-actions align="end">
+  <button class="botao-betha-cancel" mat-dialog-close (click)="onCancel()">Cancelar</button>
+
+  <button class="botao-betha" (click)="verificaAndSubmit()">Salvar
+    cliente</button>
+  <!-- cdkFocusInitial -->
+</mat-dialog-actions>

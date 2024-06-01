@@ -14,10 +14,10 @@
           <button mat-menu-item>Trocar para perfil Tecnico</button>
           <button mat-menu-item>Trocar para perfil Recepção</button>
         </mat-menu>
-        <button mat-button [matMenuTriggerFor]="menuR">Registrado ⏷</button>
+        <button *ngIf="ADMIN" mat-button [matMenuTriggerFor]="menuR">Registrado ⏷</button>
         <mat-menu #menuR="matMenu">
-          <button mat-menu-item>Registra novo cliente</button>
-          <button mat-menu-item>Registra novo tecnico</button>
+          <button mat-menu-item (click)="criarCliente()">Registra novo cliente</button>
+          <button mat-menu-item (click)="criarTecnico()">Registra novo tecnico</button>
         </mat-menu>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Planejado ⏷</span>
         <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Executando ⏷</span>

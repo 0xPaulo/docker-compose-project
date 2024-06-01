@@ -1,15 +1,18 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { AuthService } from "./../../services/auth.service";
 import { DialogCriarClienteComponent } from "./dialog-criar-cliente/dialog-criar-cliente.component";
+import { DialogCriarTecnicoComponent } from "./dialog-criar-tecnico/dialog-criar-tecnico.component";
 
 @Component({
   selector: "betha-toolbar",
   templateUrl: "./toolbar.component.html",
   styleUrls: ["./toolbar.component.scss"],
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
+  ADMIN: boolean = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -19,6 +22,14 @@ export class ToolbarComponent {
   criarCliente() {
     const dialogRef = this.dialog.open(DialogCriarClienteComponent, {
       maxWidth: "600px",
+      minWidth: "600px",
+    });
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+  criarTecnico() {
+    const dialogRef = this.dialog.open(DialogCriarTecnicoComponent, {
+      maxWidth: "600px",
+      minWidth: "600px",
     });
     dialogRef.afterClosed().subscribe((result) => {});
   }
@@ -43,12 +54,10 @@ export class ToolbarComponent {
     this.router.navigate(["/login"]);
   }
 
-  // canActivate(): boolean {
-  //   if (this.authService.isLoggedIn()) {
-  //     return true;
-  //   } else {
-  //     this.router.navigate(["/login"]);
-  //     return false;
-  //   }
-  // }
+  ngOnInit(): void {
+    const isAdmin = this.authService.getPerfilToken();
+    if (isAdmin === "ADMIN") {
+      this.ADMIN = true;
+    }
+  }
 }
