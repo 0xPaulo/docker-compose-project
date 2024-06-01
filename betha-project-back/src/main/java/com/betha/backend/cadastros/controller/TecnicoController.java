@@ -2,6 +2,7 @@ package com.betha.backend.cadastros.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.chamadoDTO.AuthenticateDTO;
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
@@ -67,7 +69,8 @@ public class TecnicoController {
     if (this.tecnicoRepository.findByEmail(dados.email()) != null)
       return ResponseEntity.badRequest().build();
     String encryptPassword = new BCryptPasswordEncoder().encode(dados.senha());
-    Tecnico novoTecnico = new Tecnico(dados.email(), encryptPassword, dados.perfil());
+    Tecnico novoTecnico = new Tecnico(dados.email(), encryptPassword, dados.perfil(), dados.nome(),
+        dados.tecnicoCategorias());
     this.tecnicoRepository.save(novoTecnico);
     return ResponseEntity.ok().build();
   }
@@ -99,6 +102,17 @@ public class TecnicoController {
   @Secured({ "ROLE_MANUTENCAO" })
   public List<ChamadoCompletoDTO> buscarTodosChamadosDoTecnico(@RequestParam(required = false) String params) {
     return this.chamadoService.todosChamadosDo(params);
+  }
+
+  @PatchMapping("/password-patch")
+  public ResponseEntity trocarSenha(@RequestBody RegisterDTO dados) {
+    Long novoId = Long.parseLong(dados.id());
+    Tecnico novoTecnico = tecnicoRepository.findById(novoId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tecnico não encontrado"));
+    String encryptPassword = new BCryptPasswordEncoder().encode(dados.senha());
+    novoTecnico.setSenha(encryptPassword);
+    tecnicoRepository.save(novoTecnico);
+    return ResponseEntity.ok().body("Senha atualizada");
   }
 
 }
