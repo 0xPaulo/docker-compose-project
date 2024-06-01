@@ -3,6 +3,7 @@ package com.betha.backend.cadastros.controller.authorizeRoutesController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,12 +33,14 @@ public class ManutencaoController {
   }
 
   @GetMapping()
+  @Secured({ "ROLE_TECNICO" })
   public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> params) {
     List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados(params);
     return resultado;
   }
 
   @PatchMapping("/{id}")
+  @Secured({ "ROLE_TECNICO" })
   public Chamado editarChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
     Chamado resultado = chamadoService.editar(id, chamadoCompletoDTO);
     return resultado;
