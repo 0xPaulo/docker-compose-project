@@ -69,9 +69,11 @@ public class Tecnico implements UserDetails {
   @OneToMany(mappedBy = "tecnico")
   private List<Chamado> chamados = new ArrayList<>();
 
-  public Tecnico(String email, String senha, Perfils perfil) {
+  public Tecnico(String email, String senha, Perfils perfil, String nome, TecnicoCategorias tecnicoCategorias) {
+    this.nome = nome;
     this.email = email;
     this.senha = senha;
+    this.tecnicoCategorias = tecnicoCategorias;
     this.perfil = perfil;
   }
 
