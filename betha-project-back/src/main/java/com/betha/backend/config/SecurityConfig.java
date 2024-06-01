@@ -28,10 +28,8 @@ public class SecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(
             authorize -> authorize
-
                 .requestMatchers(HttpMethod.POST, "/tecnico/login")
                 .permitAll()
-
                 // Cadastrar
                 .requestMatchers(HttpMethod.GET, "/cadastros")
                 .hasAnyRole("ADMIN",
