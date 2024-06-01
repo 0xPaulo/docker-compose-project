@@ -2,7 +2,6 @@ package com.betha.backend.cadastros.controller.authorizeRoutesController;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,15 +15,11 @@ import com.betha.backend.cadastros.service.ChamadoService;
 @RequestMapping("/concluido")
 public class ConcluidoController {
 
-  @Autowired
   private final ChamadoService chamadoService;
-  @Autowired
-  private final ChamadoRepository chamadoRepository;
 
   ConcluidoController(ChamadoService chamadoService,
       ChamadoRepository chamadoRepository) {
     this.chamadoService = chamadoService;
-    this.chamadoRepository = chamadoRepository;
   }
 
   @GetMapping()

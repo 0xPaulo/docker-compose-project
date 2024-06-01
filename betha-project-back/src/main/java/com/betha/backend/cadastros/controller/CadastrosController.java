@@ -50,7 +50,6 @@ public class CadastrosController {
     this.chamadoRepository.deleteById(id);
   }
 
-  // Filtro de estado do chamado
   @GetMapping()
   @Secured({ "ROLE_RECEPCAO" })
   public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> params) {
@@ -58,7 +57,6 @@ public class CadastrosController {
     return resultado;
   }
 
-  // Busca o chamado pelo seu ID
   @GetMapping("/{id}")
   @Secured({ "ROLE_RECEPCAO", "ROLE_TRIAGEM", "ROLE_TECNICO" })
   public ChamadoCompletoDTO findChamadoPeloId(@PathVariable Long id) {

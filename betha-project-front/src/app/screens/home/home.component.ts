@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
     }
     if (decodedToken.perfil === "RECEPCAO") {
       this.isRECEPCAO = true;
+      this.isCONCLUIDO = true;
     }
     if (decodedToken.perfil === "TRIAGEM") {
       this.isTRIAGEM = true;
