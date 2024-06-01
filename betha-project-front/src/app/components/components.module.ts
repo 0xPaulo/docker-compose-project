@@ -58,6 +58,7 @@ import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { DialogCriarClienteComponent } from "./toolbar/dialog-criar-cliente/dialog-criar-cliente.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { DialogCriarTecnicoComponent } from './toolbar/dialog-criar-tecnico/dialog-criar-tecnico.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
     FinalizarPedidoComponent,
     EmailContatoComponent,
     EntregueClienteComponent,
+    DialogCriarTecnicoComponent,
   ],
   imports: [
     MatRadioModule,
