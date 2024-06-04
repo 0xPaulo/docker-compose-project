@@ -45,11 +45,14 @@ export class ListaManuComponent implements OnInit {
   }
 
   carregarNovaTabela() {
-    return (this.cadastros$ = this.tabelaService.carregarCadastros());
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(
+      null,
+      this.URL
+    ));
   }
 
   filterStatus(filtros: string[]) {
-    this.cadastros$ = this.tabelaService.carregarFiltro(filtros);
+    this.cadastros$ = this.tabelaService.carregarFiltro(filtros, this.URL);
   }
 
   addTecnico(item: ChamadoCompleto) {

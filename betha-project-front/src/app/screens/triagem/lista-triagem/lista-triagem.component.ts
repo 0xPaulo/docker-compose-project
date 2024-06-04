@@ -43,18 +43,15 @@ export class ListaTriagemComponent implements OnInit {
   }
 
   carregarNovaTabela() {
-    return (this.cadastros$ = this.tabelaService.carregarCadastros());
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(
+      null,
+      this.URL
+    ));
   }
   filterStatus(filtros: string[]) {
-    this.cadastros$ = this.tabelaService.carregarFiltro(filtros);
+    this.cadastros$ = this.tabelaService.carregarFiltro(filtros, this.URL);
   }
 
-  // abrirDialogForm() {
-  //   const dialogRef = this.dialog.open(FormCadastroComponent, {
-  //     maxWidth: "600px",
-  //   });
-  //   dialogRef.afterClosed().subscribe((result) => {});
-  // }
   openDialogEmail(dados: ChamadoCompleto) {
     this.dialog.open(EmailComponent, {
       width: "60%",
@@ -112,7 +109,7 @@ export class ListaTriagemComponent implements OnInit {
   chamarCancelamento(element: Partial<ChamadoCompleto>) {
     const id = element.id;
     const elementAtualizado = { ...element, status: "CANCELADO" };
-    this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
+    this.cadastroService.mudarStatus(id, elementAtualizado, this.URL).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
@@ -125,7 +122,7 @@ export class ListaTriagemComponent implements OnInit {
   chamarManutencao(element: Partial<ChamadoCompleto>) {
     const id = element.id;
     const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
-    this.cadastroService.mudarStatus(id, elementAtualizado).subscribe(
+    this.cadastroService.mudarStatus(id, elementAtualizado, this.URL).subscribe(
       (result) => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
