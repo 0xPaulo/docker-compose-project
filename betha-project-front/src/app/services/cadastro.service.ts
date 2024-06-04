@@ -51,16 +51,21 @@ export class CadastroService {
         );
   }
 
-  mudarStatus(id: string | undefined, element: Partial<ChamadoCompleto>) {
-    return this.httpClient
-      .patch<ChamadoCompleto>(`${this.APIcadastro}/${id}`, element)
-      .pipe(
-        tap(),
-        catchError((error) => {
-          console.log("Erro ao atualizar registro", error);
-          return of(null);
-        })
-      );
+  mudarStatus(
+    id: string | undefined,
+    element: Partial<ChamadoCompleto>,
+    URL?: string
+  ) {
+    let urlBase = URL
+      ? `${this.authorizeHttpAPI}${URL}/${id}`
+      : `${this.APIcadastro}/${id}`;
+    return this.httpClient.patch<ChamadoCompleto>(urlBase, element).pipe(
+      tap(),
+      catchError((error) => {
+        console.log("Erro ao atualizar registro", error);
+        return of(null);
+      })
+    );
   }
 
   finalizarPedido(id: string, dadosPedido: string[]) {

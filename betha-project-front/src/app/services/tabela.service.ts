@@ -53,26 +53,22 @@ export class TabelaService {
     }
   }
   carregarFiltro(
-    filtros: string[],
+    filtros?: string[] | null,
     URL?: string
   ): Observable<ChamadoCompleto[]> {
-    const filtroString = filtros.join(",");
-    const params = new HttpParams().set("params", filtroString);
-    if (URL) {
-      return this.httpClient
-        .get<ChamadoCompleto[]>(`${this.authorizeHttpAPI}${URL}`, { params })
-        .pipe(
-          tap((resultado) => console.log(resultado)),
-          delay(500)
-        );
-    } else {
-      return this.httpClient
-        .get<ChamadoCompleto[]>(`${this.API}`, { params })
-        .pipe(
-          tap((resultado) => console.log(resultado)),
-          delay(500)
-        );
+    let params = new HttpParams();
+
+    if (filtros && filtros.length > 0) {
+      const filtroString = filtros.join(",");
+      params = params.set("params", filtroString);
     }
+
+    let urlBase = URL ? `${this.authorizeHttpAPI}${URL}` : this.API;
+
+    return this.httpClient.get<ChamadoCompleto[]>(urlBase, { params }).pipe(
+      tap((resultado) => console.log(resultado)),
+      delay(500)
+    );
   }
 
   carregarTabela(subId: string, URL?: string): Observable<ChamadoCompleto[]> {
