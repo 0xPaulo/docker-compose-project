@@ -39,7 +39,7 @@ public class CadastrosController {
   @PostMapping()
   @ResponseStatus(HttpStatus.CREATED)
   @Secured({ "ROLE_RECEPCAO" })
-  public Chamado salvarCadastro(@RequestBody Chamado chamado) {
+  public Chamado salvarChamado(@RequestBody Chamado chamado) {
     System.out.println(chamado);
     return chamadoService.salvarChamadoBanco(chamado);
   }
