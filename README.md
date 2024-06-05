@@ -1,5 +1,8 @@
 # Projeto de Cadastro de Itens para Conserto
 
+## Link do video mostrando o projeto:
+https://youtu.be/nPaErDVJcr8
+
 ## Introdução
 Este é um projeto desenvolvido utilizando Angular para o frontend e Spring Boot para o backend. Ele permite cadastrar itens para conserto de forma simples e eficiente.
 
