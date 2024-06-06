@@ -45,48 +45,10 @@ public class ChamadoService {
 
   }
 
-  public List<ChamadoCompletoDTO> todosChamadosDo(String clienteID) {
+  public List<ChamadoCompletoDTO> todosChamadosDo(String TecnicoID) {
     List<Chamado> chamados = new ArrayList<>();
-    chamados = this.chamadoRepository.buscarChamadosDo(clienteID);
-    List<ChamadoCompletoDTO> chamadoCompletoDTOs = new ArrayList<>();
-
-    for (Chamado chamado : chamados) {
-
-      Cliente cliente = chamado.getClienteId();
-      Tecnico tecnico = chamado.getTecnico();
-      ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
-      dto.setClienteId(cliente.getId());
-      dto.setClienteNome(cliente.getNome());
-      dto.setClienteEmail(cliente.getEmail());
-      dto.setClienteTelefone(cliente.getTelefone());
-      dto.setClienteEndereco(cliente.getEndereco());
-
-      dto.setId(chamado.getId());
-      dto.setNomeItem(chamado.getNomeItem());
-      dto.setItemSerie(chamado.getItemSerie());
-      dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
-      dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
-      dto.setCustoEstimado(chamado.getCustoEstimado());
-      dto.setDataEntrada(chamado.getDataEntrada());
-      dto.setStatus(chamado.getStatus());
-      if (chamado.getStatus().toString() == "CONCLUIDO_CONSERTADO") {
-        dto.setDataSaida(chamado.getDataSaida());
-      }
-      dto.setImage_urls(chamado.getImage_urls());
-      dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
-
-      if (tecnico != null) {
-        dto.setTecnico(tecnico.getId());
-        dto.setTecnicoImg(tecnico.getImagem());
-        dto.setTecnicoNome(tecnico.getNome());
-        dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
-      }
-
-      chamadoCompletoDTOs.add(dto);
-
-    }
-
-    return chamadoCompletoDTOs;
+    chamados = this.chamadoRepository.buscarChamadosDo(TecnicoID);
+    return processarChamado(chamados);
   }
 
   public List<ChamadoCompletoDTO> todosChamados(List<String> params) {
@@ -96,43 +58,7 @@ public class ChamadoService {
     } else {
       chamados = chamadoRepository.findAll();
     }
-    List<ChamadoCompletoDTO> chamadoCompletoDTO = new ArrayList<>();
-    for (Chamado chamado : chamados) {
-
-      Cliente cliente = chamado.getClienteId();
-      Tecnico tecnico = chamado.getTecnico();
-
-      ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
-      dto.setClienteId(cliente.getId());
-      dto.setClienteNome(cliente.getNome());
-      dto.setClienteEmail(cliente.getEmail());
-      dto.setClienteTelefone(cliente.getTelefone());
-      dto.setClienteEndereco(cliente.getEndereco());
-
-      dto.setId(chamado.getId());
-      dto.setNomeItem(chamado.getNomeItem());
-      dto.setItemSerie(chamado.getItemSerie());
-      dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
-      dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
-      dto.setCustoEstimado(chamado.getCustoEstimado());
-      dto.setDataEntrada(chamado.getDataEntrada());
-      dto.setStatus(chamado.getStatus());
-      if (chamado.getStatus().toString() == "CONCLUIDO_CONSERTADO") {
-        dto.setDataSaida(chamado.getDataSaida());
-      }
-      dto.setImage_urls(chamado.getImage_urls());
-      dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
-
-      if (tecnico != null) {
-        dto.setTecnico(tecnico.getId());
-        dto.setTecnicoImg(tecnico.getImagem());
-        dto.setTecnicoNome(tecnico.getNome());
-        dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
-      }
-
-      chamadoCompletoDTO.add(dto);
-    }
-    return chamadoCompletoDTO;
+    return processarChamado(chamados);
 
   }
 
@@ -226,6 +152,43 @@ public class ChamadoService {
     chamadoRepository.save(chamadoExistente);
 
     return chamadoExistente;
+  }
+
+  private List<ChamadoCompletoDTO> processarChamado(List<Chamado> chamados) {
+    List<ChamadoCompletoDTO> chamadoCompletoDTOs = new ArrayList<>();
+    for (Chamado chamado : chamados) {
+      Cliente cliente = chamado.getClienteId();
+      Tecnico tecnico = chamado.getTecnico();
+      ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
+      dto.setClienteId(cliente.getId());
+      dto.setClienteNome(cliente.getNome());
+      dto.setClienteEmail(cliente.getEmail());
+      dto.setClienteTelefone(cliente.getTelefone());
+      dto.setClienteEndereco(cliente.getEndereco());
+
+      dto.setId(chamado.getId());
+      dto.setNomeItem(chamado.getNomeItem());
+      dto.setItemSerie(chamado.getItemSerie());
+      dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
+      dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
+      dto.setCustoEstimado(chamado.getCustoEstimado());
+      dto.setDataEntrada(chamado.getDataEntrada());
+      dto.setStatus(chamado.getStatus());
+      if (chamado.getStatus().toString() == "CONCLUIDO_CONSERTADO") {
+        dto.setDataSaida(chamado.getDataSaida());
+      }
+      dto.setImage_urls(chamado.getImage_urls());
+      dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
+
+      if (tecnico != null) {
+        dto.setTecnico(tecnico.getId());
+        dto.setTecnicoImg(tecnico.getImagem());
+        dto.setTecnicoNome(tecnico.getNome());
+        dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
+      }
+      chamadoCompletoDTOs.add(dto);
+    }
+    return chamadoCompletoDTOs;
   }
 
 }
