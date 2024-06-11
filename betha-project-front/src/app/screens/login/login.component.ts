@@ -28,7 +28,7 @@ export class LoginComponent {
   verificaLogin() {
     if (this.form.invalid) {
       this.msgError = "Por favor, preencha todos os campos.";
-      console.log(this.msgError);
+      console.debug(this.msgError);
     } else {
       this.onACESSAR();
     }
@@ -37,7 +37,6 @@ export class LoginComponent {
   onACESSAR() {
     this.tecnicoService.logar(this.form.value).subscribe(
       (resposta: any) => {
-        console.log(resposta);
         this.authService.saveSessionStorageToken(resposta.token);
         this.router.navigate(["home"]);
       },
@@ -46,6 +45,5 @@ export class LoginComponent {
         console.error("Acesso não autorizado");
       }
     );
-    console.log(this.form.value);
   }
 }

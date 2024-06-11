@@ -41,7 +41,7 @@ export class FinalizarPedidoComponent {
   verificaTrocarStatus(arg0: string) {
     if (this.form.invalid) {
       this.msgError = "Por favor, preencha todos os campos.";
-      console.log(this.msgError);
+      console.debug(this.msgError);
     } else {
       this.trocarStatus(arg0);
     }

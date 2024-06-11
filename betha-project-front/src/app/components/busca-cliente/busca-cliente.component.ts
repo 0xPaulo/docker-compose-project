@@ -66,7 +66,7 @@ export class BuscaClienteComponent {
     if (this.clienteSelecionadoRoot) {
       this.clienteSelecionadoOut.emit(this.clienteSelecionadoRoot);
     } else {
-      console.log(`${nomeClienteSelecionadoRoot} nao encontrado`);
+      console.debug(`${nomeClienteSelecionadoRoot} nao encontrado`);
     }
   }
 }

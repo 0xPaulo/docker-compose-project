@@ -62,7 +62,7 @@ export class CadastroService {
     return this.httpClient.patch<ChamadoCompleto>(urlBase, element).pipe(
       tap(),
       catchError((error) => {
-        console.log("Erro ao atualizar registro", error);
+        console.debug("Erro ao atualizar registro", error);
         return of(null);
       })
     );
@@ -77,7 +77,7 @@ export class CadastroService {
       .pipe(
         tap(),
         catchError((error) => {
-          console.log("Erro ao atualizar registro", error);
+          console.debug("Erro ao atualizar registro", error);
           return of(null);
         })
       );

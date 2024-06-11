@@ -59,7 +59,7 @@ export class FormCriarCadastroComponent implements OnInit {
   verificaAndSubmit() {
     if (this.form.invalid) {
       this.msgError = "Por favor, preencha todos os campos.";
-      console.log(this.msgError);
+      console.debug(this.msgError);
     } else {
       this.onSubmitCliente();
     }
@@ -88,8 +88,6 @@ export class FormCriarCadastroComponent implements OnInit {
         clienteTelefone: this.form.get("clienteTelefone")?.value,
       };
     }
-    console.log("oq esta indo");
-    console.log(clienteFormFields);
 
     this.clienteService.createCliente(clienteFormFields).subscribe(
       (resultado) => {

@@ -49,8 +49,6 @@ export class DetalheProdutoComponent implements OnInit {
           reader.readAsDataURL(blob);
         });
       });
-    } else {
-      console.log("imagens nao iniciadas");
     }
   }
 }

@@ -41,8 +41,6 @@ export class HomeComponent implements OnInit {
   }
 
   applyStylesBasedOnToken(decodedToken: any) {
-    console.log(decodedToken.perfil);
-
     if (decodedToken.perfil === "ADMIN") {
       this.isRECEPCAO = true;
       this.isTRIAGEM = true;

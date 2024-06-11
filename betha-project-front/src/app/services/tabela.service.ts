@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable, delay, first, tap } from "rxjs";
+import { Observable, delay, first } from "rxjs";
 
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { ErrorDialogComponent } from "../components/dialog/errors/error-dialog/error-dialog.component";
@@ -65,20 +65,16 @@ export class TabelaService {
 
     let urlBase = URL ? `${this.authorizeHttpAPI}${URL}` : this.API;
 
-    return this.httpClient.get<ChamadoCompleto[]>(urlBase, { params }).pipe(
-      tap((resultado) => console.log(resultado)),
-      delay(500)
-    );
+    return this.httpClient
+      .get<ChamadoCompleto[]>(urlBase, { params })
+      .pipe(delay(500));
   }
 
   carregarTabela(subId: string, URL?: string): Observable<ChamadoCompleto[]> {
     const params = new HttpParams().set("params", subId);
     return this.httpClient
       .get<ChamadoCompleto[]>(`${this.authorizeHttpAPI}${URL}`, { params })
-      .pipe(
-        tap((resultado) => console.log(resultado)),
-        delay(500)
-      );
+      .pipe(delay(500));
   }
 
   openDialogError() {

@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { MatRadioChange } from "@angular/material/radio";
-import { Observable, catchError, of, tap } from "rxjs";
+import { Observable, catchError, of } from "rxjs";
 import { MostrarCadastro } from "../interfaces/mostrarCadastro";
 import { TecnicoForm } from "../interfaces/tecnico";
 
@@ -41,11 +41,9 @@ export class TecnicoService {
   }
 
   setTecnico(id: string, tecnicoID: Number) {
-    console.log(tecnicoID);
     return this.httpClient
       .patch<MostrarCadastro>(`${this.APItecnico}/${id}`, tecnicoID)
       .pipe(
-        tap((data) => console.log("Dados retornados:", data)),
         catchError((error) => {
           console.error("Erro ao atualizar o tecnico:", error);
           return of(null);

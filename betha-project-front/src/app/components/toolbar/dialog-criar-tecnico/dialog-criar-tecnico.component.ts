@@ -34,7 +34,7 @@ export class DialogCriarTecnicoComponent implements OnInit {
   verificaAndSubmit() {
     if (this.form.invalid) {
       this.msgError = "Por favor, preencha todos os campos.";
-      console.log(this.msgError);
+      console.debug(this.msgError);
     } else {
       this.onSubmitCliente();
     }
@@ -48,12 +48,9 @@ export class DialogCriarTecnicoComponent implements OnInit {
       email: this.form.get("tecnicoEmail")?.value,
       senha: this.form.get("tecnicoSenha")?.value,
     };
-    console.log("oq esta indo");
-    console.log(tecnicoFormFields);
 
     this.tecnicoService.registrarTecnico(tecnicoFormFields).subscribe(
       (resultado) => {
-        console.log(resultado);
         this.dialogRef.close(true);
 
         this.onSucess();
