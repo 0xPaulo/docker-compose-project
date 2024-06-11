@@ -8,6 +8,8 @@
 
 [Acesse o projeto ao vivo](https://betha-cadastros.netlify.app/)
 
+**Nota:** Devido ao backend estar hospedado em um servidor grátis, a primeira vez que uma requisição é feita, o servidor precisará fazer o build. Portanto, pode levar um tempo para o projeto iniciar.
+
 ## Introdução
 
 Este é um projeto desenvolvido utilizando Angular para o frontend e Spring Boot para o backend. Ele permite cadastrar itens para conserto de forma simples e eficiente.
