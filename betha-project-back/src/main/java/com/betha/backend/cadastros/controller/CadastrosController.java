@@ -40,7 +40,6 @@ public class CadastrosController {
   @ResponseStatus(HttpStatus.CREATED)
   @Secured({ "ROLE_RECEPCAO" })
   public Chamado salvarChamado(@RequestBody Chamado chamado) {
-    System.out.println(chamado);
     return chamadoService.salvarChamadoBanco(chamado);
   }
 

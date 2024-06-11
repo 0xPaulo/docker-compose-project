@@ -50,7 +50,6 @@ public class GoogleApiService {
           .setFields("id").execute();
       String imageUrl = "https://lh3.googleusercontent.com/d/" +
           uploadedFile.getId();
-      System.out.println("IMAGE URL: " + imageUrl);
       res.setStatus(200);
       res.setMsg("Imagem enviada pro drive");
       res.setUrl(imageUrl);

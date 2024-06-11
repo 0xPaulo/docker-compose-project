@@ -33,7 +33,6 @@ public class GoogleApiController {
       file.transferTo(tempFile);
       GoogleApiRes res = service.uploadImageToDrive(tempFile);
       arrayRes.add(res.getUrl());
-      System.out.println(arrayRes);
     }
     return arrayRes;
   }
