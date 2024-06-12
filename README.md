@@ -49,6 +49,9 @@ http://localhost:4200
 ## Tecnologias Utilizadas
 
 **Frontend**: Angular
+
 **Backend**: Spring Boot
+
 **Autenticação e Segurança**: Spring Security, JWT
+
 **Deploy**: Docker, Docker Compose
