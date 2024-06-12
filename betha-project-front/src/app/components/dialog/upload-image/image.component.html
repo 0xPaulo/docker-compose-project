@@ -1,9 +1,10 @@
 <div class="app">
-  <h4>Selecione as fotos para anexar ao produto</h4>
-  <label for="inputField" class="botao-betha me-2">Escolher Fotos</label>
+  <!-- Para salvar fotos sera necessario descomentar os botoes e gerar uma Key do google drive -->
+  <h4>Não é possivel subir fotos na versao local</h4>
+  <!-- <label for="inputField" class="botao-betha me-2">Escolher Fotos</label>
   <input type="file" id="inputField" accept=".jpg" style="display:none " multiple (change)="handleSelectFile($event)"
-    [disabled]="isInputDisabled">
-  <button class="botao-betha mt-2" (click)="handleUpload()" [disabled]="!selectedFile">Salvar Fotos</button>
+    [disabled]="isInputDisabled"> -->
+  <!-- <button class="botao-betha mt-2" (click)="handleUpload()" [disabled]="!selectedFile">Salvar Fotos</button> -->
   <div class="d-flex justify-content-center" *ngIf="loadingService.loading$ | async as isLoading">
     <div *ngIf="isLoading">
       <mat-spinner class="loading-spinner mt-4"></mat-spinner>

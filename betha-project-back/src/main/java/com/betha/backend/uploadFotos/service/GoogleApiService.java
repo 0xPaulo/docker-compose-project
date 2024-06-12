@@ -28,6 +28,8 @@ public class GoogleApiService {
 
   private static String getPathGoogleCredentials() {
     String currentDirectory = System.getProperty("user.dir");
+    // O arquivo cred.json nao existe, sera preciso gerar o seu proprio para
+    // utilizar esse metodo
     Path filePath = Paths.get(currentDirectory, "cred.json");
     return filePath.toString();
   }
