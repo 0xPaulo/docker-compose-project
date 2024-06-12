@@ -8,7 +8,7 @@
 
 [Acesse o projeto ao vivo](https://betha-cadastros.netlify.app/)
 
-**Nota:** Devido ao backend estar hospedado em um servidor grátis, a primeira vez que uma requisição é feita, o servidor precisará fazer o build. Portanto, pode levar um tempo para o projeto iniciar.
+**Nota:** Devido ao projeto estar hospedado em um servidor americano, a primeira requisição no processo de login pode demorar um pouco. Essa demora é normal.
 
 ## Introdução
 
