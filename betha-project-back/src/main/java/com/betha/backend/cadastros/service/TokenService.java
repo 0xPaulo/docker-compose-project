@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -16,8 +15,7 @@ import com.betha.backend.cadastros.models.Tecnico;
 @Service
 public class TokenService {
 
-  @Value("${JWT_SECRET}")
-  private String secret;
+  private String secret = "secret";
 
   public String generateToken(Tecnico tecnico) {
     try {
