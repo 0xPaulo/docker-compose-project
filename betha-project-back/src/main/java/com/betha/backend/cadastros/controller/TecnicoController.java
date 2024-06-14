@@ -66,13 +66,12 @@ public class TecnicoController {
   @Secured({ "ROLE_ADMIN" })
   @PostMapping("/register")
   public ResponseEntity registrarTecino(@RequestBody @Valid RegisterDTO dados) {
-    if (this.tecnicoRepository.findByEmail(dados.email()) != null)
-      return ResponseEntity.badRequest().build();
-    String encryptPassword = new BCryptPasswordEncoder().encode(dados.senha());
-    Tecnico novoTecnico = new Tecnico(dados.email(), encryptPassword, dados.perfil(), dados.nome(),
-        dados.tecnicoCategorias());
-    this.tecnicoRepository.save(novoTecnico);
-    return ResponseEntity.ok().build();
+    try {
+      Tecnico novoTecnico = tecnicoService.salvarNovoTecnico(dados);
+      return ResponseEntity.ok(novoTecnico);
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
   }
 
   // Busca Tecnicos disponiveis para o chamado
