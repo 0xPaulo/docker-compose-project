@@ -17,6 +17,7 @@ Este é um projeto desenvolvido utilizando Angular para o frontend e Spring Boot
 ## Funcionalidades Implementadas
 
 - **Segurança Backend:** Utilização do Spring Security para restringir o acesso conforme roles configuradas.
+- **Segurança Backend:** Utilizado Bcrypt Password Encoder para salvar senhas no banco.
 - **Autenticação:** Uso de JWT (JSON Web Tokens) para identificação e autenticação de usuários.
 - **Autenticação no Frontend:** Implementação do AuthGuard no Angular para proteger rotas.
 - **Gerenciamento de Clientes:** Possibilidade de criar e salvar novos clientes no banco de dados.
@@ -25,7 +26,7 @@ Este é um projeto desenvolvido utilizando Angular para o frontend e Spring Boot
   - **Recepção:** Registro inicial do pedido.
   - **Triagem:** Adição de fotos, valores e comunicação com o cliente para aprovação.
   - **Manutenção:** O gerente técnico designa um funcionário para realizar a manutenção.
-  - **Finalização:** O pedido pode ser finalizado após a manutenção.
+  - **Finalização:** O pedido pode ser finalizado após a manutenção ou retornar para o gerente técnico.
 
 ## Como Utilizar
 
@@ -35,10 +36,11 @@ Clone o repositório do projeto utilizando o seguinte comando:
 
 ```sh
 git clone <URL_DO_REPOSITORIO>
-
+```
+Na pasta aonde foi clonado o projeto rode o seguinte comando:
+```sh
 docker-compose up
 ```
-
 É preciso ter o Docker instalado.
 
 ## Acessando a Aplicação
