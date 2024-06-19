@@ -60,7 +60,7 @@ export class TabelaService {
 
     if (filtros && filtros.length > 0) {
       const filtroString = filtros.join(",");
-      params = params.set("params", filtroString);
+      params = params.set("filtro", filtroString);
     }
 
     let urlBase = URL ? `${this.authorizeHttpAPI}${URL}` : this.API;
