@@ -13,7 +13,7 @@ public class ClienteService {
   @Autowired
   private ClienteRepository clienteRepository;
 
-  public Cliente salvarClienteBanco(FormCliente novoCliente) {
+  public Cliente salvarNovoCliente(FormCliente novoCliente) {
     Cliente clienteTemp = Cliente.builder()
         .nome(novoCliente.getClienteNome())
         .telefone(novoCliente.getClienteTelefone())

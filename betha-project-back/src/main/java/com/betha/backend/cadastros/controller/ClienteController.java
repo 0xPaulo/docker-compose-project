@@ -39,7 +39,7 @@ public class ClienteController {
   @PostMapping()
   @Secured({ "ROLE_RECEPCAO" })
   @ResponseStatus(HttpStatus.CREATED)
-  public Cliente salvarCliente(@RequestBody FormCliente cliente) {
-    return clienteService.salvarClienteBanco(cliente);
+  public Cliente salvarClienteBanco(@RequestBody FormCliente cliente) {
+    return clienteService.salvarNovoCliente(cliente);
   }
 }

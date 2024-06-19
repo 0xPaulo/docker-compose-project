@@ -22,10 +22,10 @@ public class TecnicoService {
   @Autowired
   private TecnicoRepository tecnicoRepository;
 
-  public Chamado editar(Long id, Long nomeTecnico) {
-    Chamado chamadoExistente = chamadoRepository.findById(id)
+  public Chamado editarTecnicoDoChamado(Long chamadoId, Long tecnicoId) {
+    Chamado chamadoExistente = chamadoRepository.findById(chamadoId)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
-    Tecnico tecnicoExistente = tecnicoRepository.findById(nomeTecnico)
+    Tecnico tecnicoExistente = tecnicoRepository.findById(tecnicoId)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tecnico não encontrado"));
 
     chamadoExistente.setTecnico(tecnicoExistente);
@@ -35,16 +35,24 @@ public class TecnicoService {
     return chamadoExistente;
   }
 
-  public Tecnico salvarNovoTecnico(RegisterDTO dados) {
-    if (this.tecnicoRepository.findByEmail(dados.email()) != null) {
+  public Tecnico salvarNovoTecnico(RegisterDTO tecnicoDados) {
+    if (this.tecnicoRepository.findByEmail(tecnicoDados.email()) != null) {
       throw new IllegalArgumentException("Email já cadastrado");
     }
-    String encryptPassword = new BCryptPasswordEncoder().encode(dados.senha());
-    TecnicoCategorias categorias = dados.tecnicoCategorias() != null ? dados.tecnicoCategorias()
+    String encryptPassword = new BCryptPasswordEncoder().encode(tecnicoDados.senha());
+    TecnicoCategorias categorias = tecnicoDados.tecnicoCategorias() != null ? tecnicoDados.tecnicoCategorias()
         : TecnicoCategorias.SEM_CATEGORIA;
     Tecnico novoTecnico = new Tecnico(
-        dados.email(), encryptPassword, dados.perfil(), dados.nome(), categorias);
+        tecnicoDados.email(), encryptPassword, tecnicoDados.perfil(), tecnicoDados.nome(), categorias);
     return tecnicoRepository.save(novoTecnico);
   }
 
+  public void trocarSenhaDoTecnico(RegisterDTO dados) {
+    Long novoId = Long.parseLong(dados.id());
+    Tecnico novoTecnico = tecnicoRepository.findById(novoId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tecnico não encontrado"));
+    String encryptPassword = new BCryptPasswordEncoder().encode(dados.senha());
+    novoTecnico.setSenha(encryptPassword);
+    tecnicoRepository.save(novoTecnico);
+  }
 }

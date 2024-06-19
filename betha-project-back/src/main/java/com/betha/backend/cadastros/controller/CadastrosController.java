@@ -2,7 +2,6 @@ package com.betha.backend.cadastros.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,65 +16,61 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
+import com.betha.backend.cadastros.interfaces.ChamadoServiceInterface;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
-import com.betha.backend.cadastros.service.ChamadoService;
 
 @RestController
 @RequestMapping("/cadastros")
 public class CadastrosController {
 
-  @Autowired
-  private final ChamadoService chamadoService;
-  @Autowired
+  private final ChamadoServiceInterface chamadoService;
   private final ChamadoRepository chamadoRepository;
 
-  CadastrosController(ChamadoService chamadoService,
+  CadastrosController(ChamadoServiceInterface chamadoService,
       ChamadoRepository chamadoRepository) {
     this.chamadoService = chamadoService;
     this.chamadoRepository = chamadoRepository;
   }
 
-  @PostMapping()
-  @ResponseStatus(HttpStatus.CREATED)
-  @Secured({ "ROLE_RECEPCAO" })
-  public Chamado salvarChamado(@RequestBody Chamado chamado) {
-    return chamadoService.salvarChamadoBanco(chamado);
-  }
-
-  @DeleteMapping("/{id}")
-  @Secured({ "ROLE_RECEPCAO" })
-  public void deletar(@PathVariable Long id) {
-    this.chamadoRepository.deleteById(id);
-  }
-
-  @GetMapping()
-  @Secured({ "ROLE_RECEPCAO" })
-  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> params) {
-    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados(params);
-    return resultado;
-  }
-
   @GetMapping("/{id}")
   @Secured({ "ROLE_RECEPCAO", "ROLE_TRIAGEM", "ROLE_TECNICO" })
-  public ChamadoCompletoDTO findChamadoPeloId(@PathVariable Long id) {
+  public ChamadoCompletoDTO buscarChamadoPeloId(@PathVariable Long id) {
     ChamadoCompletoDTO resultado = chamadoService.buscarPeloId(id);
     return resultado;
   }
 
-  // Possibilita editar todos os campos do chamado
-  @PatchMapping("/{id}")
+  @GetMapping()
   @Secured({ "ROLE_RECEPCAO" })
-  public Chamado editarChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
-    Chamado resultado = chamadoService.editar(id, chamadoCompletoDTO);
+  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> filtro) {
+    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamadosCom(filtro);
     return resultado;
   }
 
-  // Finaliza o pedido ou reenvia para o Gerente Tecnico com a info da falha
+  @PostMapping()
+  @ResponseStatus(HttpStatus.CREATED)
+  @Secured({ "ROLE_RECEPCAO" })
+  public Chamado salvarChamadoBanco(@RequestBody Chamado chamado) {
+    return chamadoService.salvarNovoChamado(chamado);
+  }
+
+  @PatchMapping("/{id}")
+  @Secured({ "ROLE_RECEPCAO" })
+  public Chamado editarCamposChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
+    Chamado resultado = chamadoService.editarCamposDoId(id, chamadoCompletoDTO);
+    return resultado;
+  }
+
   @PatchMapping("change-status/{id}")
   @Secured({ "ROLE_MANUTENCAO" })
-  public Chamado editarStatus(@PathVariable Long id, @RequestBody List<String> dados) {
-    Chamado resultado = chamadoService.editarStatus(id, dados);
+  public Chamado editarStatusChamado(@PathVariable Long id, @RequestBody List<String> dados) {
+    Chamado resultado = chamadoService.editarStatusDoId(id, dados);
     return resultado;
+  }
+
+  @DeleteMapping("/{id}")
+  @Secured({ "ROLE_RECEPCAO" })
+  public void deletarChamado(@PathVariable Long id) {
+    this.chamadoRepository.deleteById(id);
   }
 }

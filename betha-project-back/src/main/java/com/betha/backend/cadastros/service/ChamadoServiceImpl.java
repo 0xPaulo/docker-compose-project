@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
+import com.betha.backend.cadastros.interfaces.ChamadoServiceInterface;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.models.Tecnico;
@@ -19,7 +20,7 @@ import com.betha.backend.cadastros.repository.ClienteRepository;
 import com.betha.backend.cadastros.repository.TabelaRepository;
 
 @Service
-public class ChamadoService {
+public class ChamadoServiceImpl implements ChamadoServiceInterface {
   @Autowired
   private ChamadoRepository chamadoRepository;
   @Autowired
@@ -27,107 +28,47 @@ public class ChamadoService {
   @Autowired
   private TabelaRepository tabelaRepository;
 
-  public Chamado salvarChamadoBanco(Chamado novoChamado) {
-    Chamado chamadoTemp = Chamado.builder()
-        .clienteId(novoChamado.getClienteId())
-        .nomeItem(novoChamado.getNomeItem())
-        .itemSerie(novoChamado.getItemSerie())
-        .defeitoRelatado(novoChamado.getDefeitoRelatado())
-        .status(novoChamado.getStatus())
-        .dataEntrada(novoChamado.getDataEntrada())
-        .analiseTecnica(novoChamado.getAnaliseTecnica())
-        .dataSaida(novoChamado.getDataSaida())
-        .custoEstimado(novoChamado.getCustoEstimado())
-        .image_urls(novoChamado.getImage_urls())
-        .build();
-
+  @Override
+  public Chamado salvarNovoChamado(Chamado novoChamado) {
+    Chamado chamadoTemp = construirNovoChamado(novoChamado);
     return chamadoRepository.save(chamadoTemp);
-
   }
 
+  @Override
   public List<ChamadoCompletoDTO> todosChamadosDo(String TecnicoID) {
     List<Chamado> chamados = new ArrayList<>();
     chamados = this.chamadoRepository.buscarChamadosDo(TecnicoID);
-    return processarChamado(chamados);
+    return processarChamados(chamados);
   }
 
-  public List<ChamadoCompletoDTO> todosChamados(List<String> params) {
+  @Override
+  public List<ChamadoCompletoDTO> todosChamadosCom(List<String> filtro) {
     List<Chamado> chamados = new ArrayList<>();
-    if (params != null && !params.isEmpty()) {
-      chamados = tabelaRepository.findByStatusInFilter(params);
+    if (filtro != null && !filtro.isEmpty()) {
+      chamados = tabelaRepository.findByStatusInFilter(filtro);
     } else {
       chamados = chamadoRepository.findAll();
     }
-    return processarChamado(chamados);
-
+    return processarChamados(chamados);
   }
 
+  @Override
   public ChamadoCompletoDTO buscarPeloId(Long id) {
     Chamado chamado = chamadoRepository.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
-    Cliente cliente = chamado.getClienteId();
-    Tecnico tecnico = chamado.getTecnico();
-    ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
-
-    dto.setClienteId(cliente.getId());
-    dto.setClienteNome(cliente.getNome());
-    dto.setClienteEmail(cliente.getEmail());
-    dto.setClienteTelefone(cliente.getTelefone());
-    dto.setClienteEndereco(cliente.getEndereco());
-
-    dto.setId(chamado.getId());
-    dto.setNomeItem(chamado.getNomeItem());
-    dto.setItemSerie(chamado.getItemSerie());
-    dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
-    dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
-    dto.setCustoEstimado(chamado.getCustoEstimado());
-    dto.setDataEntrada(chamado.getDataEntrada());
-    dto.setStatus(chamado.getStatus());
-    dto.setImage_urls(chamado.getImage_urls());
-    dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
-
-    if (tecnico != null) {
-      dto.setTecnico(tecnico.getId());
-      dto.setTecnicoNome(tecnico.getNome());
-      dto.setTecnicoImg(tecnico.getImagem());
-      dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
-
-    }
-    return dto;
+    return construirDTO(chamado);
   }
 
-  public Chamado editar(Long id, ChamadoCompletoDTO chamadoRecebido) {
-    Chamado chamadoExistente = chamadoRepository.findById(id)
+  @Override
+  public Chamado editarCamposDoId(Long chamadoID, ChamadoCompletoDTO chamadoRecebido) {
+    Chamado chamadoExistente = chamadoRepository.findById(chamadoID)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
     Cliente clienteExistente = chamadoExistente.getClienteId();
-
-    Cliente clienteTemp = clienteExistente.builder()
-        .id(clienteExistente.getId())
-        .nome(chamadoRecebido.getClienteNome())
-        .email(chamadoRecebido.getClienteEmail())
-        .endereco(chamadoRecebido.getClienteEndereco())
-        .telefone(chamadoRecebido.getClienteTelefone())
-        .build();
-
-    Chamado chamadoTemp = chamadoExistente.builder()
-        .id(chamadoExistente.getId())
-        .clienteId(chamadoExistente.getClienteId())
-        .nomeItem(chamadoRecebido.getNomeItem())
-        .itemSerie(chamadoRecebido.getItemSerie())
-        .defeitoRelatado(chamadoRecebido.getDefeitoRelatado())
-        .analiseTecnica(chamadoRecebido.getAnaliseTecnica())
-        .custoEstimado(chamadoRecebido.getCustoEstimado())
-        .dataEntrada(chamadoRecebido.getDataEntrada())
-        .image_urls(chamadoRecebido.getImage_urls())
-        .status(chamadoRecebido.getStatus())
-        .build();
-
-    clienteRepository.save(clienteTemp);
-    chamadoRepository.save(chamadoTemp);
-    return chamadoTemp;
+    return editarChamadoExistente(chamadoRecebido, chamadoExistente, clienteExistente);
   }
 
-  public Chamado editarStatus(Long id, List<String> dados) {
+  @Override
+  public Chamado editarStatusDoId(Long id, List<String> dados) {
     Chamado chamadoExistente = chamadoRepository.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
 
@@ -154,7 +95,7 @@ public class ChamadoService {
     return chamadoExistente;
   }
 
-  private List<ChamadoCompletoDTO> processarChamado(List<Chamado> chamados) {
+  private List<ChamadoCompletoDTO> processarChamados(List<Chamado> chamados) {
     List<ChamadoCompletoDTO> chamadoCompletoDTOs = new ArrayList<>();
     for (Chamado chamado : chamados) {
       Cliente cliente = chamado.getClienteId();
@@ -191,4 +132,77 @@ public class ChamadoService {
     return chamadoCompletoDTOs;
   }
 
+  private ChamadoCompletoDTO construirDTO(Chamado chamado) {
+    Cliente cliente = chamado.getClienteId();
+    Tecnico tecnico = chamado.getTecnico();
+    ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
+
+    dto.setClienteId(cliente.getId());
+    dto.setClienteNome(cliente.getNome());
+    dto.setClienteEmail(cliente.getEmail());
+    dto.setClienteTelefone(cliente.getTelefone());
+    dto.setClienteEndereco(cliente.getEndereco());
+
+    dto.setId(chamado.getId());
+    dto.setNomeItem(chamado.getNomeItem());
+    dto.setItemSerie(chamado.getItemSerie());
+    dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
+    dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
+    dto.setCustoEstimado(chamado.getCustoEstimado());
+    dto.setDataEntrada(chamado.getDataEntrada());
+    dto.setStatus(chamado.getStatus());
+    dto.setImage_urls(chamado.getImage_urls());
+    dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
+
+    if (tecnico != null) {
+      dto.setTecnico(tecnico.getId());
+      dto.setTecnicoNome(tecnico.getNome());
+      dto.setTecnicoImg(tecnico.getImagem());
+      dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
+    }
+    return dto;
+  }
+
+  private Chamado editarChamadoExistente(ChamadoCompletoDTO chamadoRecebido, Chamado chamadoExistente,
+      Cliente clienteExistente) {
+    Cliente clienteTemp = clienteExistente.builder()
+        .id(clienteExistente.getId())
+        .nome(chamadoRecebido.getClienteNome())
+        .email(chamadoRecebido.getClienteEmail())
+        .endereco(chamadoRecebido.getClienteEndereco())
+        .telefone(chamadoRecebido.getClienteTelefone())
+        .build();
+
+    Chamado chamadoTemp = chamadoExistente.builder()
+        .id(chamadoExistente.getId())
+        .clienteId(chamadoExistente.getClienteId())
+        .nomeItem(chamadoRecebido.getNomeItem())
+        .itemSerie(chamadoRecebido.getItemSerie())
+        .defeitoRelatado(chamadoRecebido.getDefeitoRelatado())
+        .analiseTecnica(chamadoRecebido.getAnaliseTecnica())
+        .custoEstimado(chamadoRecebido.getCustoEstimado())
+        .dataEntrada(chamadoRecebido.getDataEntrada())
+        .image_urls(chamadoRecebido.getImage_urls())
+        .status(chamadoRecebido.getStatus())
+        .build();
+
+    clienteRepository.save(clienteTemp);
+    chamadoRepository.save(chamadoTemp);
+    return chamadoTemp;
+  }
+
+  private Chamado construirNovoChamado(Chamado novoChamado) {
+    return Chamado.builder()
+        .clienteId(novoChamado.getClienteId())
+        .nomeItem(novoChamado.getNomeItem())
+        .itemSerie(novoChamado.getItemSerie())
+        .defeitoRelatado(novoChamado.getDefeitoRelatado())
+        .status(novoChamado.getStatus())
+        .dataEntrada(novoChamado.getDataEntrada())
+        .analiseTecnica(novoChamado.getAnaliseTecnica())
+        .dataSaida(novoChamado.getDataSaida())
+        .custoEstimado(novoChamado.getCustoEstimado())
+        .image_urls(novoChamado.getImage_urls())
+        .build();
+  }
 }

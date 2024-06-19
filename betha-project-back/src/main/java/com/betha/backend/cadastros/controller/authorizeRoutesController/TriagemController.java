@@ -14,30 +14,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
-import com.betha.backend.cadastros.service.ChamadoService;
+import com.betha.backend.cadastros.service.ChamadoServiceImpl;
 
 @RestController
 @RequestMapping("/triagem")
 public class TriagemController {
 
   @Autowired
-  private final ChamadoService chamadoService;
+  private final ChamadoServiceImpl chamadoService;
 
-  TriagemController(ChamadoService chamadoService) {
+  TriagemController(ChamadoServiceImpl chamadoService) {
     this.chamadoService = chamadoService;
   }
 
   @GetMapping()
   @Secured({ "ROLE_TRIAGEM" })
-  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> params) {
-    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados(params);
+  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> filtro) {
+    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamadosCom(filtro);
     return resultado;
   }
 
   @PatchMapping("/{id}")
   @Secured({ "ROLE_TRIAGEM" })
   public Chamado editarChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
-    Chamado resultado = chamadoService.editar(id, chamadoCompletoDTO);
+    Chamado resultado = chamadoService.editarCamposDoId(id, chamadoCompletoDTO);
     return resultado;
   }
 }

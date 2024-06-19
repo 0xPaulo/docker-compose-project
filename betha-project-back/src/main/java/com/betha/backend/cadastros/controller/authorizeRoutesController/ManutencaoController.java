@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
-import com.betha.backend.cadastros.service.ChamadoService;
+import com.betha.backend.cadastros.service.ChamadoServiceImpl;
 
 @RestController
 @RequestMapping("/manutencao")
 public class ManutencaoController {
 
   @Autowired
-  private final ChamadoService chamadoService;
+  private final ChamadoServiceImpl chamadoService;
   @Autowired
   private final ChamadoRepository chamadoRepository;
 
-  ManutencaoController(ChamadoService chamadoService,
+  ManutencaoController(ChamadoServiceImpl chamadoService,
       ChamadoRepository chamadoRepository) {
     this.chamadoService = chamadoService;
     this.chamadoRepository = chamadoRepository;
@@ -34,15 +34,15 @@ public class ManutencaoController {
 
   @GetMapping()
   @Secured({ "ROLE_TECNICO" })
-  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> params) {
-    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados(params);
+  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> filtro) {
+    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamadosCom(filtro);
     return resultado;
   }
 
   @PatchMapping("/{id}")
   @Secured({ "ROLE_TECNICO" })
   public Chamado editarChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
-    Chamado resultado = chamadoService.editar(id, chamadoCompletoDTO);
+    Chamado resultado = chamadoService.editarCamposDoId(id, chamadoCompletoDTO);
     return resultado;
   }
 }

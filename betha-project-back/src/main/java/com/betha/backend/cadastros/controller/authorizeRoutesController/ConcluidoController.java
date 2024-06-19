@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
-import com.betha.backend.cadastros.service.ChamadoService;
+import com.betha.backend.cadastros.service.ChamadoServiceImpl;
 
 @RestController
 @RequestMapping("/concluido")
 public class ConcluidoController {
 
-  private final ChamadoService chamadoService;
+  private final ChamadoServiceImpl chamadoService;
 
-  ConcluidoController(ChamadoService chamadoService,
+  ConcluidoController(ChamadoServiceImpl chamadoService,
       ChamadoRepository chamadoRepository) {
     this.chamadoService = chamadoService;
   }
 
   @GetMapping()
-  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> params) {
-    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamados(params);
+  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> filtro) {
+    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamadosCom(filtro);
     return resultado;
   }
 }
