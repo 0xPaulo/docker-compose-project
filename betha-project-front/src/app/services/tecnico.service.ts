@@ -40,7 +40,7 @@ export class TecnicoService {
     );
   }
 
-  setTecnico(id: string, tecnicoID: Number) {
+  setTecnico(id: string, tecnicoID: number) {
     return this.httpClient
       .patch<MostrarCadastro>(`${this.APItecnico}/${id}`, tecnicoID)
       .pipe(

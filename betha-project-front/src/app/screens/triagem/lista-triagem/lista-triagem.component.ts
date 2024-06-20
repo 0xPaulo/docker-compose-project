@@ -23,7 +23,7 @@ export class ListaTriagemComponent implements OnInit {
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
   filtro: string[] = ["DISPONIVEL_TRIAGEM", "AGUARDANDO_CLIENTE", "CANCELADO"];
-  URL: string = "triagem";
+  URL = "triagem";
 
   constructor(
     private authService: AuthService,
@@ -79,7 +79,7 @@ export class ListaTriagemComponent implements OnInit {
             maxWidth: "600px",
             data: { infoCadastro: dados },
           });
-          dialogRef.afterClosed().subscribe((result) => {
+          dialogRef.afterClosed().subscribe(() => {
             subscription.unsubscribe();
           });
         } else if (!(item.status === "DISPONIVEL_TRIAGEM")) {
@@ -87,7 +87,7 @@ export class ListaTriagemComponent implements OnInit {
             width: "40%",
             data: { modoEdicao: true, infoCadastro: dados },
           });
-          dialogPermi.afterClosed().subscribe((result) => {
+          dialogPermi.afterClosed().subscribe(() => {
             subscription.unsubscribe();
           });
         } else {
@@ -95,7 +95,7 @@ export class ListaTriagemComponent implements OnInit {
             maxWidth: "600px",
             data: { infoCadastro: dados },
           });
-          dialogRef.afterClosed().subscribe((result) => {
+          dialogRef.afterClosed().subscribe(() => {
             subscription.unsubscribe();
           });
         }
@@ -110,7 +110,7 @@ export class ListaTriagemComponent implements OnInit {
     const id = element.id;
     const elementAtualizado = { ...element, status: "CANCELADO" };
     this.cadastroService.mudarStatus(id, elementAtualizado, this.URL).subscribe(
-      (result) => {
+      () => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
       },
@@ -123,7 +123,7 @@ export class ListaTriagemComponent implements OnInit {
     const id = element.id;
     const elementAtualizado = { ...element, status: "AGUARDANDO_MANUTENCAO" };
     this.cadastroService.mudarStatus(id, elementAtualizado, this.URL).subscribe(
-      (result) => {
+      () => {
         this.tabelaService.emitListaAtualizada.emit();
         this.onSucess();
       },

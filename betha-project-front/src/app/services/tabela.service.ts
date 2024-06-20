@@ -63,7 +63,7 @@ export class TabelaService {
       params = params.set("filtro", filtroString);
     }
 
-    let urlBase = URL ? `${this.authorizeHttpAPI}${URL}` : this.API;
+    const urlBase = URL ? `${this.authorizeHttpAPI}${URL}` : this.API;
 
     return this.httpClient
       .get<ChamadoCompleto[]>(urlBase, { params })

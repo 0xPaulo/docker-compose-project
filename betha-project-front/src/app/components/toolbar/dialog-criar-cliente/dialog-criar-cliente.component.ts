@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -13,13 +13,13 @@ import { TabelaService } from "src/app/services/tabela.service";
   templateUrl: "./dialog-criar-cliente.component.html",
   styleUrls: ["./dialog-criar-cliente.component.scss"],
 })
-export class DialogCriarClienteComponent implements OnInit {
+export class DialogCriarClienteComponent {
   form: FormGroup;
-  isEditMode: boolean = false;
-  activeTab: string = "cliente";
-  inputDesabilitado: boolean = true;
+  isEditMode = false;
+  activeTab = "cliente";
+  inputDesabilitado = true;
   clienteRecebido!: FormCliente;
-  clienteIdExiste: boolean = false;
+  clienteIdExiste = false;
   mostrarCliente = false;
   novoClienteSalvoNoBanco!: FormCliente;
   msgError!: string;
@@ -79,7 +79,4 @@ export class DialogCriarClienteComponent implements OnInit {
   onSucess() {
     this.snackBar.open("Cadastrado com sucesso", "", { duration: 5000 });
   }
-  onCancel() {}
-
-  ngOnInit() {}
 }

@@ -9,9 +9,9 @@ import { ImgProxyService } from "src/app/services/img-proxy.service";
   styleUrls: ["./detalhe-produto.component.scss"],
 })
 export class DetalheProdutoComponent implements OnInit {
-  dia: string = "";
-  saida: string = "";
-  motivoNaoConclusao: string = "";
+  dia = "";
+  saida = "";
+  motivoNaoConclusao = "";
   tecnicoImg!: string | ArrayBuffer;
   imageUrl: string[] = [];
 

@@ -11,7 +11,7 @@ import { TecnicoService } from "./../../services/tecnico.service";
 })
 export class LoginComponent {
   form: FormGroup;
-  msgError: string = "";
+  msgError = "";
 
   constructor(
     private authService: AuthService,

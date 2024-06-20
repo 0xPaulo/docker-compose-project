@@ -15,7 +15,7 @@ export class PossuiCadastroComponent {
       maxWidth: "600px",
       data: { possuiCadastro: false, mostrarCliente: true },
     });
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe();
   }
 
   onSim() {
@@ -23,6 +23,6 @@ export class PossuiCadastroComponent {
       maxWidth: "600px",
       data: { possuiCadastro: true, mostrarCliente: false },
     });
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe();
   }
 }

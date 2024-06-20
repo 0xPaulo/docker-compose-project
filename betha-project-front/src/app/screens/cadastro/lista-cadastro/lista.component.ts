@@ -49,7 +49,7 @@ export class ListaComponent implements OnInit {
     const dialogRef = this.dialog.open(PossuiCadastroComponent, {
       maxWidth: "600px",
     });
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe();
   }
 
   editarItem(item: ChamadoCompleto) {

@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { ChangeDetectorRef, Component, Inject, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Inject } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -14,15 +14,15 @@ import { CadastroService } from "./../../../services/cadastro.service";
   templateUrl: "./form-criar-cadastro.component.html",
   styleUrls: ["./form-criar-cadastro.component.scss"],
 })
-export class FormCriarCadastroComponent implements OnInit {
+export class FormCriarCadastroComponent {
   form: FormGroup;
   formChamado: FormGroup;
-  isEditMode: boolean = false;
-  activeTab: string = "cliente";
-  inputDesabilitado: boolean = true;
+  isEditMode = false;
+  activeTab = "cliente";
+  inputDesabilitado = true;
   clienteRecebido!: FormCliente;
-  clienteIdExiste: boolean = false;
-  possuiCadastro: boolean = false;
+  clienteIdExiste = false;
+  possuiCadastro = false;
   mostrarCliente = false;
   novoClienteSalvoNoBanco!: FormCliente;
   msgError!: string;
@@ -170,7 +170,4 @@ export class FormCriarCadastroComponent implements OnInit {
   onSucess() {
     this.snackBar.open("Cadastrado com sucesso", "", { duration: 5000 });
   }
-  onCancel() {}
-
-  ngOnInit() {}
 }

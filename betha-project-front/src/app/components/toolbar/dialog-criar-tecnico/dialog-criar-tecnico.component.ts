@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -10,7 +10,7 @@ import { TecnicoService } from "./../../../services/tecnico.service";
   templateUrl: "./dialog-criar-tecnico.component.html",
   styleUrls: ["./dialog-criar-tecnico.component.scss"],
 })
-export class DialogCriarTecnicoComponent implements OnInit {
+export class DialogCriarTecnicoComponent {
   form: FormGroup;
   novoTecnicoSalvoNoBanco!: FormCliente;
   msgError!: string;
@@ -67,7 +67,4 @@ export class DialogCriarTecnicoComponent implements OnInit {
   onSucess() {
     this.snackBar.open("Cadastrado com sucesso", "", { duration: 5000 });
   }
-  onCancel() {}
-
-  ngOnInit() {}
 }

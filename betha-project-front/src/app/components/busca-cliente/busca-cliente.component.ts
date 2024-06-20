@@ -28,9 +28,9 @@ import { ClienteService } from "src/app/services/cliente.service";
   styleUrls: ["./busca-cliente.component.scss"],
 })
 export class BuscaClienteComponent {
-  nomeCliente: string = "";
+  nomeCliente = "";
   clientes$: Observable<string[]>;
-  mostrarMensagemErro: boolean = false;
+  mostrarMensagemErro = false;
 
   clienteCompleto!: any[];
 
@@ -57,7 +57,7 @@ export class BuscaClienteComponent {
   }
 
   lidarClienteSelecionado(event: MatAutocompleteSelectedEvent) {
-    let nomeClienteSelecionadoRoot = event.option.value;
+    const nomeClienteSelecionadoRoot = event.option.value;
     this.clienteCompleto.forEach((cliente) => {
       if (cliente.nome === nomeClienteSelecionadoRoot) {
         this.clienteSelecionadoRoot = cliente;

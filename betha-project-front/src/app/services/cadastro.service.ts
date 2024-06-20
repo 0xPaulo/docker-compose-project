@@ -56,7 +56,7 @@ export class CadastroService {
     element: Partial<ChamadoCompleto>,
     URL?: string
   ) {
-    let urlBase = URL
+    const urlBase = URL
       ? `${this.authorizeHttpAPI}${URL}/${id}`
       : `${this.APIcadastro}/${id}`;
     return this.httpClient.patch<ChamadoCompleto>(urlBase, element).pipe(

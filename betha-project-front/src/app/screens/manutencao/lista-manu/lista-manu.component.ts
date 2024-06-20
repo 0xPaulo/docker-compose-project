@@ -26,7 +26,7 @@ export class ListaManuComponent implements OnInit {
     "VOLTOU_MANUTENCAO",
   ];
 
-  URL: string = "manutencao";
+  URL = "manutencao";
 
   constructor(
     private cadastroService: CadastroService,

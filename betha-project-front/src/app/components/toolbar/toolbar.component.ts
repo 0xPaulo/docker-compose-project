@@ -11,7 +11,7 @@ import { DialogCriarTecnicoComponent } from "./dialog-criar-tecnico/dialog-criar
   styleUrls: ["./toolbar.component.scss"],
 })
 export class ToolbarComponent implements OnInit {
-  ADMIN: boolean = false;
+  ADMIN = false;
 
   constructor(
     private authService: AuthService,
@@ -24,14 +24,14 @@ export class ToolbarComponent implements OnInit {
       maxWidth: "600px",
       minWidth: "600px",
     });
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe();
   }
   criarTecnico() {
     const dialogRef = this.dialog.open(DialogCriarTecnicoComponent, {
       maxWidth: "600px",
       minWidth: "600px",
     });
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe();
   }
   chamarTabelaTecnico() {
     this.router.navigate(["tecnico"]);
@@ -42,7 +42,7 @@ export class ToolbarComponent implements OnInit {
   onHome() {
     this.router.navigate(["home"]);
   }
-  errorMessage: string =
+  errorMessage =
     "Ops! Esta funcionalidade ainda não está disponível. Estamos trabalhando nisso.";
 
   onLogin() {

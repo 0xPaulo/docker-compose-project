@@ -12,10 +12,10 @@ import { TabelaService } from "src/app/services/tabela.service";
   styleUrls: ["./finalizar-pedido.component.scss"],
 })
 export class FinalizarPedidoComponent {
-  addMsgBol: boolean = false;
+  addMsgBol = false;
   dados: string[] = [];
   form: FormGroup;
-  msgError: string = "";
+  msgError = "";
   constructor(
     private dialogRef: MatDialogRef<any, boolean>,
     private cadastroService: CadastroService,
@@ -48,7 +48,7 @@ export class FinalizarPedidoComponent {
   }
   trocarStatus(status: string) {
     const id = this.data.infoCadastro.id;
-    let msgTxt = this.form.get("motivoNaoConclusao")?.value;
+    const msgTxt = this.form.get("motivoNaoConclusao")?.value;
     if (status === "VMANUTENCAO") {
       this.dados.push(status);
       this.dados.push(msgTxt);

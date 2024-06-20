@@ -13,8 +13,8 @@ import { TabelaService } from "src/app/services/tabela.service";
 })
 export class EmailComponent {
   form: FormGroup;
-  dia: string = "";
-  URL: string = "triagem";
+  dia = "";
+  URL = "triagem";
 
   constructor(
     private cadastroService: CadastroService,

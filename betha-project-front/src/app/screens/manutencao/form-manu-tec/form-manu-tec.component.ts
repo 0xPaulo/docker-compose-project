@@ -17,17 +17,17 @@ import { TecnicoService } from "./../../../services/tecnico.service";
 })
 export class FormManuTecComponent implements OnInit {
   form: FormGroup;
-  id: string = "";
-  dia: string = "";
+  id = "";
+  dia = "";
 
   tecnicosCompleto!: any[];
   tecnicosNomes!: string[];
 
-  tecnicoNomeSelecionado: string = "";
-  tecnicoEspecialidadeSelecionado: string = "";
-  tecnicoChamadosSelecionado: string = "";
+  tecnicoNomeSelecionado = "";
+  tecnicoEspecialidadeSelecionado = "";
+  tecnicoChamadosSelecionado = "";
   imagemTecnico: any;
-  tecnicoID!: Number;
+  tecnicoID!: number;
 
   tecnicoImg!: string | ArrayBuffer;
 
@@ -35,7 +35,7 @@ export class FormManuTecComponent implements OnInit {
 
   imageUrl: string[] = [];
 
-  motivoNaoConclusao: string = "";
+  motivoNaoConclusao = "";
   constructor(
     private imgProxyService: ImgProxyService,
     private dialogRef: MatDialogRef<any, boolean>,
@@ -87,7 +87,7 @@ export class FormManuTecComponent implements OnInit {
     }
   }
   onSelectionChange(event: MatSelectChange) {
-    let tecnicoSelecionado = event.value;
+    const tecnicoSelecionado = event.value;
     this.tecnicosCompleto.forEach((tecnico) => {
       if (tecnico.nome === tecnicoSelecionado) {
         this.tecnicoNomeSelecionado = tecnico.nome;
@@ -139,7 +139,7 @@ export class FormManuTecComponent implements OnInit {
     );
   }
   filtroTecnico(event: MatRadioChange) {
-    let filtro = this.tecnicoService.handleFilter(event);
+    const filtro = this.tecnicoService.handleFilter(event);
     this.chamarBuscarTodos(filtro);
   }
   onError() {

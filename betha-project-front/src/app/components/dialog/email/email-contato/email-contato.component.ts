@@ -13,7 +13,7 @@ import { TabelaService } from "src/app/services/tabela.service";
 })
 export class EmailContatoComponent {
   form: FormGroup;
-  dia: string = "";
+  dia = "";
 
   constructor(
     private cadastroService: CadastroService,

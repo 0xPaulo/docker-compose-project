@@ -10,10 +10,10 @@
       <mat-spinner class="loading-spinner mt-4"></mat-spinner>
     </div>
   </div>
-  <div class="mt-4" *ngIf="!(loadingService.loading$ | async)">
+  <div class="mt-4" *ngIf="(loadingService.loading$ | async)!== true">
     <div class="container-fotos" *ngIf="selectedFile.length > 0">
       <div class="container-fotos-filha" *ngFor="let fileUrl of selectedFileUrls">
-        <img [src]="fileUrl">
+        <img [src]="fileUrl" alt="imagem">>
         <button class="botao-exluir" (click)="delete(fileUrl)">X</button>
       </div>
     </div>

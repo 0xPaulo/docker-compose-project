@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LoadingService } from "./service/loading.service";
 
@@ -7,7 +7,7 @@ import { LoadingService } from "./service/loading.service";
   templateUrl: "./image.component.html",
   styleUrls: ["./image.component.scss"],
 })
-export class ImageComponent implements OnInit {
+export class ImageComponent {
   resultMessage: { type: string; result: any } | null = null;
   image: { url: string } = { url: "" };
   selectedFile: File[] = [];
@@ -87,5 +87,4 @@ export class ImageComponent implements OnInit {
   onError() {
     this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
   }
-  ngOnInit(): void {}
 }

@@ -23,7 +23,7 @@ export class ListaConcluidoComponent implements OnInit {
     "AGUARDANDO_FINALIZAR",
   ];
 
-  URL: string = "concluido";
+  URL = "concluido";
 
   constructor(private dialog: MatDialog, private tabelaService: TabelaService) {
     this.cadastros$ = this.carregarTabelaConclu(this.filtro);

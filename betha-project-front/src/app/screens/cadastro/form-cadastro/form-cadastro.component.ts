@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -12,11 +12,11 @@ import { TabelaService } from "src/app/services/tabela.service";
   templateUrl: "./form-cadastro.component.html",
   styleUrls: ["./form-cadastro.component.scss"],
 })
-export class FormCadastroComponent implements OnInit {
+export class FormCadastroComponent {
   form: FormGroup;
-  isEditMode: boolean = false;
-  activeTab: string = "cliente";
-  inputDesabilitado: boolean = true;
+  isEditMode = false;
+  activeTab = "cliente";
+  inputDesabilitado = true;
 
   constructor(
     private cadastroService: CadastroService,
@@ -100,7 +100,4 @@ export class FormCadastroComponent implements OnInit {
   onSucess() {
     this.snackBar.open("Cadastrado com sucesso", "", { duration: 5000 });
   }
-  onCancel() {}
-
-  ngOnInit() {}
 }

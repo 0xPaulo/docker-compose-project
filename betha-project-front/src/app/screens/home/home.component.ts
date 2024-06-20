@@ -9,12 +9,12 @@ import { jwtDecode } from "jwt-decode";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  isADMIN: boolean = false;
-  isRECEPCAO: boolean = false;
-  isTRIAGEM: boolean = false;
-  isMANUTENCAO: boolean = false;
-  isTECNICO: boolean = false;
-  isCONCLUIDO: boolean = false;
+  isADMIN = false;
+  isRECEPCAO = false;
+  isTRIAGEM = false;
+  isMANUTENCAO = false;
+  isTECNICO = false;
+  isCONCLUIDO = false;
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   cadastros() {

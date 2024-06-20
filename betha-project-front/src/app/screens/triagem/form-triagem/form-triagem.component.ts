@@ -15,8 +15,8 @@ export class FormTriagemComponent {
   form: FormGroup;
   // isEditMode: boolean = false;
   result: string[] = [];
-  id: string = "";
-  URL: string = "triagem";
+  id = "";
+  URL = "triagem";
   constructor(
     private cadastroService: CadastroService,
     private datePipe: DatePipe,

@@ -19,7 +19,7 @@ export class TecnicoTabelaComponent implements OnInit {
   displayedColumns = ["id", "info", "ico"];
   filtro: string[] = ["AGUARDANDO_MANUTENCAO", "EM_MANUTENCAO"];
   subId: string = this.authService.getIdToken();
-  URL: string = "tecnico/chamados";
+  URL = "tecnico/chamados";
   nomeTecnico = this.authService.getNome();
 
   constructor(
