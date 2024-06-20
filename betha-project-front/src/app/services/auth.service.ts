@@ -8,8 +8,6 @@ import { CustomJwtPayload } from "../interfaces/CustomJwtPayload ";
 export class AuthService {
   private readonly TOKEN_KEY = "jwtToken";
 
-  constructor() {}
-
   saveSessionStorageToken(token: string): void {
     sessionStorage.setItem(this.TOKEN_KEY, token);
   }
