@@ -35,10 +35,10 @@ public class TecnicoServiceTest {
 		Long chamadoId = (long) 1;
 		Long tecnicoId = (long) 1;
 
-		Chamado novoChamado = new Chamado();
+		Chamado chamadoExistente = new Chamado();
 		Tecnico novoTecnico = new Tecnico();
 
-		Mockito.when(chamadoRepository.findById(chamadoId)).thenReturn(Optional.of(novoChamado));
+		Mockito.when(chamadoRepository.findById(chamadoId)).thenReturn(Optional.of(chamadoExistente));
 
 		Mockito.when(tecnicoRepository.findById(tecnicoId)).thenReturn(Optional.of(novoTecnico));
 
@@ -46,6 +46,10 @@ public class TecnicoServiceTest {
 		tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
 
 		// assertions
+
+		Mockito.verify(chamadoRepository).findById(chamadoId);
+		Mockito.verify(tecnicoRepository).findById(tecnicoId);
+		Mockito.verify(chamadoRepository).save(chamadoExistente);
 	}
 
 }
