@@ -2,6 +2,7 @@ package com.betha.backend.cadastros.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 
 import java.util.Optional;
 
@@ -18,8 +19,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.betha.backend.cadastros.chamadoDTO.RegisterDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Tecnico;
+import com.betha.backend.cadastros.models.Enums.Perfils;
+import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.TecnicoRepository;
 
@@ -90,5 +94,21 @@ public class TecnicoServiceTest {
 		});
 
 		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Tecnico não encontrado\"");
+	}
+
+	@Test
+	@DisplayName("Deve lançar IllegalArgument se existir email no banco")
+	public void deveLancarExcecaoQuandoEmailJaEstaCadastrado() {
+		RegisterDTO tecnicoDados = new RegisterDTO("1", "email@mail", "senha", Perfils.ADMIN, "null",
+				TecnicoCategorias.SEM_CATEGORIA);
+
+		Mockito.when(tecnicoRepository.findByEmail(anyString()))
+				.thenReturn(new Tecnico("email@mail", "null", Perfils.ADMIN, "null", TecnicoCategorias.SEM_CATEGORIA));
+
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
+			tecnicoService.salvarNovoTecnico(tecnicoDados);
+		});
+
+		Assertions.assertThat(illegalArgumentException.getMessage()).isEqualTo("Email já cadastrado");
 	}
 }
