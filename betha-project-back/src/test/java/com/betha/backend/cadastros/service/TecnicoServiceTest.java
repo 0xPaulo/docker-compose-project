@@ -44,7 +44,7 @@ public class TecnicoServiceTest {
 
 	@Test
 	@DisplayName("Deve setar um novo tecnico ao chamado")
-	public void deveEditarTecnicoDoChamadoSucesso() {
+	public void editarTecnicoDoChamadoSucess() {
 
 		// arrange
 		Long chamadoId = (long) 1;
@@ -71,7 +71,7 @@ public class TecnicoServiceTest {
 
 	@Test
 	@DisplayName("Deve lançar 404 se nao encontrar o chamado no banco")
-	public void deveLancarExcecaoQuandoChamadoNaoEncontrado() {
+	public void editarTecnicoDoChamadoErrorCase1() {
 
 		Mockito.when(chamadoRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.empty());
 		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
@@ -83,7 +83,7 @@ public class TecnicoServiceTest {
 
 	@Test
 	@DisplayName("Deve lançar 404 se nao encontrar o tecnico no banco")
-	public void deveLancarExcecaoQuandoTecnicoNaoEncontrado() {
+	public void editarTecnicoDoChamadoErrorCase2() {
 
 		Chamado chamadoExistente = new Chamado();
 		Mockito.when(chamadoRepository.findById(anyLong())).thenReturn(Optional.of(chamadoExistente));
@@ -98,7 +98,7 @@ public class TecnicoServiceTest {
 
 	@Test
 	@DisplayName("Deve lançar IllegalArgument se existir email no banco")
-	public void deveLancarExcecaoQuandoEmailJaEstaCadastrado() {
+	public void SalvarNovoTecnicoErrorCase1() {
 		RegisterDTO tecnicoDados = new RegisterDTO("1", "email@mail", "senha", Perfils.ADMIN, "null",
 				TecnicoCategorias.SEM_CATEGORIA);
 
