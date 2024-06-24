@@ -1,14 +1,21 @@
 package com.betha.backend.cadastros.service;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.Optional;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Tecnico;
@@ -26,6 +33,9 @@ public class TecnicoServiceTest {
 
 	@Mock
 	TecnicoRepository tecnicoRepository;
+
+	@Captor
+	ArgumentCaptor<Chamado> chamadoCaptor;
 
 	@Test
 	@DisplayName("Deve setar um novo tecnico ao chamado")
@@ -46,10 +56,45 @@ public class TecnicoServiceTest {
 		tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
 
 		// assertions
-
 		Mockito.verify(chamadoRepository).findById(chamadoId);
 		Mockito.verify(tecnicoRepository).findById(tecnicoId);
-		Mockito.verify(chamadoRepository).save(chamadoExistente);
+		Mockito.verify(chamadoRepository).save(chamadoCaptor.capture());
+		Chamado chamadoModificado = chamadoCaptor.getValue();
+		Assertions.assertThat(chamadoModificado.getTecnico()).isNotNull();
+		Assertions.assertThat(chamadoModificado.getStatus().name()).isEqualTo("EM_MANUTENCAO");
 	}
 
+	@Test
+	@DisplayName("Deve dar 404 se nao encontrar o chamado no banco")
+	public void shouldEditarTecnicoDoChamadoErrorCase1() {
+
+		Long chamadoId = (long) 1;
+		Long tecnicoId = (long) 1;
+
+		Mockito.when(chamadoRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.empty());
+
+		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
+			tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
+		});
+
+		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Chamado não encontrado\"");
+	}
+
+	@Test
+	@DisplayName("Deve dar 404 se nao encontrar o tecnico no banco")
+	public void shouldEditarTecnicoDoChamadoErrorCase2() {
+		Long chamadoId = (long) 1;
+		Long tecnicoId = (long) 1;
+		Chamado chamadoExistente = new Chamado();
+
+		Mockito.when(chamadoRepository.findById(chamadoId)).thenReturn(Optional.of(chamadoExistente));
+
+		Mockito.when(tecnicoRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.empty());
+
+		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
+			tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
+		});
+
+		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Tecnico não encontrado\"");
+	}
 }
