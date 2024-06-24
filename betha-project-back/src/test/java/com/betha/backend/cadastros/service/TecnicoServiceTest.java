@@ -1,6 +1,7 @@
 package com.betha.backend.cadastros.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class TecnicoServiceTest {
 
 	@Test
 	@DisplayName("Deve setar um novo tecnico ao chamado")
-	public void shouldEditarTecnicoDoChamadoSucesso() {
+	public void deveEditarTecnicoDoChamadoSucesso() {
 
 		// arrange
 		Long chamadoId = (long) 1;
@@ -65,34 +66,27 @@ public class TecnicoServiceTest {
 	}
 
 	@Test
-	@DisplayName("Deve dar 404 se nao encontrar o chamado no banco")
-	public void shouldEditarTecnicoDoChamadoErrorCase1() {
-
-		Long chamadoId = (long) 1;
-		Long tecnicoId = (long) 1;
+	@DisplayName("Deve lançar 404 se nao encontrar o chamado no banco")
+	public void deveLancarExcecaoQuandoChamadoNaoEncontrado() {
 
 		Mockito.when(chamadoRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.empty());
-
 		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
-			tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
+			tecnicoService.editarTecnicoDoChamado(1L, 2L);
 		});
 
 		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Chamado não encontrado\"");
 	}
 
 	@Test
-	@DisplayName("Deve dar 404 se nao encontrar o tecnico no banco")
-	public void shouldEditarTecnicoDoChamadoErrorCase2() {
-		Long chamadoId = (long) 1;
-		Long tecnicoId = (long) 1;
+	@DisplayName("Deve lançar 404 se nao encontrar o tecnico no banco")
+	public void deveLancarExcecaoQuandoTecnicoNaoEncontrado() {
+
 		Chamado chamadoExistente = new Chamado();
-
-		Mockito.when(chamadoRepository.findById(chamadoId)).thenReturn(Optional.of(chamadoExistente));
-
+		Mockito.when(chamadoRepository.findById(anyLong())).thenReturn(Optional.of(chamadoExistente));
 		Mockito.when(tecnicoRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.empty());
 
 		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
-			tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
+			tecnicoService.editarTecnicoDoChamado(1L, 2L);
 		});
 
 		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Tecnico não encontrado\"");
