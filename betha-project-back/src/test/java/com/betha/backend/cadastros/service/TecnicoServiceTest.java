@@ -104,23 +104,6 @@ public class TecnicoServiceTest {
 	}
 
 	@Test
-	@DisplayName("Deve lançar IllegalArgument se existir email no banco")
-	public void salvarNovoTecnicoErrorCase1() {
-
-		RegisterDTO tecnicoDados = new RegisterDTO("1", "email@mail", "senha", Perfils.ADMIN, "null",
-				TecnicoCategorias.SEM_CATEGORIA);
-
-		Mockito.when(tecnicoRepository.findByEmail(anyString()))
-				.thenReturn(new Tecnico("email@mail", "null", Perfils.ADMIN, "null", TecnicoCategorias.SEM_CATEGORIA));
-
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
-			tecnicoService.salvarNovoTecnico(tecnicoDados);
-		});
-
-		Assertions.assertThat(illegalArgumentException.getMessage()).isEqualTo("Email já cadastrado");
-	}
-
-	@Test
 	@DisplayName("Deve salvar corretamente um tecnico no banco")
 	public void salvarNovoTecnicoSucesso() {
 
@@ -142,5 +125,22 @@ public class TecnicoServiceTest {
 		assertEquals(Perfils.ADMIN, result.getPerfil());
 		assertEquals("nome", result.getNome());
 		assertEquals(TecnicoCategorias.SEM_CATEGORIA, result.getTecnicoCategorias());
+	}
+
+	@Test
+	@DisplayName("Deve lançar IllegalArgument se existir email no banco")
+	public void salvarNovoTecnicoErrorCase1() {
+
+		RegisterDTO tecnicoDados = new RegisterDTO("1", "email@mail", "senha", Perfils.ADMIN, "null",
+				TecnicoCategorias.SEM_CATEGORIA);
+
+		Mockito.when(tecnicoRepository.findByEmail(anyString()))
+				.thenReturn(new Tecnico("email@mail", "null", Perfils.ADMIN, "null", TecnicoCategorias.SEM_CATEGORIA));
+
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
+			tecnicoService.salvarNovoTecnico(tecnicoDados);
+		});
+
+		Assertions.assertThat(illegalArgumentException.getMessage()).isEqualTo("Email já cadastrado");
 	}
 }
