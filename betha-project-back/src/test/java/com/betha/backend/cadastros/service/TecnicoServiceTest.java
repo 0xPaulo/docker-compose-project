@@ -1,8 +1,14 @@
 package com.betha.backend.cadastros.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
@@ -17,6 +23,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.chamadoDTO.RegisterDTO;
@@ -43,7 +50,7 @@ public class TecnicoServiceTest {
 	ArgumentCaptor<Chamado> chamadoCaptor;
 
 	@Test
-	@DisplayName("Deve setar um novo tecnico ao chamado")
+	@DisplayName("Deve salvar um novo tecnico ao chamado")
 	public void editarTecnicoDoChamadoSucess() {
 
 		// arrange
@@ -98,7 +105,8 @@ public class TecnicoServiceTest {
 
 	@Test
 	@DisplayName("Deve lançar IllegalArgument se existir email no banco")
-	public void SalvarNovoTecnicoErrorCase1() {
+	public void salvarNovoTecnicoErrorCase1() {
+
 		RegisterDTO tecnicoDados = new RegisterDTO("1", "email@mail", "senha", Perfils.ADMIN, "null",
 				TecnicoCategorias.SEM_CATEGORIA);
 
@@ -110,5 +118,29 @@ public class TecnicoServiceTest {
 		});
 
 		Assertions.assertThat(illegalArgumentException.getMessage()).isEqualTo("Email já cadastrado");
+	}
+
+	@Test
+	@DisplayName("Deve salvar corretamente um tecnico no banco")
+	public void salvarNovoTecnicoSucesso() {
+
+		RegisterDTO dto = new RegisterDTO("1", "email@mail.com", "senha", Perfils.ADMIN, "nome",
+				TecnicoCategorias.SEM_CATEGORIA);
+		BCryptPasswordEncoder mockEncoder = mock(BCryptPasswordEncoder.class);
+
+		when(tecnicoRepository.findByEmail(dto.email())).thenReturn(null);
+		lenient().when(mockEncoder.encode(dto.senha())).thenReturn("senhaCriptografada");
+		Tecnico tecnicoSalvo = new Tecnico("email@mail.com", "senhaCriptografada", Perfils.ADMIN, "nome",
+				TecnicoCategorias.SEM_CATEGORIA);
+		when(tecnicoRepository.save(any(Tecnico.class))).thenReturn(tecnicoSalvo);
+
+		Tecnico result = tecnicoService.salvarNovoTecnico(dto);
+
+		assertNotNull(result);
+		assertEquals("email@mail.com", result.getEmail());
+		assertEquals("senhaCriptografada", result.getSenha());
+		assertEquals(Perfils.ADMIN, result.getPerfil());
+		assertEquals("nome", result.getNome());
+		assertEquals(TecnicoCategorias.SEM_CATEGORIA, result.getTecnicoCategorias());
 	}
 }
