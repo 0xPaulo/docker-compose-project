@@ -49,20 +49,28 @@ public class TecnicoServiceTest {
 	@Captor
 	ArgumentCaptor<Chamado> chamadoCaptor;
 
+	@Captor
+	ArgumentCaptor<Tecnico> tecnicoCaptor;
+
+	long chamadoId = 1L;
+	Long tecnicoId = 2L;
+
+	Tecnico tecnicoTeste = new Tecnico("email@mail.com", "senha", Perfils.ADMIN, "nome",
+			TecnicoCategorias.SEM_CATEGORIA);
+
+	RegisterDTO registroDTO = new RegisterDTO("2", "email@mail", "senha", Perfils.ADMIN, "nome",
+			TecnicoCategorias.SEM_CATEGORIA);
+
 	@Test
 	@DisplayName("Deve salvar um novo tecnico ao chamado")
 	public void editarTecnicoDoChamadoSucess() {
 
 		// arrange
-		Long chamadoId = (long) 1;
-		Long tecnicoId = (long) 1;
-
 		Chamado chamadoExistente = new Chamado();
-		Tecnico novoTecnico = new Tecnico();
 
 		Mockito.when(chamadoRepository.findById(chamadoId)).thenReturn(Optional.of(chamadoExistente));
 
-		Mockito.when(tecnicoRepository.findById(tecnicoId)).thenReturn(Optional.of(novoTecnico));
+		Mockito.when(tecnicoRepository.findById(tecnicoId)).thenReturn(Optional.of(tecnicoTeste));
 
 		// action
 		tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
@@ -82,7 +90,7 @@ public class TecnicoServiceTest {
 
 		Mockito.when(chamadoRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.empty());
 		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
-			tecnicoService.editarTecnicoDoChamado(1L, 2L);
+			tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
 		});
 
 		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Chamado não encontrado\"");
@@ -97,7 +105,7 @@ public class TecnicoServiceTest {
 		Mockito.when(tecnicoRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.empty());
 
 		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
-			tecnicoService.editarTecnicoDoChamado(1L, 2L);
+			tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
 		});
 
 		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Tecnico não encontrado\"");
@@ -107,17 +115,15 @@ public class TecnicoServiceTest {
 	@DisplayName("Deve salvar corretamente um tecnico no banco")
 	public void salvarNovoTecnicoSucesso() {
 
-		RegisterDTO dto = new RegisterDTO("1", "email@mail.com", "senha", Perfils.ADMIN, "nome",
-				TecnicoCategorias.SEM_CATEGORIA);
 		BCryptPasswordEncoder mockEncoder = mock(BCryptPasswordEncoder.class);
 
-		when(tecnicoRepository.findByEmail(dto.email())).thenReturn(null);
-		lenient().when(mockEncoder.encode(dto.senha())).thenReturn("senhaCriptografada");
+		when(tecnicoRepository.findByEmail(registroDTO.email())).thenReturn(null);
+		lenient().when(mockEncoder.encode(registroDTO.senha())).thenReturn("senhaCriptografada");
 		Tecnico tecnicoSalvo = new Tecnico("email@mail.com", "senhaCriptografada", Perfils.ADMIN, "nome",
 				TecnicoCategorias.SEM_CATEGORIA);
 		when(tecnicoRepository.save(any(Tecnico.class))).thenReturn(tecnicoSalvo);
 
-		Tecnico result = tecnicoService.salvarNovoTecnico(dto);
+		Tecnico result = tecnicoService.salvarNovoTecnico(registroDTO);
 
 		assertNotNull(result);
 		assertEquals("email@mail.com", result.getEmail());
@@ -131,16 +137,46 @@ public class TecnicoServiceTest {
 	@DisplayName("Deve lançar IllegalArgument se existir email no banco")
 	public void salvarNovoTecnicoErrorCase1() {
 
-		RegisterDTO tecnicoDados = new RegisterDTO("1", "email@mail", "senha", Perfils.ADMIN, "null",
-				TecnicoCategorias.SEM_CATEGORIA);
-
 		Mockito.when(tecnicoRepository.findByEmail(anyString()))
-				.thenReturn(new Tecnico("email@mail", "null", Perfils.ADMIN, "null", TecnicoCategorias.SEM_CATEGORIA));
+				.thenReturn(new Tecnico("email@mail", "senha", Perfils.ADMIN, "nome", TecnicoCategorias.SEM_CATEGORIA));
 
 		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
-			tecnicoService.salvarNovoTecnico(tecnicoDados);
+			tecnicoService.salvarNovoTecnico(registroDTO);
 		});
 
 		Assertions.assertThat(illegalArgumentException.getMessage()).isEqualTo("Email já cadastrado");
+	}
+
+	@Test
+	@DisplayName("Deve trocar a senha do tecnico com sucesso")
+	public void trocarSenhaDoTecnicoSucess() {
+
+		Tecnico tecnicoEncontrado = new Tecnico("email@mail.com", "senha", Perfils.ADMIN, "nome",
+				TecnicoCategorias.SEM_CATEGORIA);
+
+		Mockito.when(tecnicoRepository.findById(tecnicoId)).thenReturn(Optional.of(tecnicoEncontrado));
+
+		tecnicoService.trocarSenhaDoTecnico(registroDTO);
+
+		Mockito.verify(tecnicoRepository).findById(tecnicoId);
+		Mockito.verify(tecnicoRepository).save(tecnicoCaptor.capture());
+		Tecnico tecnicoModificado = tecnicoCaptor.getValue();
+		Assertions.assertThat(tecnicoModificado.getSenha()).isNotNull();
+		Assertions.assertThat(registroDTO.senha()).isNotEqualTo(tecnicoEncontrado.getSenha());
+	}
+
+	@Test
+	@DisplayName("Deve lançar ResponseStatusException por nao ter encontrado o tecnico")
+	public void trocarSenhaDoTecnicoErrorCase1() {
+
+		Mockito.when(tecnicoRepository.findById(tecnicoId)).thenReturn(Optional.empty());
+
+		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
+			tecnicoService.trocarSenhaDoTecnico(registroDTO);
+		});
+		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Tecnico não encontrado\"");
+
+		Mockito.verify(tecnicoRepository).findById(tecnicoId);
+
 	}
 }
