@@ -60,6 +60,8 @@ http://localhost:4200
 
 **Deploy**: Docker, Docker Compose
 
+**Testes**: JUnit
+
 ## UML
 
 ![image](https://github.com/0xPaulo/betha-angular-project/assets/102301140/855c050b-b2f4-4f7b-8484-830bd29de580)
