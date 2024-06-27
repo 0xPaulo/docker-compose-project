@@ -56,4 +56,11 @@ http://localhost:4200
 
 **Autenticação e Segurança**: Spring Security, JWT
 
+**ORM**: Hibernate 
+
 **Deploy**: Docker, Docker Compose
+
+## UML
+
+![image](https://github.com/0xPaulo/betha-angular-project/assets/102301140/855c050b-b2f4-4f7b-8484-830bd29de580)
+![image](https://github.com/0xPaulo/betha-angular-project/assets/102301140/906ef9da-9503-42d0-8624-12f485b0d3bb)
