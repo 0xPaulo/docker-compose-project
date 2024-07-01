@@ -65,17 +65,12 @@ public class TecnicoServiceTest {
 	@DisplayName("Deve salvar um novo tecnico ao chamado")
 	public void editarTecnicoDoChamadoSucess() {
 
-		// arrange
 		Chamado chamadoExistente = new Chamado();
-
 		Mockito.when(chamadoRepository.findById(chamadoId)).thenReturn(Optional.of(chamadoExistente));
-
 		Mockito.when(tecnicoRepository.findById(tecnicoId)).thenReturn(Optional.of(tecnicoTeste));
 
-		// action
 		tecnicoService.editarTecnicoDoChamado(chamadoId, tecnicoId);
 
-		// assertions
 		Mockito.verify(chamadoRepository).findById(chamadoId);
 		Mockito.verify(tecnicoRepository).findById(tecnicoId);
 		Mockito.verify(chamadoRepository).save(chamadoCaptor.capture());
@@ -119,18 +114,17 @@ public class TecnicoServiceTest {
 
 		when(tecnicoRepository.findByEmail(registroDTO.email())).thenReturn(null);
 		lenient().when(mockEncoder.encode(registroDTO.senha())).thenReturn("senhaCriptografada");
-		Tecnico tecnicoSalvo = new Tecnico("email@mail.com", "senhaCriptografada", Perfils.ADMIN, "nome",
-				TecnicoCategorias.SEM_CATEGORIA);
-		when(tecnicoRepository.save(any(Tecnico.class))).thenReturn(tecnicoSalvo);
+		tecnicoTeste.setSenha("senhaCriptografada");
+		when(tecnicoRepository.save(any(Tecnico.class))).thenReturn(tecnicoTeste);
 
 		Tecnico result = tecnicoService.salvarNovoTecnico(registroDTO);
 
 		assertNotNull(result);
-		assertEquals("email@mail.com", result.getEmail());
-		assertEquals("senhaCriptografada", result.getSenha());
-		assertEquals(Perfils.ADMIN, result.getPerfil());
-		assertEquals("nome", result.getNome());
-		assertEquals(TecnicoCategorias.SEM_CATEGORIA, result.getTecnicoCategorias());
+		assertEquals(tecnicoTeste.getEmail(), result.getEmail());
+		assertEquals(tecnicoTeste.getSenha(), result.getSenha());
+		assertEquals(tecnicoTeste.getPerfil(), result.getPerfil());
+		assertEquals(tecnicoTeste.getNome(), result.getNome());
+		assertEquals(tecnicoTeste.getTecnicoCategorias(), result.getTecnicoCategorias());
 	}
 
 	@Test
