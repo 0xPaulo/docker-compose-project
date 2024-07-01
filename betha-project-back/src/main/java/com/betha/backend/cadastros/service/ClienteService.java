@@ -1,5 +1,8 @@
 package com.betha.backend.cadastros.service;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,9 @@ public class ClienteService {
   private ClienteRepository clienteRepository;
 
   public Cliente salvarNovoCliente(FormCliente novoCliente) {
+    if (!verificaCamposPreenchidos(novoCliente)) {
+      throw new IllegalArgumentException("Todos os campos do FormCliente devem ser preenchidos.");
+    }
     Cliente clienteTemp = Cliente.builder()
         .nome(novoCliente.getClienteNome())
         .telefone(novoCliente.getClienteTelefone())
@@ -21,5 +27,15 @@ public class ClienteService {
         .email(novoCliente.getClienteEmail())
         .build();
     return clienteRepository.save(clienteTemp);
+  }
+
+  private boolean verificaCamposPreenchidos(FormCliente novoCliente) {
+    List<String> camposNecessarios = Arrays.asList("clienteNome", "clienteTelefone", "clienteEndereco", "clienteEmail");
+    for (String campo : camposNecessarios) {
+      if (novoCliente.getValorDoCampo(campo) == null) {
+        return false;
+      }
+    }
+    return true;
   }
 }
