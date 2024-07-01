@@ -13,6 +13,7 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,14 +53,16 @@ public class TecnicoServiceTest {
 	@Captor
 	ArgumentCaptor<Tecnico> tecnicoCaptor;
 
-	long chamadoId = 1L;
-	Long tecnicoId = 2L;
+	private long chamadoId = 1L;
+	private Long tecnicoId = 2L;
+	private Tecnico tecnicoTeste;
+	private RegisterDTO registroDTO;
 
-	Tecnico tecnicoTeste = new Tecnico("email@mail.com", "senha", Perfils.ADMIN, "nome",
-			TecnicoCategorias.SEM_CATEGORIA);
-
-	RegisterDTO registroDTO = new RegisterDTO("2", "email@mail", "senha", Perfils.ADMIN, "nome",
-			TecnicoCategorias.SEM_CATEGORIA);
+	@BeforeEach
+	public void setUp() {
+		tecnicoTeste = new Tecnico("email@mail.com", "senha", Perfils.ADMIN, "nome", TecnicoCategorias.SEM_CATEGORIA);
+		registroDTO = new RegisterDTO("2", "email@mail", "senha", Perfils.ADMIN, "nome", TecnicoCategorias.SEM_CATEGORIA);
+	}
 
 	@Test
 	@DisplayName("Deve salvar um novo tecnico ao chamado")
