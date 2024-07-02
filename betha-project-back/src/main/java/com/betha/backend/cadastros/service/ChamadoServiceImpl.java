@@ -3,6 +3,7 @@ package com.betha.backend.cadastros.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,10 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
   public List<ChamadoCompletoDTO> todosChamadosDo(String TecnicoID) {
     List<Chamado> chamados = new ArrayList<>();
     chamados = this.chamadoRepository.buscarChamadosDo(TecnicoID);
-    return processarChamados(chamados);
+    if (chamados.isEmpty()) {
+      throw new NoSuchElementException("Não foi encontrado chamados para esse tecnico");
+    }
+    return processarChamadoToDTO(chamados);
   }
 
   @Override
@@ -49,7 +53,7 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
     } else {
       chamados = chamadoRepository.findAll();
     }
-    return processarChamados(chamados);
+    return processarChamadoToDTO(chamados);
   }
 
   @Override
@@ -95,7 +99,7 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
     return chamadoExistente;
   }
 
-  private List<ChamadoCompletoDTO> processarChamados(List<Chamado> chamados) {
+  private List<ChamadoCompletoDTO> processarChamadoToDTO(List<Chamado> chamados) {
     List<ChamadoCompletoDTO> chamadoCompletoDTOs = new ArrayList<>();
     for (Chamado chamado : chamados) {
       Cliente cliente = chamado.getClienteId();
