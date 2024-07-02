@@ -24,26 +24,26 @@ import com.betha.backend.cadastros.repository.ChamadoRepository;
 @RequestMapping("/cadastros")
 public class CadastrosController {
 
-  private final ChamadoServiceInterface chamadoService;
+  private final ChamadoServiceInterface chamadoServiceInterface;
   private final ChamadoRepository chamadoRepository;
 
-  CadastrosController(ChamadoServiceInterface chamadoService,
+  CadastrosController(ChamadoServiceInterface chamadoServiceInterface,
       ChamadoRepository chamadoRepository) {
-    this.chamadoService = chamadoService;
+    this.chamadoServiceInterface = chamadoServiceInterface;
     this.chamadoRepository = chamadoRepository;
   }
 
   @GetMapping("/{id}")
   @Secured({ "ROLE_RECEPCAO", "ROLE_TRIAGEM", "ROLE_TECNICO" })
   public ChamadoCompletoDTO buscarChamadoPeloId(@PathVariable Long id) {
-    ChamadoCompletoDTO resultado = chamadoService.buscarPeloId(id);
+    ChamadoCompletoDTO resultado = chamadoServiceInterface.buscarPeloId(id);
     return resultado;
   }
 
   @GetMapping()
   @Secured({ "ROLE_RECEPCAO" })
   public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> filtro) {
-    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamadosCom(filtro);
+    List<ChamadoCompletoDTO> resultado = chamadoServiceInterface.todosChamadosCom(filtro);
     return resultado;
   }
 
@@ -51,20 +51,20 @@ public class CadastrosController {
   @ResponseStatus(HttpStatus.CREATED)
   @Secured({ "ROLE_RECEPCAO" })
   public Chamado salvarChamadoBanco(@RequestBody Chamado chamado) {
-    return chamadoService.salvarNovoChamado(chamado);
+    return chamadoServiceInterface.salvarNovoChamado(chamado);
   }
 
   @PatchMapping("/{id}")
   @Secured({ "ROLE_RECEPCAO" })
   public Chamado editarCamposChamado(@PathVariable Long id, @RequestBody ChamadoCompletoDTO chamadoCompletoDTO) {
-    Chamado resultado = chamadoService.editarCamposDoId(id, chamadoCompletoDTO);
+    Chamado resultado = chamadoServiceInterface.editarCamposDoId(id, chamadoCompletoDTO);
     return resultado;
   }
 
   @PatchMapping("change-status/{id}")
   @Secured({ "ROLE_MANUTENCAO" })
   public Chamado editarStatusChamado(@PathVariable Long id, @RequestBody List<String> dados) {
-    Chamado resultado = chamadoService.editarStatusDoId(id, dados);
+    Chamado resultado = chamadoServiceInterface.editarStatusDoId(id, dados);
     return resultado;
   }
 
