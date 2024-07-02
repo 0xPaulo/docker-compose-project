@@ -192,6 +192,11 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
   }
 
   private Chamado construirNovoChamado(Chamado novoChamado) {
+
+    if (novoChamado.getClienteId() == null) {
+      throw new IllegalArgumentException("clienteId não pode ser nulo");
+    }
+
     return Chamado.builder()
         .clienteId(novoChamado.getClienteId())
         .nomeItem(novoChamado.getNomeItem())
