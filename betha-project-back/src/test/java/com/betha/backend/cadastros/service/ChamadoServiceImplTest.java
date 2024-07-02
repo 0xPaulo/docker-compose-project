@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.models.Tecnico;
@@ -79,4 +82,31 @@ public class ChamadoServiceImplTest {
 		Assertions.assertThat(illegalArgumentException.getMessage()).isEqualTo("clienteId não pode ser nulo");
 	}
 
+	@Test
+	@DisplayName("Deve retornar uma lista de todos os chamados do Tecnico passado como parametro")
+	public void todosChamadosDoTecnicoSucess() {
+
+		List<Chamado> listaDeChamdosDoTecnicoRetorno = new ArrayList<>();
+		listaDeChamdosDoTecnicoRetorno.add(chamadoTeste);
+
+		when(chamadoRepository.buscarChamadosDo(anyString())).thenReturn(listaDeChamdosDoTecnicoRetorno);
+		List<ChamadoCompletoDTO> resultados = chamadoServiceImpl.todosChamadosDo(anyString());
+
+		assertNotNull(resultados);
+		assertEquals(listaDeChamdosDoTecnicoRetorno.get(0).getTecnico().getId(), resultados.get(0).getTecnico());
+	}
+
+	@Test
+	@DisplayName("Deve lançar noSuchElementException quando nao for encontrado chamado nenhum")
+	public void todosChamadosDoTecnicoErrorCase1() {
+
+		List<Chamado> ListaChamadoVaziaRetornada = new ArrayList<>();
+
+		when(chamadoRepository.buscarChamadosDo(anyString())).thenReturn(ListaChamadoVaziaRetornada);
+		NoSuchElementException noSuchElementException = assertThrows(NoSuchElementException.class, () -> {
+			chamadoServiceImpl.todosChamadosDo(anyString());
+		});
+		Assertions.assertThat(noSuchElementException.getMessage())
+				.isEqualTo("Não foi encontrado chamados para esse tecnico");
+	}
 }
