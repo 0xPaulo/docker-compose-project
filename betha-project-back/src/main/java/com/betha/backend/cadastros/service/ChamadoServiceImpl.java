@@ -100,6 +100,9 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
   }
 
   private List<ChamadoCompletoDTO> processarChamadoToDTO(List<Chamado> chamados) {
+    if (chamados.get(0).getClienteId() == null) {
+      throw new NoSuchElementException("Aconteceu algum erro ao buscar o chamado");
+    }
     List<ChamadoCompletoDTO> chamadoCompletoDTOs = new ArrayList<>();
     for (Chamado chamado : chamados) {
       Cliente cliente = chamado.getClienteId();
