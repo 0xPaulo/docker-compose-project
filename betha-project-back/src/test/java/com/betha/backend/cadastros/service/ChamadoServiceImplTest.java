@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +30,7 @@ import com.betha.backend.cadastros.models.Enums.Perfils;
 import com.betha.backend.cadastros.models.Enums.Status;
 import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
+import com.betha.backend.cadastros.repository.TabelaRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class ChamadoServiceImplTest {
@@ -38,6 +40,9 @@ public class ChamadoServiceImplTest {
 
 	@Mock
 	private ChamadoRepository chamadoRepository;
+
+	@Mock
+	private TabelaRepository tabelaRepository;
 
 	private Chamado chamadoTeste;
 	private Cliente clienteTeste;
@@ -71,7 +76,7 @@ public class ChamadoServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("Deve lançar IllegalArgumentException clienteId não pode ser nulo")
+	@DisplayName("Deve lançar IllegalArgumentException, clienteId não pode ser nulo")
 	public void salvarNovoChamadoErrorCase1() {
 
 		chamadoTeste.setClienteId(null);
@@ -108,5 +113,53 @@ public class ChamadoServiceImplTest {
 		});
 		Assertions.assertThat(noSuchElementException.getMessage())
 				.isEqualTo("Não foi encontrado chamados para esse tecnico");
+	}
+
+	@Test
+	@DisplayName("Retornar todos os Chamados de acordo com o filtro passado")
+	public void todosChamdosComFiltroSucess() {
+
+		List<String> filtros = new ArrayList<>();
+		filtros.add("teste");
+		List<Chamado> chamadosRetornados = new ArrayList<>();
+		chamadosRetornados.add(chamadoTeste);
+
+		when(tabelaRepository.findByStatusInFilter(anyList())).thenReturn(chamadosRetornados);
+		List<ChamadoCompletoDTO> resultados = chamadoServiceImpl.todosChamadosCom(filtros);
+
+		assertNotNull(resultados);
+		assertEquals(chamadosRetornados.get(0).getItemSerie(), resultados.get(0).getItemSerie());
+	}
+
+	@Test
+	@DisplayName("Retornar todos os chamados sem passar filtro")
+	public void todosChamdosSemFiltroSucess() {
+		List<String> filtros = new ArrayList<>();
+		List<Chamado> chamadosRetornados = new ArrayList<>();
+		chamadosRetornados.add(chamadoTeste);
+
+		when(chamadoRepository.findAll()).thenReturn(chamadosRetornados);
+		List<ChamadoCompletoDTO> resultados = chamadoServiceImpl.todosChamadosCom(filtros);
+
+		assertNotNull(resultados);
+		assertEquals(chamadosRetornados.get(0).getItemSerie(), resultados.get(0).getItemSerie());
+	}
+
+	@Test
+	@DisplayName("Lançar NoSuchElementException quando não for encontrado chamado nenhum com o filtro")
+	public void todosChamadosComFiltroErrorCase1() {
+
+		List<String> filtros = new ArrayList<>();
+		filtros.add("teste");
+		chamadoTeste.setClienteId(null);
+		List<Chamado> chamadosRetornados = new ArrayList<>();
+		chamadosRetornados.add(chamadoTeste);
+
+		when(tabelaRepository.findByStatusInFilter(anyList())).thenReturn(chamadosRetornados);
+		NoSuchElementException noSuchElementException = assertThrows(NoSuchElementException.class, () -> {
+			chamadoServiceImpl.todosChamadosCom(filtros);
+		});
+
+		Assertions.assertThat(noSuchElementException.getMessage()).isEqualTo("Aconteceu algum erro ao buscar o chamado");
 	}
 }
