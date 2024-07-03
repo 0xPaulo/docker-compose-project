@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { catchError, Observable, of } from "rxjs";
 import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produto/detalhe-produto.component";
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { FinalizarPedidoComponent } from "src/app/components/dialog/finalizar-pedido/finalizar-pedido.component";
@@ -23,6 +24,7 @@ export class TecnicoTabelaComponent implements OnInit {
   nomeTecnico = this.authService.getNome();
 
   constructor(
+    private snackBar: MatSnackBar,
     private authService: AuthService,
     private tabelaService: TabelaService,
     private dialog: MatDialog
@@ -30,10 +32,14 @@ export class TecnicoTabelaComponent implements OnInit {
     this.cadastros$ = this.carregarTabelaManu(this.subId);
   }
   carregarTabelaManu(subId?: string): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ = this.tabelaService.carregarTabela(
-      this.subId,
-      this.URL
-    ));
+    return (this.cadastros$ = this.tabelaService
+      .carregarTabela(this.subId, this.URL)
+      .pipe(
+        catchError(() => {
+          this.onError();
+          return of([]);
+        })
+      ));
   }
 
   finalizarPedido(dados: ChamadoCompleto) {
@@ -67,5 +73,12 @@ export class TecnicoTabelaComponent implements OnInit {
     this.tabelaService.emitListaAtualizada.subscribe(() => {
       this.carregarTabelaManu(this.subId);
     });
+  }
+  onError() {
+    this.snackBar.open(
+      "Não existe mais chamados cadastrado no seu perfil.",
+      "",
+      { duration: 5000 }
+    );
   }
 }
