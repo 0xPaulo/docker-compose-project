@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.models.Chamado;
@@ -134,6 +137,7 @@ public class ChamadoServiceImplTest {
 	@Test
 	@DisplayName("Retornar todos os chamados sem passar filtro")
 	public void todosChamdosSemFiltroSucess() {
+
 		List<String> filtros = new ArrayList<>();
 		List<Chamado> chamadosRetornados = new ArrayList<>();
 		chamadosRetornados.add(chamadoTeste);
@@ -158,6 +162,42 @@ public class ChamadoServiceImplTest {
 		when(tabelaRepository.findByStatusInFilter(anyList())).thenReturn(chamadosRetornados);
 		NoSuchElementException noSuchElementException = assertThrows(NoSuchElementException.class, () -> {
 			chamadoServiceImpl.todosChamadosCom(filtros);
+		});
+
+		Assertions.assertThat(noSuchElementException.getMessage()).isEqualTo("Aconteceu algum erro ao buscar o chamado");
+	}
+
+	@Test
+	@DisplayName("Deve buscar um chamado completo pelo ID passado")
+	public void buscarPeloIdSucess() {
+
+		when(chamadoRepository.findById(anyLong())).thenReturn(Optional.of(chamadoTeste));
+		ChamadoCompletoDTO resultado = chamadoServiceImpl.buscarPeloId(anyLong());
+
+		assertNotNull(resultado);
+	}
+
+	@Test
+	@DisplayName("Deve lançar StatusException quando nao for encontrado nenhum chamado utilizando o ID")
+	public void buscarPeloIdErrorCase1() {
+
+		when(chamadoRepository.findById(anyLong())).thenReturn(Optional.empty());
+		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
+			chamadoServiceImpl.buscarPeloId(anyLong());
+		});
+
+		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Chamado não encontrado\"");
+	}
+
+	@Test
+	@DisplayName("Deve lançar NoSuchElementException quando tiver alguma coisa errada com o ID do chamado encontrado")
+	public void buscarPeloIdErrorCase2() {
+
+		chamadoTeste.setClienteId(null);
+
+		when(chamadoRepository.findById(anyLong())).thenReturn(Optional.of(chamadoTeste));
+		NoSuchElementException noSuchElementException = assertThrows(NoSuchElementException.class, () -> {
+			chamadoServiceImpl.buscarPeloId(anyLong());
 		});
 
 		Assertions.assertThat(noSuchElementException.getMessage()).isEqualTo("Aconteceu algum erro ao buscar o chamado");
