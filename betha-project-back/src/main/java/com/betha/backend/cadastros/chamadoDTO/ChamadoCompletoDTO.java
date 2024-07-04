@@ -37,4 +37,20 @@ public class ChamadoCompletoDTO {
   private String tecnicoNome;
   private TecnicoCategorias tecnicoCategorias;
   private String motivoNaoConclusao;
+
+  public ChamadoCompletoDTO(String clienteNome, String clienteEmail, String clienteEndereco, String clienteTelefone,
+      String nomeItem, String itemSerie, String defeitoRelatado, String analiseTecnica,
+      String custoEstimado) {
+    this.clienteNome = clienteNome;
+    this.clienteEmail = clienteEmail;
+    this.clienteEndereco = clienteEndereco;
+    this.clienteTelefone = clienteTelefone;
+    this.nomeItem = nomeItem;
+    this.itemSerie = itemSerie;
+    this.defeitoRelatado = defeitoRelatado;
+    this.analiseTecnica = analiseTecnica;
+  }
+
+  public ChamadoCompletoDTO() {
+  }
 }
