@@ -140,6 +140,9 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
   }
 
   private ChamadoCompletoDTO construirDTO(Chamado chamado) {
+    if (chamado.getClienteId() == null) {
+      throw new NoSuchElementException("Aconteceu algum erro ao buscar o chamado");
+    }
     Cliente cliente = chamado.getClienteId();
     Tecnico tecnico = chamado.getTecnico();
     ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
