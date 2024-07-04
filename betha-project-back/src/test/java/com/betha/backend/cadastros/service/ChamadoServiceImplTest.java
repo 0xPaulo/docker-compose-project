@@ -1,6 +1,7 @@
 package com.betha.backend.cadastros.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,6 +34,7 @@ import com.betha.backend.cadastros.models.Enums.Perfils;
 import com.betha.backend.cadastros.models.Enums.Status;
 import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
+import com.betha.backend.cadastros.repository.ClienteRepository;
 import com.betha.backend.cadastros.repository.TabelaRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,6 +45,8 @@ public class ChamadoServiceImplTest {
 
 	@Mock
 	private ChamadoRepository chamadoRepository;
+	@Mock
+	private ClienteRepository clienteRepository;
 
 	@Mock
 	private TabelaRepository tabelaRepository;
@@ -50,6 +54,7 @@ public class ChamadoServiceImplTest {
 	private Chamado chamadoTeste;
 	private Cliente clienteTeste;
 	private Tecnico tecnicoTeste;
+	private ChamadoCompletoDTO chamadoCompletoDTO;
 
 	@BeforeEach
 	public void setup() {
@@ -65,6 +70,9 @@ public class ChamadoServiceImplTest {
 
 		chamadoTeste = new Chamado(1L, clienteTeste, tecnicoTeste, "item-nome", "item-serie", Status.DISPONIVEL_TRIAGEM,
 				"defeito-relatado", "analise-tecnica", null, LocalDateTime.now(), null, 0, null);
+
+		chamadoCompletoDTO = new ChamadoCompletoDTO("cliente-nome", "cliente-email", "cliente-endereco", "cliente-telefone",
+				"nomeItem", "itemSerie", "defeitoRelatado", "analiseTecnica", "custoEstimado");
 	}
 
 	@Test
@@ -201,5 +209,29 @@ public class ChamadoServiceImplTest {
 		});
 
 		Assertions.assertThat(noSuchElementException.getMessage()).isEqualTo("Aconteceu algum erro ao buscar o chamado");
+	}
+
+	@Test
+	@DisplayName("Deve encotrar no banco o chamado, editar com os novos valores e salvar")
+	public void editarCamposDoIdSucess() {
+
+		long chamadoID = 1L;
+
+		when(chamadoRepository.findById(1L)).thenReturn(Optional.of(chamadoTeste));
+		Chamado resultado = chamadoServiceImpl.editarCamposDoId(chamadoID, chamadoCompletoDTO);
+		assertNotNull(resultado);
+		assertEquals(chamadoID, resultado.getId());
+		assertNotEquals(chamadoTeste.getNomeItem(), resultado.getNomeItem());
+	}
+
+	@Test
+	@DisplayName("Deve lançar NOT_FOUND ao buscar o chamado que sera editado")
+	public void editarCamposDoIdErrorCas1() {
+
+		when(chamadoRepository.findById(1L)).thenReturn(Optional.empty());
+		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
+			chamadoServiceImpl.editarCamposDoId(1L, chamadoCompletoDTO);
+		});
+		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Chamado não encontrado\"");
 	}
 }
