@@ -16,5 +16,5 @@ public interface ChamadoServiceInterface {
 
   Chamado editarCamposDoId(Long chamadoID, ChamadoCompletoDTO chamadoRecebido);
 
-  Chamado editarStatusDoId(Long id, List<String> dados);
+  Chamado finalizaStatusDoId(Long id, List<String> dados);
 }

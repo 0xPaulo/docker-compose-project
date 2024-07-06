@@ -71,8 +71,13 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
     return editarChamadoExistente(chamadoRecebido, chamadoExistente, clienteExistente);
   }
 
+  // O argumento dados do metodo seguinte carrega 2 valores
+  // o primeiro valor sempre sera o status do chamado
+  // e as vazes tera um segundo valor, que é a msg de aviso do pq voltou para a
+  // manutençao
+
   @Override
-  public Chamado editarStatusDoId(Long id, List<String> dados) {
+  public Chamado finalizaStatusDoId(Long id, List<String> dados) {
     Chamado chamadoExistente = chamadoRepository.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
 

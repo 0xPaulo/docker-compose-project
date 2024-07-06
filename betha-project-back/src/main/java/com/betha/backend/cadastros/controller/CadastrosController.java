@@ -64,7 +64,7 @@ public class CadastrosController {
   @PatchMapping("change-status/{id}")
   @Secured({ "ROLE_MANUTENCAO" })
   public Chamado editarStatusChamado(@PathVariable Long id, @RequestBody List<String> dados) {
-    Chamado resultado = chamadoServiceInterface.editarStatusDoId(id, dados);
+    Chamado resultado = chamadoServiceInterface.finalizaStatusDoId(id, dados);
     return resultado;
   }
 
