@@ -21,8 +21,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -51,10 +54,15 @@ public class ChamadoServiceImplTest {
 	@Mock
 	private TabelaRepository tabelaRepository;
 
+	@Captor
+	ArgumentCaptor<Chamado> chamadoCaptor;
+
 	private Chamado chamadoTeste;
 	private Cliente clienteTeste;
 	private Tecnico tecnicoTeste;
 	private ChamadoCompletoDTO chamadoCompletoDTO;
+	private List<String> dados;
+	private long chamadoID;
 
 	@BeforeEach
 	public void setup() {
@@ -73,6 +81,11 @@ public class ChamadoServiceImplTest {
 
 		chamadoCompletoDTO = new ChamadoCompletoDTO("cliente-nome", "cliente-email", "cliente-endereco", "cliente-telefone",
 				"nomeItem", "itemSerie", "defeitoRelatado", "analiseTecnica", "custoEstimado");
+
+		dados = new ArrayList<>();
+
+		chamadoID = 1L;
+
 	}
 
 	@Test
@@ -215,8 +228,6 @@ public class ChamadoServiceImplTest {
 	@DisplayName("Deve encotrar no banco o chamado, editar com os novos valores e salvar")
 	public void editarCamposDoIdSucess() {
 
-		long chamadoID = 1L;
-
 		when(chamadoRepository.findById(1L)).thenReturn(Optional.of(chamadoTeste));
 		Chamado resultado = chamadoServiceImpl.editarCamposDoId(chamadoID, chamadoCompletoDTO);
 		assertNotNull(resultado);
@@ -234,4 +245,64 @@ public class ChamadoServiceImplTest {
 		});
 		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Chamado não encontrado\"");
 	}
+
+	@Test
+	@DisplayName("Deve trocar o status do chamado para = Concluido")
+	public void finalizaStatusDoIdSucess() {
+
+		dados.add("CONCLUIDO");
+
+		when(chamadoRepository.findById(anyLong())).thenReturn(Optional.of(chamadoTeste));
+		chamadoServiceImpl.finalizaStatusDoId(anyLong(), dados);
+
+		Mockito.verify(chamadoRepository).save(chamadoCaptor.capture());
+		Chamado chamadoModificado = chamadoCaptor.getValue();
+		Assertions.assertThat(chamadoModificado.getStatus()).isNotNull();
+
+		assertEquals(chamadoModificado.getStatus().getDescricao(), "CONCLUIDO");
+	}
+
+	@Test
+	@DisplayName("Deve trocar o status do chamado para voltou da manutençao e setar a msg de retorno ao chamado")
+	public void finalizaStatusDoIdSucessCase2() {
+
+		dados.add("VMANUTENCAO");
+		dados.add("Motivo da volta");
+
+		when(chamadoRepository.findById(anyLong())).thenReturn(Optional.of(chamadoTeste));
+		chamadoServiceImpl.finalizaStatusDoId(anyLong(), dados);
+
+		Mockito.verify(chamadoRepository).save(chamadoCaptor.capture());
+		Chamado chamadoModificado = chamadoCaptor.getValue();
+		Assertions.assertThat(chamadoModificado.getStatus()).isNotNull();
+
+		assertEquals(chamadoModificado.getStatus().getDescricao(), "VMANUTENCAO");
+		assertEquals(chamadoModificado.getMotivoNaoConclusao(), "Motivo da volta");
+	}
+
+	@Test
+	@DisplayName("Deve lançar ResponseStatusException se nao for encontrado com o ID passado")
+	public void finalizaStatusDoIdErrorCase1() {
+
+		when(chamadoRepository.findById(anyLong())).thenReturn(Optional.empty());
+		ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class, () -> {
+			chamadoServiceImpl.finalizaStatusDoId(chamadoID, dados);
+		});
+		Assertions.assertThat(responseStatusException.getMessage()).isEqualTo("404 NOT_FOUND \"Chamado não encontrado\"");
+	}
+
+	@Test
+	@DisplayName("Deve lançar IllegalArgumentException se o status passado não existir na enum Status")
+	public void finalizaStatusDoIdErrorCase2() {
+
+		dados.add("teste");
+		when(chamadoRepository.findById(anyLong())).thenReturn(Optional.of(chamadoTeste));
+
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
+			chamadoServiceImpl.finalizaStatusDoId(chamadoID, dados);
+		});
+
+		Assertions.assertThat(illegalArgumentException.getMessage()).isEqualTo("Status não reconhecido: teste");
+	}
+
 }
