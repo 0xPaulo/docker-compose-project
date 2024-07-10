@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.chamadoDTO.RegisterDTO;
+import com.betha.backend.cadastros.interfaces.TecnicoServiceInterface;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Tecnico;
 import com.betha.backend.cadastros.models.Enums.Status;
@@ -15,13 +16,14 @@ import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.TecnicoRepository;
 
 @Service
-public class TecnicoService {
+public class TecnicoServiceImpl implements TecnicoServiceInterface {
 
   @Autowired
   private ChamadoRepository chamadoRepository;
   @Autowired
   private TecnicoRepository tecnicoRepository;
 
+  @Override
   public Chamado editarTecnicoDoChamado(Long chamadoId, Long tecnicoId) {
     Chamado chamadoExistente = chamadoRepository.findById(chamadoId)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Chamado não encontrado"));
@@ -35,6 +37,7 @@ public class TecnicoService {
     return chamadoExistente;
   }
 
+  @Override
   public Tecnico salvarNovoTecnico(RegisterDTO tecnicoDados) {
     if (this.tecnicoRepository.findByEmail(tecnicoDados.email()) != null) {
       throw new IllegalArgumentException("Email já cadastrado");
@@ -47,6 +50,7 @@ public class TecnicoService {
     return tecnicoRepository.save(novoTecnico);
   }
 
+  @Override
   public void trocarSenhaDoTecnico(RegisterDTO dados) {
     Long novoId = Long.parseLong(dados.id());
     Tecnico novoTecnico = tecnicoRepository.findById(novoId)

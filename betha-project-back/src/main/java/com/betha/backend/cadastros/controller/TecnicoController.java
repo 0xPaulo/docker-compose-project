@@ -20,13 +20,13 @@ import com.betha.backend.cadastros.chamadoDTO.AuthenticateDTO;
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
 import com.betha.backend.cadastros.chamadoDTO.LoginResponseDTO;
 import com.betha.backend.cadastros.chamadoDTO.RegisterDTO;
+import com.betha.backend.cadastros.interfaces.TecnicoServiceInterface;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Tecnico;
 import com.betha.backend.cadastros.models.Enums.TecnicoCategorias;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.repository.TecnicoRepository;
 import com.betha.backend.cadastros.service.ChamadoServiceImpl;
-import com.betha.backend.cadastros.service.TecnicoService;
 import com.betha.backend.cadastros.service.TokenService;
 
 import jakarta.validation.Valid;
@@ -36,12 +36,12 @@ import jakarta.validation.Valid;
 public class TecnicoController {
 
   private final TecnicoRepository tecnicoRepository;
-  private final TecnicoService tecnicoService;
+  private final TecnicoServiceInterface tecnicoService;
   private final AuthenticationManager authenticationManager;
   private final TokenService tokenService;
   private final ChamadoServiceImpl chamadoService;
 
-  public TecnicoController(TecnicoRepository tecnicoRepository, TecnicoService tecnicoService,
+  public TecnicoController(TecnicoRepository tecnicoRepository, TecnicoServiceInterface tecnicoService,
       AuthenticationManager authenticationManager, TokenService tokenService, ChamadoRepository chamadoRepository,
       ChamadoServiceImpl chamadoService) {
     this.tecnicoRepository = tecnicoRepository;

@@ -39,7 +39,7 @@ import com.betha.backend.cadastros.repository.TecnicoRepository;
 public class TecnicoServiceTest {
 
 	@InjectMocks
-	TecnicoService tecnicoService;
+	TecnicoServiceImpl tecnicoService;
 
 	@Mock
 	ChamadoRepository chamadoRepository;
