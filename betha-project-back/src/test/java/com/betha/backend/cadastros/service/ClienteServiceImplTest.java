@@ -20,10 +20,10 @@ import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.repository.ClienteRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class ClienteServiceTest {
+public class ClienteServiceImplTest {
 
 	@InjectMocks
-	private ClienteService clienteService;
+	private ClienteServiceImpl clienteService;
 
 	@Mock
 	ClienteRepository clienteRepository;

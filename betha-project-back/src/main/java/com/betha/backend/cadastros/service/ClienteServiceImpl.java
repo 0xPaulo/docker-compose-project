@@ -7,15 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.betha.backend.cadastros.chamadoDTO.FormCliente;
+import com.betha.backend.cadastros.interfaces.ClienteServiceInterface;
 import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.repository.ClienteRepository;
 
 @Service
-public class ClienteService {
+public class ClienteServiceImpl implements ClienteServiceInterface {
 
   @Autowired
   private ClienteRepository clienteRepository;
 
+  @Override
   public Cliente salvarNovoCliente(FormCliente novoCliente) {
     if (!verificaCamposPreenchidos(novoCliente)) {
       throw new IllegalArgumentException("Todos os campos do FormCliente devem ser preenchidos.");

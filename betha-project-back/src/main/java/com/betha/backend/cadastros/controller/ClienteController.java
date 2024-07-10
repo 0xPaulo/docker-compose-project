@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betha.backend.cadastros.chamadoDTO.FormCliente;
+import com.betha.backend.cadastros.interfaces.ClienteServiceInterface;
 import com.betha.backend.cadastros.models.Cliente;
 import com.betha.backend.cadastros.repository.ClienteRepository;
-import com.betha.backend.cadastros.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 
   private final ClienteRepository clienteRepository;
-  private final ClienteService clienteService;
+  private final ClienteServiceInterface clienteService;
 
-  public ClienteController(ClienteService clienteService, ClienteRepository clienteRepository) {
+  public ClienteController(ClienteServiceInterface clienteService, ClienteRepository clienteRepository) {
     this.clienteRepository = clienteRepository;
     this.clienteService = clienteService;
   }
