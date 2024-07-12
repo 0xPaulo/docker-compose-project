@@ -15,6 +15,7 @@ import com.betha.backend.cadastros.models.Tecnico;
 @Service
 public class TokenService {
 
+  // Esse segredo nao deve ser usado em produçao
   private String secret = "secret";
 
   public String generateToken(Tecnico tecnico) {
@@ -30,8 +31,11 @@ public class TokenService {
           .withClaim("nome", tecnico.getNome().toString())
           .sign(algorithm);
       return token;
+    } catch (NullPointerException e) {
+      throw new RuntimeException("Erro ao gerar token devido a um valor nulo.",
+          e);
     } catch (JWTCreationException e) {
-      throw new RuntimeException("Erro while generation token", e);
+      throw new RuntimeException("Erro ao gerar token", e);
     }
   }
 
