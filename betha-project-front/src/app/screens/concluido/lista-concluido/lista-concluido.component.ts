@@ -48,7 +48,12 @@ export class ListaConcluidoComponent implements OnInit {
   }
 
   entregueAoCliente(dados: ChamadoCompleto) {
-    if (dados.status !== "AGUARDANDO_FINALIZAR") {
+    if (
+      !(
+        dados.status == "AGUARDANDO_FINALIZAR" ||
+        dados.status == "CONCLUIDO_N_CONSERTADO"
+      )
+    ) {
       const dialogPermi = this.dialog.open(SemPermissaoComponent, {
         width: "40%",
       });
