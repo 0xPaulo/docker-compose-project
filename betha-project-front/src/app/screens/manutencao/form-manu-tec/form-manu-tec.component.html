@@ -40,9 +40,9 @@
                 </mat-select>
               </mat-form-field>
               <div *ngIf="tecnicoNomeSelecionado" class="tec-info">
-                <a href="/">
+                <div class="imagem-tecnico" (click)="verChamadosDoTecnico(tecnicoID)">
                   <img [src]="tecnicoImg" alt="">
-                </a>
+                </div>
                 <div class="text-container">
                   <p><strong>Tecnico: </strong> {{tecnicoNomeSelecionado}}</p>
                   <p><strong>Especialidade: </strong>{{tecnicoEspecialidadeSelecionado | capitalize}}</p>

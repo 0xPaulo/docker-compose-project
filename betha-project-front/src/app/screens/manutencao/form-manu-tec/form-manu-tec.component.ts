@@ -1,10 +1,17 @@
 import { DatePipe } from "@angular/common";
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from "@angular/material/dialog";
 import { MatRadioChange } from "@angular/material/radio";
 import { MatSelectChange } from "@angular/material/select";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Observable } from "rxjs";
+import { TabelaTecnicoComponent } from "src/app/components/dialog/tabela-tecnico/tabela-tecnico.component";
+import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
 import { ImgProxyService } from "src/app/services/img-proxy.service";
 import { TabelaService } from "src/app/services/tabela.service";
 import { CadastroService } from "./../../../services/cadastro.service";
@@ -36,6 +43,9 @@ export class FormManuTecComponent implements OnInit {
   imageUrl: string[] = [];
 
   motivoNaoConclusao = "";
+
+  cadastros$!: Observable<ChamadoCompleto[]>;
+
   constructor(
     private imgProxyService: ImgProxyService,
     private dialogRef: MatDialogRef<any, boolean>,
@@ -45,6 +55,7 @@ export class FormManuTecComponent implements OnInit {
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
     private tabelaService: TabelaService,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.id = data.infoCadastro.id;
@@ -142,6 +153,13 @@ export class FormManuTecComponent implements OnInit {
     const filtro = this.tecnicoService.handleFilter(event);
     this.chamarBuscarTodos(filtro);
   }
+
+  verChamadosDoTecnico(idTecnico: number) {
+    const dialogRef = this.dialog.open(TabelaTecnicoComponent, {
+      data: { dados: idTecnico },
+    });
+  }
+
   onError() {
     this.snackBar.open("Ocorreu um erro", "", { duration: 5000 });
   }
