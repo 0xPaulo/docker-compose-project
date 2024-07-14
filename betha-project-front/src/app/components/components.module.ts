@@ -59,6 +59,7 @@ import { TestComponent } from "./test/test.component";
 import { DialogCriarClienteComponent } from "./toolbar/dialog-criar-cliente/dialog-criar-cliente.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { DialogCriarTecnicoComponent } from './toolbar/dialog-criar-tecnico/dialog-criar-tecnico.component';
+import { TabelaTecnicoComponent } from './dialog/tabela-tecnico/tabela-tecnico.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { DialogCriarTecnicoComponent } from './toolbar/dialog-criar-tecnico/dial
     EmailContatoComponent,
     EntregueClienteComponent,
     DialogCriarTecnicoComponent,
+    TabelaTecnicoComponent,
   ],
   imports: [
     MatRadioModule,
