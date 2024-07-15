@@ -32,7 +32,7 @@ export class FormManuTecComponent implements OnInit {
 
   tecnicoNomeSelecionado = "";
   tecnicoEspecialidadeSelecionado = "";
-  tecnicoChamadosSelecionado = "";
+  tecnicoChamadosSelecionado: number = 0;
   imagemTecnico: any;
   tecnicoID!: number;
 
@@ -105,6 +105,7 @@ export class FormManuTecComponent implements OnInit {
         this.tecnicoEspecialidadeSelecionado = tecnico.tecnicoCategorias;
         this.imagemTecnico = tecnico.imagem;
         this.tecnicoID = tecnico.id;
+        this.tecnicoChamadosSelecionado = tecnico.chamados.length;
         this.msgDeErro = "";
       }
     });
@@ -158,6 +159,7 @@ export class FormManuTecComponent implements OnInit {
     const dialogRef = this.dialog.open(TabelaTecnicoComponent, {
       data: { dados: idTecnico },
     });
+    dialogRef.afterClosed().subscribe();
   }
 
   onError() {
