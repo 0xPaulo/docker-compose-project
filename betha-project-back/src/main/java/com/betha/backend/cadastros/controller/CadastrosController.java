@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
+import com.betha.backend.cadastros.chamadoDTO.PaginatorChamadoCompleto;
 import com.betha.backend.cadastros.interfaces.ChamadoServiceInterface;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
@@ -42,8 +43,10 @@ public class CadastrosController {
 
   @GetMapping()
   @Secured({ "ROLE_RECEPCAO" })
-  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> filtro) {
-    List<ChamadoCompletoDTO> resultado = chamadoServiceInterface.todosChamadosCom(filtro);
+  public PaginatorChamadoCompleto buscarTodosChamadosComFiltro(
+      @RequestParam(required = false) List<String> filtro,
+      @RequestParam(required = false) List<Integer> pageConfig) {
+    PaginatorChamadoCompleto resultado = chamadoServiceInterface.todosChamadosCom(filtro, pageConfig);
     return resultado;
   }
 
