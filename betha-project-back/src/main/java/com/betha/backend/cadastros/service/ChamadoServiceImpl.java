@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
+import com.betha.backend.cadastros.chamadoDTO.PaginatorChamadoCompleto;
 import com.betha.backend.cadastros.interfaces.ChamadoServiceInterface;
 import com.betha.backend.cadastros.models.Chamado;
 import com.betha.backend.cadastros.models.Cliente;
@@ -43,17 +47,29 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
       throw new NoSuchElementException("Não foi encontrado chamados para esse tecnico");
     }
     return processarChamadoToDTO(chamados);
+    // colocar page aqui
   }
 
   @Override
-  public List<ChamadoCompletoDTO> todosChamadosCom(List<String> filtro) {
-    List<Chamado> chamados = new ArrayList<>();
-    if (filtro != null && !filtro.isEmpty()) {
-      chamados = tabelaRepository.findByStatusInFilter(filtro);
-    } else {
-      chamados = chamadoRepository.findAll();
+  public PaginatorChamadoCompleto todosChamadosCom(List<String> filtro, List<Integer> pageConfig) {
+    Page<Chamado> chamadosPaginados = null;
+    Integer pageNumber = pageConfig.get(0);
+    Integer pageSize = pageConfig.get(1);
+    long totalRegistros = this.chamadoRepository.count();
+
+    Pageable pageable = PageRequest.of(pageNumber, pageSize);
+    int totalPaginas = (int) Math.ceil((double) totalRegistros / pageSize);
+
+    if (pageConfig.get(0) > totalPaginas) {
+      throw new IllegalArgumentException("Página solicitada não existe.");
     }
-    return processarChamadoToDTO(chamados);
+
+    if (filtro != null && !filtro.isEmpty()) {
+      chamadosPaginados = tabelaRepository.findByStatusInFilter(filtro, pageable);
+    } else {
+      chamadosPaginados = chamadoRepository.findAll(pageable);
+    }
+    return processarPaginadosToDTO(chamadosPaginados, totalRegistros, totalPaginas);
   }
 
   @Override
@@ -73,7 +89,7 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
 
   // O argumento dados do metodo seguinte carrega 2 valores
   // o primeiro valor sempre sera o status do chamado
-  // e as vazes tera um segundo valor, que é a msg de aviso do pq voltou para a
+  // e as vezes tera um segundo valor, que é a msg de aviso do pq voltou para a
   // manutençao
 
   @Override
@@ -102,6 +118,50 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
     chamadoRepository.save(chamadoExistente);
 
     return chamadoExistente;
+  }
+
+  private PaginatorChamadoCompleto processarPaginadosToDTO(Page<Chamado> chamadosPaginados, long totalRegistros,
+      int totalPaginas) {
+    List<Chamado> chamados = chamadosPaginados.getContent();
+    if (chamados.get(0).getClienteId() == null) {
+      throw new NoSuchElementException("Aconteceu algum erro ao buscar o chamado");
+    }
+    List<ChamadoCompletoDTO> chamadoCompletoDTOs = new ArrayList<>();
+    for (Chamado chamado : chamados) {
+      Cliente cliente = chamado.getClienteId();
+      Tecnico tecnico = chamado.getTecnico();
+      ChamadoCompletoDTO dto = new ChamadoCompletoDTO();
+      dto.setClienteId(cliente.getId());
+      dto.setClienteNome(cliente.getNome());
+      dto.setClienteEmail(cliente.getEmail());
+      dto.setClienteTelefone(cliente.getTelefone());
+      dto.setClienteEndereco(cliente.getEndereco());
+
+      dto.setId(chamado.getId());
+      dto.setNomeItem(chamado.getNomeItem());
+      dto.setItemSerie(chamado.getItemSerie());
+      dto.setDefeitoRelatado(chamado.getDefeitoRelatado());
+      dto.setAnaliseTecnica(chamado.getAnaliseTecnica());
+      dto.setCustoEstimado(chamado.getCustoEstimado());
+      dto.setDataEntrada(chamado.getDataEntrada());
+      dto.setStatus(chamado.getStatus());
+      if (chamado.getStatus().toString() == "CONCLUIDO_CONSERTADO") {
+        dto.setDataSaida(chamado.getDataSaida());
+      }
+      dto.setImage_urls(chamado.getImage_urls());
+      dto.setMotivoNaoConclusao(chamado.getMotivoNaoConclusao());
+
+      if (tecnico != null) {
+        dto.setTecnico(tecnico.getId());
+        dto.setTecnicoImg(tecnico.getImagem());
+        dto.setTecnicoNome(tecnico.getNome());
+        dto.setTecnicoCategorias(tecnico.getTecnicoCategorias());
+      }
+      chamadoCompletoDTOs.add(dto);
+    }
+    PaginatorChamadoCompleto paginator = new PaginatorChamadoCompleto(chamadoCompletoDTOs, totalRegistros,
+        totalPaginas);
+    return paginator;
   }
 
   private List<ChamadoCompletoDTO> processarChamadoToDTO(List<Chamado> chamados) {
@@ -141,6 +201,7 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
       }
       chamadoCompletoDTOs.add(dto);
     }
+
     return chamadoCompletoDTOs;
   }
 
