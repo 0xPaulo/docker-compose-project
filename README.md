@@ -48,6 +48,10 @@ docker-compose up
 Após iniciar a aplicação, você poderá acessá-la através do navegador web utilizando o seguinte endereço:
 http://localhost:4200
 
+Usuário: admin@mail
+
+Senha: senha
+
 ## Tecnologias Utilizadas
 
 **Frontend**: Angular
