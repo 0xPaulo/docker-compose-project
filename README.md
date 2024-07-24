@@ -39,7 +39,7 @@ Este é um projeto desenvolvido utilizando Angular para o frontend e Spring Boot
 Clone o repositório do projeto utilizando o seguinte comando:
 
 ```sh
-git clone https://github.com/0xPaulo/docker-compose-betha.git
+git clone https://github.com/0xPaulo/docker-compose-project.git
 ```
 Abra o terminal na pasta aonde o projeto foi clonado e execute o seguinte comando:
 ```sh
