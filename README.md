@@ -6,7 +6,7 @@
 
 ## Link do projeto rodando
 
-[Acesse o projeto](https://betha-cadastros.netlify.app/)
+[Acesse o projeto](https://sistema-projeto-angular.netlify.app/)
 
 Usuário: admin@mail
 
