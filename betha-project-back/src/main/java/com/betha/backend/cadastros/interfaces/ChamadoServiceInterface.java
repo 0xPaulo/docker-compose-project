@@ -3,6 +3,7 @@ package com.betha.backend.cadastros.interfaces;
 import java.util.List;
 
 import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
+import com.betha.backend.cadastros.chamadoDTO.PaginatorChamadoCompleto;
 import com.betha.backend.cadastros.models.Chamado;
 
 public interface ChamadoServiceInterface {
@@ -10,7 +11,7 @@ public interface ChamadoServiceInterface {
 
   List<ChamadoCompletoDTO> todosChamadosDo(String TecnicoID);
 
-  List<ChamadoCompletoDTO> todosChamadosCom(List<String> filtro);
+  PaginatorChamadoCompleto todosChamadosCom(List<String> filtro, List<Integer> pageConfig);
 
   ChamadoCompletoDTO buscarPeloId(Long id);
 

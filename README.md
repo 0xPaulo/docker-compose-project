@@ -8,9 +8,6 @@
 
 [Acesse o projeto](https://sistema-projeto-angular.netlify.app/)
 
-Usuário: admin@mail
-
-Senha: senha
 
 **Nota:** Devido ao projeto estar hospedado em um servidor americano, a primeira requisição no processo de login pode demorar um pouco. Essa demora é normal.
 

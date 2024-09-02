@@ -27,7 +27,7 @@
     </div>
 
     <mat-table (formSubmitted)="carregarNovaTabela()" *ngIf="cadastros$ | async as cadastros ; else loading"
-      [dataSource]="cadastros">
+      [dataSource]="cadastros.chamadoCompletoDTOs">
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef></th>

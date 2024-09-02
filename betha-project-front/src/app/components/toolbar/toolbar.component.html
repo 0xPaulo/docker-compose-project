@@ -3,17 +3,19 @@
     <!-- <mat-toolbar-row> -->
     <div class="brand">
       <div class="detalhe">
-        <img src="../../../assets/image/betha-brands.svg" alt="" style="cursor: pointer;" (click)="onLogin()">
+        <img src="../../../assets/image/angular-logo.svg" alt="" style="cursor: pointer; width: 48px; height: 33px;"
+          (click)="onLogin()">
       </div>
       <div class="itens">
         <span class="ambiente-de-cadastro">AMBIENTE DE CADASTRO</span>
         <span (click)="onHome()" style="cursor: pointer;">Visão geral</span>
         <button mat-button [matMenuTriggerFor]="menu">Configurando ⏷</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>Trocar para perfil Admin</button>
-          <button mat-menu-item>Trocar para perfil Tecnico</button>
-          <button mat-menu-item>Trocar para perfil Recepção</button>
+          <button mat-menu-item>Trocar senhas</button>
+          <!-- abri um dialogo perguntando de quem vc quer trocar a senha
+           faz um findall pega o id e patch senha nova para http://localhost:8080/tecnico/password-patch -->
         </mat-menu>
+        <span style="cursor: pointer;" matTooltip="{{errorMessage}}">Planejado ⏷</span>
         <button *ngIf="ADMIN" mat-button [matMenuTriggerFor]="menuR">Registrado ⏷</button>
         <mat-menu #menuR="matMenu">
           <button mat-menu-item (click)="criarCliente()">Registra novo cliente</button>

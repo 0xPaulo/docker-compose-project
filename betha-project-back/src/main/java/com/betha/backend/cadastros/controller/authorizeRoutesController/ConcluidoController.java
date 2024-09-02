@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.betha.backend.cadastros.chamadoDTO.ChamadoCompletoDTO;
+import com.betha.backend.cadastros.chamadoDTO.PaginatorChamadoCompleto;
 import com.betha.backend.cadastros.repository.ChamadoRepository;
 import com.betha.backend.cadastros.service.ChamadoServiceImpl;
 
@@ -23,8 +23,10 @@ public class ConcluidoController {
   }
 
   @GetMapping()
-  public List<ChamadoCompletoDTO> buscarTodosChamadosComFiltro(@RequestParam(required = false) List<String> filtro) {
-    List<ChamadoCompletoDTO> resultado = chamadoService.todosChamadosCom(filtro);
+  public PaginatorChamadoCompleto buscarTodosChamadosComFiltro(
+      @RequestParam(required = false) List<String> filtro,
+      @RequestParam(required = false) List<Integer> pageConfig) {
+    PaginatorChamadoCompleto resultado = chamadoService.todosChamadosCom(filtro, pageConfig);
     return resultado;
   }
 }
