@@ -7,6 +7,7 @@ import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dia
 import { SemPermissaoComponent } from "src/app/components/dialog/errors/sem-permissao/sem-permissao.component";
 import { CancelarComponent } from "src/app/components/dialog/finalizar-pedido/cancelar/cancelar.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
+import { PaginatorChamadoCompleto } from "src/app/interfaces/paginatorChamadoCompleto";
 import { CadastroService } from "src/app/services/cadastro.service";
 import { TabelaService } from "src/app/services/tabela.service";
 import { FormManuTecComponent } from "../form-manu-tec/form-manu-tec.component";
@@ -17,7 +18,7 @@ import { FormManuTecComponent } from "../form-manu-tec/form-manu-tec.component";
   styleUrls: ["./lista-manu.component.scss"],
 })
 export class ListaManuComponent implements OnInit {
-  cadastros$: Observable<ChamadoCompleto[]>;
+  cadastros$: Observable<PaginatorChamadoCompleto>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
   filtro: string[] = [
@@ -37,7 +38,7 @@ export class ListaManuComponent implements OnInit {
     this.cadastros$ = this.carregarTabelaManu(this.filtro);
   }
 
-  carregarTabelaManu(filtro: string[]): Observable<ChamadoCompleto[]> {
+  carregarTabelaManu(filtro: string[]): Observable<PaginatorChamadoCompleto> {
     return (this.cadastros$ = this.tabelaService.carregarFiltro(
       filtro,
       this.URL

@@ -9,6 +9,7 @@ import { EmailComponent } from "src/app/components/dialog/email/email/email.comp
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { SemPermissaoComponent } from "src/app/components/dialog/errors/sem-permissao/sem-permissao.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
+import { PaginatorChamadoCompleto } from "src/app/interfaces/paginatorChamadoCompleto";
 import { AuthService } from "src/app/services/auth.service";
 import { CadastroService } from "src/app/services/cadastro.service";
 import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
@@ -19,7 +20,7 @@ import { FormTriagemComponent } from "../form-triagem/form-triagem.component";
   styleUrls: ["./lista-triagem.component.scss"],
 })
 export class ListaTriagemComponent implements OnInit {
-  cadastros$: Observable<ChamadoCompleto[]>;
+  cadastros$: Observable<PaginatorChamadoCompleto>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
   filtro: string[] = ["DISPONIVEL_TRIAGEM", "AGUARDANDO_CLIENTE", "CANCELADO"];
@@ -35,18 +36,12 @@ export class ListaTriagemComponent implements OnInit {
     this.cadastros$ = this.carregarTabelaTriagem(this.filtro);
   }
 
-  carregarTabelaTriagem(filtro: string[]): Observable<ChamadoCompleto[]> {
-    return (this.cadastros$ = this.tabelaService.carregarFiltro(
-      filtro,
-      this.URL
-    ));
+  carregarTabelaTriagem(filtro: string[]): Observable<PaginatorChamadoCompleto> {
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(filtro, this.URL));
   }
 
   carregarNovaTabela() {
-    return (this.cadastros$ = this.tabelaService.carregarFiltro(
-      null,
-      this.URL
-    ));
+    return (this.cadastros$ = this.tabelaService.carregarFiltro(null, this.URL));
   }
   filterStatus(filtros: string[]) {
     this.cadastros$ = this.tabelaService.carregarFiltro(filtros, this.URL);
@@ -70,36 +65,34 @@ export class ListaTriagemComponent implements OnInit {
   editartriagem(item: ChamadoCompleto) {
     const id = item.id;
 
-    const subscription = this.cadastroService
-      .findById(id)
-      .subscribe((dados: ChamadoCompleto[]) => {
-        const perfil = this.authService.getPerfilToken();
-        if (perfil === "ADMIN") {
-          const dialogRef = this.dialog.open(FormTriagemComponent, {
-            maxWidth: "600px",
-            data: { infoCadastro: dados },
-          });
-          dialogRef.afterClosed().subscribe(() => {
-            subscription.unsubscribe();
-          });
-        } else if (!(item.status === "DISPONIVEL_TRIAGEM")) {
-          const dialogPermi = this.dialog.open(SemPermissaoComponent, {
-            width: "40%",
-            data: { modoEdicao: true, infoCadastro: dados },
-          });
-          dialogPermi.afterClosed().subscribe(() => {
-            subscription.unsubscribe();
-          });
-        } else {
-          const dialogRef = this.dialog.open(FormTriagemComponent, {
-            maxWidth: "600px",
-            data: { infoCadastro: dados },
-          });
-          dialogRef.afterClosed().subscribe(() => {
-            subscription.unsubscribe();
-          });
-        }
-      });
+    const subscription = this.cadastroService.findById(id).subscribe((dados: ChamadoCompleto[]) => {
+      const perfil = this.authService.getPerfilToken();
+      if (perfil === "ADMIN") {
+        const dialogRef = this.dialog.open(FormTriagemComponent, {
+          maxWidth: "600px",
+          data: { infoCadastro: dados },
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          subscription.unsubscribe();
+        });
+      } else if (!(item.status === "DISPONIVEL_TRIAGEM")) {
+        const dialogPermi = this.dialog.open(SemPermissaoComponent, {
+          width: "40%",
+          data: { modoEdicao: true, infoCadastro: dados },
+        });
+        dialogPermi.afterClosed().subscribe(() => {
+          subscription.unsubscribe();
+        });
+      } else {
+        const dialogRef = this.dialog.open(FormTriagemComponent, {
+          maxWidth: "600px",
+          data: { infoCadastro: dados },
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          subscription.unsubscribe();
+        });
+      }
+    });
   }
 
   alternarDetalhes(index: number): void {
