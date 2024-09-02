@@ -8,6 +8,7 @@
 
 [Acesse o projeto](https://sistema-projeto-angular.netlify.app/)
 
+
 **Nota:** Devido ao projeto estar hospedado em um servidor americano, a primeira requisição no processo de login pode demorar um pouco. Essa demora é normal.
 
 ## Introdução
@@ -35,7 +36,7 @@ Este é um projeto desenvolvido utilizando Angular para o frontend e Spring Boot
 Clone o repositório do projeto utilizando o seguinte comando:
 
 ```sh
-git clone https://github.com/0xPaulo/docker-compose-betha.git
+git clone https://github.com/0xPaulo/docker-compose-project.git
 ```
 Abra o terminal na pasta aonde o projeto foi clonado e execute o seguinte comando:
 ```sh
@@ -47,6 +48,10 @@ docker-compose up
 
 Após iniciar a aplicação, você poderá acessá-la através do navegador web utilizando o seguinte endereço:
 http://localhost:4200
+
+Usuário: admin@mail
+
+Senha: senha
 
 ## Tecnologias Utilizadas
 
