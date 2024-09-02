@@ -4,7 +4,8 @@
       <h5 class="ms-4 ">Itens em triagem</h5>
       <div class="demo-button-container ">
         <div class="tabs twist first_button">
-          <button class="tabs-button" (click)="carregarNovaTabela()">
+          <button class="tabs-button"
+            (click)="filterStatus(['DISPONIVEL_TRIAGEM','AGUARDANDO_CLIENTE','CANCELADO','CONCLUIDO_CONSERTADO','AGUARDANDO_MANUTENCAO','AGUARDANDO_FINALIZAR','CONCLUIDO_N_CONSERTADO','EM_MANUTENCAO','VOLTOU_MANUTENCAO'])">
             <p class="ico-tabs-1">1</p>
             <p> Cadastros</p>
           </button>
@@ -26,8 +27,7 @@
       </div>
     </div>
 
-    <mat-table (formSubmitted)="carregarNovaTabela()" *ngIf="cadastros$ | async as cadastros ; else loading"
-      [dataSource]="cadastros.chamadoCompletoDTOs">
+    <mat-table *ngIf="cadastros$ | async as cadastros ; else loading" [dataSource]="cadastros.chamadoCompletoDTOs">
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef></th>
