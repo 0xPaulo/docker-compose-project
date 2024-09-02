@@ -21,6 +21,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatRadioModule } from "@angular/material/radio";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CapitalizePipe } from "../pipe/capitalize.pipe";
@@ -54,12 +55,12 @@ import { SemPermissaoComponent } from "./dialog/errors/sem-permissao/sem-permiss
 import { CancelarComponent } from "./dialog/finalizar-pedido/cancelar/cancelar.component";
 import { FinalizarPedidoComponent } from "./dialog/finalizar-pedido/finalizar-pedido.component";
 import { PossuiCadastroComponent } from "./dialog/possui-cadastro/possui-cadastro.component";
+import { TabelaTecnicoComponent } from "./dialog/tabela-tecnico/tabela-tecnico.component";
 import { ImageComponent } from "./dialog/upload-image/image.component";
 import { TestComponent } from "./test/test.component";
 import { DialogCriarClienteComponent } from "./toolbar/dialog-criar-cliente/dialog-criar-cliente.component";
+import { DialogCriarTecnicoComponent } from "./toolbar/dialog-criar-tecnico/dialog-criar-tecnico.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { DialogCriarTecnicoComponent } from './toolbar/dialog-criar-tecnico/dialog-criar-tecnico.component';
-import { TabelaTecnicoComponent } from './dialog/tabela-tecnico/tabela-tecnico.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { TabelaTecnicoComponent } from './dialog/tabela-tecnico/tabela-tecnico.c
     TabelaTecnicoComponent,
   ],
   imports: [
+    MatPaginatorModule,
     MatRadioModule,
     MatAutocompleteModule,
     MatMenuModule,

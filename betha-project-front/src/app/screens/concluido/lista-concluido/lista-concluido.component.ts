@@ -5,6 +5,7 @@ import { DetalheProdutoComponent } from "src/app/components/dialog/detalhe-produ
 import { ErrorDialogComponent } from "src/app/components/dialog/errors/error-dialog/error-dialog.component";
 import { SemPermissaoComponent } from "src/app/components/dialog/errors/sem-permissao/sem-permissao.component";
 import { ChamadoCompleto } from "src/app/interfaces/chamadoCompleto";
+import { PaginatorChamadoCompleto } from "src/app/interfaces/paginatorChamadoCompleto";
 import { TabelaService } from "src/app/services/tabela.service";
 import { EntregueClienteComponent } from "./../../../components/dialog/entregue-cliente/entregue-cliente.component";
 
@@ -14,7 +15,7 @@ import { EntregueClienteComponent } from "./../../../components/dialog/entregue-
   styleUrls: ["./lista-concluido.component.scss"],
 })
 export class ListaConcluidoComponent implements OnInit {
-  cadastros$: Observable<ChamadoCompleto[]>;
+  cadastros$: Observable<PaginatorChamadoCompleto>;
   detalhesVisiveis: { [key: number]: boolean } = {};
   displayedColumns = ["id", "info", "ico"];
   filtro: string[] = [
@@ -29,7 +30,7 @@ export class ListaConcluidoComponent implements OnInit {
     this.cadastros$ = this.carregarTabelaConclu(this.filtro);
   }
 
-  carregarTabelaConclu(filtro: string[]): Observable<ChamadoCompleto[]> {
+  carregarTabelaConclu(filtro: string[]): Observable<PaginatorChamadoCompleto> {
     return (this.cadastros$ = this.tabelaService.carregarFiltro(
       filtro,
       this.URL

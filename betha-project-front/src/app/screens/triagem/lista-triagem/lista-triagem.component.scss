@@ -218,75 +218,54 @@ mat-card {
 .cor-icone {
   color: rgb(75, 75, 75);
 }
-.CANCELADO:before {
-  color: white;
-  font-weight: bold;
+.status-label:before {
+  color: #fff;
+  font-weight: 700;
   border-radius: 3px;
   padding: 2px 7px;
+}
+.CANCELADO:before {
+  @extend .status-label;
   background-color: #a91409;
   content: "Cancelado";
 }
 .DISPONIVEL_TRIAGEM:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #00b85e;
   content: "Disponível para triagem";
 }
 .AGUARDANDO_CLIENTE:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #0287c3;
   content: "Aguardando cliente";
 }
 .AGUARDANDO_MANUTENCAO:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #4b2a8e;
   content: "Aguardando Técnico";
 }
 .EM_MANUTENCAO:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #ff6f00;
   content: "Em Manutenção";
 }
 .CONCLUIDO_CONSERTADO:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #78ca00;
   content: "Finalizado";
 }
 .CONCLUIDO_N_CONSERTADO:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #cc5700;
   content: "Finalizado com falha";
 }
 .VOLTOU_MANUTENCAO:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #cc5700;
   content: "Voltou da manutenção";
 }
 .AGUARDANDO_FINALIZAR:before {
-  color: white;
-  font-weight: bold;
-  border-radius: 3px;
-  padding: 2px 7px;
+  @extend .status-label;
   background-color: #0058cc;
   content: "Aguardando finalizar";
 }

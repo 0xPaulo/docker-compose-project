@@ -53,11 +53,11 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
   @Override
   public PaginatorChamadoCompleto todosChamadosCom(List<String> filtro, List<Integer> pageConfig) {
     Page<Chamado> chamadosPaginados = null;
-    Integer pageNumber = pageConfig.get(0);
+    Integer pageIndex = pageConfig.get(0);
     Integer pageSize = pageConfig.get(1);
     long totalRegistros = this.chamadoRepository.count();
 
-    Pageable pageable = PageRequest.of(pageNumber, pageSize);
+    Pageable pageable = PageRequest.of(pageIndex, pageSize);
     int totalPaginas = (int) Math.ceil((double) totalRegistros / pageSize);
 
     if (pageConfig.get(0) > totalPaginas) {
@@ -66,10 +66,11 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
 
     if (filtro != null && !filtro.isEmpty()) {
       chamadosPaginados = tabelaRepository.findByStatusInFilter(filtro, pageable);
+      totalRegistros = chamadosPaginados.getTotalElements();
     } else {
       chamadosPaginados = chamadoRepository.findAll(pageable);
     }
-    return processarPaginadosToDTO(chamadosPaginados, totalRegistros, totalPaginas);
+    return processarPaginadosToDTO(chamadosPaginados, totalRegistros);
   }
 
   @Override
@@ -120,8 +121,7 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
     return chamadoExistente;
   }
 
-  private PaginatorChamadoCompleto processarPaginadosToDTO(Page<Chamado> chamadosPaginados, long totalRegistros,
-      int totalPaginas) {
+  private PaginatorChamadoCompleto processarPaginadosToDTO(Page<Chamado> chamadosPaginados, long totalRegistros) {
     List<Chamado> chamados = chamadosPaginados.getContent();
     if (chamados.get(0).getClienteId() == null) {
       throw new NoSuchElementException("Aconteceu algum erro ao buscar o chamado");
@@ -159,8 +159,7 @@ public class ChamadoServiceImpl implements ChamadoServiceInterface {
       }
       chamadoCompletoDTOs.add(dto);
     }
-    PaginatorChamadoCompleto paginator = new PaginatorChamadoCompleto(chamadoCompletoDTOs, totalRegistros,
-        totalPaginas);
+    PaginatorChamadoCompleto paginator = new PaginatorChamadoCompleto(chamadoCompletoDTOs, totalRegistros);
     return paginator;
   }
 

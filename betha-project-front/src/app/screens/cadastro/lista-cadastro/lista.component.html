@@ -6,7 +6,8 @@
         <button (click)="abrirDialogForm()" class="ms-4 personalizado-button">+ Cadastrar
         </button>
         <div class="tabs twist">
-          <button class="tabs-button" (click)="carregarTabela()">
+          <button class="tabs-button"
+            (click)="filterStatus(['DISPONIVEL_TRIAGEM','AGUARDANDO_CLIENTE','CANCELADO','CONCLUIDO_CONSERTADO','AGUARDANDO_MANUTENCAO','AGUARDANDO_FINALIZAR','CONCLUIDO_N_CONSERTADO','EM_MANUTENCAO','VOLTOU_MANUTENCAO'])">
             <p class="ico-tabs-1">1</p>
             <p class="first_button"> Cadastros</p>
           </button>
@@ -28,8 +29,7 @@
       </div>
     </div>
 
-    <mat-table (formSubmitted)="carregarNovaTabela()" *ngIf="cadastros$ | async as cadastros ; else loading"
-      [dataSource]="cadastros">
+    <mat-table *ngIf="cadastros$ | async as cadastros ; else loading" [dataSource]="cadastros.chamadoCompletoDTOs">
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef></th>
@@ -103,4 +103,7 @@
     </div>
   </ng-template>
 </div>
+<mat-paginator [pageSizeOptions]="[5, 10, 15]" [pageIndex]="pageIndex" [pageSize]="pageSize" [length]="totalRegistros"
+  (page)="carregarTabela($event)" aria-label="Select page">
+</mat-paginator>
 <div class="linhas-bottom-page"></div>
