@@ -2,8 +2,7 @@
 
 ## Link do vídeo mostrando o projeto
 
-[Assista ao vídeo aqui](https://youtu.be/nPaErDVJcr8)
-
+[Assista ao vídeo aqui](https://youtu.be/tJ1Qi8p4XcM)
 ## Link do projeto rodando
 
 [Acesse o projeto](https://sistema-projeto-angular.netlify.app/)
